@@ -61,7 +61,17 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveControl(double leftPower, double rightPower) {
-    	driveController.tankDrive(leftPower, rightPower);
+    	leftMotor1.set(-leftPower);
+    	leftMotor2.set(-leftPower);
+    	rightMotor1.set(rightPower);
+    	rightMotor2.set(rightPower);
+    }
+    
+    public void stop() {
+    	leftMotor1.set(0);
+    	leftMotor2.set(0);
+    	rightMotor1.set(0);
+    	rightMotor2.set(0);
     }
 }
 

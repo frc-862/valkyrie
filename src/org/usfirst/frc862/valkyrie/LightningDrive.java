@@ -15,8 +15,9 @@ public class LightningDrive extends RobotDrive {
     private double last_shift = Timer.getFPGATimestamp();
 
     public LightningDrive(CANTalon left1, CANTalon left2, CANTalon right1, CANTalon right2, DoubleSolenoid shifter) {
-        super(left1, left2, right1, right2);
-
+        // Use two motor config, as we will put the motors into follow mode
+        super(left1, right1);
+        
         this.left1 = left1;
         this.left2 = left2;
         this.right1 = right1;

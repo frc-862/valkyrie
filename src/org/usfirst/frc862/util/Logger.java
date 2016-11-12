@@ -12,7 +12,12 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class Logger {
     public static final double FREQUENCY = 0.5;
     public static final int BUFFER_DEPTH = 500;
+    
+    public static final int DEBUG = 10;
+    public static final int WARN = 20;
+    public static final int ERROR = 30;
 
+    private static int level = DEBUG;
     private static Logger logger;
     private Thread logging_thread;
 
@@ -97,5 +102,21 @@ public class Logger {
 
     public static boolean log(String s) {
         return getLogger().logString(s);
+    }
+    
+    public static void setLevel(int l) {
+        level = l;
+    }
+    
+    public static void debug(String s) {
+        if (level <= DEBUG) getLogger().logString(s);
+    }
+    
+    public static void warn(String s) {
+        if (level <= WARN) getLogger().logString(s);        
+    }
+    
+    public static void error(String s) {
+        if (level <= ERROR) getLogger().logString(s);
     }
 }

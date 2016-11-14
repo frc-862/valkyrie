@@ -1,6 +1,7 @@
 package org.usfirst.frc862.valkyrie;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -56,6 +57,9 @@ public class Robot extends IterativeRobot {
     }
 
     public void disabledPeriodic() {
+        if (Utility.getUserButton()) {
+            (new Constants()).writeToFile();
+        }
         Scheduler.getInstance().run();
     }
 

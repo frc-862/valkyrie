@@ -39,6 +39,7 @@ public class ConstantsBase {
 
     public void writeToFile() {
         Map<String, Object> data = new HashMap<String, Object>();
+        data.put("array", new String[] { "ONE_HAND", "Stay", "away", "from", "the", "band", "saw" }); 
         OutputStream output = null;
 
         try {
@@ -82,7 +83,8 @@ public class ConstantsBase {
             input = new FileInputStream(getResolvedFileName());
             Object o = yaml.load(input);
             if (o instanceof Map<?,?>) {   
-                Map<String,Object> map = ((Map<String, Object>) yaml.load(input));
+                @SuppressWarnings("unchecked")
+                Map<String,Object> map = ((Map<String, Object>) o);
                 
                 withEachStaticField((Field f) -> {
                     try {

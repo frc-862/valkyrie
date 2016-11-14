@@ -9,10 +9,18 @@ public class Constants extends ConstantsBase {
     public static double minimumShiftDelay = 0.75;
 
     public String getFileName() {
-        return "~/valkyrie.properties";
+        return "~/valkyrie.yaml";
     }
 
     static {
         new Constants().readFromFile();
     }
+
+    // public static void main(String[] argv) {
+    // new Constants().writeToFile();
+
+    // System.out.println("driveRampRate: " + driveRampRate);
+    // System.out.println("encoderTicksPerRev: " + encoderTicksPerRev);
+    // System.out.println("minimumShiftDelay: " + minimumShiftDelay);
+    // }
 }

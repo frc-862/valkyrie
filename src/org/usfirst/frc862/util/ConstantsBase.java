@@ -1,18 +1,22 @@
 package org.usfirst.frc862.util;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.lang.reflect.Field;
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
+import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 public class ConstantsBase {
     public String getFileName() {
-        return "~/config.properties";
+        return "~/config.yaml";
     }
 
     public String getResolvedFileName() {
@@ -34,28 +38,29 @@ public class ConstantsBase {
     }
 
     public void writeToFile() {
-        Properties prop = new Properties();
+        Map<String, Object> data = new HashMap<String, Object>();
         OutputStream output = null;
 
         try {
             output = new FileOutputStream(getResolvedFileName());
+            Writer writer = new OutputStreamWriter(output);
 
             withEachStaticField((Field f) -> {
                 String name = f.getName();
                 Object value = null;
                 try {
                     value = f.get(this);
+                    data.put(name, value);
                 } catch (Exception e) {
                     System.err.println("Unable to get value for " + name);
                     e.printStackTrace();
                 }
-
-                prop.put(name, value.toString());
             });
 
             // save properties to project root folder
-            prop.store(output, null);
-
+            Yaml yaml = new Yaml();
+            yaml.dump(data, writer);
+            
         } catch (IOException io) {
             io.printStackTrace();
         } finally {
@@ -70,54 +75,31 @@ public class ConstantsBase {
     }
 
     public void readFromFile() {
-        Properties prop = new Properties();
+        Yaml yaml = new Yaml(new SafeConstructor());
         InputStream input = null;
 
         try {
             input = new FileInputStream(getResolvedFileName());
-            prop.load(input);
-
-            withEachStaticField((Field f) -> {
-                String name = f.getName();
-                String value = prop.getProperty(name);
-                Class<?> klass = f.getType();
-                Object o;
-                try {
-                    System.out.println("Loading " + name);
-                    o = f.get(this);
-
-                    if (value == null) {
-                        // do nothing
-                    } else if (o instanceof String) {
-                        f.set(this, value);
-                    } else if (o instanceof Double) {
-                        f.setDouble(this, Double.parseDouble(value));
-                    } else if (o instanceof Float) {
-                        f.setFloat(this, Float.parseFloat(value));
-                    } else if (o instanceof Boolean) {
-                        f.setBoolean(this, Boolean.parseBoolean(value));
-                    } else if (o instanceof Long) {
-                        f.setLong(this, Long.parseLong(value));
-                    } else if (o instanceof Integer) {
-                        f.setInt(this, Integer.parseInt(value));
-                    } else if (o instanceof Short) {
-                        f.setShort(this, Short.parseShort(value));
-                    } else if (o instanceof Byte) {
-                        f.setByte(this, Byte.parseByte(value));
-                    } else {
-                        System.err.println("Unknown type: " + klass);
+            Object o = yaml.load(input);
+            if (o instanceof Map<?,?>) {   
+                Map<String,Object> map = ((Map<String, Object>) yaml.load(input));
+                
+                withEachStaticField((Field f) -> {
+                    try {
+                    String name = f.getName();
+                    f.set(this, map.get(name));
+                    } catch(IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch(Exception e) {
+                        e.printStackTrace();
                     }
-//                } catch (FileNotFoundException e) {
-//                    writeToFile();
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-            });
+                });
+            }
 
         } catch (IOException io) {
             io.printStackTrace();
+        } catch (Exception err) {
+            err.printStackTrace();
         } finally {
             if (input != null) {
                 try {

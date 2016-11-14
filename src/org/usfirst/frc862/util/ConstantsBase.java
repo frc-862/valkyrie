@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 import org.yaml.snakeyaml.Yaml;
@@ -39,7 +40,7 @@ public class ConstantsBase {
 
     public void writeToFile() {
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("array", new String[] { "ONE_HAND", "Stay", "away", "from", "the", "band", "saw" }); 
+        data.put("array", new String[] { "ONE_HAND", "Stay", "away", "from", "the", "band", "saw" });
         OutputStream output = null;
 
         try {
@@ -61,7 +62,7 @@ public class ConstantsBase {
             // save properties to project root folder
             Yaml yaml = new Yaml();
             yaml.dump(data, writer);
-            
+
         } catch (IOException io) {
             io.printStackTrace();
         } finally {
@@ -82,17 +83,32 @@ public class ConstantsBase {
         try {
             input = new FileInputStream(getResolvedFileName());
             Object o = yaml.load(input);
-            if (o instanceof Map<?,?>) {   
+            if (o instanceof Map<?, ?>) {
                 @SuppressWarnings("unchecked")
-                Map<String,Object> map = ((Map<String, Object>) o);
-                
+                Map<String, Object> map = ((Map<String, Object>) o);
+
                 withEachStaticField((Field f) -> {
                     try {
-                    String name = f.getName();
-                    f.set(this, map.get(name));
-                    } catch(IllegalAccessException e) {
+                        String name = f.getName();
+                        Class<?> klass = f.getType();
+                        Object value = map.get(name);
+                        
+                        if (klass.equals(InterpolatedMap.class)) {
+                            @SuppressWarnings("unchecked")
+                            LinkedHashMap<Double,Double> tm = (LinkedHashMap<Double,Double>) value;                            
+                            InterpolatedMap val = new InterpolatedMap();
+                            
+                            for (double key : tm.keySet()) {
+                                val.put(key, tm.get(key));
+                            }
+                            
+                            f.set(this, val);
+                        } else {
+                            f.set(this, map.get(name));
+                        }
+                    } catch (IllegalAccessException e) {
                         e.printStackTrace();
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 });

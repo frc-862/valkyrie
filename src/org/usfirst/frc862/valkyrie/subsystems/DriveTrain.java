@@ -15,8 +15,12 @@ import java.util.function.Consumer;
 
 import org.usfirst.frc862.valkyrie.RobotMap;
 import org.usfirst.frc862.valkyrie.commands.*;
-import org.usfirst.frc862.valkyrie.subsystems.modes.OpenLoopDrive;
+import org.usfirst.frc862.valkyrie.subsystems.modes.BrakeMode;
+import org.usfirst.frc862.valkyrie.subsystems.modes.HeadingMode;
+import org.usfirst.frc862.valkyrie.subsystems.modes.MotionProfileMode;
+import org.usfirst.frc862.valkyrie.subsystems.modes.OpenLoopMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.SubsystemMode;
+import org.usfirst.frc862.valkyrie.subsystems.modes.VelocityMode;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -39,7 +43,11 @@ public class DriveTrain extends Subsystem {
         OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE
     }    
     private Modes mode;
-    OpenLoopDrive openLoopDrive = new OpenLoopDrive(this);
+    OpenLoopMode openLoopMode = new OpenLoopMode(this);
+    VelocityMode velocityMode = new VelocityMode(this);
+    BrakeMode brakeMode = new BrakeMode(this);
+    HeadingMode headingMode = new HeadingMode(this);
+    MotionProfileMode motionProfileMode = new MotionProfileMode(this);
     SubsystemMode currentMode;
 
     
@@ -93,19 +101,23 @@ public class DriveTrain extends Subsystem {
         currentMode.end();
         switch (m) {
         case OPEN_LOOP:
-            currentMode = openLoopDrive;
+            currentMode = openLoopMode;
             break;
         
         case VELOCITY:
+            currentMode = velocityMode;
             break;
             
         case BRAKE:
+            currentMode = brakeMode;
             break;
             
         case HEADING:
+            currentMode = headingMode;
             break;
             
         case MOTION_PROFILE:
+            currentMode = motionProfileMode;
             break;
                         
         default:

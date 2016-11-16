@@ -4,119 +4,77 @@ Version 2.0
 Children:
 - Children:
   - Children:
-    - Children:
-      - Children: []
-        Properties:
-          Forward PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
-            choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
-              '12', '13', '14', '15', '16', '17', '18', '19', '20']
-            default: '0'
-            name: Forward PCM (Solenoid)
-            validators: [Solenoid]
-            value: '5'
-          Reverse PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
-            choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
-              '12', '13', '14', '15', '16', '17', '18', '19', '20']
-            default: '0'
-            name: Reverse PCM (Solenoid)
-            validators: [Solenoid]
-            value: '5'
-          Reverse Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
-            choices: ['0', '1', '2', '3', '4', '5', '6', '7']
-            default: '0'
-            name: Reverse Channel (Solenoid)
-            validators: [Solenoid]
-            value: '1'
-          Forward Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
-            choices: ['0', '1', '2', '3', '4', '5', '6', '7']
-            default: '0'
-            name: Forward Channel (Solenoid)
-            validators: [Solenoid]
-            value: '0'
-        Base: Double Solenoid
-        Name: Shifter
-      - Children: []
-        Properties:
-          CAN ID: !!robotbuilder.data.properties.ChoicesProperty
-            choices: &id001 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-              '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
-            default: '2'
-            name: CAN ID
-            validators: &id002 [CANID]
-            value: '1'
-        Base: CAN Talon
-        Name: Left Motor 1
-      - Children: []
-        Properties:
-          CAN ID: !!robotbuilder.data.properties.ChoicesProperty
-            choices: *id001
-            default: '2'
-            name: CAN ID
-            validators: *id002
-            value: '2'
-        Base: CAN Talon
-        Name: Left Motor 2
-      - Children: []
-        Properties:
-          CAN ID: !!robotbuilder.data.properties.ChoicesProperty
-            choices: *id001
-            default: '2'
-            name: CAN ID
-            validators: *id002
-            value: '3'
-        Base: CAN Talon
-        Name: Right Motor 1
-      - Children: []
-        Properties:
-          CAN ID: !!robotbuilder.data.properties.ChoicesProperty
-            choices: *id001
-            default: '2'
-            name: CAN ID
-            validators: *id002
-            value: '4'
-        Base: CAN Talon
-        Name: Right Motor 2
+    - Children: []
       Properties:
-        Left Motors Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
-          name: Left Motors Inverted, validators: null, value: false}
-        Sensitivity: !!robotbuilder.data.properties.DoubleProperty {default: 0.5,
-          name: Sensitivity, validators: null, value: 0.5}
-        Right Motor 2: !!robotbuilder.data.properties.ChildSelectionProperty
-          default: null
-          name: Right Motor 2
-          type: PIDOutput
-          validators: [LightningDriveValidator, ChildDropdownSelected]
-          value: DriveTrain Right Motor 2
-        Right Motor 1: !!robotbuilder.data.properties.ChildSelectionProperty
-          default: null
-          name: Right Motor 1
-          type: PIDOutput
-          validators: [LightningDriveValidator, ChildDropdownSelected]
-          value: DriveTrain Right Motor 1
-        Maximum Output: !!robotbuilder.data.properties.DoubleProperty {default: 1,
-          name: Maximum Output, validators: null, value: 1.0}
-        Right Motors Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
-          name: Right Motors Inverted, validators: null, value: false}
-        Shifter: !!robotbuilder.data.properties.ChildSelectionProperty
-          default: null
-          name: Shifter
-          type: Actuator
-          validators: [ChildDropdownSelected]
-          value: DriveTrain Shifter
-        Left Motor 2: !!robotbuilder.data.properties.ChildSelectionProperty
-          default: null
-          name: Left Motor 2
-          type: PIDOutput
-          validators: [LightningDriveValidator, ChildDropdownSelected]
-          value: DriveTrain Left Motor 2
-        Left Motor 1: !!robotbuilder.data.properties.ChildSelectionProperty
-          default: null
-          name: Left Motor 1
-          type: PIDOutput
-          validators: [LightningDriveValidator, ChildDropdownSelected]
-          value: DriveTrain Left Motor 1
-      Base: LightningDrive
-      Name: LightningDrive 1
+        Forward PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+            '12', '13', '14', '15', '16', '17', '18', '19', '20']
+          default: '0'
+          name: Forward PCM (Solenoid)
+          validators: [Solenoid]
+          value: '5'
+        Reverse PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+            '12', '13', '14', '15', '16', '17', '18', '19', '20']
+          default: '0'
+          name: Reverse PCM (Solenoid)
+          validators: [Solenoid]
+          value: '5'
+        Reverse Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: ['0', '1', '2', '3', '4', '5', '6', '7']
+          default: '0'
+          name: Reverse Channel (Solenoid)
+          validators: [Solenoid]
+          value: '1'
+        Forward Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: ['0', '1', '2', '3', '4', '5', '6', '7']
+          default: '0'
+          name: Forward Channel (Solenoid)
+          validators: [Solenoid]
+          value: '0'
+      Base: Double Solenoid
+      Name: Shifter
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: &id001 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
+          default: '2'
+          name: CAN ID
+          validators: &id002 [CANID]
+          value: '1'
+      Base: CAN Talon
+      Name: Left Motor 1
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '2'
+          name: CAN ID
+          validators: *id002
+          value: '2'
+      Base: CAN Talon
+      Name: Left Motor 2
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '2'
+          name: CAN ID
+          validators: *id002
+          value: '3'
+      Base: CAN Talon
+      Name: Right Motor 1
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '2'
+          name: CAN ID
+          validators: *id002
+          value: '4'
+      Base: CAN Talon
+      Name: Right Motor 2
     Properties:
       Default command parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []

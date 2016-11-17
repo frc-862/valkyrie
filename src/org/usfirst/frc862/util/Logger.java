@@ -1,21 +1,21 @@
 package org.usfirst.frc862.util;
 
-import edu.wpi.first.wpilibj.Timer;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 public class Logger {
-    public static final double FREQUENCY = 0.5;
+    public static final int FREQUENCY = 500;
     public static final int BUFFER_DEPTH = 500;
     
     public static final int DEBUG = 10;
     public static final int WARN = 20;
     public static final int ERROR = 30;
+    private static final int FLUSH_COUNT = 100;
 
     private static int level = DEBUG;
     private static Logger logger;
@@ -23,8 +23,8 @@ public class Logger {
 
     private File file = null;
     private BufferedWriter writer;
+    private static int counter = 0;
     private ArrayBlockingQueue<String> buffer = new ArrayBlockingQueue<String>(BUFFER_DEPTH);
-    private double next_write = Timer.getFPGATimestamp() + FREQUENCY;
 
     private static Logger getLogger() {
         if (logger == null) {
@@ -35,12 +35,16 @@ public class Logger {
 
     void write_buffered_message() {
         try {
-            writer.write(buffer.take());
-            writer.newLine();
-
-            if (Timer.getFPGATimestamp() > next_write) {
+            String msg = buffer.poll(FREQUENCY, TimeUnit.MILLISECONDS);
+            if (msg != null) {
+                writer.write(msg);
+                writer.newLine();
+                ++counter;
+            } 
+            
+            if (counter > FLUSH_COUNT || msg == null) {
                 writer.flush();
-                next_write = Timer.getFPGATimestamp() + FREQUENCY;
+                counter = 0;
             }
         } catch (Exception e) {
             System.err.println("Error writing buffer");
@@ -113,10 +117,14 @@ public class Logger {
     }
     
     public static void warn(String s) {
-        if (level <= WARN) getLogger().logString(s);        
+        if (level <= WARN) {
+            System.err.println(s);
+            getLogger().logString(s);        
+        }
     }
     
     public static void error(String s) {
+        System.err.println(s);
         if (level <= ERROR) getLogger().logString(s);
     }
 }

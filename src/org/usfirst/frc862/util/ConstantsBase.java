@@ -26,7 +26,8 @@ public class ConstantsBase {
 
     public void withEachField(Consumer<Field> func) {
         for (Field field : this.getClass().getDeclaredFields()) {
-            func.accept(field);
+            if (!java.lang.reflect.Modifier.isFinal(field.getModifiers()))
+                func.accept(field);
         }
     }
 
@@ -39,6 +40,7 @@ public class ConstantsBase {
     }
 
     public void writeToFile() {
+        Logger.debug("WriteToFile: " + getResolvedFileName());
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("array", new String[] { "ONE_HAND", "Stay", "away", "from", "the", "band", "saw" });
         OutputStream output = null;
@@ -92,19 +94,21 @@ public class ConstantsBase {
                         String name = f.getName();
                         Class<?> klass = f.getType();
                         Object value = map.get(name);
-                        
-                        if (klass.equals(InterpolatedMap.class)) {
-                            @SuppressWarnings("unchecked")
-                            LinkedHashMap<Double,Double> tm = (LinkedHashMap<Double,Double>) value;                            
-                            InterpolatedMap val = new InterpolatedMap();
-                            
-                            for (double key : tm.keySet()) {
-                                val.put(key, tm.get(key));
+
+                        if (value != null) {
+                            if (klass.equals(InterpolatedMap.class)) {
+                                @SuppressWarnings("unchecked")
+                                LinkedHashMap<Double, Double> tm = (LinkedHashMap<Double, Double>) value;
+                                InterpolatedMap val = new InterpolatedMap();
+
+                                for (double key : tm.keySet()) {
+                                    val.put(key, tm.get(key));
+                                }
+
+                                f.set(this, val);
+                            } else {
+                                f.set(this, map.get(name));
                             }
-                            
-                            f.set(this, val);
-                        } else {
-                            f.set(this, map.get(name));
                         }
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();

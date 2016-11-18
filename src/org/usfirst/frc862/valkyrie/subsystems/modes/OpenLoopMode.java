@@ -3,6 +3,7 @@ package org.usfirst.frc862.valkyrie.subsystems.modes;
 import org.usfirst.frc862.util.ExponentialSmoothingFilter;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.valkyrie.Constants;
+import org.usfirst.frc862.valkyrie.RobotMap;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
@@ -25,13 +26,11 @@ public class OpenLoopMode extends SubsystemMode {
         drive.set(left, right);
     }
     
-    ExponentialSmoothingFilter f = new ExponentialSmoothingFilter(0.1);
-    private long counter = 0;
-
     // Measuring the loop timing, seems pretty accurate
     public void loop(double delta) {
-        double error = f.filter((delta - Constants.driveTrainLoopRate) * 1000000);
-        if (counter++ % 50 == 0)
-            Logger.debug("Error: " + error);
+//        double error = (delta - Constants.driveTrainLoopRate) * 1000000;
+//        Logger.debug("Loop Error: " + error);
+//        Logger.debug("YAW: " + RobotMap.navx.getYaw());
+//        Logger.flush();
     }
 }

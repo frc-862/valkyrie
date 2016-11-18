@@ -11,7 +11,7 @@ public class SubsystemMode {
     
     public void initialize() {}
     
-    public void loop() {}
+    public void loop(double delta) {}
     public void end() {} 
     
     public void teleop(double left, double right) {}

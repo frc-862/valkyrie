@@ -23,12 +23,6 @@ public class BrakeMode extends SubsystemMode {
     }
 
     @Override
-    public void loop() {
-        // TODO Auto-generated method stub
-        super.loop();
-    }
-
-    @Override
     public void end() {
         // TODO Auto-generated method stub
         super.end();

@@ -14,6 +14,7 @@ package org.usfirst.frc862.valkyrie.subsystems;
 import java.util.function.Consumer;
 
 import org.usfirst.frc862.util.LoopingSubsystem;
+import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.RobotMap;
 import org.usfirst.frc862.valkyrie.commands.*;
 import org.usfirst.frc862.valkyrie.subsystems.modes.BrakeMode;
@@ -69,7 +70,7 @@ public class DriveTrain extends LoopingSubsystem {
     // here. Call these from Commands.
 
     public DriveTrain() {
-        super(0.01);
+        super(Constants.driveTrainLoopRate);
         this.eachSlaveMotor((CANTalon t) -> {
             t.changeControlMode(CANTalon.TalonControlMode.Follower);
         });
@@ -162,8 +163,8 @@ public class DriveTrain extends LoopingSubsystem {
         currentMode.initialize();
     }
     
-    public void loop() {
-        currentMode.loop();
+    public void loop(double start) {
+        currentMode.loop(start);
     }
     
     public void end() {

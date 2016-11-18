@@ -20,9 +20,7 @@ public class VelocityMode extends SubsystemMode {
     }
 
     @Override
-    public void loop() {
-        // TODO Auto-generated method stub
-        super.loop();
+    public void loop(double delta) {
     }
 
     @Override

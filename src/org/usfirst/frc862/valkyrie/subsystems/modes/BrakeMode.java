@@ -1,6 +1,9 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
+import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
+
+import edu.wpi.first.wpilibj.CANTalon;
 
 public class BrakeMode extends SubsystemMode {
 
@@ -12,6 +15,11 @@ public class BrakeMode extends SubsystemMode {
     public void initialize() {
         // TODO Auto-generated method stub
         super.initialize();
+        drive.eachPrimaryMotor((CANTalon t) -> {
+            t.setPID(Constants.brakeP, Constants.brakeI, Constants.brakeD,
+                    Constants.brakeIZone, Constants.brakeRampRate,
+                    Constants.brakeF, Constants.brakeSlot);
+        });
     }
 
     @Override

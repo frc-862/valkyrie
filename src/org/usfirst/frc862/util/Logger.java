@@ -127,4 +127,14 @@ public class Logger {
         System.err.println(s);
         if (level <= ERROR) getLogger().logString(s);
     }
+
+    public static void flush() {
+        try {
+            getLogger().writer.flush();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            System.err.println("Error flushing logger stream");
+            e.printStackTrace();
+        }
+    }
 }

@@ -32,12 +32,11 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-
 
 /**
  *
  */
+@SuppressWarnings("unused")
 public class DriveTrain extends LoopingSubsystem {
 
     public enum Modes {

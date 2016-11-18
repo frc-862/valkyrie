@@ -1,11 +1,7 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
-import org.usfirst.frc862.util.ExponentialDecayFilter;
-import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
-
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 public class OpenLoopMode extends SubsystemMode {

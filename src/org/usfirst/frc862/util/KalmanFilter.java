@@ -1,3 +1,5 @@
+package org.usfirst.frc862.util;
+
 public class KalmanFilter
 {
     private double kQ;

@@ -17,7 +17,8 @@ public class OpenLoopMode extends SubsystemMode {
     @Override
     public void initialize() {
         drive.eachPrimaryMotor((CANTalon talon) -> {
-           talon.changeControlMode(TalonControlMode.PercentVbus); 
+           talon.changeControlMode(TalonControlMode.PercentVbus);
+           talon.setVoltageRampRate(Constants.driveRampRate);
         });        
     }
     

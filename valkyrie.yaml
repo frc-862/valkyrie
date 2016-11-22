@@ -111,7 +111,7 @@ Children:
         validators: null
         value: []
     Base: Subsystem
-    Name: DriveTrainStub
+    Name: DriveTrain
   Properties: {}
   Base: Subsystems
   Name: Subsystems

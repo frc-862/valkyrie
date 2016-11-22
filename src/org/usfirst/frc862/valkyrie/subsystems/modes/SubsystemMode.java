@@ -1,19 +1,11 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
-import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
+import edu.wpi.first.wpilibj.Joystick;
 
 public class SubsystemMode {
-    public DriveTrain drive;
-    
-    public SubsystemMode(DriveTrain dt) {
-        drive = dt;
-    }
-    
-    public void initialize() {}
-    
-    public void loop(double delta) {}
-    public void end() {} 
-    
-    public void teleop(double left, double right) {}
+    public void start() {}
+    public void loop(double delta) {}    
     public void stop() {}
+
+    public void teleop(Joystick left, Joystick right) {}
 }

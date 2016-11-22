@@ -2,16 +2,11 @@ package org.usfirst.frc862.valkyrie.subsystems.modes;
 
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 public class MotionProfileMode extends SubsystemMode {
-
-    public MotionProfileMode(DriveTrain driveTrain) {
-        super(driveTrain);
-    }
-
     @Override
-    public void initialize() {
-        // TODO Auto-generated method stub
-        super.initialize();
+    public void start() {
     }
 
     @Override
@@ -19,21 +14,10 @@ public class MotionProfileMode extends SubsystemMode {
     }
 
     @Override
-    public void end() {
-        // TODO Auto-generated method stub
-        super.end();
-    }
-
-    @Override
-    public void teleop(double left, double right) {
-        // TODO Auto-generated method stub
-        super.teleop(left, right);
-    }
-
-    @Override
     public void stop() {
-        // TODO Auto-generated method stub
-        super.stop();
     }
 
+    @Override
+    public void teleop(Joystick left, Joystick right) {
+    }
 }

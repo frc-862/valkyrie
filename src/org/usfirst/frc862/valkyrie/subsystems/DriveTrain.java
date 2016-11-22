@@ -21,13 +21,15 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
 import com.kauailabs.navx.frc.AHRS;
 
 /**
  *
  */
 @SuppressWarnings("unused")
-public class DriveTrain extends LoopingSubsystem {
+public class DriveTrain extends Subsystem {
 
     public enum Modes {
         OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE
@@ -62,7 +64,6 @@ public class DriveTrain extends LoopingSubsystem {
     // here. Call these from Commands.
 
     public DriveTrain() {
-        super(Constants.driveTrainLoopRate);
         this.eachSlaveMotor((CANTalon t) -> {
             t.changeControlMode(CANTalon.TalonControlMode.Follower);
         });
@@ -85,11 +86,11 @@ public class DriveTrain extends LoopingSubsystem {
             // report error
         }
         
-        openLoopMode = new OpenLoopMode(this);
-        velocityMode = new VelocityMode(this);
-        brakeMode = new BrakeMode(this);
-        headingMode = new HeadingMode(this);
-        motionProfileMode = new MotionProfileMode(this);
+        openLoopMode = new OpenLoopMode();
+        velocityMode = new VelocityMode();
+        brakeMode = new BrakeMode();
+        headingMode = new HeadingMode();
+        motionProfileMode = new MotionProfileMode();
         currentMode = openLoopMode;
         mode = Modes.OPEN_LOOP;
     }
@@ -124,7 +125,7 @@ public class DriveTrain extends LoopingSubsystem {
     public void setMode(Modes m) {
         if (mode == m) return;
         
-        currentMode.end();
+        currentMode.stop();
         switch (m) {
         case OPEN_LOOP:
             currentMode = openLoopMode;
@@ -148,19 +149,15 @@ public class DriveTrain extends LoopingSubsystem {
                         
         default:
         }
-        currentMode.initialize();   
+        currentMode.start();   
     }    
     
-    public void init() {
-        currentMode.initialize();
+    public void start() {
+        currentMode.start();
     }
     
-    public void loop(double start) {
-        currentMode.loop(start);
-    }
-    
-    public void end() {
-        currentMode.end();
+    public void stop() {
+        currentMode.stop();
     }
     
     public double getLeftVelocity() {

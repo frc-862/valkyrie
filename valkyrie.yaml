@@ -6,20 +6,72 @@ Children:
   - Children:
     - Children: []
       Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: &id001 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
+          default: '2'
+          name: CAN ID
+          validators: &id002 [CANID]
+          value: '3'
+      Base: CAN Talon
+      Name: Left Motor 1
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '2'
+          name: CAN ID
+          validators: *id002
+          value: '4'
+      Base: CAN Talon
+      Name: Left Motor 2
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '2'
+          name: CAN ID
+          validators: *id002
+          value: '5'
+      Base: CAN Talon
+      Name: Right Motor 1
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '2'
+          name: CAN ID
+          validators: *id002
+          value: '6'
+      Base: CAN Talon
+      Name: Right Motor 2
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+            '12', '13', '14', '15', '16', '17', '18', '19', '20']
+          default: '0'
+          name: CAN ID
+          validators: null
+          value: '1'
+      Base: PowerDistributionPanel
+      Name: PowerDistributionPanel
+    - Children: []
+      Properties:
         Forward PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
             '12', '13', '14', '15', '16', '17', '18', '19', '20']
           default: '0'
           name: Forward PCM (Solenoid)
           validators: [Solenoid]
-          value: '5'
+          value: '2'
         Reverse PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
             '12', '13', '14', '15', '16', '17', '18', '19', '20']
           default: '0'
           name: Reverse PCM (Solenoid)
           validators: [Solenoid]
-          value: '5'
+          value: '2'
         Reverse Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: ['0', '1', '2', '3', '4', '5', '6', '7']
           default: '0'
@@ -36,45 +88,15 @@ Children:
       Name: Shifter
     - Children: []
       Properties:
-        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
-          choices: &id001 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
-          default: '2'
-          name: CAN ID
-          validators: &id002 [CANID]
-          value: '1'
-      Base: CAN Talon
-      Name: Left Motor 1
-    - Children: []
-      Properties:
-        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
-          default: '2'
-          name: CAN ID
-          validators: *id002
+        PCM ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+            '12', '13', '14', '15', '16', '17', '18', '19', '20']
+          default: '0'
+          name: PCM ID
+          validators: [PCMCompID]
           value: '2'
-      Base: CAN Talon
-      Name: Left Motor 2
-    - Children: []
-      Properties:
-        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
-          default: '2'
-          name: CAN ID
-          validators: *id002
-          value: '3'
-      Base: CAN Talon
-      Name: Right Motor 1
-    - Children: []
-      Properties:
-        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
-          default: '2'
-          name: CAN ID
-          validators: *id002
-          value: '4'
-      Base: CAN Talon
-      Name: Right Motor 2
+      Base: Compressor
+      Name: Compressor
     Properties:
       Default command parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
@@ -89,11 +111,31 @@ Children:
         validators: null
         value: []
     Base: Subsystem
-    Name: DriveTrain
+    Name: DriveTrainStub
   Properties: {}
   Base: Subsystems
   Name: Subsystems
-- Children: []
+- Children:
+  - Children: []
+    Properties:
+      Number: !!robotbuilder.data.properties.ChoicesProperty
+        choices: &id003 ['0', '1', '2', '3', '4', '5']
+        default: 1
+        name: Number
+        validators: &id004 [Joystick]
+        value: '0'
+    Base: Joystick
+    Name: Driver
+  - Children: []
+    Properties:
+      Number: !!robotbuilder.data.properties.ChoicesProperty
+        choices: *id003
+        default: 1
+        name: Number
+        validators: *id004
+        value: '1'
+    Base: Joystick
+    Name: CoPilot
   Properties: {}
   Base: OI
   Name: Operator Interface

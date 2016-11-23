@@ -1,6 +1,8 @@
 package org.usfirst.frc862.valkyrie.subsystems;
 
 import java.util.function.Consumer;
+
+import org.usfirst.frc862.util.FaultCode;
 import org.usfirst.frc862.util.LoopingSubsystem;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.RobotMap;
@@ -93,7 +95,7 @@ public class DriveTrain extends Subsystem {
         leftMotor2.reverseOutput(false);        
         if (leftMotor1.isSensorPresent(CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != 
                 CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
-            // report error
+            FaultCode.write(FaultCode.Codes.LEFT_ENCODER_NOT_FOUND);
         }
         
         rightMotor1.reverseSensor(false);
@@ -101,7 +103,7 @@ public class DriveTrain extends Subsystem {
         rightMotor2.reverseOutput(true);        
         if (rightMotor1.isSensorPresent(CANTalon.FeedbackDevice.CtreMagEncoder_Relative) !=
                 CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
-            // report error
+            FaultCode.write(FaultCode.Codes.RIGHT_ENCODER_NOT_FOUND);
         }
         
         openLoopMode = new OpenLoopMode();

@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTableKeyNotDefined;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 
 import org.usfirst.frc862.util.Logger;
 // import org.usfirst.frc862.valkyrie.commands.*;
@@ -65,6 +68,8 @@ public class Robot extends IterativeRobot {
         Logger.flush();
         
         driveTrain.setMode(DriveTrain.Modes.BRAKE);
+        SmartDashboard.putNumber("FOO", 7);
+        SmartDashboard.getNumber("PTH", 999);
     }
 
     public void disabledPeriodic() {
@@ -73,6 +78,17 @@ public class Robot extends IterativeRobot {
 //            (new Constants()).writeToFile();
             RobotMap.navx.zeroYaw();
         }
+        
+        SmartDashboard.putNumber("Heading", RobotMap.navx.getYaw());
+        double x = 42;
+        try {
+           x = SmartDashboard.getNumber("FOO", 123);
+        } catch (TableKeyNotDefinedException err) {
+            // do nothing
+            x = 240;
+        }
+        SmartDashboard.putNumber("Bar", x);
+        
         Scheduler.getInstance().run();
     }
 

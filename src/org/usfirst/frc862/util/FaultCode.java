@@ -14,6 +14,8 @@ import java.util.HashSet;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class FaultCode {
     public enum Codes {
         LEFT_ENCODER_NOT_FOUND, RIGHT_ENCODER_NOT_FOUND, LOW_MAIN_VOLTAGE
@@ -29,6 +31,9 @@ public class FaultCode {
     public static void write(Codes code) {
         try {
             if (first_time) {
+                for (Codes c : Codes.values()) {
+                    SmartDashboard.putBoolean("FAULT_" + c.toString(), true);
+                }
                 Files.write(getFaultPath(), ("######### RESTART #########\n").getBytes(), StandardOpenOption.CREATE,
                         StandardOpenOption.APPEND);
                 first_time = false;
@@ -40,6 +45,7 @@ public class FaultCode {
                         ("FAULT Detected: " + code.toString() + "\n").getBytes(), StandardOpenOption.CREATE,
                         StandardOpenOption.APPEND);
                 Logger.error("FAULT: " + code);
+                SmartDashboard.putBoolean("FAULT_" + code.toString(), false);
                 // TODO Write fault to the dashboard
             }
         } catch (IOException e) {

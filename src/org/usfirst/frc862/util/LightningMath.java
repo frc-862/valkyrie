@@ -33,4 +33,27 @@ public class LightningMath {
     public static double deltaThetaInRadians(double from, double to) {
         return boundThetaNegPiToPi(to - from);
     }
+    
+    public static int scale(int input,
+            int lowInput, int highInput, int lowOutput, int highOutput)
+    {
+        final int inputRange = highInput - lowInput;
+        final int outputRange = highOutput - lowOutput;
+        
+        return (input - lowInput) * outputRange / inputRange + lowOutput;
+    }
+
+    public static double scale(double input,
+            double lowInput, double highInput, double lowOutput, double highOutput)
+    {
+        final double inputRange = highInput - lowInput;
+        final double outputRange = highOutput - lowOutput;
+        
+        return  (input - lowInput) * outputRange / inputRange + lowOutput;
+    }
+
+    public static double deadZone(double input, double deadband)
+    {
+        return Math.abs(input) >= deadband ? input : 0;
+    }
 }

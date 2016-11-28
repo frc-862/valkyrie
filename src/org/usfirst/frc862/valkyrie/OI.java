@@ -14,6 +14,7 @@ package org.usfirst.frc862.valkyrie;
 import org.usfirst.frc862.valkyrie.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 

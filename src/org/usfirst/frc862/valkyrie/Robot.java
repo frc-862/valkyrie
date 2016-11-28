@@ -127,7 +127,7 @@ public class Robot extends IterativeRobot {
         }
         Scheduler.getInstance().run();
         
-        driveTrain.teleop(oi.driver, oi.coPilot);
+        driveTrain.teleop(oi.driverLeft, oi.driverRight);
     }
 
     /**

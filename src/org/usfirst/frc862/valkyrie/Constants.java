@@ -32,6 +32,8 @@ public class Constants extends ConstantsBase {
     public static int kDriveBaseLockAllowableError = 10;
     public static double brakeIZone;
     public static double driveTrainLoopRate = 0.5;
+    public static double maxRampRate = 0.75;
+    public static double shiftDelay = 0.25; 
 
     public String getFileName() {
         return "~/valkyrie.yaml";

@@ -16,4 +16,7 @@ public class SubsystemMode {
     }
 
     public void teleop(Joystick left, Joystick right) {}
+    
+    public void upShift() {}
+    public void downShift() {}
 }

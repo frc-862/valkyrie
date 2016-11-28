@@ -230,5 +230,13 @@ public class DriveTrain extends Subsystem {
     public void teleop(Joystick driver, Joystick coPilot) {
         currentMode.teleop(driver, coPilot);
     }
+
+    public void downShift() {
+        currentMode.downShift();
+    }
+    
+    public void upShift() {
+        currentMode.upShift();
+    }
 }
 

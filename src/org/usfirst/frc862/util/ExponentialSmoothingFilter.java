@@ -1,10 +1,10 @@
 package org.usfirst.frc862.util;
 
-public class ExponentialSmoothingFilter {
-    boolean first_time = true;
-    double previous;
-    double smoothing_factor;
-    double reverse_factor;
+class ExponentialSmoothingFilter {
+    private boolean first_time = true;
+    private double previous;
+    private double smoothing_factor;
+    private double reverse_factor;
     
     public ExponentialSmoothingFilter(double smoothing_factor) {
         this.smoothing_factor = smoothing_factor;

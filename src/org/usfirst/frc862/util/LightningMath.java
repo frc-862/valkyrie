@@ -1,5 +1,6 @@
 package org.usfirst.frc862.util;
 
+@SuppressWarnings("WeakerAccess")
 public class LightningMath {
 
     public static double limit(double v, double low, double high) {
@@ -43,8 +44,9 @@ public class LightningMath {
         return (input - lowInput) * outputRange / inputRange + lowOutput;
     }
 
+    @SuppressWarnings("SameParameterValue")
     public static double scale(double input,
-            double lowInput, double highInput, double lowOutput, double highOutput)
+                               double lowInput, double highInput, double lowOutput, double highOutput)
     {
         final double inputRange = highInput - lowInput;
         final double outputRange = highOutput - lowOutput;

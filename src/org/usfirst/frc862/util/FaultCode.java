@@ -21,10 +21,10 @@ public class FaultCode {
         LEFT_ENCODER_NOT_FOUND, RIGHT_ENCODER_NOT_FOUND, LOW_MAIN_VOLTAGE
     }
 
-    static HashSet<Codes> faults = new HashSet<>();
-    static boolean first_time = true;
+    private static HashSet<Codes> faults = new HashSet<>();
+    private static boolean first_time = true;
 
-    public static Path getFaultPath() {
+    private static Path getFaultPath() {
         return Paths.get("/home/lvuser/faults.log");
     }
 

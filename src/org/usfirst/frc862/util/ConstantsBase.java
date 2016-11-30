@@ -16,22 +16,22 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 public class ConstantsBase {
-    public String getFileName() {
+    protected String getFileName() {
         return "~/config.yaml";
     }
 
-    public String getResolvedFileName() {
+    private String getResolvedFileName() {
         return getFileName().replaceFirst("^~", System.getProperty("user.home"));
     }
 
-    public void withEachField(Consumer<Field> func) {
+    private void withEachField(Consumer<Field> func) {
         for (Field field : this.getClass().getDeclaredFields()) {
             if (!java.lang.reflect.Modifier.isFinal(field.getModifiers()))
                 func.accept(field);
         }
     }
 
-    public void withEachStaticField(Consumer<Field> func) {
+    private void withEachStaticField(Consumer<Field> func) {
         withEachField((Field f) -> {
             if (java.lang.reflect.Modifier.isStatic(f.getModifiers())) {
                 func.accept(f);
@@ -78,7 +78,7 @@ public class ConstantsBase {
         }
     }
 
-    public void readFromFile() {
+    protected void readFromFile() {
         Yaml yaml = new Yaml(new SafeConstructor());
         InputStream input = null;
 

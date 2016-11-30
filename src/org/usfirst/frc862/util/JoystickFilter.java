@@ -5,7 +5,7 @@ import static org.usfirst.frc862.util.LightningMath.scale;
 public class JoystickFilter {
     public enum Mode {
         LINEAR, SQUARED, CUBED
-    };
+    }
 
     private Mode mode;
     private double deadband;

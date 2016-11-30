@@ -12,13 +12,14 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 
 public class OpenLoopMode extends SubsystemMode {   
-    Timer shifting = new Timer();
-    double currentLeftPower = 0;
-    double currentRightPower = 0;
-    double leftPower = 0;
-    double rightPower = 0;
-    enum State { NORMAL, UPSHIFTING, DOWNSHIFTING };
-    State state = State.NORMAL;
+    private Timer shifting = new Timer();
+    private double currentLeftPower = 0;
+    private double currentRightPower = 0;
+    private double leftPower = 0;
+    private double rightPower = 0;
+    enum State { NORMAL, UPSHIFTING, DOWNSHIFTING }
+
+    private State state = State.NORMAL;
     
     @Override
     public void start() {

@@ -1,10 +1,11 @@
 package org.usfirst.frc862.util;
 
+@SuppressWarnings("WeakerAccess")
 public class MovingAverageFilter {
-    double[] values;
-    double sum = 0;
-    int pos = 0;
-    int count = 0;
+    private double[] values;
+    private double sum = 0;
+    private int pos = 0;
+    private int count = 0;
     
     public MovingAverageFilter(int boxes) {
         values = new double[boxes];

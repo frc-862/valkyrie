@@ -3,7 +3,7 @@ package org.usfirst.frc862.util;
 import edu.wpi.first.wpilibj.Notifier;
 
 public class BackgroundStateEngine extends StateMachine {
-    boolean running = false;
+    private boolean running = false;
     private Notifier looper;
     private double loop_period;
     

@@ -1,5 +1,6 @@
 package org.usfirst.frc862.util;
 
+@SuppressWarnings("WeakerAccess")
 public class KalmanFilter
 {
     private double kQ;
@@ -8,6 +9,7 @@ public class KalmanFilter
     private double prevEstimate;
     private boolean first_time;
 
+    @SuppressWarnings({"SameParameterValue", "WeakerAccess"})
     public KalmanFilter(double kQ, double kR)
     {
         this.kQ = kQ;
@@ -33,9 +35,8 @@ public class KalmanFilter
         double tempP = prevP + kQ;
         double k = tempP / (tempP + kR);
         double xEst = prevEstimate + k * (value - prevEstimate);
-        double p = (1 - k) * tempP;
 
-        prevP = p;
+        prevP = (1 - k) * tempP;
         prevEstimate = xEst;
 
         return prevEstimate;

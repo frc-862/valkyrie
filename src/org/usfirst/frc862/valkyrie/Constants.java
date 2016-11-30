@@ -3,6 +3,7 @@ package org.usfirst.frc862.valkyrie;
 import org.usfirst.frc862.util.ConstantsBase;
 import org.usfirst.frc862.util.InterpolatedMap;
 
+@SuppressWarnings("WeakerAccess")
 public class Constants extends ConstantsBase {
     // Volts per second
     public static double driveRampRate = 12.0;

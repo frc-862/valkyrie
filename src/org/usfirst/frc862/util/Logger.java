@@ -9,19 +9,20 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 public class Logger {
-    public static final int FREQUENCY = 500;
-    public static final int BUFFER_DEPTH = 500;
+    private static final int FREQUENCY = 500;
+    private static final int BUFFER_DEPTH = 500;
     
+    @SuppressWarnings("WeakerAccess")
     public static final int DEBUG = 10;
+    @SuppressWarnings("WeakerAccess")
     public static final int WARN = 20;
+    @SuppressWarnings("WeakerAccess")
     public static final int ERROR = 30;
     private static final int FLUSH_COUNT = 100;
 
     private static int level = DEBUG;
     private static Logger logger;
-    private Thread logging_thread;
 
-    private File file = null;
     private BufferedWriter writer;
     private static int counter = 0;
     private ArrayBlockingQueue<String> buffer = new ArrayBlockingQueue<String>(BUFFER_DEPTH);
@@ -33,7 +34,7 @@ public class Logger {
         return logger;
     }
 
-    void write_buffered_message() {
+    private void write_buffered_message() {
         try {
             String msg = buffer.poll(FREQUENCY, TimeUnit.MILLISECONDS);
             if (msg != null) {
@@ -54,10 +55,11 @@ public class Logger {
 
     private Logger() {
         try {
-            file = logFileName();
+            File file = logFileName();
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
 
-            logging_thread = new Thread(() -> {
+            Thread logging_thread = new Thread(() -> {
+                //noinspection InfiniteLoopStatement
                 while (true) {
                     write_buffered_message();
                 }
@@ -71,7 +73,7 @@ public class Logger {
 
     }
 
-    protected File logFileName() {
+    private File logFileName() {
         File base = null;
 
         // find the mount point

@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class LoopingSubsystem extends Subsystem {
-    protected boolean running = false;
-    protected double loop_period;
-    protected Notifier looper;
+    private boolean running = false;
+    private double loop_period;
+    private Notifier looper;
     
     private double start;
     private double finish;
@@ -42,11 +42,13 @@ public abstract class LoopingSubsystem extends Subsystem {
         }
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void init() {
     }
 
     public abstract void loop(double delta);
 
+    @SuppressWarnings("WeakerAccess")
     public void end() {
     }
 }

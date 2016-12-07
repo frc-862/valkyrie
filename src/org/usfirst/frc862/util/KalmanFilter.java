@@ -1,8 +1,7 @@
 package org.usfirst.frc862.util;
 
 @SuppressWarnings("WeakerAccess")
-public class KalmanFilter
-{
+public class KalmanFilter implements ValueFilter {
     private double kQ;
     private double kR;
     private double prevP;
@@ -14,9 +13,7 @@ public class KalmanFilter
     {
         this.kQ = kQ;
         this.kR = kR;
-        prevP = 0.0;
-        prevEstimate = 0.0;
-        first_time = true;
+        reset();
     }
 
     public KalmanFilter()
@@ -24,6 +21,14 @@ public class KalmanFilter
         this(0.024, 0.6158);
     }
 
+    @Override
+    public void reset() {
+        prevP = 0.0;
+        prevEstimate = 0.0;
+        first_time = true;
+    }
+
+    @Override
     public double filter(double value)
     {
         if (first_time)
@@ -39,6 +44,11 @@ public class KalmanFilter
         prevP = (1 - k) * tempP;
         prevEstimate = xEst;
 
+        return prevEstimate;
+    }
+
+    @Override
+    public double get() {
         return prevEstimate;
     }
 

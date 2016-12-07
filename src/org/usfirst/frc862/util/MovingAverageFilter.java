@@ -1,30 +1,40 @@
 package org.usfirst.frc862.util;
 
 @SuppressWarnings("WeakerAccess")
-public class MovingAverageFilter {
+public class MovingAverageFilter implements ValueFilter {
     private double[] values;
-    private double sum = 0;
+    private double average = 0;
     private int pos = 0;
     private int count = 0;
     
     public MovingAverageFilter(int boxes) {
         values = new double[boxes];
     }
-    
+
+    @Override
+    public void reset() {
+        average = 0;
+        pos = 0;
+        count = 0;
+    }
+
+    @Override
     public double filter(double value) {
-        sum += value;
         if (count < values.length) {
-            ++count;
-            values[pos++] = value;
-        } else if (pos < values.length) {
-            sum -= values[pos];
-            values[pos++] = value;
+            average += (average * count + value) / (count + 1);
+            count += 1;
         } else {
-            sum -= values[0];
-            values[0] = value;
-            pos = 1;
+            average += (value - values[pos]) / values.length;
         }
-        
-        return sum / count;
-    }    
+
+        values[pos] = value;
+        pos = (pos + 1) % values.length;
+
+        return average;
+    }
+
+    @Override
+    public double get() {
+        return average;
+    }
 }

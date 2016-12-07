@@ -11,13 +11,13 @@ import java.util.concurrent.TimeUnit;
 public class Logger {
     private static final int FREQUENCY = 500;
     private static final int BUFFER_DEPTH = 500;
-    
-    @SuppressWarnings("WeakerAccess")
+
+    public static final int TRACE = 0;
     public static final int DEBUG = 10;
-    @SuppressWarnings("WeakerAccess")
-    public static final int WARN = 20;
-    @SuppressWarnings("WeakerAccess")
-    public static final int ERROR = 30;
+    public static final int INFO = 20;
+    public static final int WARN = 30;
+    public static final int ERROR = 40;
+
     private static final int FLUSH_COUNT = 100;
 
     private static int level = DEBUG;
@@ -102,32 +102,75 @@ public class Logger {
         return result;
     }
 
-    private boolean logString(String s) {
-        return buffer.offer(s);
+    private void logString(String s) {
+        buffer.offer(s);
+    }
+    private void logString(String format, Object... args) {
+        logString(String.format(format, args));
     }
 
-    public static boolean log(String s) {
-        return getLogger().logString(s);
+    public static void log(String s) {
+        getLogger().logString(s);
     }
     
     public static void setLevel(int l) {
         level = l;
     }
-    
-    public static void debug(String s) {
-        if (level <= DEBUG) getLogger().logString(s);
+
+    public static void trace(String s) {
+        if (level <= TRACE)
+            getLogger().logString(s);
     }
-    
+
+    public static void trace(String format, Object... args) {
+        if (level <= TRACE)
+            getLogger().logString(format, args);
+    }
+
+    public static void debug(String s) {
+        if (level <= DEBUG)
+            getLogger().logString(s);
+    }
+
+    public static void debug(String format, Object... args) {
+        if (level <= DEBUG)
+            getLogger().logString(format, args);
+    }
+
+    public static void info(String s) {
+        if (level <= INFO)
+            getLogger().logString(s);
+    }
+
+    public static void info(String format, Object... args) {
+        if (level <= INFO)
+            getLogger().logString(format, args);
+    }
+
     public static void warn(String s) {
         if (level <= WARN) {
             System.err.println(s);
-            getLogger().logString(s);        
+            getLogger().logString(s);
         }
     }
-    
+
+    public static void warn(String s, Object... args) {
+        if (level <= WARN) {
+            String msg = String.format(s, args);
+            System.err.println(msg);
+            getLogger().logString(msg);
+        }
+    }
+
     public static void error(String s) {
         System.err.println(s);
         if (level <= ERROR) getLogger().logString(s);
+    }
+
+    public static void error(String s, Object... args) {
+        String msg = String.format(s, args);
+        System.err.println(msg);
+        if (level <= ERROR) getLogger().logString(msg);
     }
 
     public static void flush() {

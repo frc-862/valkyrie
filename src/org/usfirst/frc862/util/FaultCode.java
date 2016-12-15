@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class FaultCode {
     public enum Codes {
         LEFT_ENCODER_NOT_FOUND, RIGHT_ENCODER_NOT_FOUND,
-        LOW_MAIN_VOLTAGE
+        LOW_MAIN_VOLTAGE, SLOW_LOOPER
     }
 
     private static HashSet<Codes> faults = new HashSet<>();
@@ -30,6 +30,10 @@ public class FaultCode {
     }
 
     public static void write(Codes code) {
+        write(code, "");
+    }
+    
+    public static void write(Codes code, String msg) {
         try {
             if (first_time) {
                 for (Codes c : Codes.values()) {
@@ -43,11 +47,10 @@ public class FaultCode {
             if (!faults.contains(code)) {
                 faults.add(code);
                 Files.write(Paths.get("/home/lvuser/faults.log"),
-                        ("FAULT Detected: " + code.toString() + "\n").getBytes(), StandardOpenOption.CREATE,
+                        ("FAULT Detected: " + code.toString() + " " + msg + "\n").getBytes(), StandardOpenOption.CREATE,
                         StandardOpenOption.APPEND);
-                Logger.error("FAULT: " + code);
+                Logger.error("FAULT: " + code + " " + msg);
                 SmartDashboard.putBoolean("FAULT_" + code.toString(), false);
-                // TODO Write fault to the dashboard
             }
         } catch (IOException e) {
             Logger.error("Unable to write fault code " + code);

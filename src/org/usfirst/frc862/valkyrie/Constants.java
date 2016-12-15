@@ -34,7 +34,8 @@ public class Constants extends ConstantsBase {
     public static double brakeIZone;
     public static double driveTrainLoopRate = 0.5;
     public static double maxRampRate = 0.75;
-    public static double shiftDelay = 0.25; 
+    public static double shiftDelay = 0.25;
+    public static double dataLoggerPeriod = 0.05;  // 20 times a second by default 
 
     public String getFileName() {
         return "~/valkyrie.yaml";

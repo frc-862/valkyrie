@@ -2,6 +2,7 @@ package org.usfirst.frc862.valkyrie.subsystems;
 
 import java.util.function.Consumer;
 
+import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;
 import org.usfirst.frc862.util.LoopingSubsystem;
 import org.usfirst.frc862.valkyrie.Constants;
@@ -94,6 +95,9 @@ public class DriveTrain extends Subsystem {
         if (leftMotor1.isSensorPresent(CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != 
                 CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
             FaultCode.write(FaultCode.Codes.LEFT_ENCODER_NOT_FOUND);
+        } else {
+            DataLogger.addDataElement("left encoder pos", () -> leftMotor1.getEncPosition());
+            DataLogger.addDataElement("left encoder vel", () -> leftMotor1.getEncVelocity());
         }
         
         rightMotor1.reverseSensor(false);
@@ -102,6 +106,9 @@ public class DriveTrain extends Subsystem {
         if (rightMotor1.isSensorPresent(CANTalon.FeedbackDevice.CtreMagEncoder_Relative) !=
                 CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
             FaultCode.write(FaultCode.Codes.RIGHT_ENCODER_NOT_FOUND);
+        } else {
+            DataLogger.addDataElement("right encoder pos", () -> rightMotor1.getEncPosition());
+            DataLogger.addDataElement("right encoder vel", () -> rightMotor1.getEncVelocity());
         }
         
         openLoopMode = new OpenLoopMode();
@@ -109,6 +116,12 @@ public class DriveTrain extends Subsystem {
         brakeMode = new BrakeMode();
         headingMode = new HeadingMode();
         motionProfileMode = new MotionProfileMode();
+        
+        // Data Logging, using the follower will have it always
+        // return applied throttle, regardless of mode
+        DataLogger.addDataElement("Left Drive Power", () -> leftMotor2.get());
+        DataLogger.addDataElement("Right Drive Power", () -> rightMotor2.get());
+        DataLogger.addDataElement("heading", () -> navx.getFusedHeading());
         
         currentMode = brakeMode;
         mode = Modes.BRAKE;

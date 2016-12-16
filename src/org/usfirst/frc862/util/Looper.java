@@ -27,14 +27,16 @@ public class Looper {
         public void runCrashTracked() {
             synchronized (taskRunningLock) {
                 if (running) {
-                    double now = Timer.getFPGATimestamp();
+                    double start = Timer.getFPGATimestamp();
+                    dt = start - timestamp;
+                    timestamp = start;
                     for (Loop loop : loops) {
                         loop.onLoop();
                     }
-                    dt = now - timestamp;
-                    timestamp = now;
+                    double duration = Timer.getFPGATimestamp() - start;
+                    timestamp = start;
                     
-                    if (dt >= period) {
+                    if (duration >= period) {
                         FaultCode.write(FaultCode.Codes.SLOW_LOOPER, 
                                 "expected <" + period + " had " + dt);
                     }

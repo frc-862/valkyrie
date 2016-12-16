@@ -77,6 +77,9 @@ public class Robot extends IterativeRobot {
             Logger.debug("start drive train");
             backgroundLooper.register(DataLogger.getLogger().getLogWriter());
             driveTrainLooper.register(DataLogger.getLogger());
+            
+            backgroundLooper.start();
+            driveTrainLooper.start();
 
             // Might want to run this while disable for diagnostics
             // DataLogger.start();

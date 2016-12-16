@@ -36,6 +36,8 @@ public class Constants extends ConstantsBase {
     public static double maxRampRate = 0.75;
     public static double shiftDelay = 0.25;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default 
+    public static int logDepth = 500;
+    public static double backgroundLoopRate = 0.5;
 
     public String getFileName() {
         return "~/valkyrie.yaml";

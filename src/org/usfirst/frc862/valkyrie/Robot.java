@@ -75,6 +75,7 @@ public class Robot extends IterativeRobot {
             RobotMap.navx.zeroYaw();
 
             Logger.debug("start drive train");
+            backgroundLooper.register(Logger.getWriter());
             backgroundLooper.register(DataLogger.getLogger().getLogWriter());
             driveTrainLooper.register(DataLogger.getLogger());
             

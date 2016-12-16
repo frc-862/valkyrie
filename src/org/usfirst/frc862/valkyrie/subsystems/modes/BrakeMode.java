@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.CANTalon;
 public class BrakeMode extends SubsystemMode {
 
     @Override
-    public void start() {
-        super.start();
+    public void onStart() {
+        super.onStart();
 
         Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> {
             t.setPID(Constants.brakeP, Constants.brakeI, Constants.brakeD,

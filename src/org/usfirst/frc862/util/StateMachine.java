@@ -2,11 +2,9 @@ package org.usfirst.frc862.util;
 
 import java.util.HashMap;
 
-import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class StateMachine {
+public class StateMachine implements Loop {
     public class State {
         String name;
         
@@ -30,11 +28,11 @@ public class StateMachine {
         finish = Timer.getFPGATimestamp();
     }
     
-    public void start() {
+    public void onStart() {
         currentState.state.enter();
     }
     
-    public void loop() {
+    public void onLoop() {
         start = Timer.getFPGATimestamp();
         int rc = currentState.state.loop(start - finish);
         finish = Timer.getFPGATimestamp();
@@ -47,7 +45,7 @@ public class StateMachine {
         }
     }
     
-    void stop() {
+    public void onStop() {
         currentState.state.exit();
     }
 }

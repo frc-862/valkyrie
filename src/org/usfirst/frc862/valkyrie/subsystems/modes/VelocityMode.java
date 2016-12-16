@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.Joystick;
 public class VelocityMode extends SubsystemMode {
 
     @Override
-    public void start() {
-        super.start();
+    public void onStart() {
+        super.onStart();
         
         Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> { 
             t.changeControlMode(CANTalon.TalonControlMode.PercentVbus);

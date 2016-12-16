@@ -34,7 +34,7 @@ public class Looper {
                     dt = now - timestamp;
                     timestamp = now;
                     
-                    if (dt > period) {
+                    if (dt >= period) {
                         FaultCode.write(FaultCode.Codes.SLOW_LOOPER, 
                                 "expected <" + period + " had " + dt);
                     }
@@ -64,6 +64,10 @@ public class Looper {
                 for (Loop loop : loops) {
                     loop.onStart();
                 }
+                
+                // reset the timestamp, to minimize faults,
+                // especially when our onStarts are slow
+                timestamp = Timer.getFPGATimestamp();
                 running = true;
             }
             notifier.startPeriodic(period);

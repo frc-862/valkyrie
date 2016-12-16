@@ -1,17 +1,18 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
 import org.usfirst.frc862.util.Logger;
+import org.usfirst.frc862.util.Loop;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class SubsystemMode {
-    public void start() {
+public class SubsystemMode  {
+    public void onStart() {
         Logger.debug("start: " + this.getClass().getSimpleName());
     }
     
-    public void loop(double delta) {}
+    public void onLoop() {}
     
-    public void stop() {
+    public void onStop() {
         Logger.debug("stop: " + this.getClass().getSimpleName());
     }
 

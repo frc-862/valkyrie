@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;
+import org.usfirst.frc862.util.Loop;
 import org.usfirst.frc862.util.LoopingSubsystem;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.RobotMap;
@@ -35,12 +36,13 @@ import com.kauailabs.navx.frc.AHRS;
  *
  */
 @SuppressWarnings("unused")
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends Subsystem implements Loop {
 
     public enum Modes {
         OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE
     }    
     
+    private final Object modeRunningLock = new Object();
     private Modes mode;
     OpenLoopMode openLoopMode;
     VelocityMode velocityMode;
@@ -67,19 +69,11 @@ public class DriveTrain extends Subsystem {
     // here. Call these from Commands.
     
     private boolean running = false;
-    private Notifier looper = null;
-    private double start;
-    private double stop;
+    // private double start;
+    // private double stop;
     
     public DriveTrain() {
         initialize();
-        looper = new Notifier(() -> {
-            if (running) {
-                start = Timer.getFPGATimestamp();
-                currentMode.loop(start - stop);
-                stop = Timer.getFPGATimestamp();
-            }
-        });
     }
     
     private void initialize() {
@@ -157,8 +151,10 @@ public class DriveTrain extends Subsystem {
     public void setMode(Modes m) {
         if (mode == m) return;
         
+        synchronized (modeRunningLock) {
         boolean was_running = running;
-        if (running) stop();
+        if (running) 
+            currentMode.onStop();
         
         switch (m) {
         case OPEN_LOOP:
@@ -187,22 +183,25 @@ public class DriveTrain extends Subsystem {
         
         mode = m;
         if (was_running)
-            start();   
+            currentMode.onStart();
+        }
     }    
-    
-    public void start() {
-        if (!running) {
-            currentMode.start();
-            running = true;
-            looper.startPeriodic(Constants.driveTrainLoopRate);
+
+    public void onStart() {
+        synchronized (modeRunningLock) {
+            currentMode.onStart();
         }
     }
-    
-    public void stop() {
-        if (running) {
-            running = false;
-            looper.stop();
-            currentMode.stop();
+
+    public void onLoop() {
+        synchronized (modeRunningLock) {
+            currentMode.onLoop();
+        }
+    }
+
+    public void onStop() {
+        synchronized (modeRunningLock) {
+            currentMode.onStop();
         }
     }
     

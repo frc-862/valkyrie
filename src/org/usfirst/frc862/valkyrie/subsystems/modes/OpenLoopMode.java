@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class OpenLoopMode extends SubsystemMode {   
     private Timer shifting = new Timer();
+    private double lasttime = 0;
     private double currentLeftPower = 0;
     private double currentRightPower = 0;
     private double leftPower = 0;
@@ -22,13 +23,15 @@ public class OpenLoopMode extends SubsystemMode {
     private State state = State.NORMAL;
     
     @Override
-    public void start() {
-        super.start();
+    public void onStart() {
+        super.onStart();
 
         Robot.driveTrain.eachPrimaryMotor((CANTalon talon) -> {
            talon.changeControlMode(TalonControlMode.PercentVbus);
            talon.setVoltageRampRate(Constants.driveRampRate);
         });        
+        
+        lasttime = Timer.getFPGATimestamp();
     }
     
     @Override
@@ -38,9 +41,11 @@ public class OpenLoopMode extends SubsystemMode {
     }
     
     @Override
-    public void loop(double delta) {
-        Logger.debug("loop: " + delta);
-
+    public void onLoop() {
+        double now = Timer.getFPGATimestamp();
+        double delta = now - lasttime;
+        lasttime = now;
+              
         switch (state) {
         case NORMAL:
             break;
@@ -87,7 +92,7 @@ public class OpenLoopMode extends SubsystemMode {
     }
 
     @Override
-    public void stop() {
+    public void onStop() {
         // TODO Auto-generated method stub
         Robot.driveTrain.set(0, 0);
     }

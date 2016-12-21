@@ -15,6 +15,8 @@ import org.usfirst.frc862.util.Looper;
 // import org.usfirst.frc862.valkyrie.commands.*;
 import org.usfirst.frc862.valkyrie.subsystems.*;
 
+// Pat was here and he cannot wait for Kickoff
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot

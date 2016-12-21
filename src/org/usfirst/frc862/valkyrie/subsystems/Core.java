@@ -8,7 +8,6 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
 package org.usfirst.frc862.valkyrie.subsystems;
 
 import org.usfirst.frc862.valkyrie.RobotMap;
@@ -48,4 +47,11 @@ public class Core extends Subsystem {
         // setDefaultCommand(new MySpecialCommand());
     }
 }
+/*NICK ROCK has found an obscure but cool-sounding .java file and is commenting on it.
+ THIS IS THE ONLY OFFICIAL NICK ROCK COMMENT
+ All confusion has been clarified on my end
+ Thank you for your time
+ B)
+ */
+
 

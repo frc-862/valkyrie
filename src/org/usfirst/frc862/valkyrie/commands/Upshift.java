@@ -8,6 +8,10 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
+/*NICK ROCK is kinda overwhelmed right now, and why did I have to literally branch all of master for one comment?
+Also I'm slightly confused with getting things from GitHub. It seems straightforward, but my NTR brach opened in
+the CHAOS folder, despite making an entirely new branch off of master. Whatever, I'll figure this out B)
+*/
 
 package org.usfirst.frc862.valkyrie.commands;
 

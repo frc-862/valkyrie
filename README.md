@@ -1,10 +1,8 @@
-# valkyrie Codebusters Branch
+# valkyrie Codebusters Training Branch
 
 
-<html>
-<body>
-  <img src="codebusters.png" alt="Codebusters logo">
-</body>
-</html>
+
+ ![Codebusters logo](codebusters.png)
+
 
 

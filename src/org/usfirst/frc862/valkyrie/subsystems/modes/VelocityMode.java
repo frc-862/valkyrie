@@ -3,7 +3,8 @@ package org.usfirst.frc862.valkyrie.subsystems.modes;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.Joystick;
 
 public class VelocityMode extends SubsystemMode {

@@ -15,7 +15,6 @@ import org.usfirst.frc862.valkyrie.subsystems.modes.MotionProfileMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.OpenLoopMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.SubsystemMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.VelocityMode;
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -30,6 +29,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
 
 /**

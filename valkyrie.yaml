@@ -12,7 +12,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: &id002 [CANID]
-          value: '3'
+          value: '7'
       Base: CAN Talon
       Name: Left Motor 1
     - Children: []
@@ -22,7 +22,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '4'
+          value: '8'
       Base: CAN Talon
       Name: Left Motor 2
     - Children: []
@@ -53,14 +53,14 @@ Children:
           default: '0'
           name: Forward PCM (Solenoid)
           validators: [Solenoid]
-          value: '2'
+          value: '11'
         Reverse PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
             '12', '13', '14', '15', '16', '17', '18', '19', '20']
           default: '0'
           name: Reverse PCM (Solenoid)
           validators: [Solenoid]
-          value: '2'
+          value: '11'
         Reverse Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: ['0', '1', '2', '3', '4', '5', '6', '7']
           default: '0'

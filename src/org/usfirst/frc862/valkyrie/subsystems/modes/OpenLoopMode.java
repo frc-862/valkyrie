@@ -37,59 +37,13 @@ public class OpenLoopMode extends SubsystemMode {
     
     @Override
     public void teleop(Joystick left, Joystick right) {
-        leftPower = left.getRawAxis(0);
-        rightPower = right.getRawAxis(0);
+        leftPower = left.getRawAxis(3);
+        rightPower = right.getRawAxis(3);
+        Robot.driveTrain.set(leftPower, rightPower);
     }
     
     @Override
     public void onLoop() {
-        double now = Timer.getFPGATimestamp();
-        double delta = now - lasttime;
-        lasttime = now;
-              
-        switch (state) {
-        case NORMAL:
-            break;
-            
-        case UPSHIFTING:
-            if (shifting.get() >= Constants.shiftDelay) {
-                state = State.NORMAL;
-                RobotMap.driveTrainShifter.set(Value.kForward);
-            } else {
-                rightPower = 0;
-                leftPower = 0;
-            }
-            break;
-            
-        case DOWNSHIFTING:
-            if (shifting.get() >= Constants.shiftDelay) {
-                state = State.NORMAL;
-                RobotMap.driveTrainShifter.set(Value.kReverse);
-            } else {
-                rightPower = 0;
-                leftPower = 0;
-            }
-            break;
-        }
-        
-        double maxChange = Constants.maxRampRate * delta;
-        double deltaRight = rightPower - currentRightPower;
-        double deltaLeft = leftPower - currentLeftPower;
-        
-        if (deltaRight > maxChange) deltaRight = maxChange;
-        if (deltaRight < -maxChange) deltaRight = -maxChange;
-        if (deltaLeft > maxChange) deltaLeft = maxChange;
-        if (deltaLeft < -maxChange) deltaLeft = -maxChange;
-        
-        currentRightPower += deltaRight;
-        currentLeftPower += deltaLeft;
-        
-        if (currentRightPower > 0 && rightPower < 0) currentRightPower = 0;
-        if (currentRightPower < 0 && rightPower > 0) currentRightPower = 0;
-        if (currentLeftPower > 0 && leftPower < 0) currentLeftPower = 0;
-        if (currentLeftPower < 0 && leftPower > 0) currentLeftPower = 0;
-
-        Robot.driveTrain.set(currentRightPower, currentLeftPower);
     }
 
     @Override

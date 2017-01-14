@@ -210,8 +210,9 @@ public class Robot extends IterativeRobot {
                 Logger.debug("Pressed!");
             }
             Scheduler.getInstance().run();
-
-            driveTrain.teleop(oi.driverLeft, oi.driverLeft);
+            SmartDashboard.putNumber("LeftEnc", RobotMap.driveTrainLeftMotor1.getEncPosition());
+            SmartDashboard.putNumber("RightEnc", RobotMap.driveTrainRightMotor1.getEncPosition());
+            driveTrain.teleop(oi.driverLeft, oi.driverRight);
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
             throw t;

@@ -85,6 +85,8 @@ public class DriveTrain extends Subsystem implements Loop {
 
         leftMotor1.reverseSensor(true);
         leftMotor1.reverseOutput(false);
+        // Followers should only be reversed if you want them to run opposite of the
+        // master controller
         leftMotor2.reverseOutput(false);        
         if (leftMotor1.isSensorPresent(CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != 
                 CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
@@ -96,7 +98,9 @@ public class DriveTrain extends Subsystem implements Loop {
         
         rightMotor1.reverseSensor(false);
         rightMotor1.reverseOutput(true);
-        rightMotor2.reverseOutput(true);        
+        // Followers should only be reversed if you want them to run opposite of the
+        // master controller
+        rightMotor2.reverseOutput(false);        
         if (rightMotor1.isSensorPresent(CANTalon.FeedbackDevice.CtreMagEncoder_Relative) !=
                 CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
             FaultCode.write(FaultCode.Codes.RIGHT_ENCODER_NOT_FOUND);

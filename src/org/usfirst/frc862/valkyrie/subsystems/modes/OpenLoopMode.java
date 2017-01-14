@@ -37,8 +37,8 @@ public class OpenLoopMode extends SubsystemMode {
     
     @Override
     public void teleop(Joystick left, Joystick right) {
-        leftPower = left.getRawAxis(3);
-        rightPower = right.getRawAxis(3);
+        leftPower = left.getRawAxis(1);
+        rightPower = right.getRawAxis(1);
         Robot.driveTrain.set(leftPower, rightPower);
     }
     

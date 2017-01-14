@@ -267,7 +267,7 @@ Children:
         default: 1
         name: Number
         validators: *id007
-        value: '2'
+        value: '1'
     Base: Joystick
     Name: DriverRight
   - Children: []
@@ -277,7 +277,7 @@ Children:
         default: 1
         name: Number
         validators: *id007
-        value: '1'
+        value: '2'
     Base: Joystick
     Name: CoPilot
   Properties: {}

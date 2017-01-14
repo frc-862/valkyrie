@@ -131,23 +131,9 @@ public class Robot extends IterativeRobot {
 
     public void disabledPeriodic() {
         try {
-            if (Utility.getUserButton()) {
-                // Logger.debug("writing configuration file");
-                // (new Constants()).writeToFile();
-                RobotMap.navx.zeroYaw();
-            }
-
             SmartDashboard.putNumber("Heading", RobotMap.navx.getYaw());
-            double x = 42;
-            try {
-                x = SmartDashboard.getNumber("FOO", 123);
-            } catch (TableKeyNotDefinedException err) {
-                // do nothing
-                x = 240;
-            }
-            SmartDashboard.putNumber("Bar", x);
 
-            Scheduler.getInstance().run();
+            // Scheduler.getInstance().run();
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
             throw t;
@@ -213,20 +199,6 @@ public class Robot extends IterativeRobot {
             SmartDashboard.putNumber("LeftEnc", RobotMap.driveTrainLeftMotor1.getEncPosition());
             SmartDashboard.putNumber("RightEnc", RobotMap.driveTrainRightMotor1.getEncPosition());
             driveTrain.teleop(oi.driverLeft, oi.driverRight);
-        } catch (Throwable t) {
-            CrashTracker.logThrowableCrash(t);
-            throw t;
-        }
-    }
-
-    @Override
-    public void startCompetition() {
-        try {
-            CrashTracker.logCompetitionStart();
-            Logger.info("It's staring I'm so excited");
-
-            // TODO Auto-generated method stub
-            super.startCompetition();
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
             throw t;

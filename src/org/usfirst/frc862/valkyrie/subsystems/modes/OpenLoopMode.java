@@ -1,5 +1,6 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
+import org.usfirst.frc862.util.JoystickFilter;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
@@ -39,6 +40,11 @@ public class OpenLoopMode extends SubsystemMode {
     public void teleop(Joystick left, Joystick right) {
         leftPower = left.getRawAxis(1);
         rightPower = right.getRawAxis(1);
+        
+        
+        JoystickFilter filter = new JoystickFilter(Constants.deadband, 0, 1, JoystickFilter.Mode.SQUARED);
+        leftPower = filter.filter(leftPower);
+        rightPower = filter.filter(rightPower);
         Robot.driveTrain.set(leftPower, rightPower);
     }
     

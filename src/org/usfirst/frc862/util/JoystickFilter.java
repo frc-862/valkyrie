@@ -64,10 +64,10 @@ public class JoystickFilter {
             output = scale(input, deadband, 1, minPower, maxPower);
 
         case SQUARED:
-            output = scale(input * input, deadband, 1, minPower, maxPower);
+            output = scale(input * input, deadband * deadband, 1, minPower, maxPower);
 
         case CUBED:
-            output = scale(input * input * input, deadband, 1, minPower, maxPower);
+            output = scale(input * input * input, deadband * deadband * deadband , 1, minPower, maxPower);
         }
 
         if (negative)

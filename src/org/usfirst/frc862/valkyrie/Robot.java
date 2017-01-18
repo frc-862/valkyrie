@@ -201,7 +201,8 @@ public class Robot extends IterativeRobot {
             Scheduler.getInstance().run();
             SmartDashboard.putNumber("LeftEnc", RobotMap.driveTrainLeftMotor1.getEncPosition());
             SmartDashboard.putNumber("RightEnc", RobotMap.driveTrainRightMotor1.getEncPosition());
-            driveTrain.teleop(oi.driverLeft, oi.driverRight);
+            
+            driveTrain.teleop(oi.driverLeft, oi.driverRight, oi.coPilot);
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
             throw t;

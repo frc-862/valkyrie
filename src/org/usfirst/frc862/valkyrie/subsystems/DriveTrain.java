@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;
+import org.usfirst.frc862.util.JoystickFilter;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Loop;
 import org.usfirst.frc862.util.LoopingSubsystem;
@@ -70,6 +71,8 @@ public class DriveTrain extends Subsystem implements Loop {
     // here. Call these from Commands.
     
     private boolean running = false;
+    private JoystickFilter filter = new JoystickFilter(Constants.deadband, 0, 1, JoystickFilter.Mode.SQUARED);
+
     // private double start;
     // private double stop;
     
@@ -91,8 +94,8 @@ public class DriveTrain extends Subsystem implements Loop {
         // Followers should only be reversed if you want them to run opposite of the
         // master controller
         //leftMotor2.reverseOutput(false);        
-        if (leftMotor1.isSensorPresent(CANTalon.FeedbackDevice.QuadEncoder) != 
-                CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
+        if (leftMotor1.isSensorPresent(CANTalon.FeedbackDevice.QuadEncoder) == 
+                CANTalon.FeedbackDeviceStatus.FeedbackStatusNotPresent) {
             FaultCode.write(FaultCode.Codes.LEFT_ENCODER_NOT_FOUND);
         } else {
             leftMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
@@ -105,10 +108,11 @@ public class DriveTrain extends Subsystem implements Loop {
         // Followers should only be reversed if you want them to run opposite of the
         // master controller
         rightMotor2.reverseOutput(false);        
-        if (rightMotor1.isSensorPresent(CANTalon.FeedbackDevice.CtreMagEncoder_Relative) !=
-                CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
+        if (rightMotor1.isSensorPresent(CANTalon.FeedbackDevice.QuadEncoder) ==
+                CANTalon.FeedbackDeviceStatus.FeedbackStatusNotPresent) {
             FaultCode.write(FaultCode.Codes.RIGHT_ENCODER_NOT_FOUND);
         } else {
+            rightMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
             DataLogger.addDataElement("right encoder pos", () -> rightMotor1.getEncPosition());
             DataLogger.addDataElement("right encoder vel", () -> rightMotor1.getEncVelocity());
         }
@@ -246,8 +250,20 @@ public class DriveTrain extends Subsystem implements Loop {
         rightMotor1.set(right);
     }
 
-    public void teleop(Joystick driver, Joystick coPilot) {
-        currentMode.teleop(driver, coPilot);
+    public void teleop(Joystick driverLeft, Joystick driverRight) {
+        teleop(driverLeft, driverRight, null);
+    }
+
+    public void teleop(Joystick driverLeft, Joystick driverRight, Joystick coPilot) {
+        // NOTE this is where you need to make changes if we switch to a
+        // single controller, etc. 
+        double leftPower = filter.filter(driverLeft.getRawAxis(1));
+        double rightPower = filter.filter(driverRight.getRawAxis(1));
+        
+        // sub-modes should map -1 to 1 into their desired ranges
+        currentMode.teleop(leftPower, rightPower);
+
+        // coPilot currently unused.
     }
 
     public void downShift() {

@@ -10,7 +10,6 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 
 public class OpenLoopMode extends SubsystemMode {   
@@ -37,14 +36,7 @@ public class OpenLoopMode extends SubsystemMode {
     }
     
     @Override
-    public void teleop(Joystick left, Joystick right) {
-        leftPower = left.getRawAxis(1);
-        rightPower = right.getRawAxis(1);
-        
-        
-        JoystickFilter filter = new JoystickFilter(Constants.deadband, 0, 1, JoystickFilter.Mode.SQUARED);
-        leftPower = filter.filter(leftPower);
-        rightPower = filter.filter(rightPower);
+    public void teleop(double left, double right) {
         Robot.driveTrain.set(leftPower, rightPower);
     }
     

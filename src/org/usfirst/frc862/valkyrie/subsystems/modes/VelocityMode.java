@@ -1,5 +1,6 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
+import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 
@@ -14,15 +15,12 @@ public class VelocityMode extends SubsystemMode {
         super.onStart();
         
         Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> { 
-            t.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+            t.changeControlMode(CANTalon.TalonControlMode.Speed);
         });
     }
 
     @Override
-    public void teleop(Joystick left, Joystick right) {
-        Robot.driveTrain.set(
-                left.getAxis(Joystick.AxisType.kY), 
-                right.getAxis(Joystick.AxisType.kY)
-        );
+    public void teleop(double left, double right) {
+        Robot.driveTrain.set(left * Constants.maxVelocity, right * Constants.maxVelocity);
     }
 }

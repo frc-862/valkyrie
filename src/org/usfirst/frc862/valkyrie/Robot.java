@@ -71,7 +71,7 @@ public class Robot extends IterativeRobot {
                 status |= cw.getAutonomous()  ? 16 : 0;
                 status |= cw.getTest()        ? 32 : 0;
                 
-                status |= 64 << HAL.getAllianceStation().ordinal();
+                // status |= 64 << HAL.getAllianceStation().ordinal();
                 
                 return status;
             });
@@ -99,6 +99,7 @@ public class Robot extends IterativeRobot {
             backgroundLooper.register(Logger.getWriter());
             backgroundLooper.register(DataLogger.getLogger().getLogWriter());
             driveTrainLooper.register(DataLogger.getLogger());
+            driveTrainLooper.register(driveTrain);
             
             backgroundLooper.start();
             driveTrainLooper.start();
@@ -121,6 +122,8 @@ public class Robot extends IterativeRobot {
             Logger.debug("disabled robot");
 
             driveTrain.setMode(DriveTrain.Modes.BRAKE);
+            driveTrain.start();
+            
             Logger.flush();
             DataLogger.flush();
         } catch (Throwable t) {

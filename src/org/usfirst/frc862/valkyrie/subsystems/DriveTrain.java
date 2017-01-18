@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;
+import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Loop;
 import org.usfirst.frc862.util.LoopingSubsystem;
 import org.usfirst.frc862.valkyrie.Constants;
@@ -84,21 +85,22 @@ public class DriveTrain extends Subsystem implements Loop {
         rightMotor2.set(rightMotor1.getDeviceID());
 
         leftMotor1.reverseSensor(true);
-        leftMotor1.reverseOutput(false);
+        leftMotor1.reverseOutput(true);
         leftMotor1.setVoltageRampRate(Constants.driveRampRate);
         
         // Followers should only be reversed if you want them to run opposite of the
         // master controller
-        leftMotor2.reverseOutput(false);        
-        if (leftMotor1.isSensorPresent(CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != 
+        //leftMotor2.reverseOutput(false);        
+        if (leftMotor1.isSensorPresent(CANTalon.FeedbackDevice.QuadEncoder) != 
                 CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
             FaultCode.write(FaultCode.Codes.LEFT_ENCODER_NOT_FOUND);
         } else {
+            leftMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
             DataLogger.addDataElement("left encoder pos", () -> leftMotor1.getEncPosition());
             DataLogger.addDataElement("left encoder vel", () -> leftMotor1.getEncVelocity());
         }
         
-        rightMotor1.reverseSensor(false);
+        rightMotor1.reverseSensor(true);
         rightMotor1.reverseOutput(false);
         // Followers should only be reversed if you want them to run opposite of the
         // master controller
@@ -155,6 +157,7 @@ public class DriveTrain extends Subsystem implements Loop {
     }
     
     public void setMode(Modes m) {
+        Logger.debug("drive train set mode " + m + " from " + mode + " we are running: " + running);
         if (mode == m) return;
         
         synchronized (modeRunningLock) {
@@ -253,6 +256,13 @@ public class DriveTrain extends Subsystem implements Loop {
     
     public void upShift() {
         currentMode.upShift();
+    }
+
+    public void start() {
+        synchronized (modeRunningLock) {
+            running = true;
+            currentMode.onStart();
+        }
     }
 }
 

@@ -32,7 +32,7 @@ public class Constants extends ConstantsBase {
     public static double kDriveBaseLockRampRate = 0;
     public static int kDriveBaseLockAllowableError = 10;
     public static double brakeIZone;
-    public static double driveTrainLoopRate = 0.05;
+    public static double driveTrainLoopRate = 0.06;
     public static double maxRampRate = 0.75;
     public static double shiftDelay = 0.25;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default 

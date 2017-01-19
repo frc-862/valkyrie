@@ -39,6 +39,12 @@ public class MotionProfileMode extends SubsystemMode {
         Logger.debug("sent point to talon");
         RobotMap.driveTrainLeftMotor1.changeControlMode(CANTalon.TalonControlMode.MotionProfile);
         Logger.debug("change talon mode");
+        
+        
+        Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> { 
+            t.setPID(0.01, 0, 0);
+            t.setF(3.41 / 4);           
+        });
     }
 
     @Override

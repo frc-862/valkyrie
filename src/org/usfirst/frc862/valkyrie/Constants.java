@@ -39,8 +39,9 @@ public class Constants extends ConstantsBase {
     public static int logDepth = 500;
     public static double backgroundLoopRate = 0.5;
     public static double deadband = 0.1;
-    public static double maxVelocity = 7;
-
+    // public static double maxVelocity = (4 * 12.0) / (6 * 3.1415) * 60; // in rpm w/6" wheel
+    public static double maxVelocity = 500;
+ 
     public String getFileName() {
         return "~/valkyrie.yaml";
     }

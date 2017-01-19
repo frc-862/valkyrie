@@ -40,6 +40,7 @@ public class LogWriter implements Loop {
                 writer.write(msg);
                 writer.newLine();
             }
+            drain.clear();
         } catch (Exception e) {
             System.err.println("Error writing buffer");
             e.printStackTrace();

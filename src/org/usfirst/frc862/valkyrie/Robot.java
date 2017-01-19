@@ -183,7 +183,8 @@ public class Robot extends IterativeRobot {
                 autonomousCommand.cancel();
 
             // TODO fix other modes and make them work
-            driveTrain.setMode(DriveTrain.Modes.OPEN_LOOP);
+            // driveTrain.setMode(DriveTrain.Modes.OPEN_LOOP);
+            driveTrain.setMode(DriveTrain.Modes.VELOCITY);
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
             throw t;
@@ -199,8 +200,10 @@ public class Robot extends IterativeRobot {
                 Logger.debug("Pressed!");
             }
             Scheduler.getInstance().run();
-            SmartDashboard.putNumber("LeftEnc", RobotMap.driveTrainLeftMotor1.getEncPosition());
-            SmartDashboard.putNumber("RightEnc", RobotMap.driveTrainRightMotor1.getEncPosition());
+            SmartDashboard.putNumber("Left Pos", RobotMap.driveTrainLeftMotor1.getPosition());
+            SmartDashboard.putNumber("Right Pos", RobotMap.driveTrainRightMotor1.getPosition());
+            SmartDashboard.putNumber("Left Vel", RobotMap.driveTrainLeftMotor1.getSpeed());
+            SmartDashboard.putNumber("Right Vel", RobotMap.driveTrainRightMotor1.getSpeed());
             
             driveTrain.teleop(oi.driverLeft, oi.driverRight, oi.coPilot);
         } catch (Throwable t) {

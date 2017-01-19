@@ -87,8 +87,8 @@ public class DriveTrain extends Subsystem implements Loop {
         leftMotor2.set(leftMotor1.getDeviceID());
         rightMotor2.set(rightMotor1.getDeviceID());
 
-        leftMotor1.reverseSensor(true);
-        leftMotor1.reverseOutput(true);
+        leftMotor1.reverseSensor(false);
+        leftMotor1.reverseOutput(false);
         leftMotor1.setVoltageRampRate(Constants.driveRampRate);
         
         // Followers should only be reversed if you want them to run opposite of the
@@ -99,11 +99,16 @@ public class DriveTrain extends Subsystem implements Loop {
             FaultCode.write(FaultCode.Codes.LEFT_ENCODER_NOT_FOUND);
         } else {
             leftMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-            DataLogger.addDataElement("left encoder pos", () -> leftMotor1.getEncPosition());
-            DataLogger.addDataElement("left encoder vel", () -> leftMotor1.getEncVelocity());
+            leftMotor1.setEncPosition(0);
+            leftMotor1.configEncoderCodesPerRev(360);
+            DataLogger.addDataElement("left encoder pos", () -> leftMotor1.getPosition());
+            DataLogger.addDataElement("left encoder vel", () -> leftMotor1.getSpeed());
+            DataLogger.addDataElement("left closed loop error", () -> leftMotor1.getError());
+            DataLogger.addDataElement("left output voltage", () -> leftMotor1.getOutputVoltage());
+            DataLogger.addDataElement("left set point", () -> leftMotor1.getSetpoint());
         }
         
-        rightMotor1.reverseSensor(true);
+        rightMotor1.reverseSensor(false);
         rightMotor1.reverseOutput(false);
         // Followers should only be reversed if you want them to run opposite of the
         // master controller
@@ -113,8 +118,13 @@ public class DriveTrain extends Subsystem implements Loop {
             FaultCode.write(FaultCode.Codes.RIGHT_ENCODER_NOT_FOUND);
         } else {
             rightMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-            DataLogger.addDataElement("right encoder pos", () -> rightMotor1.getEncPosition());
-            DataLogger.addDataElement("right encoder vel", () -> rightMotor1.getEncVelocity());
+            rightMotor1.setEncPosition(0);
+            rightMotor1.configEncoderCodesPerRev(360);
+            DataLogger.addDataElement("right encoder pos", () -> rightMotor1.getPosition());
+            DataLogger.addDataElement("right encoder vel", () -> rightMotor1.getSpeed());
+            DataLogger.addDataElement("right closed loop error", () -> rightMotor1.getError());
+            DataLogger.addDataElement("right output voltage", () -> rightMotor1.getOutputVoltage());
+            DataLogger.addDataElement("right set point", () -> rightMotor1.getSetpoint());
         }
         
         openLoopMode = new OpenLoopMode();
@@ -261,7 +271,7 @@ public class DriveTrain extends Subsystem implements Loop {
         double rightPower = filter.filter(driverRight.getRawAxis(1));
         
         // sub-modes should map -1 to 1 into their desired ranges
-        currentMode.teleop(leftPower, rightPower);
+        currentMode.teleop(-leftPower, rightPower);
 
         // coPilot currently unused.
     }

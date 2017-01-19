@@ -16,6 +16,9 @@ public class VelocityMode extends SubsystemMode {
         
         Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> { 
             t.changeControlMode(CANTalon.TalonControlMode.Speed);
+            t.setPID(0.01, 0, 0);
+            t.setF(3.41 / 4);
+           
         });
     }
 

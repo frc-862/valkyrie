@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class FaultCode {
     public enum Codes {
         LEFT_ENCODER_NOT_FOUND, RIGHT_ENCODER_NOT_FOUND,
-        LOW_MAIN_VOLTAGE, SLOW_LOOPER
+        LOW_MAIN_VOLTAGE, SLOW_LOOPER, MISMATCHED_MOTION_PROFILES
     }
 
     private static HashSet<Codes> faults = new HashSet<>();

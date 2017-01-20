@@ -13,6 +13,7 @@ package org.usfirst.frc862.valkyrie.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc862.util.Logger;
+import org.usfirst.frc862.util.MotionProfile;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 
@@ -41,6 +42,7 @@ public class FollowMotionProfile extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         Logger.debug("Set follow mode");
+        Robot.driveTrain.motionProfileMode.setPoints(MotionProfile.Points, MotionProfile.Points);
         Robot.driveTrain.setMode(DriveTrain.Modes.MOTION_PROFILE);
     }
 
@@ -50,15 +52,20 @@ public class FollowMotionProfile extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.driveTrain.motionProfileMode.isFinished();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        // TODO mode reset should be a call to drivetrain,
+        // in case we have reset to OPEN_LOOP, due to a sensor
+        // fault
+        Robot.driveTrain.setMode(DriveTrain.Modes.VELOCITY);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        end();
     }
 }

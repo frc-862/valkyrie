@@ -2,6 +2,7 @@ package org.usfirst.frc862.valkyrie;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -47,6 +48,9 @@ public class Robot extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+    
+    double lastTime = Timer.getFPGATimestamp();
+    
     public void robotInit() {
         try {
             CrashTracker.logRobotInit();
@@ -55,8 +59,11 @@ public class Robot extends IterativeRobot {
             RobotMap.init();
 
             // Pointless example of logging user button with data logger
-            DataLogger.addDataElement("user button", () -> {
-                return Utility.getUserButton() ? 1.0 : 0.0;
+            DataLogger.addDataElement("deltaT", () -> {
+                double now = Timer.getFPGATimestamp();
+                double dt = now - lastTime;
+                lastTime = now;
+                return dt;
             });
 
             ControlWord cw = new ControlWord();

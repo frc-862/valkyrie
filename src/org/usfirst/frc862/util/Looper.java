@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Looper {
     public double period = 0.1;
 
-    private boolean running;
+    private boolean looperRunning;
 
     private final Notifier notifier;
     private final List<Loop> loops;
@@ -26,7 +26,7 @@ public class Looper {
         @Override
         public void runCrashTracked() {
             synchronized (taskRunningLock) {
-                if (running) {
+                if (looperRunning) {
                     double start = Timer.getFPGATimestamp();
                     dt = start - timestamp;
                     timestamp = start;
@@ -48,7 +48,7 @@ public class Looper {
     public Looper(double period) {
         this.period = period;
         notifier = new Notifier(runnable);
-        running = false;
+        looperRunning = false;
         loops = new ArrayList<>();
     }
 
@@ -59,7 +59,7 @@ public class Looper {
     }
 
     public synchronized void start() {
-        if (!running) {
+        if (!looperRunning) {
             Logger.info("Starting loops");
             synchronized (taskRunningLock) {
                 timestamp = Timer.getFPGATimestamp();
@@ -70,18 +70,18 @@ public class Looper {
                 // reset the timestamp, to minimize faults,
                 // especially when our onStarts are slow
                 timestamp = Timer.getFPGATimestamp();
-                running = true;
+                looperRunning = true;
             }
             notifier.startPeriodic(period);
         }
     }
 
     public synchronized void stop() {
-        if (running) {
+        if (looperRunning) {
             Logger.info("Stopping loops");
             notifier.stop();
             synchronized (taskRunningLock) {
-                running = false;
+                looperRunning = false;
                 for (Loop loop : loops) {
                     Logger.debug("Stopping " + loop);
                     loop.onStop();

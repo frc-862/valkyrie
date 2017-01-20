@@ -32,6 +32,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.MotionProfileStatus;
 import com.kauailabs.navx.frc.AHRS;
 
 /**
@@ -72,6 +73,7 @@ public class DriveTrain extends Subsystem implements Loop {
     
     private boolean running = false;
     private JoystickFilter filter = new JoystickFilter(Constants.deadband, 0, 1, JoystickFilter.Mode.SQUARED);
+    private MotionProfileStatus status = new MotionProfileStatus();
 
     // private double start;
     // private double stop;
@@ -176,8 +178,10 @@ public class DriveTrain extends Subsystem implements Loop {
         
         synchronized (modeRunningLock) {
         boolean was_running = running;
-        if (running) 
+        if (running) {
+            running = false;
             currentMode.onStop();
+        }
         
         switch (m) {
         case OPEN_LOOP:
@@ -206,24 +210,33 @@ public class DriveTrain extends Subsystem implements Loop {
         
         mode = m;
         if (was_running)
-            currentMode.onStart();
+            Logger.debug("call on start");
+            onStart();
         }
     }    
 
     public void onStart() {
         synchronized (modeRunningLock) {
+            Logger.debug("in onStart: " + running);
             currentMode.onStart();
+            Logger.debug("should be started");
+            // Logger.flush();
+            running = true;
         }
     }
 
     public void onLoop() {
         synchronized (modeRunningLock) {
-            currentMode.onLoop();
+            if (running) {
+              Logger.debug("Looping in " + currentMode.getClass().getCanonicalName() + " at " + Timer.getFPGATimestamp() + " ??? " + running);
+              currentMode.onLoop();
+            }
         }
     }
 
     public void onStop() {
         synchronized (modeRunningLock) {
+            running = false;
             currentMode.onStop();
         }
     }
@@ -286,7 +299,7 @@ public class DriveTrain extends Subsystem implements Loop {
 
     public void start() {
         synchronized (modeRunningLock) {
-            running = true;
+            Logger.debug("drivetrain start");
             currentMode.onStart();
         }
     }

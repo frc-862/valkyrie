@@ -284,7 +284,7 @@ public class DriveTrain extends Subsystem implements Loop {
         double rightPower = filter.filter(driverRight.getRawAxis(1));
         
         // sub-modes should map -1 to 1 into their desired ranges
-        currentMode.teleop(-leftPower, rightPower);
+        currentMode.teleop(leftPower, rightPower);
 
         // coPilot currently unused.
     }

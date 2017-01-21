@@ -110,8 +110,8 @@ public class DriveTrain extends Subsystem implements Loop {
             DataLogger.addDataElement("left set point", () -> leftMotor1.getSetpoint());
         }
         
-        rightMotor1.reverseSensor(false);
-        rightMotor1.reverseOutput(false);
+        rightMotor1.reverseSensor(true);
+        rightMotor1.reverseOutput(true);
         // Followers should only be reversed if you want them to run opposite of the
         // master controller
         rightMotor2.reverseOutput(false);        

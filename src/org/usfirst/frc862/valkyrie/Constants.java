@@ -41,6 +41,7 @@ public class Constants extends ConstantsBase {
     public static double deadband = 0.1;
     // public static double maxVelocity = (4 * 12.0) / (6 * 3.1415) * 60; // in rpm w/6" wheel
     public static double maxVelocity = 500;
+    public static double winchRampTime = 3;
  
     public String getFileName() {
         return "~/valkyrie.yaml";

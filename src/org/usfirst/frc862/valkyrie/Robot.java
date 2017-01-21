@@ -113,6 +113,7 @@ public class Robot extends IterativeRobot {
             backgroundLooper.start();
             driveTrainLooper.start();
 
+            SmartDashboard.putNumber("Climb Power", 1.0);
             // Might want to run this while disable for diagnostics
             // DataLogger.start();
         } catch (Throwable t) {

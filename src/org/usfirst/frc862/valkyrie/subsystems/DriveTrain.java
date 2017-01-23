@@ -74,6 +74,8 @@ public class DriveTrain extends Subsystem implements Loop {
     private boolean running = false;
     private JoystickFilter filter = new JoystickFilter(Constants.deadband, 0, 1, JoystickFilter.Mode.SQUARED);
     private MotionProfileStatus status = new MotionProfileStatus();
+    private double leftRequestedPower;
+    private double rightRequestedPower;
 
     // private double start;
     // private double stop;
@@ -268,6 +270,17 @@ public class DriveTrain extends Subsystem implements Loop {
         });
     }
     
+    public double getAverageVelocity() {
+        double leftVel = leftMotor1.getEncVelocity();
+        double rightVel = rightMotor1.getEncVelocity();
+        double v = (leftVel  + rightVel) / 2;
+        return v;
+    }
+    
+    public double getRequestedPower() {
+        return (leftRequestedPower + rightRequestedPower) / 2;
+    }
+    
     public void set(double left, double right) {
         leftMotor1.set(left);
         rightMotor1.set(right);
@@ -282,6 +295,9 @@ public class DriveTrain extends Subsystem implements Loop {
         // single controller, etc. 
         double leftPower = filter.filter(driverLeft.getRawAxis(1));
         double rightPower = filter.filter(driverRight.getRawAxis(1));
+        
+        leftRequestedPower = leftPower;
+        rightRequestedPower = rightPower;
         
         // sub-modes should map -1 to 1 into their desired ranges
         currentMode.teleop(leftPower, rightPower);

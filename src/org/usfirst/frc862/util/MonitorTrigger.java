@@ -32,4 +32,3 @@ public class MonitorTrigger extends Trigger {
         return timer.get() >= duration;
     }
 }
-

@@ -24,6 +24,6 @@ public class VelocityMode extends SubsystemMode {
 
     @Override
     public void teleop(double left, double right) {
-        Robot.driveTrain.set(left * Constants.maxVelocity, right * Constants.maxVelocity);
+        Robot.driveTrain.set(-left * Constants.maxVelocity, -right * Constants.maxVelocity);
     }
 }

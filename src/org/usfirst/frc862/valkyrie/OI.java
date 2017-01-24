@@ -11,10 +11,8 @@
 
 package org.usfirst.frc862.valkyrie;
 
-import org.usfirst.frc862.util.EitherButtonTrigger;
 import org.usfirst.frc862.util.FaultCode;
 import org.usfirst.frc862.util.FaultCommand;
-import org.usfirst.frc862.util.LogCommand;
 import org.usfirst.frc862.valkyrie.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -116,29 +114,37 @@ public class OI {
                 new FaultCommand(FaultCode.Codes.LOW_MAIN_VOLTAGE)
         );
 
-        new HighCurrentTrigger(RobotMap.corePowerPanel, Constants.HighVoltage, Constants.HCTriggerTime).whenActive(
+        new HighCurrentTrigger(RobotMap.corePowerPanel, Constants.HighCurrentThreshold, Constants.HCTriggerTime).whenActive(
+                // TODO disable compressor
+                // TODO only shift if in high gear
                 new DownShift()
         );
-        
+
+        // TODO duration may be too long, test test test
         new CrashTrigger(RobotMap.navx, Constants.CrashDeacceleration, Constants.CrashDuration).whenActive(
+                // TODO disable compressor
+                // TODO only shift if in high gear
                 new DownShift()
         );
 
         new LosingPushingBattleTrigger(Robot.driveTrain, Constants.LostBattleTriggerTime).whenActive(
                 new DownShift()
         );
-        
-        new CoastTrigger(Robot.driveTrain, Constants.CoastVelocity, Constants.CoastTriggerTime).whenActive(
+
+        new CoastTrigger(Robot.driveTrain, Constants.CoastVelocity,
+                Constants.CoastTriggerTime, Constants.MinCoastPower).whenActive(
+                // TODO only shift if in high gear
                 new DownShift()
         );
-        
+
         //Luke shook Nicole
-        new VelocityTalonUpshiftTrigger(Robot.driveTrain, Constants.UpshiftJoystickVelocity, Constants.VelocityUpshiftTime).whenActive(
+        new VelocityTalonUpshiftTrigger(Robot.driveTrain, Constants.MinRequestedPowerForUpshift,
+                Constants.MinUpshiftVelocity, Constants.VelocityUpshiftTime).whenActive(
                 new Upshift()
         );
 
         /*
-        new EncoderFailure(RobotMap.corePowerPanel, Constants.HighVoltage, Constants.TriggerTime).whenActive(
+        new EncoderFailure(RobotMap.corePowerPanel, Constants.HighCurrentThreshold, Constants.TriggerTime).whenActive(
                 new LogCommand(() -> "Current warning: " + RobotMap.corePowerPanel.getTotalCurrent())
         );
         */

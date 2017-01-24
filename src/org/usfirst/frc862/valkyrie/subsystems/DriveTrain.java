@@ -269,7 +269,11 @@ public class DriveTrain extends Subsystem implements Loop {
            t.setEncPosition(0); 
         });
     }
-    
+
+    public double getAbsVelocity() {
+        return Math.abs(getAverageVelocity());
+    }
+
     public double getAverageVelocity() {
         double leftVel = leftMotor1.getEncVelocity();
         double rightVel = rightMotor1.getEncVelocity();
@@ -278,7 +282,7 @@ public class DriveTrain extends Subsystem implements Loop {
     }
     
     public double getRequestedPower() {
-        return (leftRequestedPower + rightRequestedPower) / 2;
+        return Math.abs(leftRequestedPower + rightRequestedPower) / 2;
     }
     
     public void set(double left, double right) {

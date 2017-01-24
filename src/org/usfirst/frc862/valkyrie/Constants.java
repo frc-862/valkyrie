@@ -46,14 +46,16 @@ public class Constants extends ConstantsBase {
     public static double winchRampTime = 3;
     public static double LowVoltage = 10;
     public static double HCTriggerTime = 0.25;
-    public static double HighVoltage = 100;
+    public static double HighCurrentThreshold = 200;
     public static double CrashDeacceleration = -200;
     public static double CoastTriggerTime = 0.01;
     public static double UpshiftVelocity = 300;
-    public static double VelocityUpshiftTime = 0.75;
-    public static double UpshiftJoystickVelocity = 0.75;
+    public static double VelocityUpshiftTime = 0.25;
+    public static double MinRequestedPowerForUpshift = 0.75;
     public static double LVTriggerTime = 0.5;
- 
+    public static double MinCoastPower = 0.1;
+    public static double MinUpshiftVelocity = 6;
+
     public String getFileName() {
         return "~/valkyrie.yaml";
     }

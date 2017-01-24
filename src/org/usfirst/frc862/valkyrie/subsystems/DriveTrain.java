@@ -20,6 +20,7 @@ import org.usfirst.frc862.valkyrie.subsystems.modes.VelocityMode;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Notifier;
@@ -275,8 +276,8 @@ public class DriveTrain extends Subsystem implements Loop {
     }
 
     public double getAverageVelocity() {
-        double leftVel = leftMotor1.getEncVelocity();
-        double rightVel = rightMotor1.getEncVelocity();
+        double leftVel = leftMotor1.getSpeed();
+        double rightVel = rightMotor1.getSpeed();
         double v = (leftVel  + rightVel) / 2;
         return v;
     }
@@ -309,12 +310,12 @@ public class DriveTrain extends Subsystem implements Loop {
         // coPilot currently unused.
     }
 
-    public void downShift() {
-        currentMode.downShift();
+    public void downShift () {
+      shifter.set(Value.kForward);
     }
     
     public void upShift() {
-        currentMode.upShift();
+        shifter.set(Value.kReverse);
     }
 
     public void start() {

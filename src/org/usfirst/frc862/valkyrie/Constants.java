@@ -7,6 +7,7 @@ import org.usfirst.frc862.util.InterpolatedMap;
 public class Constants extends ConstantsBase {
     public static final double CrashDuration = 0.1;
     public static final double LostBattleTriggerTime = 0.75;
+    public static final double CompressorPauseTime = 1;
     // Volts per second
     public static double driveRampRate = 300;
     public static int encoderTicksPerRev = 360;
@@ -25,7 +26,7 @@ public class Constants extends ConstantsBase {
     // as the value here in the code is 
     // immutable
     public static int brakeSlot = 1;
-    public static double CoastVelocity = 3;
+    public static double CoastVelocity = 400;
     public static double kDriveBaseLockKp = 0.5;
     public static double kDriveBaseLockKi = 0;
     public static double kDriveBaseLockKd = 0;
@@ -53,8 +54,8 @@ public class Constants extends ConstantsBase {
     public static double VelocityUpshiftTime = 0.25;
     public static double MinRequestedPowerForUpshift = 0.75;
     public static double LVTriggerTime = 0.5;
-    public static double MinCoastPower = 0.1;
-    public static double MinUpshiftVelocity = 6;
+    public static double MaxCoastPower = 0.35;
+    public static double MinUpshiftVelocity = 300;
 
     public String getFileName() {
         return "~/valkyrie.yaml";

@@ -69,7 +69,7 @@ public class RobotMap {
         corePowerPanel = new PowerDistributionPanel(1);
         LiveWindow.addSensor("Core", "PowerPanel", corePowerPanel);
         
-        coreCompressor = new Compressor(2);
+        coreCompressor = new Compressor(11);
         
         
         winchWinchMotor1 = new VictorSP(0);

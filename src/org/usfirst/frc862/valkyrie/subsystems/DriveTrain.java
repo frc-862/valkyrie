@@ -142,7 +142,7 @@ public class DriveTrain extends Subsystem implements Loop {
         // return applied throttle, regardless of mode
         DataLogger.addDataElement("Left Drive Power", () -> leftMotor2.get());
         DataLogger.addDataElement("Right Drive Power", () -> rightMotor2.get());
-        DataLogger.addDataElement("heading", () -> navx.getFusedHeading());
+        // DataLogger.addDataElement("heading", () -> navx.getFusedHeading());
         
         currentMode = brakeMode;
         mode = Modes.BRAKE;

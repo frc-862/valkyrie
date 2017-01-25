@@ -64,6 +64,8 @@ public class OI {
     public JoystickButton cmdUpshift1;
     public JoystickButton cmdDownshift1;
     public JoystickButton winchButton;
+    public JoystickButton upshiftButton;
+    public JoystickButton downshiftButton;
     public Joystick driverLeft;
     public JoystickButton cmdUpShift2;
     public JoystickButton cmdDownshift2;
@@ -88,6 +90,10 @@ public class OI {
         cmdUpShift2.whenPressed(new Upshift());
         driverLeft = new Joystick(0);
         
+        downshiftButton = new JoystickButton(driverLeft, 16);
+        downshiftButton.whenPressed(new DownShift());
+        upshiftButton = new JoystickButton(driverLeft, 11);
+        upshiftButton.whenPressed(new Upshift());
         winchButton = new JoystickButton(driverLeft, 1);
         winchButton.whileHeld(new Climb());
         cmdDownshift1 = new JoystickButton(driverLeft, 2);
@@ -111,15 +117,15 @@ public class OI {
         // Todo integrate either/two button commands into robotbuilder
         // new EitherButtonTrigger(cmdUpshift1, cmdUpShift2).whenActive(new Upshift());
 
-//        new LowVoltageTrigger(RobotMap.corePowerPanel, Constants.LowVoltage, Constants.LVTriggerTime).whenActive(
-//                new FaultCommand(FaultCode.Codes.LOW_MAIN_VOLTAGE)
-//        );
-//
-//        new HighCurrentTrigger(RobotMap.corePowerPanel, Constants.HighCurrentThreshold, Constants.HCTriggerTime).whenActive(
-//                // TODO disable compressor
-//                // TODO only shift if in high gear
-//                new DownShift()
-//        );
+        new LowVoltageTrigger(RobotMap.corePowerPanel, Constants.LowVoltage, Constants.LVTriggerTime).whenActive(
+                new FaultCommand(FaultCode.Codes.LOW_MAIN_VOLTAGE)
+        );
+
+        new HighCurrentTrigger(RobotMap.corePowerPanel, Constants.HighCurrentThreshold, Constants.HCTriggerTime).whenActive(
+                // TODO disable compressor
+                // TODO only shift if in high gear
+                new DownShift()
+        );
 
         // TODO duration may be too long, test test test
         new CrashTrigger(RobotMap.navx, Constants.CrashDeacceleration, Constants.CrashDuration).whenActive(

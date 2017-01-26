@@ -57,6 +57,8 @@ public class Constants extends ConstantsBase {
     public static double MaxCoastPower = 0.35;
     public static double MinUpshiftVelocity = 300;
     public static double straightCommandDelta = 0.19;
+    public static double rotateEpsilon = 1.75;
+    public static double rotatePGain = maxVelocity / 180;
 
     public String getFileName() {
         return "~/valkyrie.yaml";

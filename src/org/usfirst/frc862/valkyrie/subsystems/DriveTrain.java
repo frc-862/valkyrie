@@ -7,34 +7,25 @@ import org.usfirst.frc862.util.FaultCode;
 import org.usfirst.frc862.util.JoystickFilter;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Loop;
-import org.usfirst.frc862.util.LoopingSubsystem;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.RobotMap;
-import org.usfirst.frc862.valkyrie.commands.*;
+import org.usfirst.frc862.valkyrie.subsystems.modes.AdaptivePursuitMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.BrakeMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.HeadingMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.MotionProfileMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.OpenLoopMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.SubsystemMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.VelocityMode;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Notifier;
-import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.MotionProfileStatus;
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
@@ -43,7 +34,7 @@ import com.kauailabs.navx.frc.AHRS;
 public class DriveTrain extends Subsystem implements Loop {
 
     public enum Modes {
-        OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE
+        OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE, ADAPTIVE_PURSUIT
     }    
     
     private final Object modeRunningLock = new Object();
@@ -52,6 +43,7 @@ public class DriveTrain extends Subsystem implements Loop {
     VelocityMode velocityMode;
     BrakeMode brakeMode;
     HeadingMode headingMode;
+    AdaptivePursuitMode adaptivePursuitMode;
     public MotionProfileMode motionProfileMode;
     SubsystemMode currentMode;
     protected double driveTheta;
@@ -139,6 +131,7 @@ public class DriveTrain extends Subsystem implements Loop {
         brakeMode = new BrakeMode();
         headingMode = new HeadingMode();
         motionProfileMode = new MotionProfileMode();
+        adaptivePursuitMode = new AdaptivePursuitMode();
         
         // Data Logging, using the follower will have it always
         // return applied throttle, regardless of mode
@@ -203,6 +196,10 @@ public class DriveTrain extends Subsystem implements Loop {
             
         case HEADING:
             currentMode = headingMode;
+            break;
+            
+        case ADAPTIVE_PURSUIT:
+            currentMode = adaptivePursuitMode;
             break;
             
         case MOTION_PROFILE:
@@ -294,6 +291,10 @@ public class DriveTrain extends Subsystem implements Loop {
         rightMotor1.set(right);
     }
 
+    public void stop() {
+        set(0,0);
+    }
+    
     public void teleop(Joystick driverLeft, Joystick driverRight) {
         teleop(driverLeft, driverRight, null);
     }

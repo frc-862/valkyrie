@@ -56,6 +56,7 @@ public class Constants extends ConstantsBase {
     public static double LVTriggerTime = 0.5;
     public static double MaxCoastPower = 0.35;
     public static double MinUpshiftVelocity = 300;
+    public static double straightCommandDelta = 0.19;
 
     public String getFileName() {
         return "~/valkyrie.yaml";

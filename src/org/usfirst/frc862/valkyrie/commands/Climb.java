@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
+import org.usfirst.frc862.valkyrie.RobotMap;
 
 /**
  *
@@ -43,6 +44,7 @@ public class Climb extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        RobotMap.winchLarkin.set(0.75);
         start = Timer.getFPGATimestamp();
         stop = start + Constants.winchRampTime;
     }
@@ -62,6 +64,7 @@ public class Climb extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+        RobotMap.winchLarkin.set(0);
         Robot.winch.stop();
     }
 

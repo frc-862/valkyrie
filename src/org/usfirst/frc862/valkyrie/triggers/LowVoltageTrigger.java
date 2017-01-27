@@ -3,6 +3,8 @@ package org.usfirst.frc862.valkyrie.triggers;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.buttons.Trigger;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc862.util.MonitorTrigger;
 
 /**
@@ -10,6 +12,7 @@ import org.usfirst.frc862.util.MonitorTrigger;
  */
 public class LowVoltageTrigger extends MonitorTrigger {
     public LowVoltageTrigger(PowerDistributionPanel panel, double limit, double duration) {
-        super(duration, () -> panel.getVoltage() < limit);
+        super(duration, () -> panel.getVoltage() < limit && SmartDashboard.getBoolean("Use Low Voltage Downshift", true));
+        //I need a nap
     }
 }

@@ -1,6 +1,7 @@
 package org.usfirst.frc862.util;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +13,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+
+import org.usfirst.frc862.valkyrie.Constants;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 
@@ -118,8 +121,8 @@ public class ConstantsBase {
                 });
             }
 
-        } catch (IOException io) {
-            io.printStackTrace();
+        } catch (FileNotFoundException err) {
+            (new Constants()).writeToFile();
         } catch (Exception err) {
             err.printStackTrace();
         } finally {

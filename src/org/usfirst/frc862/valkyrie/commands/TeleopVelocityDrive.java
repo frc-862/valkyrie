@@ -11,6 +11,8 @@
 
 package org.usfirst.frc862.valkyrie.commands;
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 
@@ -39,11 +41,13 @@ public class TeleopVelocityDrive extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.driveTrain.setMode(DriveTrain.Modes.VELOCITY);
+        Logger.debug("TeleopVelocityDrive init");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.driveTrain.teleop(Robot.oi.driverLeft, Robot.oi.driverRight, Robot.oi.coPilot);
+        Logger.debug("Normal teleop drive");
+        Robot.driveTrain.teleop(Robot.oi.driverLeft, Robot.oi.driverRight, Robot.oi.coPilot, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -59,6 +59,7 @@ public class Constants extends ConstantsBase {
     public static double straightCommandDelta = 0.19;
     public static double rotateEpsilon = 2.5;
     public static double rotatePGain = maxVelocity / 180.0 * 1.5;
+    public static double straightenPGain = 1 / 90.0;
 
     public String getFileName() {
         return "~/valkyrie.yaml";

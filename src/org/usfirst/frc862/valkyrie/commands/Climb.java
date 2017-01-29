@@ -44,7 +44,7 @@ public class Climb extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        RobotMap.winchLarkin.set(0.75);
+        RobotMap.winchLarkin.set(-1.0);
         start = Timer.getFPGATimestamp();
         stop = start + Constants.winchRampTime;
     }

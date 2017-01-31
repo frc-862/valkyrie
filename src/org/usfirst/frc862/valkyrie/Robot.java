@@ -244,6 +244,9 @@ public class Robot extends IterativeRobot {
             
             SmartDashboard.putNumber("Average Velocity", Robot.driveTrain.getAverageVelocity());
             SmartDashboard.putNumber("Requested Power", Robot.driveTrain.getRequestedPower());
+            
+            SmartDashboard.putNumber("Super Sonic Distancer MAF", Robot.driveTrain.getUltrasonicValue1());
+            SmartDashboard.putNumber("Super Sonic Distancer ESF", Robot.driveTrain.getUltrasonicValue2());
 
 //            
         } catch (Throwable t) {

@@ -21,7 +21,7 @@ public class MovingAverageFilter implements ValueFilter {
     @Override
     public double filter(double value) {
         if (count < values.length) {
-            average += (average * count + value) / (count + 1);
+            average = (average * count + value) / (count + 1);
             count += 1;
         } else {
             average += (value - values[pos]) / values.length;

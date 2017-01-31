@@ -1,6 +1,6 @@
 package org.usfirst.frc862.util;
 
-class ExponentialSmoothingFilter implements ValueFilter {
+public class ExponentialSmoothingFilter implements ValueFilter {
     private boolean first_time = true;
     private double previous;
     private double smoothing_factor;

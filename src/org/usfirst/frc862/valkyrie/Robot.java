@@ -134,6 +134,9 @@ public class Robot extends IterativeRobot {
             autonChooser.addDefault("Center Lift", new FollowMotionProfile());
             SmartDashboard.putData("Auton Mode", autonChooser);
             SmartDashboard.putNumber("Climb Power", 1.0);
+            SmartDashboard.putNumber("Dynamic Motion Profile X", 1.0);
+            SmartDashboard.putNumber("Dynamic Motion Profile Y", 1.0);
+            SmartDashboard.putNumber("Dynamic Motion Profile Angle", 90.0);
             
             SmartDashboard.putBoolean("Use Crash Downshift", true);
             SmartDashboard.putBoolean("Use Coast Downshift", true);

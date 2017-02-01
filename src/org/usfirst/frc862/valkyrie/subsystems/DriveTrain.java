@@ -264,6 +264,14 @@ public class DriveTrain extends Subsystem implements Loop {
         return leftMotor1.getPosition();
     }
     
+    public int getLeftEncoder() {
+    	return leftMotor1.getEncPosition();
+    }
+    
+    public int getRightEncoder() {
+    	return rightMotor1.getEncPosition();
+    }
+    
     public double getRightDistance() {
         return rightMotor1.getPosition();
     }

@@ -3,6 +3,14 @@ package org.usfirst.frc862.util;
 @SuppressWarnings("WeakerAccess")
 public class LightningMath {
 
+	public static double meters2feet(double meters) {
+		return meters * 0.3048;
+	}
+	
+	public static double feet2meters(double feet) {
+		return feet * 3.28084;
+	}
+	
     public static double limit(double v, double low, double high) {
         return (v < low) ? low : ((v > high) ? high : v);
     }

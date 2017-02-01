@@ -60,6 +60,10 @@ public class Constants extends ConstantsBase {
     public static double rotateEpsilon = 2.5;
     public static double rotatePGain = maxVelocity / 180.0 * 1.5;
     public static double straightenPGain = 1 / 90.0;
+	public static double WallFollowSpeedL = 0.5;
+	public static double WallFollowSpeedR = 0.5;
+	public static double WallFollowDistanceClose = 24.0;
+	public static double WallFollowDistanceFar = 27.0;
 
     public String getFileName() {
         return "~/valkyrie.yaml";

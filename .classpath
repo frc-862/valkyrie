@@ -15,5 +15,6 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/snakeyaml-1.18-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/snakeyaml-1.18-SNAPSHOT.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRLib.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/TalonSRXLibJava.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

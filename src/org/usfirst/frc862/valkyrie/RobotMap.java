@@ -45,6 +45,7 @@ public class RobotMap {
     public static CANTalon driveTrainRightMotor2;
     public static CANTalon driveTrainRightMotor3;
     public static AnalogInput driveTrainUltrasonic;
+    public static AnalogInput driveTrainUltrasonic2;
     public static PowerDistributionPanel corePowerPanel;
     public static Compressor coreCompressor;
     public static SpeedController winchWinchMotor1;
@@ -78,6 +79,9 @@ public class RobotMap {
         
         driveTrainUltrasonic = new AnalogInput(1);
         LiveWindow.addSensor("DriveTrain", "Ultrasonic", driveTrainUltrasonic);
+        
+        driveTrainUltrasonic2 = new AnalogInput(0);
+        LiveWindow.addSensor("DriveTrain", "Ultrasonic2", driveTrainUltrasonic2);
         
         corePowerPanel = new PowerDistributionPanel(10);
         LiveWindow.addSensor("Core", "PowerPanel", corePowerPanel);

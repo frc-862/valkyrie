@@ -18,12 +18,18 @@ public class VelocityMode extends SubsystemMode {
             t.changeControlMode(CANTalon.TalonControlMode.Speed);
             t.setPID(0.1, 0, 0);
             t.setF(3.41 / 4);
+            t.enableBrakeMode(false);
+        });
+        
+        Robot.driveTrain.eachSlaveMotor((CANTalon t) -> {
+            t.enableBrakeMode(false);
         });
     }
     
     @Override
     public void teleop(double left, double right) {
         // Joysticks are backwards -- forward is negative, positive is backwards
-        Robot.driveTrain.set(-left * Constants.maxVelocity, -right * Constants.maxVelocity);
+        // But our master is now reversed in a 6cim setup, so no negation
+        Robot.driveTrain.set(left * Constants.maxVelocity, right * Constants.maxVelocity);
     }
 }

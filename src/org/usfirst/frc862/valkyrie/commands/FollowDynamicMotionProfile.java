@@ -15,6 +15,7 @@ import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain.Modes;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import jaci.pathfinder.*;
@@ -51,6 +52,7 @@ public class FollowDynamicMotionProfile extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	double start = Timer.getFPGATimestamp();
     	Waypoint[] points = new Waypoint[] {
     			//new Waypoint(getDynamicXValue(), getDynamicYValue(), getDynamicAngle()),
     			new Waypoint(-2, -2, 0),
@@ -70,6 +72,7 @@ public class FollowDynamicMotionProfile extends Command {
     	right.configurePIDVA(Constants.DMPKP, Constants.DMPKI, Constants.DMPKD, Constants.DMPKV, Constants.DMPKA);
     	
     	index = 0; 
+    	SmartDashboard.putNumber("DMP Elapsed Time", Timer.getFPGATimestamp() - start);
     	Robot.driveTrain.setMode(Modes.OPEN_LOOP);
     }
 

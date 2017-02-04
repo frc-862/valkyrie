@@ -62,9 +62,9 @@ public class FollowWall extends Command {
     			lSpeed -= .1;
     		}
     		
-    		if (Robot.driveTrain.getUltrasonicValue1()) {
-    			
-    		}
+//    		if (Robot.driveTrain.getUltrasonicValue1()) {
+//    			
+//    		}
     	}
     	
     	if (!wallIsLeft) {

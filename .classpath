@@ -17,5 +17,6 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRLib.jar"/>
 	<classpathentry kind="lib" path="lib/Pathfinder-Java.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/Pathfinder-Java.jar"/>
+	<classpathentry kind="lib" path="lib/RIOdroid.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

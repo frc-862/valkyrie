@@ -108,6 +108,7 @@ public class OI {
 
 
         // SmartDashboard Buttons
+        SmartDashboard.putData("AdaptivePursuit", new AdaptivePursuit());
         SmartDashboard.putData("Do Nothing", new DoNothing());
         SmartDashboard.putData("Upshift", new Upshift());
         SmartDashboard.putData("DownShift", new DownShift());

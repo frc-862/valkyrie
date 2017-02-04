@@ -61,7 +61,7 @@ public class Constants extends ConstantsBase {
     public static double rotateEpsilon = 2.5;
     public static double rotatePGain = maxVelocity / 180.0 * 1.5;
     public static double straightenPGain = 1 / 90.0;
-	public static double MotionProfileLoopSpeed = 0.05;
+	public static double MotionProfileLoopSpeed = 0.1;
 	public static double MotionProfileMaxVelocity = 1.7;
 	public static double MotionProfileMaxAcceleration = 1.0;
 	public static double MotionProfileMaxJerk = 1.0;
@@ -71,6 +71,13 @@ public class Constants extends ConstantsBase {
 	public static double DMPKD = 0.0;
 	public static double DMPKV = 1.0 / MotionProfileMaxVelocity;
 	public static double DMPKA = 0.0;
+    public static double kTrackScrubFactor = 1.0;
+    public static double kTrackEffectiveDiameter = 4.0;
+    public static double kPathFollowingMaxAccel = 3.6;
+    public static double kLooperDt = 0.05;
+    public static double kPathFollowingLookahead = 3.0;
+    public static double kPathFollowingMaxVel = 16.0;
+    public static int kCameraPitchAngleDegrees;
 
     public String getFileName() {
         return "~/valkyrie.yaml";

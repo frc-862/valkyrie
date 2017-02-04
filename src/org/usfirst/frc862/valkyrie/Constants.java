@@ -78,6 +78,7 @@ public class Constants extends ConstantsBase {
     public static double kPathFollowingLookahead = 3.0;
     public static double kPathFollowingMaxVel = 16.0;
     public static int kCameraPitchAngleDegrees;
+	public static double lowGearMaxVelocity = 4;
 
     public String getFileName() {
         return "~/valkyrie.yaml";

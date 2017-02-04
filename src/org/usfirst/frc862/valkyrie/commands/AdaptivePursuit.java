@@ -19,6 +19,7 @@ import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain.Modes;
 
+import com.team254.frc2016.RobotState;
 import com.team254.lib.util.AdaptivePurePursuitController;
 import com.team254.lib.util.Path;
 import com.team254.lib.util.RigidTransform2d;
@@ -67,19 +68,19 @@ public class AdaptivePursuit extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//        RigidTransform2d robot_pose = RobotState.getInstance().getLatestFieldToVehicle().getValue();
-//        RigidTransform2d.Delta command = pathFollowingController_.update(robot_pose, Timer.getFPGATimestamp());
-//        LightningKinematics.DriveVelocity setpoint = LightningKinematics.inverseKinematics(command);
-//
-//        // Scale the command to respect the max velocity limits
-//        double max_vel = 0.0;
-//        max_vel = Math.max(max_vel, Math.abs(setpoint.left));
-//        max_vel = Math.max(max_vel, Math.abs(setpoint.right));
-//        if (max_vel > Constants.kPathFollowingMaxVel) {
-//            double scaling = Constants.kPathFollowingMaxVel / max_vel;
-//            setpoint = new LightningKinematics.DriveVelocity(setpoint.left * scaling, setpoint.right * scaling);
-//        }
-//        mDrive.set(setpoint.left, setpoint.right);
+        RigidTransform2d robot_pose = RobotState.getInstance().getLatestFieldToVehicle().getValue();
+        RigidTransform2d.Delta command = pathFollowingController_.update(robot_pose, Timer.getFPGATimestamp());
+        LightningKinematics.DriveVelocity setpoint = LightningKinematics.inverseKinematics(command);
+
+        // Scale the command to respect the max velocity limits
+        double max_vel = 0.0;
+        max_vel = Math.max(max_vel, Math.abs(setpoint.left));
+        max_vel = Math.max(max_vel, Math.abs(setpoint.right));
+        if (max_vel > Constants.kPathFollowingMaxVel) {
+            double scaling = Constants.kPathFollowingMaxVel / max_vel;
+            setpoint = new LightningKinematics.DriveVelocity(setpoint.left * scaling, setpoint.right * scaling);
+        }
+        mDrive.set(setpoint.left, setpoint.right);
     }
 
     // Make this return true when this Command no longer needs to run execute()

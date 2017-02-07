@@ -28,6 +28,10 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.hal.HAL;
+import edu.wpi.first.wpilibj.hal.FRCNetComm.tInstances;
+import edu.wpi.first.wpilibj.hal.FRCNetComm.tResourceType;
+import static org.usfirst.frc862.util.LightningMath.*;
 
 /**
  *
@@ -338,6 +342,36 @@ public class DriveTrain extends Subsystem implements Loop {
         currentMode.teleop(leftRequestedPower, rightRequestedPower);
 
         // coPilot currently unused.
+    }
+
+    public void teleopArcade(double moveValue, double rotateValue) {
+        // NOTE this is where you need to make changes if we switch to a
+        // single controller, etc.
+        moveValue = filter.filter(limit(moveValue));
+        rotateValue = filter.filter(limit(rotateValue));
+
+        double leftMotorSpeed;
+        double rightMotorSpeed;
+
+        if (moveValue > 0.0) {
+            if (rotateValue > 0.0) {
+                leftMotorSpeed = moveValue - rotateValue;
+                rightMotorSpeed = Math.max(moveValue, rotateValue);
+            } else {
+                leftMotorSpeed = Math.max(moveValue, -rotateValue);
+                rightMotorSpeed = moveValue + rotateValue;
+            }
+        } else {
+            if (rotateValue > 0.0) {
+                leftMotorSpeed = -Math.max(-moveValue, rotateValue);
+                rightMotorSpeed = moveValue + rotateValue;
+            } else {
+                leftMotorSpeed = moveValue - rotateValue;
+                rightMotorSpeed = -Math.max(-moveValue, -rotateValue);
+            }
+        }
+
+        currentMode.teleop(leftMotorSpeed, rightMotorSpeed);
     }
 
     public void start() {

@@ -18,7 +18,11 @@ public class LightningMath {
     public static double limit(double v, double limit) {
         return limit(v, -limit, limit);
     }
-
+    
+    public static double limit(double input) {
+        return limit(input, -1, 1);
+    }
+    
     public static double boundThetaNegPiToPi(double theta) {
         return theta - (Math.ceil((theta + Math.PI) / (Math.PI * 2)) - 1) * (Math.PI * 2); // (-π;π]
     }

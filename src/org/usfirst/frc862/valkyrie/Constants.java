@@ -37,14 +37,14 @@ public class Constants extends ConstantsBase {
     public static double kDriveBaseLockRampRate = 0;
     public static int kDriveBaseLockAllowableError = 10;
     public static double brakeIZone;
-    public static double driveTrainLoopRate = 0.05;
+    public static double driveTrainLoopRate = 0.10;
     public static double maxRampRate = 0.75;
     public static double shiftDelay = 0.25;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default 
     public static int logDepth = 1000;
     public static double backgroundLoopRate = 0.5;
     public static double deadband = 0.05;
-    public static double maxVelocity = 500;
+    public static double maxVelocity = 350;
     public static double winchRampTime = 3;
     public static double LowVoltage = 10;
     public static double HCTriggerTime = 0.25;
@@ -78,6 +78,10 @@ public class Constants extends ConstantsBase {
     public static double kPathFollowingLookahead = 3.0;
     public static double kPathFollowingMaxVel = 16.0;
     public static int kCameraPitchAngleDegrees;
+    public static int kCameraYawAngleDegrees;
+    public static int kCenterOfTargetHeight;
+    public static int kCameraZOffset;
+    public static double velocityFeedForward = 4.6 / 4;
 
     public String getFileName() {
         return "~/valkyrie.yaml";

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.usfirst.frc862.util.TargetInfo;
 import org.usfirst.frc862.valkyrie.Constants;
 
 //import com.team254.frc2016.GoalTracker.TrackReport;
@@ -11,6 +12,7 @@ import org.usfirst.frc862.valkyrie.Constants;
 //import com.team254.frc2016.vision.TargetInfo;
 import com.team254.lib.util.InterpolatingDouble;
 import com.team254.lib.util.InterpolatingTreeMap;
+import com.team254.lib.util.Kinematics;
 import com.team254.lib.util.RigidTransform2d;
 import com.team254.lib.util.Rotation2d;
 
@@ -65,13 +67,6 @@ public class RobotState {
     public static final int kObservationBufferSize = 100;
     public static final double kMaxTargetAge = 0.4;
 
-//    public static final RigidTransform2d kVehicleToTurretFixed = new RigidTransform2d(
-//            new Translation2d(Constants.kTurretXOffset, Constants.kTurretYOffset),
-//            Rotation2d.fromDegrees(Constants.kTurretAngleOffsetDegrees));
-//
-//    public static final RigidTransform2d kTurretRotatingToCamera = new RigidTransform2d(
-//            new Translation2d(Constants.kCameraXOffset, Constants.kCameraYOffset), new Rotation2d());
-
     // FPGATimestamp -> RigidTransform2d or Rotation2d
     protected InterpolatingTreeMap<InterpolatingDouble, RigidTransform2d> field_to_vehicle_;
     protected RigidTransform2d.Delta vehicle_velocity_;
@@ -89,8 +84,8 @@ public class RobotState {
         field_to_vehicle_.put(new InterpolatingDouble(start_time), initial_field_to_vehicle);
         vehicle_velocity_ = new RigidTransform2d.Delta(0, 0, 0);
         camera_pitch_correction_ = Rotation2d.fromDegrees(-Constants.kCameraPitchAngleDegrees);
-//        camera_yaw_correction_ = Rotation2d.fromDegrees(-Constants.kCameraYawAngleDegrees);
-//        differential_height_ = Constants.kCenterOfTargetHeight - Constants.kCameraZOffset;
+        camera_yaw_correction_ = Rotation2d.fromDegrees(-Constants.kCameraYawAngleDegrees);
+        differential_height_ = Constants.kCenterOfTargetHeight - Constants.kCameraZOffset;
     }
 
     public synchronized RigidTransform2d getFieldToVehicle(double timestamp) {
@@ -105,18 +100,6 @@ public class RobotState {
         return getLatestFieldToVehicle().getValue().transformBy(
                 RigidTransform2d.fromVelocity(new RigidTransform2d.Delta(vehicle_velocity_.dx * lookahead_time,
                         vehicle_velocity_.dy * lookahead_time, vehicle_velocity_.dtheta * lookahead_time)));
-    }
-
-    public synchronized Map.Entry<InterpolatingDouble, Rotation2d> getLatestTurretRotation() {
-//        return turret_rotation_.lastEntry();
-        return null;
-    }
-
-    public synchronized RigidTransform2d getFieldToTurretRotated(double timestamp) {
-//        InterpolatingDouble key = new InterpolatingDouble(timestamp);
-//        return field_to_vehicle_.getInterpolated(key).transformBy(kVehicleToTurretFixed)
-//                .transformBy(RigidTransform2d.fromRotation(turret_rotation_.getInterpolated(key)));
-        return null;
     }
 
     public synchronized RigidTransform2d getFieldToCamera(double timestamp) {
@@ -166,14 +149,14 @@ public class RobotState {
 //        turret_rotation_.put(new InterpolatingDouble(timestamp), observation);
 //    }
 
-//    public synchronized void addObservations(double timestamp, RigidTransform2d field_to_vehicle,
-//            Rotation2d turret_rotation, RigidTransform2d.Delta velocity) {
-//        addFieldToVehicleObservation(timestamp, field_to_vehicle);
+    public synchronized void addObservations(double timestamp, RigidTransform2d field_to_vehicle,
+            Rotation2d turret_rotation, RigidTransform2d.Delta velocity) {
+        addFieldToVehicleObservation(timestamp, field_to_vehicle);
 //        addTurretRotationObservation(timestamp, turret_rotation);
-//        vehicle_velocity_ = velocity;
-//    }
+        vehicle_velocity_ = velocity;
+    }
 
-//    public void addVisionUpdate(double timestamp, List<TargetInfo> vision_update) {
+    public void addVisionUpdate(double timestamp, List<TargetInfo> vision_update) {
 //        List<Translation2d> field_to_goals = new ArrayList<>();
 //        RigidTransform2d field_to_camera = getFieldToCamera(timestamp);
 //        if (!(vision_update == null || vision_update.isEmpty())) {
@@ -206,19 +189,19 @@ public class RobotState {
 //        synchronized (this) {
 //            goal_tracker_.update(timestamp, field_to_goals);
 //        }
-//    }
+    }
 //
 //    public synchronized void resetVision() {
 //        goal_tracker_.reset();
 //    }
 //
-//    public RigidTransform2d generateOdometryFromSensors(double left_encoder_delta_distance,
-//            double right_encoder_delta_distance, Rotation2d current_gyro_angle) {
-//        RigidTransform2d last_measurement = getLatestFieldToVehicle().getValue();
-//        return Kinematics.integrateForwardKinematics(last_measurement, left_encoder_delta_distance,
-//                right_encoder_delta_distance, current_gyro_angle);
-//    }
-//
+    public RigidTransform2d generateOdometryFromSensors(double left_encoder_delta_distance,
+            double right_encoder_delta_distance, Rotation2d current_gyro_angle) {
+        RigidTransform2d last_measurement = getLatestFieldToVehicle().getValue();
+        return Kinematics.integrateForwardKinematics(last_measurement, left_encoder_delta_distance,
+                right_encoder_delta_distance, current_gyro_angle);
+    }
+
 //    public void outputToSmartDashboard() {
 //        RigidTransform2d odometry = getLatestFieldToVehicle().getValue();
 //        SmartDashboard.putNumber("robot_pose_x", odometry.getTranslation().getX());

@@ -63,13 +63,13 @@ public class Constants extends ConstantsBase {
     public static double straightenPGain = 1 / 90.0;
 	public static double MotionProfileLoopSpeed = 0.1;
 	public static double MotionProfileMaxVelocity = 1.7;
-	public static double MotionProfileMaxAcceleration = 1.0;
+	public static double MotionProfileMaxAcceleration = 0.2;
 	public static double MotionProfileMaxJerk = 1.0;
 	public static double WheelDiameter = LightningMath.feet2meters(1/3);
-	public static double DMPKP = 1.0;
+	public static double DMPKP = 0.0;
 	public static double DMPKI = 0.0;
 	public static double DMPKD = 0.0;
-	public static double DMPKV = 1.0 / MotionProfileMaxVelocity;
+	public static double DMPKV = 300;
 	public static double DMPKA = 0.0;
     public static double kTrackScrubFactor = 1.0;
     public static double kTrackEffectiveDiameter = 4.0;
@@ -81,7 +81,9 @@ public class Constants extends ConstantsBase {
     public static int kCameraYawAngleDegrees;
     public static int kCenterOfTargetHeight;
     public static int kCameraZOffset;
-    public static double velocityFeedForward = 4.6 / 4;
+//    public static double velocityFeedForward = 4.6 / 4;
+    public static double velocityFeedForward = 4.5 / 4;
+    public static double velocityPTerm = 0.64;
 
     public String getFileName() {
         return "~/valkyrie.yaml";

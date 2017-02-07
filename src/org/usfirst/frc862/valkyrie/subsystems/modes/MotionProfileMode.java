@@ -1,7 +1,10 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
+import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;
 import org.usfirst.frc862.util.Logger;
+import org.usfirst.frc862.util.LoggerValue;
+import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
 import com.ctre.CANTalon;
@@ -14,6 +17,14 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
     private double[][] rightPoints = null;
     private MotionProfileStatus status = new MotionProfileStatus();
     private boolean done = false;
+
+    static private LoggerValue mpmSetPoint = new LoggerValue();;
+    static private LoggerValue mpmSetEnc = new LoggerValue();;
+
+    static {
+        DataLogger.addDataElement("mpmSetPoint", mpmSetPoint);
+        DataLogger.addDataElement("mpmSetEnc", mpmSetEnc);
+    }
 
     @Override
     public void onStart() {
@@ -28,7 +39,8 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
            t.changeMotionControlFramePeriod(5);
            t.changeControlMode(CANTalon.TalonControlMode.MotionProfile);
            t.set(CANTalon.SetValueMotionProfile.Disable.value);
-           t.setPID(0.1, 0, 0, 3.41 / 4, 0, 0, 0);
+           t.setPID(Constants.velocityPTerm, 0, 0, 
+                   Constants.velocityFeedForward, 0, 0, 0);
         });
 
         int period = (int) leftPoints[0][2];
@@ -81,14 +93,18 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
         // TODO Auto-generated method stub
         super.onLoop();
 
-        RobotMap.driveTrainLeftMotor1.getMotionProfileStatus(status);
-        if (status.activePointValid && status.activePoint.isLastPoint) {
+        Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> {
+          t.getMotionProfileStatus(status);
+          if (status.activePointValid && status.activePoint.isLastPoint) {
             // stop here
-            RobotMap.driveTrainLeftMotor1.set(CANTalon.SetValueMotionProfile.Hold.value);
+            t.set(CANTalon.SetValueMotionProfile.Hold.value);
             done = true;
-        } else {
-            RobotMap.driveTrainLeftMotor1.set(CANTalon.SetValueMotionProfile.Enable.value);
-        }
+          } else {
+              MotionProfileMode.mpmSetPoint.set(status.activePoint.velocity);
+              MotionProfileMode.mpmSetEnc.set(status.activePoint.position);
+            t.set(CANTalon.SetValueMotionProfile.Enable.value);
+          }
+        });
     }
 
     @Override

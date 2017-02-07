@@ -66,8 +66,9 @@ public class FollowDynamicMotionProfile extends Command {
         Waypoint[] points = new Waypoint[] {
                 // new Waypoint(getDynamicXValue(), getDynamicYValue(),
                 // getDynamicAngle()),
-                new Waypoint(-2, 0, 0), 
-                new Waypoint(0, 0, 0) 
+                new Waypoint(-4, -4, Pathfinder.d2r(-45)),
+                new Waypoint(0, 0, 0),
+                new Waypoint(4, -4, Pathfinder.d2r(-45))                
                 };
 
         Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC,
@@ -83,7 +84,7 @@ public class FollowDynamicMotionProfile extends Command {
         right.configurePIDVA(Constants.DMPKP, Constants.DMPKI, Constants.DMPKD, Constants.DMPKV, Constants.DMPKA);
 
         SmartDashboard.putNumber("DMP Elapsed Time", Timer.getFPGATimestamp() - start);
-        Robot.driveTrain.setMode(Modes.OPEN_LOOP);
+        Robot.driveTrain.setMode(Modes.VELOCITY);
     }
 
     // Called repeatedly when this Command is scheduled to run

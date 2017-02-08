@@ -10,7 +10,10 @@
 
 package org.usfirst.frc862.valkyrie.commands;
 
+import java.io.File;
+
 import org.usfirst.frc862.util.DataLogger;
+import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.LoggerValue;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
@@ -36,6 +39,8 @@ public class FollowDynamicMotionProfile extends Command {
 
 //    public static Trajectory lightningTrajectory;
     private EncoderFollower left, right;
+    private double loop_start;
+    private int point_count;
     static private LoggerValue fdmpLeft = new LoggerValue();;
     static private LoggerValue fdmpRight = new LoggerValue();;
     static private LoggerValue fdmpGyro = new LoggerValue();;
@@ -66,15 +71,24 @@ public class FollowDynamicMotionProfile extends Command {
         Waypoint[] points = new Waypoint[] {
                 // new Waypoint(getDynamicXValue(), getDynamicYValue(),
                 // getDynamicAngle()),
-                new Waypoint(-4, -4, Pathfinder.d2r(-45)),
-                new Waypoint(0, 0, 0),
-                new Waypoint(4, -4, Pathfinder.d2r(-45))                
+                new Waypoint(-1.5, 0.4, Pathfinder.d2r(0)),
+                new Waypoint(-0.5, 0.4, Pathfinder.d2r(0)),
+                new Waypoint(0, 0, Pathfinder.d2r(30))
+                
+//                new Waypoint(0, 0, 0),
+//                new Waypoint(1, 0, Pathfinder.d2r(0)),
+//                new Waypoint(1.5, -0.4, Pathfinder.d2r(-30))
                 };
 
+        Logger.debug("Generate trajectory");
         Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC,
                 Trajectory.Config.SAMPLES_HIGH, Constants.MotionProfileLoopSpeed, Constants.MotionProfileMaxVelocity,
                 Constants.MotionProfileMaxAcceleration, Constants.MotionProfileMaxJerk);
+        Logger.debug("Generated");
         Trajectory trajectory = Pathfinder.generate(points, config);
+        point_count = trajectory.segments.length;
+        SmartDashboard.putNumber("Dynamic points", point_count);
+        
         TankModifier tank = new TankModifier(trajectory).modify(0.5);
         left = new EncoderFollower(tank.getLeftTrajectory());
         right = new EncoderFollower(tank.getRightTrajectory());
@@ -84,7 +98,11 @@ public class FollowDynamicMotionProfile extends Command {
         right.configurePIDVA(Constants.DMPKP, Constants.DMPKI, Constants.DMPKD, Constants.DMPKV, Constants.DMPKA);
 
         SmartDashboard.putNumber("DMP Elapsed Time", Timer.getFPGATimestamp() - start);
+        Pathfinder.writeToCSV(new File("/u/log/trajectory.csv"), trajectory);
+        
         Robot.driveTrain.setMode(Modes.VELOCITY);
+        RobotMap.navx.reset();
+        loop_start = Timer.getFPGATimestamp();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -96,7 +114,7 @@ public class FollowDynamicMotionProfile extends Command {
         double desired_heading = left.getHeading();
 
         double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
-        double turn = 0.8 * (-1 / 80.0) * angleDifference;
+        double turn = 0.8 * (Constants.maxVelocity / 80.0) * angleDifference;
 
         fdmpLeft.set(l);
         fdmpRight.set(r);
@@ -112,6 +130,7 @@ public class FollowDynamicMotionProfile extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+        SmartDashboard.putNumber("Dynamic DT", (Timer.getFPGATimestamp() - loop_start) / point_count);
         Robot.driveTrain.set(0, 0);
     }
 

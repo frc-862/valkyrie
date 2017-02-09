@@ -68,21 +68,32 @@ public class FollowWall extends Command {
     	}
     	
     	if (!wallIsLeft) {
-    		
+    		if (Robot.driveTrain.getUltrasonicValue2() < Constants.WallFollowDistanceClose) {
+    			rSpeed += .1;
+    		}
+
+    		if (Robot.driveTrain.getUltrasonicValue2() > Constants.WallFollowDistanceFar) {
+    			rSpeed -= .1;
+    		}    		
     	}
+    	
+    	Robot.driveTrain.set(lSpeed, rSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	end();
         return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveTrain.set(0, 0);    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

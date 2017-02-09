@@ -885,6 +885,24 @@ Children:
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: ResetDataLogger
+  - Children: []
+    Properties:
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value: []
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: DriveTrain}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id011 []
+        name: Parameter presets
+        validators: null
+        value: *id011
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+    Base: Command
+    Name: DynamicExtraCheese
   Properties: {}
   Base: Commands
   Name: Commands

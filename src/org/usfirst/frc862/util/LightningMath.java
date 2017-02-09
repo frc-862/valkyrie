@@ -1,5 +1,7 @@
 package org.usfirst.frc862.util;
 
+import org.usfirst.frc862.valkyrie.Constants;
+
 @SuppressWarnings("WeakerAccess")
 public class LightningMath {
 
@@ -69,5 +71,17 @@ public class LightningMath {
     public static double deadZone(double input, double deadband)
     {
         return Math.abs(input) >= deadband ? input : 0;
+    }
+    
+    public static double rpm2fps(double rpm) {
+        // rpm * circumference will be feet / minute
+        // 60 is the number of seconds in a minute
+        return rpm * Constants.WheelCircumference / 60.0;
+    }
+    
+    public static double fps2rpm(double fps) {
+        // fps * 60 will be feet / minute
+        // feet / minute * circumference is rpm 
+        return fps * 60 / Constants.WheelCircumference;
     }
 }

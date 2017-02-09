@@ -9,7 +9,7 @@ public class Constants extends ConstantsBase {
     public static final double CrashDuration = 0.1;
     public static final double LostBattleTriggerTime = 0.75;
     public static final double CompressorPauseTime = 1;
-    public static final double wheelBase = 0.5;
+    public static final double wheelBase = 21.5 / 12;  // in feet
     // Volts per second
     public static double driveRampRate = 300;
     public static int encoderTicksPerRev = 360;
@@ -43,7 +43,7 @@ public class Constants extends ConstantsBase {
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default 
     public static int logDepth = 1000;
     public static double backgroundLoopRate = 0.5;
-    public static double deadband = 0.05;
+    public static double deadband = 0.00;
     public static double maxVelocity = 350;
     public static double winchRampTime = 3;
     public static double LowVoltage = 10;
@@ -65,7 +65,8 @@ public class Constants extends ConstantsBase {
 	public static double MotionProfileMaxVelocity = 1.7;
 	public static double MotionProfileMaxAcceleration = 0.2;
 	public static double MotionProfileMaxJerk = 1.0;
-	public static double WheelDiameter = LightningMath.feet2meters(1/3);
+    public static double WheelDiameter = 4.0 / 12.0;  // in feet
+    public static double WheelCircumference = WheelDiameter * Math.PI;  // in feet
 	public static double DMPKP = 0.0;
 	public static double DMPKI = 0.0;
 	public static double DMPKD = 0.0;

@@ -88,6 +88,18 @@ public class DataLogger implements Loop {
         return result;
     }
 
+    public void reset_file() {
+        writer.flush();
+        writer.close();
+        File file = logFileName();
+        System.out.println("new logfile: " + file);
+        writer = new LogWriter(file.getAbsolutePath());
+    }
+    
+    public static void new_file() {
+        getLogger().reset_file();
+    }
+    
     public static void flush() {
         getLogger().writer.flush();
     }

@@ -12,7 +12,7 @@ public class BrakeMode extends SubsystemMode {
         super.onStart();
         
         Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> {
-            t.enableBrakeMode(true);
+            t.enableBrakeMode(false);
             t.setPID(Constants.brakeP, Constants.brakeI, Constants.brakeD,
                     Constants.brakeIZone, Constants.brakeRampRate,
                     Constants.brakeF, Constants.brakeSlot);

@@ -45,7 +45,9 @@ public class Robot extends IterativeRobot {
     public SendableChooser<Command> autonChooser;
     public Looper driveTrainLooper = new Looper(Constants.driveTrainLoopRate);
     public Looper backgroundLooper = new Looper(Constants.backgroundLoopRate);
-     
+    
+    public static Robot me;
+    
     public Robot() {
         CrashTracker.logRobotConstruction();
     }
@@ -59,6 +61,7 @@ public class Robot extends IterativeRobot {
     
     public void robotInit() {
         try {
+            me = this;
             CrashTracker.logRobotInit();
 
             Logger.debug("robotInit");
@@ -105,7 +108,7 @@ public class Robot extends IterativeRobot {
             backgroundLooper.register(DataLogger.getLogger().getLogWriter());
             driveTrainLooper.register(DataLogger.getLogger());
             driveTrainLooper.register(driveTrain);
-            
+
             backgroundLooper.start();
             driveTrainLooper.start();
 
@@ -129,6 +132,12 @@ public class Robot extends IterativeRobot {
         }
     }
 
+    public void resetDataLog() {
+        driveTrainLooper.stop();
+        DataLogger.new_file();
+        driveTrainLooper.start();
+    }
+    
     /**
      * This function is called when the disabled button is hit. You can use it
      * to reset subsystems before shutting down.

@@ -37,7 +37,7 @@ public class OpenLoopMode extends SubsystemMode {
     
     @Override
     public void teleop(double left, double right) {
-        Robot.driveTrain.set(-left, right);
+        Robot.driveTrain.set(left, -right);
     }
     
     @Override

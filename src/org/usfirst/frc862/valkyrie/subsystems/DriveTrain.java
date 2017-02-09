@@ -74,7 +74,7 @@ public class DriveTrain extends Subsystem implements Loop {
     // here. Call these from Commands.
     
     private boolean running = false;
-    private JoystickFilter filter = new JoystickFilter(Constants.deadband, 0, 1, JoystickFilter.Mode.SQUARED);
+    private JoystickFilter filter = new JoystickFilter(Constants.deadband, 0, 1, JoystickFilter.Mode.LINEAR);
     private MotionProfileStatus status = new MotionProfileStatus();
     private double leftRequestedPower;
     private double rightRequestedPower;

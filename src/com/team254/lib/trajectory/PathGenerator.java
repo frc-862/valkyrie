@@ -31,7 +31,7 @@ public class PathGenerator {
             wheelbase_width);
   }
 
-  static Trajectory generateFromPath(WaypointSequence path,
+   public static Trajectory generateFromPath(WaypointSequence path,
           TrajectoryGenerator.Config config) {
     if (path.getNumWaypoints() < 2) {
       return null;
@@ -100,7 +100,7 @@ public class PathGenerator {
    * right sides.
    * @return [0] is left, [1] is right
    */
-  static Trajectory.Pair makeLeftAndRightTrajectories(Trajectory input,
+  public static Trajectory.Pair makeLeftAndRightTrajectories(Trajectory input,
           double wheelbase_width) {
     Trajectory[] output = new Trajectory[2];
     output[0] = input.copy();

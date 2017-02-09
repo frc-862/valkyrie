@@ -38,6 +38,10 @@ public class TrajectoryFollower {
     profile_ = profile;
   }
 
+  public Trajectory.Segment getSegment() {
+      return profile_.getSegment(current_segment);
+  }
+  
   public double calculate(double distance_so_far) {
     if (current_segment < profile_.getNumSegments()) {
       Trajectory.Segment segment = profile_.getSegment(current_segment);

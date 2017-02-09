@@ -1,15 +1,11 @@
 package org.usfirst.frc862.util;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
-import java.util.Deque;
 import java.util.Vector;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 import org.usfirst.frc862.valkyrie.Constants;
 

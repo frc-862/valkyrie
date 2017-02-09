@@ -73,6 +73,10 @@ public class LightningMath {
         return Math.abs(input) >= deadband ? input : 0;
     }
     
+    public static double rotations2feet(double rotations) {
+        return rotations * Constants.WheelCircumference;
+    }
+    
     public static double rpm2fps(double rpm) {
         // rpm * circumference will be feet / minute
         // 60 is the number of seconds in a minute

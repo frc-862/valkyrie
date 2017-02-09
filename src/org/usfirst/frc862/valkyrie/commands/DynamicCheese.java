@@ -10,19 +10,18 @@
 
 
 package org.usfirst.frc862.valkyrie.commands;
-import edu.wpi.first.wpilibj.command.Command;
-import jaci.pathfinder.Pathfinder;
-
 import org.usfirst.frc862.util.LightningMath;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 
 import com.team254.lib.trajectory.PathGenerator;
-import com.team254.lib.trajectory.TrajectoryGenerator;
-import com.team254.lib.trajectory.WaypointSequence;
 import com.team254.lib.trajectory.Trajectory;
 import com.team254.lib.trajectory.Trajectory.Pair;
 import com.team254.lib.trajectory.Trajectory.Segment;
+import com.team254.lib.trajectory.TrajectoryGenerator;
+import com.team254.lib.trajectory.WaypointSequence;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

@@ -85,6 +85,14 @@ public class Constants extends ConstantsBase {
 //    public static double velocityFeedForward = 4.6 / 4;
     public static double velocityFeedForward = 4.5 / 4;
     public static double velocityPTerm = 0.64;
+    
+    // TODO lots of guessing here, need to tune
+    public static double pathP = LightningMath.fps2rpm(1);
+    public static double pathI = 0;
+    public static double pathD = 0;
+    public static double pathV = LightningMath.fps2rpm(1);
+    public static double pathA = pathV / 2;
+    public static double pathTurn = -3.0 / 80;  // borrowed from Poofs
 
     public String getFileName() {
         return "~/valkyrie.yaml";

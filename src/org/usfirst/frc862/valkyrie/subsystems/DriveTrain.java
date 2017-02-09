@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;
 import org.usfirst.frc862.util.JoystickFilter;
+import org.usfirst.frc862.util.LightningMath;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Loop;
 import org.usfirst.frc862.valkyrie.Constants;
@@ -262,11 +263,11 @@ public class DriveTrain extends Subsystem implements Loop {
     }
     
     public double getLeftVelocity() {
-        return leftMotor1.getSpeed();
+        return LightningMath.rpm2fps(leftMotor1.getSpeed());
     }
     
     public double getRightVelocity() {
-        return rightMotor1.getSpeed();
+        return LightningMath.rpm2fps(rightMotor1.getSpeed());
     }
     
     public double getVelocity() {
@@ -274,7 +275,7 @@ public class DriveTrain extends Subsystem implements Loop {
     }
     
     public double getLeftDistance() {
-        return leftMotor1.getPosition();
+        return LightningMath.rotations2feet(leftMotor1.getPosition());
     }
     
     public int getLeftEncoder() {
@@ -286,7 +287,7 @@ public class DriveTrain extends Subsystem implements Loop {
     }
     
     public double getRightDistance() {
-        return rightMotor1.getPosition();
+        return LightningMath.rotations2feet(rightMotor1.getPosition());
     }
     
     public void resetDistance() {
@@ -381,6 +382,15 @@ public class DriveTrain extends Subsystem implements Loop {
         }
     }
 
+    public double getGyroAngle() {
+        return navx.getFusedHeading();
+    }
+    
+    public double getGyroAngleInRadians() {
+        return getGyroAngle() * Math.PI / 180;
+    }
+    
+    
     /*
     public boolean getDrivingStraight() {
         return drivingStraight;

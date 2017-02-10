@@ -12,7 +12,6 @@
 package org.usfirst.frc862.valkyrie.commands;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Command;
-import jaci.pathfinder.Pathfinder;
 
 import org.usfirst.frc862.util.CommandLogger;
 import org.usfirst.frc862.valkyrie.Constants;
@@ -75,7 +74,7 @@ public class DynamicExtraCheese extends Command {
 //        points.addWaypoint(new WaypointSequence.Waypoint(0,0,0)); //left side
 //        points.addWaypoint(new WaypointSequence.Waypoint(7.45,-3.17,Pathfinder.d2r(-65))); //left side
         points.addWaypoint(new WaypointSequence.Waypoint(0,0,0));
-        points.addWaypoint(new WaypointSequence.Waypoint(7.9, 2.7,Pathfinder.d2r(63))); //right side
+        points.addWaypoint(new WaypointSequence.Waypoint(7.9, 2.7, Math.toRadians(63))); //right side
 
         
         TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
@@ -114,7 +113,7 @@ public class DynamicExtraCheese extends Command {
         double goalHeading = followerLeft.getHeading();
         double observedHeading = drive.getGyroAngleInRadians();
 
-        double angleDiff = ChezyMath.getDifferenceInAngleDegrees(observedHeading, Pathfinder.r2d(goalHeading));
+        double angleDiff = ChezyMath.getDifferenceInAngleDegrees(observedHeading, Math.toDegrees(goalHeading));
 
         double turn = Constants.pathTurn * angleDiff;
         double requestedLeft = speedLeft + turn;

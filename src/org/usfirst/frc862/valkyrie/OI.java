@@ -133,7 +133,6 @@ public class OI {
         // Todo integrate either/two button commands into robotbuilder
         // new EitherButtonTrigger(cmdUpshift1, cmdUpShift2).whenActive(new Upshift());
 
-        if (false) {
         new LowVoltageTrigger(RobotMap.corePowerPanel, Constants.LowVoltage, Constants.LVTriggerTime).whenActive(
                 new FaultCommand(FaultCode.Codes.LOW_MAIN_VOLTAGE)
         );
@@ -169,7 +168,6 @@ public class OI {
                 Constants.MinUpshiftVelocity, Constants.VelocityUpshiftTime).whenActive(
                 new Upshift()
         );
-        }
         /*
         new EncoderFailure(RobotMap.corePowerPanel, Constants.HighCurrentThreshold, Constants.TriggerTime).whenActive(
                 new LogCommand(() -> "Current warning: " + RobotMap.corePowerPanel.getTotalCurrent())

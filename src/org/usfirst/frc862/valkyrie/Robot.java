@@ -4,7 +4,7 @@ import org.usfirst.frc862.util.CrashTracker;
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Looper;
-import org.usfirst.frc862.valkyrie.commands.FollowMotionProfile;
+import org.usfirst.frc862.valkyrie.commands.StraightDynamicProfile;
 // import org.usfirst.frc862.valkyrie.commands.*;
 import org.usfirst.frc862.valkyrie.subsystems.Core;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
@@ -115,7 +115,7 @@ public class Robot extends IterativeRobot {
             // TODO add auton modes
             autonChooser = new SendableChooser<Command>();
             autonChooser.addDefault("Do Nothing", null);
-            autonChooser.addDefault("Center Lift", new FollowMotionProfile());
+            autonChooser.addDefault("Center Lift", new StraightDynamicProfile());
             SmartDashboard.putData("Auton Mode", autonChooser);
             SmartDashboard.putNumber("Climb Power", 1.0);
             SmartDashboard.putNumber("Dynamic Motion Profile X", 1.0);

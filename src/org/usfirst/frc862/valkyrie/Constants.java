@@ -1,15 +1,18 @@
 package org.usfirst.frc862.valkyrie;
 
+import java.io.File;
+
 import org.usfirst.frc862.util.ConstantsBase;
 import org.usfirst.frc862.util.InterpolatedMap;
 import org.usfirst.frc862.util.LightningMath;
 
 @SuppressWarnings("WeakerAccess")
 public class Constants extends ConstantsBase {
-    public static final double CrashDuration = 0.1;
-    public static final double LostBattleTriggerTime = 0.75;
-    public static final double CompressorPauseTime = 1;
-    public static final double wheelBase = 21.5 / 12;  // in feet
+    public static double CrashDuration = 0.1;
+    public static double LostBattleTriggerTime = 0.75;
+    public static double CompressorPauseTime = 1;
+    public static double wheelBase = 21.5 / 12;  // in feet
+    
     // Volts per second
     public static double driveRampRate = 300;
     public static int encoderTicksPerRev = 360;
@@ -93,6 +96,10 @@ public class Constants extends ConstantsBase {
     public static double pathV = LightningMath.fps2rpm(1);
     public static double pathA = 0; //pathV / 2;
     public static double pathTurn = -3.0 / 80;  // borrowed from Poofs
+    public static double Path_dt = 0.02;
+    public static double Path_max_acc = 8 / 3;
+    public static double Path_max_jerk = 25;
+    public static double Path_max_vel = 3.5;
 
     public String getFileName() {
         return "~/valkyrie.yaml";
@@ -104,6 +111,11 @@ public class Constants extends ConstantsBase {
 //        Constants.lookupTable.put(50.0, 2500.0);
 //        Constants.lookupTable.put(100.0, 10000.0);
         
+        File file = new File("/home/lvuser/obot");
+        if (file.exists()) {
+            // TODO any obot specific over-rides can go here
+        }
+
         new Constants().readFromFile();
     }
 

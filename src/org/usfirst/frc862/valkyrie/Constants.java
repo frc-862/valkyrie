@@ -1,5 +1,7 @@
 package org.usfirst.frc862.valkyrie;
 
+import java.io.File;
+
 import org.usfirst.frc862.util.ConstantsBase;
 import org.usfirst.frc862.util.InterpolatedMap;
 import org.usfirst.frc862.util.LightningMath;
@@ -109,6 +111,11 @@ public class Constants extends ConstantsBase {
 //        Constants.lookupTable.put(50.0, 2500.0);
 //        Constants.lookupTable.put(100.0, 10000.0);
         
+        File file = new File("/home/lvuser/obot");
+        if (file.exists()) {
+            // TODO any obot specific over-rides can go here
+        }
+
         new Constants().readFromFile();
     }
 

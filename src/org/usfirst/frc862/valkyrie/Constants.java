@@ -61,12 +61,10 @@ public class Constants extends ConstantsBase {
     public static double rotateEpsilon = 2.5;
     public static double rotatePGain = maxVelocity / 180.0 * 1.5;
     public static double straightenPGain = 1 / 90.0;
-<<<<<<< HEAD
 	public static double WallFollowSpeedL = 0.5;
 	public static double WallFollowSpeedR = 0.5;
 	public static double WallFollowDistanceClose = 24.0;
 	public static double WallFollowDistanceFar = 27.0;
-=======
 	public static double MotionProfileLoopSpeed = 0.02;
 	public static double MotionProfileMaxVelocity = 1.7;
 	public static double MotionProfileMaxAcceleration = 0.2;
@@ -90,7 +88,6 @@ public class Constants extends ConstantsBase {
 //    public static double velocityFeedForward = 4.6 / 4;
     public static double velocityFeedForward = 4.5 / 4;
     public static double velocityPTerm = 0.64;
->>>>>>> refs/remotes/origin/master
 
     public String getFileName() {
         return "~/valkyrie.yaml";

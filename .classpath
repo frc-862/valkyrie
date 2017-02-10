@@ -15,8 +15,14 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/snakeyaml-1.18-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/snakeyaml-1.18-SNAPSHOT.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRLib.jar"/>
+<<<<<<< HEAD
 	<classpathentry kind="var" path="USERLIBS_DIR/TalonSRXLibJava.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/Pathfinder-Java.jar"/>
+=======
+	<classpathentry kind="lib" path="lib/Pathfinder-Java.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/Pathfinder-Java.jar"/>
+	<classpathentry kind="lib" path="lib/RIOdroid.jar"/>
+>>>>>>> refs/remotes/origin/master
 	<classpathentry kind="var" path="USERLIBS_DIR/RIOdroid.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

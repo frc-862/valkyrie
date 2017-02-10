@@ -2,12 +2,14 @@ package org.usfirst.frc862.valkyrie;
 
 import org.usfirst.frc862.util.ConstantsBase;
 import org.usfirst.frc862.util.InterpolatedMap;
+import org.usfirst.frc862.util.LightningMath;
 
 @SuppressWarnings("WeakerAccess")
 public class Constants extends ConstantsBase {
     public static final double CrashDuration = 0.1;
     public static final double LostBattleTriggerTime = 0.75;
     public static final double CompressorPauseTime = 1;
+    public static final double wheelBase = 0.5;
     // Volts per second
     public static double driveRampRate = 300;
     public static int encoderTicksPerRev = 360;
@@ -35,15 +37,14 @@ public class Constants extends ConstantsBase {
     public static double kDriveBaseLockRampRate = 0;
     public static int kDriveBaseLockAllowableError = 10;
     public static double brakeIZone;
-    public static double driveTrainLoopRate = 0.05;
+    public static double driveTrainLoopRate = 0.10;
     public static double maxRampRate = 0.75;
     public static double shiftDelay = 0.25;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default 
     public static int logDepth = 1000;
     public static double backgroundLoopRate = 0.5;
-    public static double deadband = 0.1;
-    // public static double maxVelocity = (4 * 12.0) / (6 * 3.1415) * 60; // in rpm w/6" wheel
-    public static double maxVelocity = 500;
+    public static double deadband = 0.05;
+    public static double maxVelocity = 350;
     public static double winchRampTime = 3;
     public static double LowVoltage = 10;
     public static double HCTriggerTime = 0.25;
@@ -60,10 +61,36 @@ public class Constants extends ConstantsBase {
     public static double rotateEpsilon = 2.5;
     public static double rotatePGain = maxVelocity / 180.0 * 1.5;
     public static double straightenPGain = 1 / 90.0;
+<<<<<<< HEAD
 	public static double WallFollowSpeedL = 0.5;
 	public static double WallFollowSpeedR = 0.5;
 	public static double WallFollowDistanceClose = 24.0;
 	public static double WallFollowDistanceFar = 27.0;
+=======
+	public static double MotionProfileLoopSpeed = 0.02;
+	public static double MotionProfileMaxVelocity = 1.7;
+	public static double MotionProfileMaxAcceleration = 0.2;
+	public static double MotionProfileMaxJerk = 1.0;
+	public static double WheelDiameter = LightningMath.feet2meters(1/3);
+	public static double DMPKP = 0.0;
+	public static double DMPKI = 0.0;
+	public static double DMPKD = 0.0;
+	public static double DMPKV = 300;
+	public static double DMPKA = 0.0;
+    public static double kTrackScrubFactor = 1.0;
+    public static double kTrackEffectiveDiameter = 4.0;
+    public static double kPathFollowingMaxAccel = 3.6;
+    public static double kLooperDt = 0.05;
+    public static double kPathFollowingLookahead = 3.0;
+    public static double kPathFollowingMaxVel = 16.0;
+    public static int kCameraPitchAngleDegrees;
+    public static int kCameraYawAngleDegrees;
+    public static int kCenterOfTargetHeight;
+    public static int kCameraZOffset;
+//    public static double velocityFeedForward = 4.6 / 4;
+    public static double velocityFeedForward = 4.5 / 4;
+    public static double velocityPTerm = 0.64;
+>>>>>>> refs/remotes/origin/master
 
     public String getFileName() {
         return "~/valkyrie.yaml";

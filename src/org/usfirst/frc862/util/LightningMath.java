@@ -3,6 +3,14 @@ package org.usfirst.frc862.util;
 @SuppressWarnings("WeakerAccess")
 public class LightningMath {
 
+	public static double meters2feet(double meters) {
+		return meters * 0.3048;
+	}
+	
+	public static double feet2meters(double feet) {
+		return feet * 3.28084;
+	}
+	
     public static double limit(double v, double low, double high) {
         return (v < low) ? low : ((v > high) ? high : v);
     }
@@ -10,7 +18,11 @@ public class LightningMath {
     public static double limit(double v, double limit) {
         return limit(v, -limit, limit);
     }
-
+    
+    public static double limit(double input) {
+        return limit(input, -1, 1);
+    }
+    
     public static double boundThetaNegPiToPi(double theta) {
         return theta - (Math.ceil((theta + Math.PI) / (Math.PI * 2)) - 1) * (Math.PI * 2); // (-π;π]
     }

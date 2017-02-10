@@ -14,6 +14,7 @@ import org.usfirst.frc862.valkyrie.RobotMap;
 import org.usfirst.frc862.valkyrie.commands.TeleopVelocityDrive;
 import org.usfirst.frc862.valkyrie.subsystems.modes.AdaptivePursuitMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.BrakeMode;
+import org.usfirst.frc862.valkyrie.subsystems.modes.EncoderMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.HeadingMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.MotionProfileMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.OpenLoopMode;
@@ -30,6 +31,10 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.hal.HAL;
+import edu.wpi.first.wpilibj.hal.FRCNetComm.tInstances;
+import edu.wpi.first.wpilibj.hal.FRCNetComm.tResourceType;
+import static org.usfirst.frc862.util.LightningMath.*;
 
 /**
  *
@@ -38,7 +43,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveTrain extends Subsystem implements Loop {
 
     public enum Modes {
-        OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE, ADAPTIVE_PURSUIT
+        OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE, ADAPTIVE_PURSUIT, ENCODER
     }    
     
     private final Object modeRunningLock = new Object();
@@ -78,6 +83,7 @@ public class DriveTrain extends Subsystem implements Loop {
     private MotionProfileStatus status = new MotionProfileStatus();
     private double leftRequestedPower;
     private double rightRequestedPower;
+    private EncoderMode encoderMode;
 
     // private double start;
     // private double stop;
@@ -87,16 +93,8 @@ public class DriveTrain extends Subsystem implements Loop {
     }
     
     private void initialize() {
-        this.eachSlaveMotor((CANTalon t) -> {
-            t.changeControlMode(CANTalon.TalonControlMode.Follower);
-        });
-        leftMotor2.set(leftMotor1.getDeviceID());
-        rightMotor2.set(rightMotor1.getDeviceID());
-        leftMotor3.set(leftMotor1.getDeviceID());
-        rightMotor3.set(rightMotor1.getDeviceID());
-
         leftMotor1.reverseSensor(false);
-        leftMotor1.reverseOutput(false);
+        leftMotor1.reverseOutput(true);
         leftMotor1.setVoltageRampRate(Constants.driveRampRate);
         
         // Followers should only be reversed if you want them to run opposite of the
@@ -116,8 +114,8 @@ public class DriveTrain extends Subsystem implements Loop {
             DataLogger.addDataElement("left set point", () -> leftMotor1.getSetpoint());
         }
         
-        rightMotor1.reverseSensor(true);
-        rightMotor1.reverseOutput(true);
+        rightMotor1.reverseSensor(false);
+        rightMotor1.reverseOutput(false);
         // Followers should only be reversed if you want them to run opposite of the
         // master controller
         rightMotor2.reverseOutput(false);        
@@ -136,21 +134,31 @@ public class DriveTrain extends Subsystem implements Loop {
         }
 
         
+        this.eachSlaveMotor((CANTalon t) -> {
+            t.changeControlMode(CANTalon.TalonControlMode.Follower);
+            t.reverseOutput(true);
+        });
+        leftMotor2.set(leftMotor1.getDeviceID());
+        leftMotor3.set(leftMotor1.getDeviceID());
+        
+        rightMotor2.set(rightMotor1.getDeviceID());
+        rightMotor3.set(rightMotor1.getDeviceID());
+
         openLoopMode = new OpenLoopMode();
         velocityMode = new VelocityMode();
         brakeMode = new BrakeMode();
         headingMode = new HeadingMode();
         motionProfileMode = new MotionProfileMode();
         adaptivePursuitMode = new AdaptivePursuitMode();
+        encoderMode = new EncoderMode();
         
         // Data Logging, using the follower will have it always
         // return applied throttle, regardless of mode
-        DataLogger.addDataElement("Left Drive Power", () -> leftMotor2.get());
-        DataLogger.addDataElement("Right Drive Power", () -> rightMotor2.get());
-        // DataLogger.addDataElement("heading", () -> navx.getFusedHeading());
+        DataLogger.addDataElement("Left Drive Power", () -> leftMotor1.get());
+        DataLogger.addDataElement("Right Drive Power", () -> rightMotor1.get());
         
-        currentMode = brakeMode;
-        mode = Modes.BRAKE;
+        currentMode = this.velocityMode;
+        mode = Modes.VELOCITY;
     }
     
     public void initDefaultCommand() {
@@ -218,6 +226,10 @@ public class DriveTrain extends Subsystem implements Loop {
             currentMode = motionProfileMode;
             break;
                         
+        case ENCODER:
+            currentMode = encoderMode;
+            break;
+                        
         default:
             // TODO set fault
         }
@@ -270,6 +282,14 @@ public class DriveTrain extends Subsystem implements Loop {
         return leftMotor1.getPosition();
     }
     
+    public int getLeftEncoder() {
+    	return leftMotor1.getEncPosition();
+    }
+    
+    public int getRightEncoder() {
+    	return rightMotor1.getEncPosition();
+    }
+    
     public double getRightDistance() {
         return rightMotor1.getPosition();
     }
@@ -315,7 +335,6 @@ public class DriveTrain extends Subsystem implements Loop {
     }
     
     public void set(double left, double right) {
-        
         leftMotor1.set(left);
         rightMotor1.set(right);
     }
@@ -346,6 +365,36 @@ public class DriveTrain extends Subsystem implements Loop {
         currentMode.teleop(leftRequestedPower, rightRequestedPower);
 
         // coPilot currently unused.
+    }
+
+    public void teleopArcade(double moveValue, double rotateValue) {
+        // NOTE this is where you need to make changes if we switch to a
+        // single controller, etc.
+        moveValue = filter.filter(limit(moveValue));
+        rotateValue = filter.filter(limit(rotateValue));
+
+        double leftMotorSpeed;
+        double rightMotorSpeed;
+
+        if (moveValue > 0.0) {
+            if (rotateValue > 0.0) {
+                leftMotorSpeed = moveValue - rotateValue;
+                rightMotorSpeed = Math.max(moveValue, rotateValue);
+            } else {
+                leftMotorSpeed = Math.max(moveValue, -rotateValue);
+                rightMotorSpeed = moveValue + rotateValue;
+            }
+        } else {
+            if (rotateValue > 0.0) {
+                leftMotorSpeed = -Math.max(-moveValue, rotateValue);
+                rightMotorSpeed = moveValue + rotateValue;
+            } else {
+                leftMotorSpeed = moveValue - rotateValue;
+                rightMotorSpeed = -Math.max(-moveValue, -rotateValue);
+            }
+        }
+
+        currentMode.teleop(leftMotorSpeed, rightMotorSpeed);
     }
 
     public void start() {

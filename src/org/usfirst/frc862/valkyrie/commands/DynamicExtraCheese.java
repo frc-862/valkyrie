@@ -72,10 +72,11 @@ public class DynamicExtraCheese extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {        
         WaypointSequence points = new WaypointSequence(10);
+//        points.addWaypoint(new WaypointSequence.Waypoint(0,0,0)); //left side
+//        points.addWaypoint(new WaypointSequence.Waypoint(7.45,-3.17,Pathfinder.d2r(-65))); //left side
         points.addWaypoint(new WaypointSequence.Waypoint(0,0,0));
-//        points.addWaypoint(new WaypointSequence.Waypoint(6.5,-3,-Math.PI / 3));
-        points.addWaypoint(new WaypointSequence.Waypoint(7,-2.67,-Math.PI / 3));
-//        points.addWaypoint(new WaypointSequence.Waypoint(7.1,-2.67,-Math.PI / 3));
+        points.addWaypoint(new WaypointSequence.Waypoint(7.9, 2.7,Pathfinder.d2r(63))); //right side
+
         
         TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
         config.dt = 0.02;
@@ -142,7 +143,7 @@ public class DynamicExtraCheese extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return segment_index >= trajectory.getNumSegments();
+    	return this.followerLeft.isFinishedTrajectory();
     }
 
     // Called once after isFinished returns true

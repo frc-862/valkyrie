@@ -11,6 +11,7 @@ public class Constants extends ConstantsBase {
 	
 	public static double HCScaryTriggerTime = 1.5;
 	//Autoshifting
+	//TODO Calibrate shift points for valkyrie
     public static double CrashDuration = 0.1;
     public static double LostBattleTriggerTime = 0.75;
     public static double CompressorPauseTime = 1;
@@ -33,8 +34,6 @@ public class Constants extends ConstantsBase {
     public static double minimumAirReserve = 3;
     public static double compressorDisabledDelay = 0.5;
     public static double seriousCurrentDrawTimer = 0.15;
-
-
     
     //Robot Physical Specs
     public static double wheelBase = 22.0 / 12.0;  // in feet
@@ -60,7 +59,13 @@ public class Constants extends ConstantsBase {
     public static double velocityFeedForwardL = 4.5 / 4;
     public static double velocityPTerm = 0.64;
 	public static double MotorOffTime = 1.0;
-
+	//TODO Calibrate P term and feed forward for high hear
+	public static double velocityLowGearPTerm = 0.64;
+	public static double velocityHighGearPTerm = 0.64;
+	public static double velocityFeedForwardRHigh = 4.5 / 4;
+	public static double velocityFeedForwardLLow = 4.5 / 4;
+	public static double velocityFeedForwardLHigh = 4.5 / 4;
+	public static double velocityFeedForwardRLow = 4.5 / 4;
 
     // Note this is final, it will not be
     // in the config file, and if you put
@@ -95,8 +100,7 @@ public class Constants extends ConstantsBase {
     public static double Path_max_acc = 8 / 3;
     public static double Path_max_jerk = 25;
     public static double Path_max_vel = 3.5;
-
-    
+ 
     //vision
 	public static double DMPKP = 0.0;
 	public static double DMPKI = 0.0;

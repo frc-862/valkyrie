@@ -51,19 +51,21 @@ public class Shifter extends Subsystem {
 
     public void downShift() {
         if (!isLowGear()) {
-            shifter.set(Value.kForward);
+            shifter.set(Value.kReverse);
             Robot.core.useAirUnits(Constants.shiftAirUnit);
             gear_state = 1;
             lastShift = Timer.getFPGATimestamp();
+            Robot.driveTrain.tuneForLowGear();
         }
     }
 
     public void upShift() {
         if (!isHighGear()) {
-            shifter.set(Value.kReverse);
+            shifter.set(Value.kForward);
             Robot.core.useAirUnits(Constants.shiftAirUnit);
             gear_state = 2;
             lastShift = Timer.getFPGATimestamp();
+            Robot.driveTrain.tuneForHighGear();
         }
     }
 

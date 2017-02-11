@@ -9,6 +9,7 @@ import org.usfirst.frc862.util.LightningMath;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Loop;
 import org.usfirst.frc862.valkyrie.Constants;
+import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
 import org.usfirst.frc862.valkyrie.commands.TeleopVelocityDrive;
 import org.usfirst.frc862.valkyrie.subsystems.modes.AdaptivePursuitMode;
@@ -400,5 +401,38 @@ public class DriveTrain extends Subsystem implements Loop {
         // TODO for a limited amount of time reduce (cut?) motor power 
         // better to loose the battle than the war...
     }
+
+	public void tuneForLowGear() {
+		// TODO Auto-generated method stub
+		Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> { 
+            t.changeControlMode(CANTalon.TalonControlMode.Speed);
+            t.setPID(Constants.velocityLowGearPTerm, 0, 0);
+        });
+		
+		 Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
+	        	t.setF(Constants.velocityFeedForwardLLow);
+	        });
+		 
+		 Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
+	        	t.setF(Constants.velocityFeedForwardRLow);
+	        });
+		
+	}
+
+	public void tuneForHighGear() {
+		// TODO Auto-generated method stub
+		Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> { 
+            t.changeControlMode(CANTalon.TalonControlMode.Speed);
+            t.setPID(Constants.velocityHighGearPTerm, 0, 0);
+        });
+		
+		 Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
+	        	t.setF(Constants.velocityFeedForwardRHigh);
+	        });
+		 
+		 Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
+	        	t.setF(Constants.velocityFeedForwardLHigh);
+	        });
+	}
 }
 

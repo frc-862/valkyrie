@@ -51,7 +51,9 @@ public class Constants extends ConstantsBase {
     public static double driveTrainLoopRate = 0.10;
     public static double maxRampRate = 0.75;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default
-    public static double maxVelocity = 350;
+    public static double maxHighGearVelocity = 350;
+    public static double maxLowGearVelocity = 350;
+   
     public static double driveRampRate = 300;
     public static int encoderTicksPerRev = 360;
     public static double velocityFeedForward = 4.5 / 4;
@@ -81,7 +83,7 @@ public class Constants extends ConstantsBase {
     public static double winchRampTime = 3;
     public static double straightCommandDelta = 0.19;
     public static double rotateEpsilon = 2.5; //degrees
-    public static double rotatePGain = maxVelocity / 180.0 * 1.5;
+    public static double rotatePGain = maxLowGearVelocity / 180.0 * 1.5;
     public static double straightenPGain = 1 / 90.0;
 
     //Motion Profile

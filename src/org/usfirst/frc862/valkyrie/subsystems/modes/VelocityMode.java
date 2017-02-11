@@ -38,6 +38,12 @@ public class VelocityMode extends SubsystemMode {
     public void teleop(double left, double right) {
         // Joysticks are backwards -- forward is negative, positive is backwards
         // But our master is now reversed in a 6cim setup, so no negation
-        Robot.driveTrain.set(left * -Constants.maxVelocity, right * -Constants.maxVelocity);
+    	//Gear state 2 is high gear, state 1 is low gear
+    	if (Robot.shifter.gear_state == 1){
+    		Robot.driveTrain.set(left * -Constants.maxLowGearVelocity, right * -Constants.maxLowGearVelocity);
+    	}
+    	if (Robot.shifter.gear_state == 2){
+    		Robot.driveTrain.set(left * -Constants.maxHighGearVelocity, right * -Constants.maxHighGearVelocity);
+    	}
     }
 }

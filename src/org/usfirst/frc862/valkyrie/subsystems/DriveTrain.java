@@ -177,6 +177,14 @@ public class DriveTrain extends Subsystem implements Loop {
         func.accept(rightMotor1);
     }
     
+    public void leftPrimaryMotor(Consumer<CANTalon> func) {
+    	func.accept(leftMotor1);
+    }
+    
+    public void rightPrimaryMotor(Consumer<CANTalon> func) {
+    	func.accept(rightMotor1);
+    }
+    
     public void eachSlaveMotor(Consumer<CANTalon> func) {
         func.accept(leftMotor2);
         func.accept(rightMotor2);
@@ -391,6 +399,6 @@ public class DriveTrain extends Subsystem implements Loop {
     public void reduceMotorPower() {
         // TODO for a limited amount of time reduce (cut?) motor power 
         // better to loose the battle than the war...
-    }    
+    }
 }
 

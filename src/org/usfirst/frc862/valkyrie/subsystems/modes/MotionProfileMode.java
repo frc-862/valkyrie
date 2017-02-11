@@ -38,10 +38,14 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
            t.clearMotionProfileTrajectories(); 
            t.changeMotionControlFramePeriod(5);
            t.changeControlMode(CANTalon.TalonControlMode.MotionProfile);
-           t.set(CANTalon.SetValueMotionProfile.Disable.value);
-           t.setPID(Constants.velocityPTerm, 0, 0, 
-                   Constants.velocityFeedForward, 0, 0, 0);
+           t.set(CANTalon.SetValueMotionProfile.Disable.value);    	   
         });
+        
+        RobotMap.driveTrainLeftMotor1.setPID(Constants.velocityPTerm, 0, 0, 
+                   Constants.velocityFeedForwardL, 0, 0, 0);
+        
+        RobotMap.driveTrainRightMotor1.setPID(Constants.velocityPTerm, 0, 0, 
+                Constants.velocityFeedForwardR, 0, 0, 0);
 
         int period = (int) leftPoints[0][2];
         final int pointCount = Math.min(leftPoints.length, rightPoints.length);

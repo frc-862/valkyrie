@@ -405,34 +405,21 @@ public class DriveTrain extends Subsystem implements Loop {
 	public void tuneForLowGear() {
 		// TODO Auto-generated method stub
 		Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> { 
-            t.changeControlMode(CANTalon.TalonControlMode.Speed);
             t.setPID(Constants.velocityLowGearPTerm, 0, 0);
         });
 		
-		 Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
-	        	t.setF(Constants.velocityFeedForwardLLow);
-	        });
-		 
-		 Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
-	        	t.setF(Constants.velocityFeedForwardRLow);
-	        });
-		
+		RobotMap.driveTrainLeftMotor1.setF(Constants.velocityFeedForwardLLow);
+		RobotMap.driveTrainRightMotor1.setF(Constants.velocityFeedForwardRLow);
 	}
 
 	public void tuneForHighGear() {
 		// TODO Auto-generated method stub
 		Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> { 
-            t.changeControlMode(CANTalon.TalonControlMode.Speed);
             t.setPID(Constants.velocityHighGearPTerm, 0, 0);
         });
 		
-		 Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
-	        	t.setF(Constants.velocityFeedForwardRHigh);
-	        });
-		 
-		 Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
-	        	t.setF(Constants.velocityFeedForwardLHigh);
-	        });
+		RobotMap.driveTrainLeftMotor1.setF(Constants.velocityFeedForwardRHigh);
+		RobotMap.driveTrainRightMotor1.setF(Constants.velocityFeedForwardLHigh); 
 	}
 }
 

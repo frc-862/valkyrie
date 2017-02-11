@@ -51,7 +51,7 @@ public class Constants extends ConstantsBase {
     public static double driveTrainLoopRate = 0.10;
     public static double maxRampRate = 0.75;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default
-    public static double maxHighGearVelocity = 350;
+    public static double maxHighGearVelocity = 950;
     public static double maxLowGearVelocity = 350;
    
     public static double driveRampRate = 300;
@@ -64,8 +64,8 @@ public class Constants extends ConstantsBase {
 	//TODO Calibrate P term and feed forward for high hear
 	public static double velocityLowGearPTerm = 0.64;
 	public static double velocityHighGearPTerm = 0.64;
-	public static double velocityFeedForwardRHigh = 4.5 / 4;
-	public static double velocityFeedForwardLLow = 4.5 / 4;
+	public static double velocityFeedForwardRHigh = 4.5 /4;
+	public static double velocityFeedForwardLLow = 4.5 /4;
 	public static double velocityFeedForwardLHigh = 4.5 / 4;
 	public static double velocityFeedForwardRLow = 4.5 / 4;
 

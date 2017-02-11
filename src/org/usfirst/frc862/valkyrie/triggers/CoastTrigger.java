@@ -1,6 +1,7 @@
 package org.usfirst.frc862.valkyrie.triggers;
 
 import org.usfirst.frc862.util.MonitorTrigger;
+import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,6 +14,7 @@ public class CoastTrigger extends MonitorTrigger {
         super(duration, () -> {
             return (Math.abs(dt.getAverageVelocity()) < limit) &&
                     (Math.abs(dt.getRequestedPower()) < minCoastPower) && 
+                    !Robot.shifter.hysteresisSafetyNet() &&
                     SmartDashboard.getBoolean("Use Coast Downshift", true);
             });
     }

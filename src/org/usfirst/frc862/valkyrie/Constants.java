@@ -101,6 +101,13 @@ public class Constants extends ConstantsBase {
     public static double Path_max_jerk = 25;
     public static double Path_max_vel = 3.5;
 
+    public static double maxAirUnits = 20;
+    public static double shiftAirUnit = 1;
+    public static double minimumAirReserve = 3;
+    public static double compressorDisabledDelay = 0.5;
+    public static double shiftHysteresis = 0.3;
+    public static double seriousCurrentDrawTimer = 0.15;
+
     public String getFileName() {
         return "~/valkyrie.yaml";
     }

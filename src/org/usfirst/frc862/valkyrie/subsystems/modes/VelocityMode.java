@@ -22,11 +22,11 @@ public class VelocityMode extends SubsystemMode {
         });
         
         Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
-        	t.setF(Constants.velocityFeedForwardL);
+        	t.setF(Constants.velocityFeedForwardLLow);
         });
         
         Robot.driveTrain.rightPrimaryMotor((CANTalon t) ->{
-        	t.setF(Constants.velocityFeedForwardR);
+        	t.setF(Constants.velocityFeedForwardRLow);
         });
         
         Robot.driveTrain.eachSlaveMotor((CANTalon t) -> {
@@ -38,6 +38,6 @@ public class VelocityMode extends SubsystemMode {
     public void teleop(double left, double right) {
         // Joysticks are backwards -- forward is negative, positive is backwards
         // But our master is now reversed in a 6cim setup, so no negation
-        Robot.driveTrain.set(left * -Constants.maxVelocity, right * -Constants.maxVelocity);
+        Robot.driveTrain.set(left * - Robot.shifter.getMaxVelocity(), right * -Robot.shifter.getMaxVelocity());
     }
 }

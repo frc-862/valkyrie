@@ -42,11 +42,11 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
         });
         
         RobotMap.driveTrainLeftMotor1.setPID(Constants.velocityPTerm, 0, 0, 
-                   Constants.velocityFeedForwardL, 0, 0, 0);
+                   Constants.velocityFeedForwardLLow, 0, 0, 0);
         
         RobotMap.driveTrainRightMotor1.setPID(Constants.velocityPTerm, 0, 0, 
-                Constants.velocityFeedForwardR, 0, 0, 0);
-
+                Constants.velocityFeedForwardRLow, 0, 0, 0);
+        
         int period = (int) leftPoints[0][2];
         final int pointCount = Math.min(leftPoints.length, rightPoints.length);
         for(int i=0; i < pointCount; ++i) {

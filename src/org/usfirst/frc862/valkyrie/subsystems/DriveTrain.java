@@ -9,6 +9,7 @@ import org.usfirst.frc862.util.LightningMath;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Loop;
 import org.usfirst.frc862.valkyrie.Constants;
+import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
 import org.usfirst.frc862.valkyrie.commands.TeleopVelocityDrive;
 import org.usfirst.frc862.valkyrie.subsystems.modes.AdaptivePursuitMode;
@@ -399,6 +400,28 @@ public class DriveTrain extends Subsystem implements Loop {
     public void reduceMotorPower() {
         // TODO for a limited amount of time reduce (cut?) motor power 
         // better to loose the battle than the war...
+    }
+
+    public void configureLowGear() {
+        // TODO Auto-generated method stub
+        Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
+            t.setF(Constants.velocityFeedForwardLLow);
+        });
+        
+        Robot.driveTrain.rightPrimaryMotor((CANTalon t) ->{
+            t.setF(Constants.velocityFeedForwardRLow);
+        });
+    }
+
+    public void configureHighGear() {
+        // TODO Auto-generated method stub
+        Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
+            t.setF(Constants.velocityFeedForwardLHigh);
+        });
+        
+        Robot.driveTrain.rightPrimaryMotor((CANTalon t) ->{
+            t.setF(Constants.velocityFeedForwardRHigh);
+        });
     }
 }
 

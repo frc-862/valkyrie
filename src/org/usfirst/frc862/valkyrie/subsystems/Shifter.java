@@ -55,6 +55,7 @@ public class Shifter extends Subsystem {
             Robot.core.useAirUnits(Constants.shiftAirUnit);
             gear_state = 1;
             lastShift = Timer.getFPGATimestamp();
+            Robot.driveTrain.configureLowGear();
         }
     }
 
@@ -64,6 +65,7 @@ public class Shifter extends Subsystem {
             Robot.core.useAirUnits(Constants.shiftAirUnit);
             gear_state = 2;
             lastShift = Timer.getFPGATimestamp();
+            Robot.driveTrain.configureHighGear();
         }
     }
 
@@ -82,4 +84,18 @@ public class Shifter extends Subsystem {
     public boolean hysteresisSafetyNet() {
         return (Timer.getFPGATimestamp() - lastShift) > Constants.shiftHysteresis;
     }
+    
+    public double getMaxVelocity(){
+        if(isLowGear())
+        {
+            return Constants.maxVelocityLow; 
+        }
+        else 
+        {
+            return Constants.maxVelocityHigh;
+        }
+    }
+    
 }
+
+

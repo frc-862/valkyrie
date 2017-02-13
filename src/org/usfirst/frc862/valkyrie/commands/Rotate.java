@@ -60,7 +60,9 @@ public class Rotate extends Command {
         if(previousHeading > 170 && heading < 0) offset += 360;
         if(previousHeading < -170 && heading > 0) offset -= 360;
         error = goal - (heading - offset);
-        double power = Constants.rotatePGain * error;
+        double rotatePGain = Robot.shifter.getMaxVelocity() / 180.0 * 1.5;
+        double power = rotatePGain * error;
+
         Robot.driveTrain.set(power, -power);
         SmartDashboard.putNumber("Error", error);
         SmartDashboard.putNumber("Power", power);

@@ -13,7 +13,7 @@ public class VelocityTalonUpshiftTrigger extends MonitorTrigger {
     public VelocityTalonUpshiftTrigger(DriveTrain dt, double powerLimit, double velocityLimit, double duration) {
         super(duration, () -> (dt.getRequestedPower() > powerLimit) &&
                 (dt.getAbsVelocity() > velocityLimit) && 
-                !Robot.shifter.hysteresisSafetyNet() &&
+                //!Robot.shifter.hysteresisSafetyNet() &&
                 SmartDashboard.getBoolean("Use Velocity Upshift", true));
     }
 }

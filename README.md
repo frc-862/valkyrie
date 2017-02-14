@@ -12,3 +12,5 @@ year's teleop.
 See our teams [website](http://lightningrobotics.com/) for more information about us.
 
 **Full steam ahead!!!**
+
+p.s. Here is Luke's original [read me](DONT_README.md)

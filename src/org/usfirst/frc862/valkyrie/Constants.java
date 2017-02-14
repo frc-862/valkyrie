@@ -9,6 +9,14 @@ import org.usfirst.frc862.util.LightningMath;
 @SuppressWarnings("WeakerAccess")
 public class Constants extends ConstantsBase {
 	
+    
+    // Note this is final, it will not be
+    // in the config file, and if you put
+    // it there, the value will be ignored
+    // as the value here in the code is 
+    // immutable
+    
+    
 	//Autoshifting
     public static double HCScaryTriggerTime = 1.5;
     public static double CrashDuration = 0.1;
@@ -73,11 +81,6 @@ public class Constants extends ConstantsBase {
     public static double brakeIZone = 0;
     public static int brakeSlot = 1;
     
-    // Note this is final, it will not be
-    // in the config file, and if you put
-    // it there, the value will be ignored
-    // as the value here in the code is 
-    // immutable
 	
 	//Logging
     public static int logDepth = 1000;
@@ -89,10 +92,6 @@ public class Constants extends ConstantsBase {
     
 
     //Motion Profile
-    public static double MotionProfileLoopSpeed = 0.02;
-	public static double MotionProfileMaxVelocity = 1.7;
-	public static double MotionProfileMaxAcceleration = 0.2;
-	public static double MotionProfileMaxJerk = 1.0;
     public static double pathP = LightningMath.fps2rpm(1.5);
     public static double pathI = 0;
     public static double pathD = 0;
@@ -104,7 +103,6 @@ public class Constants extends ConstantsBase {
     public static double Path_max_jerk = 25;
     public static double Path_max_vel = 3.5;
     //public static InterpolatedMap lookupTable = new InterpolatedMap(new Double[]{1.0,2.1,3.2,4.3}); //interpolation example
-
 
     
     //vision
@@ -131,6 +129,7 @@ public class Constants extends ConstantsBase {
     public static double kDriveBaseLockRampRate = 0;
     public static int kDriveBaseLockAllowableError = 10;
 
+    
     public String getFileName() {
         return "~/valkyrie.yaml";
     }

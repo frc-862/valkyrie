@@ -145,7 +145,7 @@ public class OI {
         );
         
         new HighCurrentTrigger(RobotMap.corePowerPanel, Constants.HighCurrentThreshold, Constants.HCScaryTriggerTime).whenActive(
-                new TurnOffMotors(1)
+                new TurnOffMotors(Constants.MotorOffTime)
         );
 
         // TODO duration may be too long, test test test

@@ -179,6 +179,7 @@ public class Robot extends IterativeRobot {
 
             // schedule the autonomous command (example)
             Logger.debug("Starting autonomous");
+            shifter.downShift();
             autonomousCommand = (Command) autonChooser.getSelected();
             if (autonomousCommand != null)
                 autonomousCommand.start();
@@ -213,6 +214,8 @@ public class Robot extends IterativeRobot {
             if (autonomousCommand != null)
                 autonomousCommand.cancel();
 
+            shifter.downShift();
+            
             // TODO fix other modes and make them work
             // driveTrain.setMode(DriveTrain.Modes.OPEN_LOOP);
             driveTrain.setMode(DriveTrain.Modes.VELOCITY);

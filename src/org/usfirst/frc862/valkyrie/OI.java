@@ -26,7 +26,6 @@ import org.usfirst.frc862.valkyrie.commands.ExtendGearCollector;
 import org.usfirst.frc862.valkyrie.commands.FollowMotionProfile;
 import org.usfirst.frc862.valkyrie.commands.GetDataPacket;
 import org.usfirst.frc862.valkyrie.commands.HighCurrentResponse;
-import org.usfirst.frc862.valkyrie.commands.LarkinCmd;
 import org.usfirst.frc862.valkyrie.commands.LeftDynamicProfile;
 import org.usfirst.frc862.valkyrie.commands.OpenLoopDriveCommand;
 import org.usfirst.frc862.valkyrie.commands.PauseCompressor;
@@ -88,7 +87,6 @@ public class OI {
     public JoystickButton winchButton;
     public JoystickButton upshiftButton;
     public JoystickButton downshiftButton;
-    public JoystickButton larkinButton;
     public JoystickButton toggleShiftButton;
     public JoystickButton visionAssistFeedButton;
     public JoystickButton visionAssistGear;
@@ -125,8 +123,6 @@ public class OI {
         visionAssistFeedButton.whileHeld(new VisionFeedStation());
         toggleShiftButton = new JoystickButton(driverLeft, 1);
         toggleShiftButton.whenPressed(new DoNothing());
-        larkinButton = new JoystickButton(driverLeft, 12);
-        larkinButton.whileHeld(new LarkinCmd());
         downshiftButton = new JoystickButton(driverLeft, 16);
         downshiftButton.whenPressed(new DownShift());
         upshiftButton = new JoystickButton(driverLeft, 11);
@@ -152,7 +148,6 @@ public class OI {
         SmartDashboard.putData("Rotate: right", new Rotate(-90));
         SmartDashboard.putData("Rotate: reverse", new Rotate(180));
         SmartDashboard.putData("DriveStraight", new DriveStraight());
-        SmartDashboard.putData("LarkinCmd", new LarkinCmd());
         SmartDashboard.putData("Get Data Packet", new GetDataPacket());
         SmartDashboard.putData("Open Loop Drive Command", new OpenLoopDriveCommand());
         SmartDashboard.putData("Arcade Drive", new ArcadeDrive());

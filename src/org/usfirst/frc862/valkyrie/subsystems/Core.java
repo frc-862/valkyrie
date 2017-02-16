@@ -52,8 +52,8 @@ public class Core extends Subsystem implements Loop {
     public Core() {
         navx.zeroYaw();
 
-        DataLogger.addDataElement("Larkin", () -> powerPanel.getCurrent(13));
-        DataLogger.addDataElement("Voltage Warning", () -> powerPanel.getVoltage());
+        DataLogger.addDataElement("Winch Power 1", () -> powerPanel.getCurrent(4));
+        DataLogger.addDataElement("Winch Power 2", () -> powerPanel.getCurrent(11));
         DataLogger.addDataElement("Current Warning", () -> powerPanel.getTotalCurrent());
         DataLogger.addDataElement("AccelX", () -> navx.getRawAccelX());
         DataLogger.addDataElement("AccelY", () -> navx.getRawAccelY());

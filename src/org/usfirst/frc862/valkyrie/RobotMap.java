@@ -47,7 +47,6 @@ public class RobotMap {
     public static Compressor coreCompressor;
     public static SpeedController winchWinchMotor1;
     public static SpeedController winchWinchMotor2;
-    public static SpeedController winchLarkin;
     public static DoubleSolenoid shifterShifter;
     public static DoubleSolenoid gearCollectorcollector;
 
@@ -86,9 +85,6 @@ public class RobotMap {
         
         winchWinchMotor2 = new VictorSP(1);
         LiveWindow.addActuator("Winch", "WinchMotor2", (VictorSP) winchWinchMotor2);
-        
-        winchLarkin = new VictorSP(2);
-        LiveWindow.addActuator("Winch", "Larkin", (VictorSP) winchLarkin);
         
         shifterShifter = new DoubleSolenoid(11, 0, 1);
         LiveWindow.addActuator("Shifter", "Shifter", shifterShifter);

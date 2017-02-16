@@ -13,19 +13,39 @@ package org.usfirst.frc862.valkyrie;
 
 import org.usfirst.frc862.util.FaultCode;
 import org.usfirst.frc862.util.FaultCommand;
-import org.usfirst.frc862.valkyrie.commands.*;
+import org.usfirst.frc862.valkyrie.commands.ArcadeDrive;
+import org.usfirst.frc862.valkyrie.commands.Autoshifter;
+import org.usfirst.frc862.valkyrie.commands.CalibratedClimb;
+import org.usfirst.frc862.valkyrie.commands.Climb;
+import org.usfirst.frc862.valkyrie.commands.DoNothing;
+import org.usfirst.frc862.valkyrie.commands.DownShift;
+import org.usfirst.frc862.valkyrie.commands.DriveStraight;
+import org.usfirst.frc862.valkyrie.commands.DynamicCheese;
+import org.usfirst.frc862.valkyrie.commands.DynamicExtraCheese;
+import org.usfirst.frc862.valkyrie.commands.ExtendGearCollector;
+import org.usfirst.frc862.valkyrie.commands.FollowMotionProfile;
+import org.usfirst.frc862.valkyrie.commands.GetDataPacket;
+import org.usfirst.frc862.valkyrie.commands.HighCurrentResponse;
+import org.usfirst.frc862.valkyrie.commands.LarkinCmd;
+import org.usfirst.frc862.valkyrie.commands.LeftDynamicProfile;
+import org.usfirst.frc862.valkyrie.commands.OpenLoopDriveCommand;
+import org.usfirst.frc862.valkyrie.commands.PauseCompressor;
+import org.usfirst.frc862.valkyrie.commands.ResetDataLogger;
+import org.usfirst.frc862.valkyrie.commands.RetractGearCollector;
+import org.usfirst.frc862.valkyrie.commands.RightDynamicProfile;
+import org.usfirst.frc862.valkyrie.commands.Rotate;
+import org.usfirst.frc862.valkyrie.commands.TurnOffMotors;
+import org.usfirst.frc862.valkyrie.commands.Upshift;
+import org.usfirst.frc862.valkyrie.commands.VisionFeedStation;
+import org.usfirst.frc862.valkyrie.commands.VisionGear;
+import org.usfirst.frc862.valkyrie.commands.WallFollow;
+import org.usfirst.frc862.valkyrie.commands.WriteConstants;
+import org.usfirst.frc862.valkyrie.triggers.HighCurrentTrigger;
+import org.usfirst.frc862.valkyrie.triggers.LowVoltageTrigger;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.LightningButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc862.valkyrie.triggers.HighCurrentTrigger;
-import org.usfirst.frc862.valkyrie.triggers.LosingPushingBattleTrigger;
-import org.usfirst.frc862.valkyrie.triggers.LowVoltageTrigger;
-import org.usfirst.frc862.valkyrie.triggers.CoastTrigger;
-import org.usfirst.frc862.valkyrie.triggers.VelocityTalonUpshiftTrigger;
-import org.usfirst.frc862.valkyrie.triggers.CrashTrigger;
 
 
 /**

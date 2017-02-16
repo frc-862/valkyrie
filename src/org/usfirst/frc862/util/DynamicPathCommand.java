@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
+import org.usfirst.frc862.valkyrie.subsystems.DriveTrain.Modes;
 
 import com.team254.lib.trajectory.Path;
 import com.team254.lib.trajectory.PathGenerator;
@@ -23,6 +24,7 @@ import com.team254.lib.trajectory.io.TextFileDeserializer;
 import com.team254.lib.trajectory.io.TextFileSerializer;
 
 import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DynamicPathCommand extends Command {
@@ -46,7 +48,7 @@ public class DynamicPathCommand extends Command {
 
         logger = new CommandLogger(this.getName());
         logger.addDataElement("projected_left_pos");
-        logger.addDataElement("requested_left_pos");
+        logger.addDataElement("requested_left_vel");
         logger.addDataElement("actual_left_pos");
         logger.addDataElement("projected_left_vel");
         logger.addDataElement("actual_left_vel");
@@ -74,6 +76,7 @@ public class DynamicPathCommand extends Command {
             File file = new File(getFileName());
 
             if (!file.exists()) {
+                Logger.debug("Unable to load file " + getFileName());
                 return false;
             }
 
@@ -81,8 +84,12 @@ public class DynamicPathCommand extends Command {
             TextFileDeserializer deserializer = new TextFileDeserializer();
             path = deserializer.deserialize(contents);
 
+            Logger.debug("Loaded file " + getFileName() + " with " + 
+               path.getLeftWheelTrajectory().getNumSegments() + " points");
+            
         } catch (IOException e) {
-            System.out.println(e);
+            Logger.error(e.toString());
+            return false;
         }
         
         return true;
@@ -95,18 +102,19 @@ public class DynamicPathCommand extends Command {
         //System.out.print(serialized);
         String fullpath = getFileName();
         if (!writeFile(fullpath, serialized)) {
-          System.err.println(fullpath + " could not be written!!!!1");
+          Logger.debug(fullpath + " could not be written!!!!1");
         } else {
-          System.out.println("Wrote " + fullpath);
+          Logger.debug("Wrote " + fullpath);
         }    
     }
 
     protected String getFileName() {
-        return getName() + ".txt";
+        return "/home/lvuser/" + getName() + ".txt";
     }
     
     private static boolean writeFile(String path, String data) {
         try {
+            Logger.debug("Writing path file to: " + path);
             File file = new File(path);
 
             if (!file.exists()) {
@@ -118,6 +126,7 @@ public class DynamicPathCommand extends Command {
             bw.write(data);
             bw.close();
         } catch (IOException e) {
+            Logger.error(e.toString());
             return false;
         }
 
@@ -126,20 +135,25 @@ public class DynamicPathCommand extends Command {
 
     protected void generatePath() {
         path = PathGenerator.makePath(points, config, Constants.wheelBase, getName());
-
-        Robot.driveTrain.resetDistance();
-        
-        followerLeft.configure(Constants.pathP, Constants.pathI, Constants.pathD, Constants.pathV, Constants.pathA);        
-        followerRight.configure(Constants.pathP, Constants.pathI, Constants.pathD, Constants.pathV, Constants.pathA);
     }
     
     @Override
     protected void initialize() {
+        Logger.debug("DynamicPathCommand init " + Timer.getFPGATimestamp());
+        
+        Robot.driveTrain.setMode(Modes.VELOCITY);
+        Robot.shifter.downShift();
+        
         if (!loadPath()) {
+            Logger.debug("Generating path");
             generatePath();
             savePath();
         }
-        
+
+        Robot.driveTrain.resetDistance();        
+        followerLeft.configure(Constants.pathP, Constants.pathI, Constants.pathD, Constants.pathV, Constants.pathA);        
+        followerRight.configure(Constants.pathP, Constants.pathI, Constants.pathD, Constants.pathV, Constants.pathA);
+
         followerLeft.setTrajectory(path.getLeftWheelTrajectory());
         followerLeft.reset();
         followerRight.setTrajectory(path.getRightWheelTrajectory());
@@ -167,10 +181,11 @@ public class DynamicPathCommand extends Command {
         double turn = Constants.pathTurn * angleDiff;
         double requestedLeft = speedLeft + turn;
         double requestedRight = speedRight - turn;
+        
         drive.set(requestedLeft, requestedRight);
 
         logger.set("projected_left_pos", left.pos);
-        logger.set("requested_left_pos", requestedLeft);
+        logger.set("requested_left_vel", requestedLeft);
         logger.set("actual_left_pos", distanceL);
         logger.set("projected_left_vel", left.vel);
         logger.set("actual_left_vel", drive.getLeftVelocity());

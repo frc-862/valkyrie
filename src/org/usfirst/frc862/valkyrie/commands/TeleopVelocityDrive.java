@@ -46,7 +46,6 @@ public class TeleopVelocityDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Logger.debug("Normal teleop drive");
         Robot.driveTrain.teleop(Robot.oi.driverLeft, Robot.oi.driverRight, Robot.oi.coPilot, 0);
     }
 

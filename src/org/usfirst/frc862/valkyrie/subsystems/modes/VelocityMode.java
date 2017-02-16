@@ -17,17 +17,16 @@ public class VelocityMode extends SubsystemMode {
         
         Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> { 
             t.changeControlMode(CANTalon.TalonControlMode.Speed);
-            t.setPID(Constants.velocityPTerm, 0, 0);
+            
             t.enableBrakeMode(false);
         });
         
-        Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
-        	t.setF(Constants.velocityFeedForwardLLow);
-        });
-        
-        Robot.driveTrain.rightPrimaryMotor((CANTalon t) ->{
-        	t.setF(Constants.velocityFeedForwardRLow);
-        });
+        if(Robot.shifter.isLowGear()){
+            Robot.driveTrain.configureLowGear();
+        }
+        else{
+            Robot.driveTrain.configureHighGear();
+        }
         
         Robot.driveTrain.eachSlaveMotor((CANTalon t) -> {
             t.enableBrakeMode(false);

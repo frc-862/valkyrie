@@ -63,9 +63,10 @@ public class Constants extends ConstantsBase {
     public static int encoderTicksPerRev = 360;
     public static double velocityFeedForwardRLow = 4.5 / 4;
     public static double velocityFeedForwardLLow = 4.5 / 4;
-    public static double velocityFeedForwardRHigh = 1.5/4;
-    public static double velocityFeedForwardLHigh = 1.5/4;
-    public static double velocityPTerm = 0.64;
+    public static double velocityPTermLow = 0.64;
+    public static double velocityPTermHigh = 0.2;
+    public static double velocityFeedForwardRHigh = 1.62/4;
+    public static double velocityFeedForwardLHigh = 1.62/4;
 	public static double MotorOffTime = 1.0;
     public static double rotateEpsilon = 2.5;
     public static double straightCommandDelta = 0.19;
@@ -99,7 +100,7 @@ public class Constants extends ConstantsBase {
     public static double pathA = 0; //pathV / 2;
     public static double pathTurn = -3.0 / 80;  // borrowed from Poofs :)
     public static double Path_dt = 0.02;
-    public static double Path_max_acc = 8 / 3;
+    public static double Path_max_acc = 8/3;
     public static double Path_max_jerk = 25;
     public static double Path_max_vel = 3.5;
     //public static InterpolatedMap lookupTable = new InterpolatedMap(new Double[]{1.0,2.1,3.2,4.3}); //interpolation example
@@ -128,6 +129,7 @@ public class Constants extends ConstantsBase {
     public static int kDriveBaseLockIZone = 0;
     public static double kDriveBaseLockRampRate = 0;
     public static int kDriveBaseLockAllowableError = 10;
+    
 
     
     public String getFileName() {

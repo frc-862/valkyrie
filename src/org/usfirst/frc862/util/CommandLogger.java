@@ -51,6 +51,7 @@ public class CommandLogger {
             writeHeader();
             first_time = false;
         }
+        this.writeValues();
     }
     
     private void writeHeader() {
@@ -65,7 +66,7 @@ public class CommandLogger {
         overflow |= !buffer.offer(s);
     }
     
-    private void writeValues() {
+    public void writeValues() {
         String line = Double.toString(Timer.getFPGATimestamp());
         for (String fld : fieldNames) {
             line += "," + values.get(fld);

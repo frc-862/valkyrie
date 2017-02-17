@@ -129,6 +129,9 @@ public class Constants extends ConstantsBase {
     public static int kDriveBaseLockIZone = 0;
     public static double kDriveBaseLockRampRate = 0;
     public static int kDriveBaseLockAllowableError = 10;
+    public static double WallFollowDistance = 300;
+    public static double WallFollowSpeed = 2;
+    public static double WallFollowP = 0.01;
     
 
     

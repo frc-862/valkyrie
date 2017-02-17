@@ -16,18 +16,17 @@ import com.team254.lib.trajectory.Path;
 import com.team254.lib.trajectory.PathGenerator;
 import com.team254.lib.trajectory.Trajectory;
 import com.team254.lib.trajectory.TrajectoryFollower;
-import com.team254.lib.trajectory.Trajectory.Pair;
-import com.team254.lib.util.ChezyMath;
 import com.team254.lib.trajectory.TrajectoryGenerator;
 import com.team254.lib.trajectory.WaypointSequence;
 import com.team254.lib.trajectory.io.TextFileDeserializer;
 import com.team254.lib.trajectory.io.TextFileSerializer;
+import com.team254.lib.util.ChezyMath;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DynamicPathCommand extends Command {
+public class SimpleDynamicPathCommand extends Command {
     private WaypointSequence points = new WaypointSequence(10);
     private TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
     private CommandLogger logger;
@@ -36,12 +35,12 @@ public class DynamicPathCommand extends Command {
     private Notifier notifier;
     private Path path;
 
-    public DynamicPathCommand(String name) {
+    public SimpleDynamicPathCommand(String name) {
         super(name);
         
-        config.dt = Constants.Path_dt;
-        config.max_acc = Constants.Path_max_acc;
-        config.max_jerk = Constants.Path_max_jerk;
+        config.dt = 0.02;
+        config.max_acc = 8 / 3;
+        config.max_jerk = 25;
         config.max_vel = Constants.Path_max_vel;
         
         requires(Robot.driveTrain);
@@ -173,10 +172,10 @@ public class DynamicPathCommand extends Command {
         double speedLeft = followerLeft.calculate(distanceL);
         double speedRight = followerRight.calculate(distanceR);
         
-        double goalHeading = Math.toDegrees(followerLeft.getHeading());
-        double observedHeading = drive.getGyroAngle();
+        double goalHeading = followerLeft.getHeading();
+        double observedHeading = drive.getGyroAngleInRadians();
 
-        double angleDiff = ChezyMath.getDifferenceInAngleDegrees(observedHeading, goalHeading);
+        double angleDiff = ChezyMath.getDifferenceInAngleDegrees(observedHeading, Math.toDegrees(goalHeading));
 
         double turn = Constants.pathTurn * angleDiff;
         double requestedLeft = speedLeft + turn;
@@ -185,16 +184,16 @@ public class DynamicPathCommand extends Command {
         drive.set(requestedLeft, requestedRight);
 
         logger.set("projected_left_pos", left.pos);
-        logger.set("requested_left_vel", LightningMath.rpm2fps(requestedLeft));
+        logger.set("requested_left_vel", requestedLeft);
         logger.set("actual_left_pos", distanceL);
         logger.set("projected_left_vel", left.vel);
         logger.set("actual_left_vel", drive.getLeftVelocity());
         logger.set("projected_right_pos", right.pos);
-        logger.set("requested_right_vel", LightningMath.rpm2fps(requestedRight));
+        logger.set("requested_right_pos", requestedRight);
         logger.set("actual_right_pos", distanceR);
         logger.set("projected_right_vel", right.vel);
         logger.set("actual_right_vel", drive.getRightVelocity());
-        logger.set("projected_heading", goalHeading);
+        logger.set("projected_heading", left.heading);
         logger.set("actual_heading", observedHeading);
         logger.write();
     }

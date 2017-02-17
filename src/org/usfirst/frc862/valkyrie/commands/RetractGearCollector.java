@@ -37,6 +37,8 @@ public class RetractGearCollector extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        this.setTimeout(0.1);
+        Robot.gearCollector.retract();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -45,7 +47,7 @@ public class RetractGearCollector extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return this.isTimedOut();
     }
 
     // Called once after isFinished returns true

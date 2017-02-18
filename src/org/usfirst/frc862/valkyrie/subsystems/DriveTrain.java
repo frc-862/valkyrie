@@ -81,6 +81,7 @@ public class DriveTrain extends Subsystem implements Loop {
     private double rightRequestedPower;
     private EncoderMode encoderMode;
     private TestMode testMode;
+	private double straightAdjust = 0;
 
     // private double start;
     // private double stop;
@@ -345,8 +346,8 @@ public class DriveTrain extends Subsystem implements Loop {
     }
     
     public void set(double left, double right) {
-        leftMotor1.set(left);
-        rightMotor1.set(right);
+        leftMotor1.set(left - straightAdjust);
+        rightMotor1.set(right + straightAdjust);
     }
 
     public void stop() {
@@ -452,5 +453,9 @@ public class DriveTrain extends Subsystem implements Loop {
             t.setF(Constants.velocityFeedForwardRHigh);
         });
     }
+
+	public void setStraightAdjust(double adjustment) {
+		straightAdjust  = adjustment;
+	}
 }
 

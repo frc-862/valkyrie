@@ -41,6 +41,8 @@ public class Constants extends ConstantsBase {
     public static double minimumAirReserve = 3;
     public static double compressorDisabledDelay = 0.5;
     public static double seriousCurrentDrawTimer = 0.15;
+	public static double VeerDifference = 57.0; //idk how this works though
+	public static double autoshightStraightenP = 0;
 
     
     //Robot Physical Specs
@@ -132,11 +134,10 @@ public class Constants extends ConstantsBase {
     public static double WallFollowDistance = 300;
     public static double WallFollowSpeed = 2;
     public static double WallFollowP = 0.01;
- 
-  //test mode constants  
-    public static double testVelocity = 0.5;
-    
 
+    //test mode constants  
+    public static double testVelocity = 0.5;
+	public static double autoshiftEpsilon = 20;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

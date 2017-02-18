@@ -132,6 +132,7 @@ public class Constants extends ConstantsBase {
     public static double WallFollowDistance = 300;
     public static double WallFollowSpeed = 2;
     public static double WallFollowP = 0.01;
+	public static double VeerDifference = 57.0; //idk how this works though
     
 
     

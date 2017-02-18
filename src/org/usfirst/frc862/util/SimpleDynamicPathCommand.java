@@ -29,36 +29,27 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SimpleDynamicPathCommand extends Command {
     private WaypointSequence points = new WaypointSequence(10);
     private TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
-    private CommandLogger logger;
     private TrajectoryFollower followerLeft = new TrajectoryFollower();
     private TrajectoryFollower followerRight = new TrajectoryFollower();
     private Notifier notifier;
     private Path path;
-
+    public double pathP = 114.65;//FPS*60/pi*Wheel Diameter 
+    public double pathI = 0;
+    public double pathD = 0;
+    public double pathV = 76.43;//FPS^2*60/pi*Wheel Diameter
+    public double pathA = 0;
+    public double wheelBase;//insert size of robot wheel size base
+    public double pathTurn;
     public SimpleDynamicPathCommand(String name) {
         super(name);
         
-        config.dt = 0.02;
-        config.max_acc = 8 / 3;
-        config.max_jerk = 25;
-        config.max_vel = Constants.Path_max_vel;
+        config.dt = 0.02;//add prefered time slice delta
+        config.max_acc = 8 / 3;//add path max acceleration
+        config.max_jerk = 25;//add path max jerk
+        config.max_vel = 3.5;//add path max velocity
         
         requires(Robot.driveTrain);
 
-        logger = new CommandLogger(this.getName());
-        logger.addDataElement("projected_left_pos");
-        logger.addDataElement("requested_left_vel");
-        logger.addDataElement("actual_left_pos");
-        logger.addDataElement("projected_left_vel");
-        logger.addDataElement("actual_left_vel");
-        logger.addDataElement("projected_right_pos");
-        logger.addDataElement("requested_right_pos");
-        logger.addDataElement("actual_right_pos");
-        logger.addDataElement("projected_right_vel");
-        logger.addDataElement("actual_right_vel");
-        logger.addDataElement("projected_heading");
-        logger.addDataElement("actual_heading");
-        
         notifier = new Notifier(()-> followPath());
     }
 
@@ -75,7 +66,7 @@ public class SimpleDynamicPathCommand extends Command {
             File file = new File(getFileName());
 
             if (!file.exists()) {
-                Logger.debug("Unable to load file " + getFileName());
+                
                 return false;
             }
 
@@ -83,11 +74,11 @@ public class SimpleDynamicPathCommand extends Command {
             TextFileDeserializer deserializer = new TextFileDeserializer();
             path = deserializer.deserialize(contents);
 
-            Logger.debug("Loaded file " + getFileName() + " with " + 
-               path.getLeftWheelTrajectory().getNumSegments() + " points");
+            
+               
             
         } catch (IOException e) {
-            Logger.error(e.toString());
+            
             return false;
         }
         
@@ -101,9 +92,9 @@ public class SimpleDynamicPathCommand extends Command {
         //System.out.print(serialized);
         String fullpath = getFileName();
         if (!writeFile(fullpath, serialized)) {
-          Logger.debug(fullpath + " could not be written!!!!1");
+          
         } else {
-          Logger.debug("Wrote " + fullpath);
+          
         }    
     }
 
@@ -113,7 +104,7 @@ public class SimpleDynamicPathCommand extends Command {
     
     private static boolean writeFile(String path, String data) {
         try {
-            Logger.debug("Writing path file to: " + path);
+            
             File file = new File(path);
 
             if (!file.exists()) {
@@ -125,7 +116,7 @@ public class SimpleDynamicPathCommand extends Command {
             bw.write(data);
             bw.close();
         } catch (IOException e) {
-            Logger.error(e.toString());
+            
             return false;
         }
 
@@ -133,25 +124,25 @@ public class SimpleDynamicPathCommand extends Command {
     }
 
     protected void generatePath() {
-        path = PathGenerator.makePath(points, config, Constants.wheelBase, getName());
+        
+        path = PathGenerator.makePath(points, config, wheelBase, getName());
     }
     
     @Override
-    protected void initialize() {
-        Logger.debug("DynamicPathCommand init " + Timer.getFPGATimestamp());
-        
-        Robot.driveTrain.setMode(Modes.VELOCITY);
-        Robot.shifter.downShift();
+    protected void initialize() { 
+        //If you do not use Talons do not use this code
+        Robot.driveTrain.setMode(Modes.OPEN_LOOP);
         
         if (!loadPath()) {
-            Logger.debug("Generating path");
+           
             generatePath();
             savePath();
         }
-
+//add encoder reset here
+        
         Robot.driveTrain.resetDistance();        
-        followerLeft.configure(Constants.pathP, Constants.pathI, Constants.pathD, Constants.pathV, Constants.pathA);        
-        followerRight.configure(Constants.pathP, Constants.pathI, Constants.pathD, Constants.pathV, Constants.pathA);
+        followerLeft.configure(pathP, pathI, pathD, pathV, pathA);        
+        followerRight.configure(pathP, pathI, pathD, pathV, pathA);
 
         followerLeft.setTrajectory(path.getLeftWheelTrajectory());
         followerLeft.reset();
@@ -164,50 +155,36 @@ public class SimpleDynamicPathCommand extends Command {
     private void followPath() {
         DriveTrain drive = Robot.driveTrain;
         double distanceL = drive.getLeftDistance();
+        //get left encoder 
         double distanceR = drive.getRightDistance();
-
-        Trajectory.Segment left = followerLeft.getSegment();
-        Trajectory.Segment right = followerRight.getSegment();
-        
-        double speedLeft = followerLeft.calculate(distanceL);
-        double speedRight = followerRight.calculate(distanceR);
-        
+        //get right encoder
+        double leftPower = followerLeft.calculate(distanceL);
+        double rightPower = followerRight.calculate(distanceR);
+        //comment out if there is no gyroscope on the robot
         double goalHeading = followerLeft.getHeading();
         double observedHeading = drive.getGyroAngleInRadians();
 
         double angleDiff = ChezyMath.getDifferenceInAngleDegrees(observedHeading, Math.toDegrees(goalHeading));
 
-        double turn = Constants.pathTurn * angleDiff;
-        double requestedLeft = speedLeft + turn;
-        double requestedRight = speedRight - turn;
-        
+        //remove turn if no gyro
+        double turn = pathTurn * angleDiff;
+        double requestedLeft = leftPower + turn;
+        double requestedRight = rightPower - turn;
+        //set motors here
         drive.set(requestedLeft, requestedRight);
 
-        logger.set("projected_left_pos", left.pos);
-        logger.set("requested_left_vel", requestedLeft);
-        logger.set("actual_left_pos", distanceL);
-        logger.set("projected_left_vel", left.vel);
-        logger.set("actual_left_vel", drive.getLeftVelocity());
-        logger.set("projected_right_pos", right.pos);
-        logger.set("requested_right_pos", requestedRight);
-        logger.set("actual_right_pos", distanceR);
-        logger.set("projected_right_vel", right.vel);
-        logger.set("actual_right_vel", drive.getRightVelocity());
-        logger.set("projected_heading", left.heading);
-        logger.set("actual_heading", observedHeading);
-        logger.write();
+        
     }
 
     @Override
     protected void execute() {
-        logger.drain();
+        
     }
 
     @Override
     protected void end() {
         notifier.stop();
-        logger.drain();
-        logger.flush();
+        
     }
 
     @Override

@@ -78,6 +78,7 @@ public class Autoshifter extends Command {
             
         case UP_SHIFTING:
             Robot.shifter.upShift();
+            // TODO straighten while shifting?
             resetTimers();
             state = State.HYSTERESIS_DELAY;
             break;

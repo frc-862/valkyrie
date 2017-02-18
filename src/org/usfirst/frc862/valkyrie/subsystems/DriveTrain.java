@@ -19,6 +19,7 @@ import org.usfirst.frc862.valkyrie.subsystems.modes.HeadingMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.MotionProfileMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.OpenLoopMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.SubsystemMode;
+import org.usfirst.frc862.valkyrie.subsystems.modes.TestMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.VelocityMode;
 
 import com.ctre.CANTalon;
@@ -42,7 +43,7 @@ import static org.usfirst.frc862.util.LightningMath.*;
 public class DriveTrain extends Subsystem implements Loop {
 
     public enum Modes {
-        OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE, ADAPTIVE_PURSUIT, ENCODER
+        OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE, ADAPTIVE_PURSUIT, ENCODER, TEST
     }    
     
     private final Object modeRunningLock = new Object();
@@ -79,6 +80,7 @@ public class DriveTrain extends Subsystem implements Loop {
     private double leftRequestedPower;
     private double rightRequestedPower;
     private EncoderMode encoderMode;
+    private TestMode testMode;
 
     // private double start;
     // private double stop;
@@ -87,7 +89,18 @@ public class DriveTrain extends Subsystem implements Loop {
         initialize();
     }
     
-    private void initialize() {
+    public void configure_test_mode() {
+        eachPrimaryMotor((CANTalon t) -> {
+            t.changeControlMode(CANTalon.TalonControlMode.Voltage);
+            t.set(0);
+        });
+        eachSlaveMotor((CANTalon t) -> {
+            t.changeControlMode(CANTalon.TalonControlMode.Voltage);
+            t.set(0);
+        });
+    }
+
+    public void configure_follow_modes() {
         leftMotor1.reverseSensor(false);
         leftMotor1.reverseOutput(true);
         leftMotor1.setVoltageRampRate(Constants.driveRampRate);
@@ -102,11 +115,6 @@ public class DriveTrain extends Subsystem implements Loop {
             leftMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
             leftMotor1.setEncPosition(0);
             leftMotor1.configEncoderCodesPerRev(360);
-            DataLogger.addDataElement("left encoder pos", () -> leftMotor1.getPosition());
-            DataLogger.addDataElement("left encoder vel", () -> leftMotor1.getSpeed());
-            DataLogger.addDataElement("left closed loop error", () -> leftMotor1.getError());
-            DataLogger.addDataElement("left output voltage", () -> leftMotor1.getOutputVoltage());
-            DataLogger.addDataElement("left set point", () -> leftMotor1.getSetpoint());
         }
         
         rightMotor1.reverseSensor(false);
@@ -121,11 +129,6 @@ public class DriveTrain extends Subsystem implements Loop {
             rightMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
             rightMotor1.setEncPosition(0);
             rightMotor1.configEncoderCodesPerRev(360);
-            DataLogger.addDataElement("right encoder pos", () -> rightMotor1.getPosition());
-            DataLogger.addDataElement("right encoder vel", () -> rightMotor1.getSpeed());
-            DataLogger.addDataElement("right closed loop error", () -> rightMotor1.getError());
-            DataLogger.addDataElement("right output voltage", () -> rightMotor1.getOutputVoltage());
-            DataLogger.addDataElement("right set point", () -> rightMotor1.getSetpoint());
         }
 
         
@@ -138,6 +141,23 @@ public class DriveTrain extends Subsystem implements Loop {
         
         rightMotor2.set(rightMotor1.getDeviceID());
         rightMotor3.set(rightMotor1.getDeviceID());
+        
+    }
+    
+    private void initialize() {
+        configure_follow_modes();
+        
+        DataLogger.addDataElement("left encoder pos", () -> leftMotor1.getPosition());
+        DataLogger.addDataElement("left encoder vel", () -> leftMotor1.getSpeed());
+        DataLogger.addDataElement("left closed loop error", () -> leftMotor1.getError());
+        DataLogger.addDataElement("left output voltage", () -> leftMotor1.getOutputVoltage());
+        DataLogger.addDataElement("left set point", () -> leftMotor1.getSetpoint());
+
+        DataLogger.addDataElement("right encoder pos", () -> rightMotor1.getPosition());
+        DataLogger.addDataElement("right encoder vel", () -> rightMotor1.getSpeed());
+        DataLogger.addDataElement("right closed loop error", () -> rightMotor1.getError());
+        DataLogger.addDataElement("right output voltage", () -> rightMotor1.getOutputVoltage());
+        DataLogger.addDataElement("right set point", () -> rightMotor1.getSetpoint());
 
         openLoopMode = new OpenLoopMode();
         velocityMode = new VelocityMode();
@@ -146,6 +166,7 @@ public class DriveTrain extends Subsystem implements Loop {
         motionProfileMode = new MotionProfileMode();
         adaptivePursuitMode = new AdaptivePursuitMode();
         encoderMode = new EncoderMode();
+        testMode = new TestMode();
         
         // Data Logging, using the follower will have it always
         // return applied throttle, regardless of mode
@@ -227,6 +248,10 @@ public class DriveTrain extends Subsystem implements Loop {
             
         case MOTION_PROFILE:
             currentMode = motionProfileMode;
+            break;
+                        
+        case TEST:
+            currentMode = testMode;
             break;
                         
         case ENCODER:

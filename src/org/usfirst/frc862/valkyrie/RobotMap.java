@@ -19,7 +19,10 @@ import org.usfirst.frc862.util.FaultCode;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -51,6 +54,7 @@ public class RobotMap {
     public static Compressor coreCompressor;
     public static SpeedController winchWinchMotor1;
     public static SpeedController winchWinchMotor2;
+    public static Encoder winchWinchEncoder;
     public static DoubleSolenoid shifterShifter;
     public static DoubleSolenoid gearCollectorcollector;
 
@@ -99,6 +103,10 @@ public class RobotMap {
         winchWinchMotor2 = new VictorSP(1);
         LiveWindow.addActuator("Winch", "WinchMotor2", (VictorSP) winchWinchMotor2);
         
+        winchWinchEncoder = new Encoder(0, 1, false, EncodingType.k4X);
+        LiveWindow.addSensor("Winch", "Winch Encoder", winchWinchEncoder);
+        winchWinchEncoder.setDistancePerPulse(1.0);
+        winchWinchEncoder.setPIDSourceType(PIDSourceType.kRate);
         shifterShifter = new DoubleSolenoid(11, 0, 1);
         LiveWindow.addActuator("Shifter", "Shifter", shifterShifter);
         

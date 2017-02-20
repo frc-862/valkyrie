@@ -18,14 +18,6 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
     private MotionProfileStatus status = new MotionProfileStatus();
     private boolean done = false;
 
-    static private LoggerValue mpmSetPoint = new LoggerValue();;
-    static private LoggerValue mpmSetEnc = new LoggerValue();;
-
-    static {
-        DataLogger.addDataElement("mpmSetPoint", mpmSetPoint);
-        DataLogger.addDataElement("mpmSetEnc", mpmSetEnc);
-    }
-
     @Override
     public void onStart() {
         // TODO Auto-generated method stub
@@ -100,8 +92,6 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
             t.set(CANTalon.SetValueMotionProfile.Hold.value);
             done = true;
           } else {
-              MotionProfileMode.mpmSetPoint.set(status.activePoint.velocity);
-              MotionProfileMode.mpmSetEnc.set(status.activePoint.position);
             t.set(CANTalon.SetValueMotionProfile.Enable.value);
           }
         });

@@ -84,7 +84,7 @@ public class Core extends Subsystem implements Loop {
         boolean status = compressor.enabled();
 
         if (status) {
-            lastTimeCompressorWasOn = Timer.getFPGATimestamp();
+            setLastTimeCompressorWasOn(Timer.getFPGATimestamp());
         } else if (this.previousCompressorStatus && compressor.getClosedLoopControl()) {
             availableAirUnits = Constants.maxAirUnits;
         }
@@ -131,6 +131,14 @@ public class Core extends Subsystem implements Loop {
 
         }
 
+    }
+
+    public double getLastTimeCompressorWasOn() {
+        return lastTimeCompressorWasOn;
+    }
+
+    private void setLastTimeCompressorWasOn(double lastTimeCompressorWasOn) {
+        this.lastTimeCompressorWasOn = lastTimeCompressorWasOn;
     }
 
 }

@@ -5,7 +5,6 @@ import java.io.File;
 import org.usfirst.frc862.util.ConstantsBase;
 import org.usfirst.frc862.util.LightningMath;
 
-@SuppressWarnings("WeakerAccess")
 public class Constants extends ConstantsBase {
 	
     

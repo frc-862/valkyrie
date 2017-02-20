@@ -2,7 +2,6 @@ package org.usfirst.frc862.util;
 
 import org.usfirst.frc862.valkyrie.Constants;
 
-@SuppressWarnings("WeakerAccess")
 public class LightningMath {
 
 	public static double meters2feet(double meters) {
@@ -58,7 +57,6 @@ public class LightningMath {
         return (input - lowInput) * outputRange / inputRange + lowOutput;
     }
 
-    @SuppressWarnings("SameParameterValue")
     public static double scale(double input,
                                double lowInput, double highInput, double lowOutput, double highOutput)
     {

@@ -35,6 +35,7 @@ public class DynamicPathCommand extends Command {
     private Notifier notifier;
     private Path path;
     private double starting_heading;
+    private boolean testing = false;
 
     public DynamicPathCommand(String name) {
         super(name);
@@ -59,6 +60,7 @@ public class DynamicPathCommand extends Command {
         logger.addDataElement("actual_right_vel");
         logger.addDataElement("projected_heading");
         logger.addDataElement("actual_heading");
+        logger.addDataElement("angle_diff");
         
         notifier = new Notifier(()-> followPath());
     }
@@ -72,26 +74,29 @@ public class DynamicPathCommand extends Command {
     }
     
     protected boolean loadPath() {
-        try {
-            File file = new File(getFileName());
+        if (testing ) {
+            return false;
+        } else {
+            try {
+                File file = new File(getFileName());
 
-            if (!file.exists()) {
-                Logger.debug("Unable to load file " + getFileName());
+                if (!file.exists()) {
+                    Logger.debug("Unable to load file " + getFileName());
+                    return false;
+                }
+
+                String contents = new String(Files.readAllBytes(Paths.get(getFileName())));
+                TextFileDeserializer deserializer = new TextFileDeserializer();
+                path = deserializer.deserialize(contents);
+
+                Logger.debug("Loaded file " + getFileName() + " with " + path.getLeftWheelTrajectory().getNumSegments()
+                        + " points");
+
+            } catch (IOException e) {
+                Logger.error(e.toString());
                 return false;
             }
-
-            String contents = new String(Files.readAllBytes(Paths.get(getFileName())));            
-            TextFileDeserializer deserializer = new TextFileDeserializer();
-            path = deserializer.deserialize(contents);
-
-            Logger.debug("Loaded file " + getFileName() + " with " + 
-               path.getLeftWheelTrajectory().getNumSegments() + " points");
-            
-        } catch (IOException e) {
-            Logger.error(e.toString());
-            return false;
         }
-        
         return true;
     }
     
@@ -175,7 +180,7 @@ public class DynamicPathCommand extends Command {
         double speedRight = followerRight.calculate(distanceR);
         
         double goalHeading = Math.toDegrees(followerLeft.getHeading());
-        double observedHeading = ChezyMath.getDifferenceInAngleDegrees(starting_heading, drive.getGyroAngle());
+        double observedHeading = ChezyMath.getDifferenceInAngleDegrees(drive.getGyroAngle(), starting_heading);
         double angleDiff = ChezyMath.getDifferenceInAngleDegrees(observedHeading, goalHeading);
 
         double turn = Constants.pathTurn * angleDiff;
@@ -194,8 +199,9 @@ public class DynamicPathCommand extends Command {
         logger.set("actual_right_pos", distanceR);
         logger.set("projected_right_vel", right.vel);
         logger.set("actual_right_vel", drive.getRightVelocity());
-        logger.set("projected_heading", goalHeading);
+        logger.set("projected_heading", ChezyMath.boundAngleNeg180to180Degrees(goalHeading));
         logger.set("actual_heading", observedHeading);
+        logger.set("angle_diff", angleDiff);
         logger.write();
     }
 

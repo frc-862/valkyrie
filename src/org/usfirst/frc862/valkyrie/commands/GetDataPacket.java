@@ -11,10 +11,8 @@
 
 package org.usfirst.frc862.valkyrie.commands;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc862.valkyrie.Robot;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketAddress;
 import org.usfirst.frc862.util.Logger;
 
 /**

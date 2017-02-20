@@ -12,12 +12,8 @@
 package org.usfirst.frc862.valkyrie.subsystems;
 
 import org.usfirst.frc862.valkyrie.RobotMap;
-import org.usfirst.frc862.valkyrie.commands.*;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Victor;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 

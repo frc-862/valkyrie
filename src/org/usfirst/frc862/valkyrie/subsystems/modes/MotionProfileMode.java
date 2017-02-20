@@ -1,10 +1,7 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
-import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;
 import org.usfirst.frc862.util.Logger;
-import org.usfirst.frc862.util.LoggerValue;
-import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
 import com.ctre.CANTalon;

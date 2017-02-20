@@ -1,13 +1,8 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
-import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
-import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 
 import com.ctre.CANTalon;
-
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class VelocityMode extends SubsystemMode {
 

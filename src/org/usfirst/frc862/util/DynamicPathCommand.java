@@ -16,12 +16,11 @@ import com.team254.lib.trajectory.Path;
 import com.team254.lib.trajectory.PathGenerator;
 import com.team254.lib.trajectory.Trajectory;
 import com.team254.lib.trajectory.TrajectoryFollower;
-import com.team254.lib.trajectory.Trajectory.Pair;
-import com.team254.lib.util.ChezyMath;
 import com.team254.lib.trajectory.TrajectoryGenerator;
 import com.team254.lib.trajectory.WaypointSequence;
 import com.team254.lib.trajectory.io.TextFileDeserializer;
 import com.team254.lib.trajectory.io.TextFileSerializer;
+import com.team254.lib.util.ChezyMath;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;

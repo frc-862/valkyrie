@@ -10,13 +10,10 @@
 
 
 package org.usfirst.frc862.valkyrie.commands;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.hal.HAL;
-import edu.wpi.first.wpilibj.hal.FRCNetComm.tInstances;
-import edu.wpi.first.wpilibj.hal.FRCNetComm.tResourceType;
-
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain.Modes;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

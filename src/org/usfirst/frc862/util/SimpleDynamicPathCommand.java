@@ -7,14 +7,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain.Modes;
 
 import com.team254.lib.trajectory.Path;
 import com.team254.lib.trajectory.PathGenerator;
-import com.team254.lib.trajectory.Trajectory;
 import com.team254.lib.trajectory.TrajectoryFollower;
 import com.team254.lib.trajectory.TrajectoryGenerator;
 import com.team254.lib.trajectory.WaypointSequence;
@@ -23,7 +21,6 @@ import com.team254.lib.trajectory.io.TextFileSerializer;
 import com.team254.lib.util.ChezyMath;
 
 import edu.wpi.first.wpilibj.Notifier;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class SimpleDynamicPathCommand extends Command {

@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
-import org.usfirst.frc862.valkyrie.RobotMap;
 
 /**
  *

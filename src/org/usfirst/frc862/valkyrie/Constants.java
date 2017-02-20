@@ -3,7 +3,6 @@ package org.usfirst.frc862.valkyrie;
 import java.io.File;
 
 import org.usfirst.frc862.util.ConstantsBase;
-import org.usfirst.frc862.util.InterpolatedMap;
 import org.usfirst.frc862.util.LightningMath;
 
 @SuppressWarnings("WeakerAccess")

@@ -1,15 +1,11 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
-import org.usfirst.frc862.util.JoystickFilter;
-import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
-import org.usfirst.frc862.valkyrie.RobotMap;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Timer;
 
 public class OpenLoopMode extends SubsystemMode {   

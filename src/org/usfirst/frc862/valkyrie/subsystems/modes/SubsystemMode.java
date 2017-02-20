@@ -1,7 +1,6 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
 import org.usfirst.frc862.util.Logger;
-import org.usfirst.frc862.util.Loop;
 
 public class SubsystemMode  {
     public void onStart() {

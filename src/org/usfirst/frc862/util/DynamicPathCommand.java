@@ -35,6 +35,7 @@ public class DynamicPathCommand extends Command {
     private TrajectoryFollower followerRight = new TrajectoryFollower();
     private Notifier notifier;
     private Path path;
+    private double starting_heading;
 
     public DynamicPathCommand(String name) {
         super(name);
@@ -150,7 +151,8 @@ public class DynamicPathCommand extends Command {
             savePath();
         }
 
-        Robot.driveTrain.resetDistance();        
+        Robot.driveTrain.resetDistance();
+        starting_heading = Robot.driveTrain.getGyroAngle();
         followerLeft.configure(Constants.pathP, Constants.pathI, Constants.pathD, Constants.pathV, Constants.pathA);        
         followerRight.configure(Constants.pathP, Constants.pathI, Constants.pathD, Constants.pathV, Constants.pathA);
 
@@ -174,8 +176,7 @@ public class DynamicPathCommand extends Command {
         double speedRight = followerRight.calculate(distanceR);
         
         double goalHeading = Math.toDegrees(followerLeft.getHeading());
-        double observedHeading = drive.getGyroAngle();
-
+        double observedHeading = ChezyMath.getDifferenceInAngleDegrees(starting_heading, drive.getGyroAngle());
         double angleDiff = ChezyMath.getDifferenceInAngleDegrees(observedHeading, goalHeading);
 
         double turn = Constants.pathTurn * angleDiff;

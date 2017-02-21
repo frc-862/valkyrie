@@ -94,9 +94,12 @@ public class Autoshifter extends Command {
             break;
             
         case UP_SHIFTING:
+            originalRDistance = Robot.driveTrain.getRightDistance();
+            originalLDistance = Robot.driveTrain.getLeftDistance();
             Robot.shifter.upShift();
             resetTimers();
-            state = State.STRAIGHT_CHECK;
+            overtakeTimer.reset();
+            state = State.STRAIGHT_OVERRIDE;
             break;
             
         case DOWN_SHIFTING:
@@ -106,18 +109,8 @@ public class Autoshifter extends Command {
             break;
             
         case STRAIGHT_CHECK:
-        	overtakeTimer.start();
-        	if (overtakeTimer.hasPeriodPassed(0.125)) {
-        		rDistDif = originalRDistance - Robot.driveTrain.getRightDistance();
-        		lDistDif = originalLDistance - Robot.driveTrain.getLeftDistance();
-        		bigDif = Math.abs(rDistDif - lDistDif);
-        		if (bigDif > Constants.VeerDifference) {
-        			state = State.STRAIGHT_OVERRIDE;
-        			overtakeTimer.reset();
-        			overtakeTimer.start();
-        		} else {
-        			state = State.HYSTERESIS_DELAY;
-        		}
+        	if (overtakeTimer.hasPeriodPassed(0.01)) {
+        		state = State.HYSTERESIS_DELAY;
         	}
         	break;
         	

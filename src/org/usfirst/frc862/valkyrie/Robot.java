@@ -10,6 +10,7 @@ import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 import org.usfirst.frc862.valkyrie.subsystems.GearCollector;
 import org.usfirst.frc862.valkyrie.subsystems.Shifter;
 import org.usfirst.frc862.valkyrie.subsystems.Winch;
+import org.usfirst.frc862.valkyrie.subsystems.Core.Ultrasonic;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -169,6 +170,9 @@ public class Robot extends IterativeRobot {
         try {
             SmartDashboard.putNumber("Heading", RobotMap.navx.getYaw());
 
+            SmartDashboard.putNumber("Joy1", oi.driverLeft.getRawAxis(1));
+            SmartDashboard.putNumber("Joy2", oi.driverRight.getRawAxis(1));
+            SmartDashboard.putNumber("Joy2LR", oi.driverRight.getRawAxis(0));
             // Scheduler.getInstance().run();
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
@@ -248,6 +252,12 @@ public class Robot extends IterativeRobot {
             SmartDashboard.putNumber("Average Velocity", Robot.driveTrain.getAverageVelocity());
             SmartDashboard.putNumber("Requested Power", Robot.driveTrain.getRequestedPower());
 
+            SmartDashboard.putNumber("Ultra1", Robot.core.getUltrasonic(Ultrasonic.Front));
+            SmartDashboard.putNumber("Ultra2", Robot.core.getUltrasonic(Ultrasonic.Left));
+            SmartDashboard.putNumber("Ultra3", Robot.core.getUltrasonic(Ultrasonic.Right));
+            SmartDashboard.putNumber("Ultra1", Robot.core.getUltrasonic(Ultrasonic.Front));
+            
+            //SmartDashboard.putNumber("Beam", Robot.core);
 //            
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);

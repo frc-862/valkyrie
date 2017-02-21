@@ -24,7 +24,7 @@ public class Constants extends ConstantsBase {
     public static double HighCurrentThreshold = 200;
     public static double LowVoltage = 10;
     public static double CrashDeacceleration = -200;
-    public static double CoastTriggerTime = 1.0;
+    public static double CoastTriggerTime = 0.1;
     public static double CoastVelocity = 200;
     public static double VelocityUpshiftTime = 0.1;
     public static double MinRequestedPowerForUpshift = 0.75;
@@ -40,7 +40,9 @@ public class Constants extends ConstantsBase {
     public static double compressorDisabledDelay = 0.5;
     public static double seriousCurrentDrawTimer = 0.15;
 	public static double VeerDifference = 57.0; //idk how this works though
-	public static double autoshightStraightenP = 0;
+	public static double autoshightStraightenP = -1.5;
+    public static double ArcadeAngleP = 0.6;
+    public static double autoshiftEpsilon = 1;
 
     
     //Robot Physical Specs
@@ -50,7 +52,7 @@ public class Constants extends ConstantsBase {
     
     
     //Joystick
-    public static double deadband = 0.00;
+    public static double deadband = 0.09;
 
     
     //DriveTrain
@@ -61,16 +63,17 @@ public class Constants extends ConstantsBase {
     public static double maxVelocityHigh = 950;
     public static double driveRampRate = 300;
     public static int encoderTicksPerRev = 360;
-    public static double velocityFeedForwardRLow = 4.5 / 4;
+    public static double velocityFeedForwardRLow = 4.6 / 4;
     public static double velocityFeedForwardLLow = 4.5 / 4;
     public static double velocityPTermLow = 0.64;
     public static double velocityPTermHigh = 0.2;
-    public static double velocityFeedForwardRHigh = 1.62/4;
+    public static double velocityFeedForwardRHigh = 1.874/4;
     public static double velocityFeedForwardLHigh = 1.62/4;
 	public static double MotorOffTime = 1.0;
     public static double rotateEpsilon = 2.5;
     public static double straightCommandDelta = 0.19;
     public static double straightenPGain = 1 / 90.0;
+    public static double MinCommandedPower = 0.05;
 
 
 	//Brake mode (not in use)
@@ -135,7 +138,6 @@ public class Constants extends ConstantsBase {
 
     //test mode constants  
     public static double testVelocity = 0.5;
-	public static double autoshiftEpsilon = 20;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

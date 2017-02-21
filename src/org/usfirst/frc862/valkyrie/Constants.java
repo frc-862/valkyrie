@@ -56,7 +56,7 @@ public class Constants extends ConstantsBase {
 
     
     //DriveTrain
-    public static double driveTrainLoopRate = 0.10;
+    public static double driveTrainLoopRate = 0.1;
     public static double maxRampRate = 0.75;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default
     public static double maxVelocityLow = 350;
@@ -89,7 +89,7 @@ public class Constants extends ConstantsBase {
 	//Logging
     public static int logDepth = 1000;
     public static double backgroundLoopRate = 0.5;
-    
+
     
     //Mechanisms
     public static double winchRampTime = 3;
@@ -137,7 +137,8 @@ public class Constants extends ConstantsBase {
     public static double WallFollowP = 0.01;
 
     //test mode constants  
-    public static double testVelocity = 0.5;
+    public static double MotorTestPower = 0.4;
+    public static double WinchTestPower = 0.4;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

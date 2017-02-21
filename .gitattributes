@@ -1,0 +1,5 @@
+.project                   text whitespace=cr-at-eol merge=union
+.classpath                 text whitespace=cr-at-eol merge=union
+.cproject                  text whitespace=cr-at-eol merge=union
+org.eclipse.jdt.core.prefs text whitespace=cr-at-eol merge=union
+

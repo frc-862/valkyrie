@@ -11,11 +11,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class FaultCode {
     public enum Codes {
         LEFT_ENCODER_NOT_FOUND, RIGHT_ENCODER_NOT_FOUND,
-        LOW_MAIN_VOLTAGE, SLOW_LOOPER, MISMATCHED_MOTION_PROFILES, NAVX_ERROR
+        LOW_MAIN_VOLTAGE, SLOW_LOOPER, MISMATCHED_MOTION_PROFILES, 
+        NAVX_ERROR, INTERNAL_ERROR
     }
 
     private static HashSet<Codes> faults = new HashSet<>();
     private static boolean first_time = true;
+    private static boolean dummy_light = false;
 
     private static Path getFaultPath() {
         return Paths.get("/home/lvuser/faults.log");
@@ -26,6 +28,7 @@ public class FaultCode {
     }
     
     public static void write(Codes code, String msg) {
+        dummy_light = true;
         try {
             if (first_time) {
                 for (Codes c : Codes.values()) {
@@ -49,4 +52,6 @@ public class FaultCode {
             e.printStackTrace();
         }
     }
+    
+    public boolean dummyLightOn() { return dummy_light; }
 }

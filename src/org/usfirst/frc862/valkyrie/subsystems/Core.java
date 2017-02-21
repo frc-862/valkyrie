@@ -147,4 +147,8 @@ public class Core extends Subsystem implements Loop {
         this.lastTimeCompressorWasOn = lastTimeCompressorWasOn;
     }
 
+    public boolean gearPresent() {
+        return this.gearSensor.get();
+    }
+
 }

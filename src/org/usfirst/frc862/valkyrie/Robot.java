@@ -168,8 +168,7 @@ public class Robot extends IterativeRobot {
 
     public void disabledPeriodic() {
         try {
-            SmartDashboard.putNumber("Heading", RobotMap.navx.getYaw());
-
+            SmartDashboard.putNumber("Heading", Robot.driveTrain.getGyroAngle());
             SmartDashboard.putNumber("Joy1", oi.driverLeft.getRawAxis(1));
             SmartDashboard.putNumber("Joy2", oi.driverRight.getRawAxis(1));
             SmartDashboard.putNumber("Joy2LR", oi.driverRight.getRawAxis(0));
@@ -252,10 +251,12 @@ public class Robot extends IterativeRobot {
             SmartDashboard.putNumber("Average Velocity", Robot.driveTrain.getAverageVelocity());
             SmartDashboard.putNumber("Requested Power", Robot.driveTrain.getRequestedPower());
 
+            SmartDashboard.putNumber("Heading", Robot.driveTrain.getGyroAngle());
             SmartDashboard.putNumber("Ultra1", Robot.core.getUltrasonic(Ultrasonic.Front));
             SmartDashboard.putNumber("Ultra2", Robot.core.getUltrasonic(Ultrasonic.Left));
             SmartDashboard.putNumber("Ultra3", Robot.core.getUltrasonic(Ultrasonic.Right));
-            SmartDashboard.putNumber("Ultra1", Robot.core.getUltrasonic(Ultrasonic.Front));
+            SmartDashboard.putNumber("Ultra4", Robot.core.getUltrasonic(Ultrasonic.Back));
+            SmartDashboard.putBoolean("Gear", Robot.core.gearPresent());
             
             //SmartDashboard.putNumber("Beam", Robot.core);
 //            

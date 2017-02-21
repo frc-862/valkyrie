@@ -26,7 +26,7 @@ public class Constants extends ConstantsBase {
     public static double CrashDeacceleration = -200;
     public static double CoastTriggerTime = 0.1;
     public static double CoastVelocity = 200;
-    public static double VelocityUpshiftTime = 0.1;
+    public static double VelocityUpshiftTime = 0.02 * 3;
     public static double MinRequestedPowerForUpshift = 0.75;
     public static double LVTriggerTime = 0.5;
     public static double MaxCoastPower = 0.35;

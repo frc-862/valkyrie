@@ -27,10 +27,11 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
            t.clearMotionProfileTrajectories(); 
            t.changeMotionControlFramePeriod(5);
            t.changeControlMode(CANTalon.TalonControlMode.MotionProfile);
-           t.set(CANTalon.SetValueMotionProfile.Disable.value);
-           t.setPID(0.1, 0, 0, 3.41 / 4, 0, 0, 0);
+           t.set(CANTalon.SetValueMotionProfile.Disable.value);    	   
         });
-
+        
+        Robot.shifter.downShift();
+        
         int period = (int) leftPoints[0][2];
         final int pointCount = Math.min(leftPoints.length, rightPoints.length);
         for(int i=0; i < pointCount; ++i) {
@@ -81,14 +82,16 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
         // TODO Auto-generated method stub
         super.onLoop();
 
-        RobotMap.driveTrainLeftMotor1.getMotionProfileStatus(status);
-        if (status.activePointValid && status.activePoint.isLastPoint) {
+        Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> {
+          t.getMotionProfileStatus(status);
+          if (status.activePointValid && status.activePoint.isLastPoint) {
             // stop here
-            RobotMap.driveTrainLeftMotor1.set(CANTalon.SetValueMotionProfile.Hold.value);
+            t.set(CANTalon.SetValueMotionProfile.Hold.value);
             done = true;
-        } else {
-            RobotMap.driveTrainLeftMotor1.set(CANTalon.SetValueMotionProfile.Enable.value);
-        }
+          } else {
+            t.set(CANTalon.SetValueMotionProfile.Enable.value);
+          }
+        });
     }
 
     @Override

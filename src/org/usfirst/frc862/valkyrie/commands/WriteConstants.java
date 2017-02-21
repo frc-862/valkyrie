@@ -14,7 +14,6 @@ package org.usfirst.frc862.valkyrie.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc862.valkyrie.Constants;
-import org.usfirst.frc862.valkyrie.Robot;
 
 /**
  *

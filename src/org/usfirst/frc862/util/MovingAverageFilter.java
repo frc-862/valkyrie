@@ -1,6 +1,5 @@
 package org.usfirst.frc862.util;
 
-@SuppressWarnings("WeakerAccess")
 public class MovingAverageFilter implements ValueFilter {
     private double[] values;
     private double average = 0;

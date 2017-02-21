@@ -1,8 +1,8 @@
 package org.usfirst.frc862.valkyrie.triggers;
 
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.Timer;
 import org.usfirst.frc862.util.MonitorTrigger;
+
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 /**
  * Created by phurley on 12/7/16.

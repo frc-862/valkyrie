@@ -1,6 +1,7 @@
 package org.usfirst.frc862.util;
 
-@SuppressWarnings("WeakerAccess")
+import org.usfirst.frc862.valkyrie.Constants;
+
 public class LightningMath {
 
 	public static double meters2feet(double meters) {
@@ -18,7 +19,11 @@ public class LightningMath {
     public static double limit(double v, double limit) {
         return limit(v, -limit, limit);
     }
-
+    
+    public static double limit(double input) {
+        return limit(input, -1, 1);
+    }
+    
     public static double boundThetaNegPiToPi(double theta) {
         return theta - (Math.ceil((theta + Math.PI) / (Math.PI * 2)) - 1) * (Math.PI * 2); // (-π;π]
     }
@@ -52,7 +57,6 @@ public class LightningMath {
         return (input - lowInput) * outputRange / inputRange + lowOutput;
     }
 
-    @SuppressWarnings("SameParameterValue")
     public static double scale(double input,
                                double lowInput, double highInput, double lowOutput, double highOutput)
     {
@@ -65,5 +69,21 @@ public class LightningMath {
     public static double deadZone(double input, double deadband)
     {
         return Math.abs(input) >= deadband ? input : 0;
+    }
+    
+    public static double rotations2feet(double rotations) {
+        return rotations * Constants.WheelCircumference;
+    }
+    
+    public static double rpm2fps(double rpm) {
+        // rpm * circumference will be feet / minute
+        // 60 is the number of seconds in a minute
+        return rpm * Constants.WheelCircumference / 60.0;
+    }
+    
+    public static double fps2rpm(double fps) {
+        // fps * 60 will be feet / minute
+        // feet / minute * circumference is rpm 
+        return fps * 60 / Constants.WheelCircumference;
     }
 }

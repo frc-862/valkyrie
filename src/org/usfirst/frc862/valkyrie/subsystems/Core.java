@@ -20,6 +20,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -60,8 +61,7 @@ public class Core extends Subsystem implements Loop {
     public Core() {
         navx.zeroYaw();
 
-        DataLogger.addDataElement("Winch Power 1", () -> powerPanel.getCurrent(4));
-        DataLogger.addDataElement("Winch Power 2", () -> powerPanel.getCurrent(11));
+        DataLogger.addDataElement("Match Time", () -> DriverStation.getInstance().getMatchTime());
         DataLogger.addDataElement("Current Warning", () -> powerPanel.getTotalCurrent());
         DataLogger.addDataElement("AccelX", () -> navx.getRawAccelX());
         DataLogger.addDataElement("AccelY", () -> navx.getRawAccelY());
@@ -149,6 +149,10 @@ public class Core extends Subsystem implements Loop {
 
     public boolean gearPresent() {
         return this.gearSensor.get();
+    }
+
+    public PowerDistributionPanel getPDP() {
+        return powerPanel;
     }
 
 }

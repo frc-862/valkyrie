@@ -35,7 +35,7 @@ public class DynamicPathCommand extends Command {
     private Notifier notifier;
     private Path path;
     private double starting_heading;
-    private boolean testing = false;
+    protected boolean testing = false;
 
     public DynamicPathCommand(String name) {
         super(name);

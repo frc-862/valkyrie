@@ -30,7 +30,7 @@ public class Constants extends ConstantsBase {
     public static double MinRequestedPowerForUpshift = 0.75;
     public static double LVTriggerTime = 0.5;
     public static double MaxCoastPower = 0.35;
-    public static double MinUpshiftVelocity = 300;
+    public static double MinUpshiftVelocity = 250;
     public static double shiftHysteresis = 0.5;
     public static double shiftDelay = 0.25;
     public static double minimumShiftDelay = 0.75;
@@ -139,6 +139,12 @@ public class Constants extends ConstantsBase {
     //test mode constants  
     public static double MotorTestPower = 0.4;
     public static double WinchTestPower = 0.4;
+    
+    // Power channels
+    public static int winch1PowerChannel = 4;
+    public static int winch2PowerChannel = 11;
+    public static double slowWinchCurrent = 35;
+    public static double stopWinchCurrent = 42;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

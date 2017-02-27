@@ -10,8 +10,6 @@
 
 
 package org.usfirst.frc862.valkyrie.commands;
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc862.util.StatefulCommand;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
@@ -89,7 +87,11 @@ public class SystemTest extends StatefulCommand {
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.driveTrain.configure_test_mode();
+        Robot.driveTrain.configure_follow_modes();
+        Robot.driveTrain.stop();
+        Robot.gearCollector.retract();
+        Robot.shifter.downShift();
+        Robot.winch.stop();
     }
 
     // Called when another command which requires one or more of the same

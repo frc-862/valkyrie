@@ -12,8 +12,6 @@
 package org.usfirst.frc862.valkyrie.commands;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
-import org.usfirst.frc862.valkyrie.RobotMap;
-import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain.Modes;
 
 import com.team254.lib.util.ChezyMath;

@@ -139,7 +139,8 @@ public class Constants extends ConstantsBase {
     //test mode constants  
     public static double MotorTestPower = 0.4;
     public static double WinchTestPower = 0.4;
-    
+    public static double MotorTestDistance = 3;
+
     // Power channels
     public static int winch1PowerChannel = 4;
     public static int winch2PowerChannel = 11;

@@ -139,7 +139,7 @@ public class OI {
         upshiftButton = new JoystickButton(driverLeft, 11);
         upshiftButton.whenPressed(new Upshift());
         winchButton = new JoystickButton(driverLeft, 2);
-        winchButton.whileHeld(new Climb());
+        winchButton.whileHeld(new CalibratedClimb());
         cmdDownshift1 = new JoystickButton(driverLeft, 19);
         cmdDownshift1.whenPressed(new DownShift());
         driveStraightBtn = new JoystickButton(driverLeft, 22);

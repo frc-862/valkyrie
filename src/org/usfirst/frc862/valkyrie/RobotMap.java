@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 
@@ -50,6 +51,7 @@ public class RobotMap {
     public static PowerDistributionPanel corePowerPanel;
     public static Compressor coreCompressor;
     public static DigitalInput coreGearSensor;
+    public static Solenoid coreLEDRing;
     public static SpeedController winchWinchMotor1;
     public static SpeedController winchWinchMotor2;
     public static DoubleSolenoid shifterShifter;
@@ -99,6 +101,9 @@ public class RobotMap {
         
         coreGearSensor = new DigitalInput(0);
         LiveWindow.addSensor("Core", "Gear Sensor", coreGearSensor);
+        
+        coreLEDRing = new Solenoid(11, 6);
+        LiveWindow.addActuator("Core", "LED Ring", coreLEDRing);
         
         winchWinchMotor1 = new VictorSP(0);
         LiveWindow.addActuator("Winch", "WinchMotor1", (VictorSP) winchWinchMotor1);

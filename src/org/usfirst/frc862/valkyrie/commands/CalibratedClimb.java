@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc862.util.CommandLogger;
+import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 
@@ -45,6 +46,8 @@ public class CalibratedClimb extends Command {
         logger.addDataElement("power");
         logger.addDataElement("winch_1_current");
         logger.addDataElement("winch_2_current");
+        logger.addDataElement("total_winch");
+
     }
 
     // Called just before this Command runs the first time
@@ -55,16 +58,19 @@ public class CalibratedClimb extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
-        if (totalWinchCurrent() > Constants.slowWinchCurrent) {
-            power = SmartDashboard.getNumber("Climb Power", 0.862) / 2;
-        }
+//        if (totalWinchCurrent() > Constants.slowWinchCurrent) {
+//            power = SmartDashboard.getNumber("Climb Power", 0.862) / 2;
+//        }
         Robot.winch.climb(power);
         
+        Logger.debug("Climbing " + this.totalWinchCurrent());
         logger.set("power", power);
         logger.set("winch_1_current", Robot.core.getPDP().getCurrent(Constants.winch1PowerChannel));
         logger.set("winch_2_current", Robot.core.getPDP().getCurrent(Constants.winch2PowerChannel));
-        logger.writeValues();
+        logger.set("total_winch", this.totalWinchCurrent());
+        logger.write();
     }
 
     protected double totalWinchCurrent() {
@@ -74,12 +80,13 @@ public class CalibratedClimb extends Command {
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return totalWinchCurrent() > Constants.stopWinchCurrent;
+        return false; // totalWinchCurrent() > Constants.stopWinchCurrent;
     }
 
     // Called once after isFinished returns true
     protected void end() {
         Robot.winch.stop();
+        logger.drain();
         logger.flush();
     }
 

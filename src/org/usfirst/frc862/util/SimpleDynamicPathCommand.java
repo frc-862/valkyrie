@@ -11,6 +11,7 @@ import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain.Modes;
 
+import com.team254.lib.trajectory.FollowerInterface;
 import com.team254.lib.trajectory.Path;
 import com.team254.lib.trajectory.PathGenerator;
 import com.team254.lib.trajectory.TrajectoryFollower;
@@ -26,8 +27,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SimpleDynamicPathCommand extends Command {
     private WaypointSequence points = new WaypointSequence(10);
     private TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
-    private TrajectoryFollower followerLeft = new TrajectoryFollower();
-    private TrajectoryFollower followerRight = new TrajectoryFollower();
+    private FollowerInterface followerLeft = new TrajectoryFollower();
+    private FollowerInterface followerRight = new TrajectoryFollower();
     private Notifier notifier;
     private Path path;
     public double pathP = 114.65;//FPS*60/pi*Wheel Diameter 

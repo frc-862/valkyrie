@@ -12,8 +12,10 @@ import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain.Modes;
 
+import com.team254.lib.trajectory.FollowerInterface;
 import com.team254.lib.trajectory.Path;
 import com.team254.lib.trajectory.PathGenerator;
+import com.team254.lib.trajectory.ReverseTrajectoryFollower;
 import com.team254.lib.trajectory.Trajectory;
 import com.team254.lib.trajectory.TrajectoryFollower;
 import com.team254.lib.trajectory.TrajectoryGenerator;
@@ -30,16 +32,21 @@ public class DynamicPathCommand extends Command {
     private WaypointSequence points = new WaypointSequence(10);
     private TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
     private CommandLogger logger;
-    private TrajectoryFollower followerLeft = new TrajectoryFollower();
-    private TrajectoryFollower followerRight = new TrajectoryFollower();
+    private FollowerInterface followerLeft = new TrajectoryFollower();
+    private FollowerInterface followerRight = new TrajectoryFollower();
     private Notifier notifier;
     private Path path;
     private double starting_heading;
+    protected boolean reverse = false;
     protected boolean testing = false;
 
     public DynamicPathCommand(String name) {
         super(name);
         
+        if (reverse) {
+            followerLeft = new ReverseTrajectoryFollower();
+            followerRight = new ReverseTrajectoryFollower();            
+        }
         config.dt = Constants.Path_dt;
         config.max_acc = Constants.Path_max_acc;
         config.max_jerk = Constants.Path_max_jerk;

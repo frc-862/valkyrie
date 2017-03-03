@@ -5,7 +5,7 @@ package com.team254.lib.trajectory;
  *
  * @author Jared341
  */
-public class TrajectoryFollower {
+public class TrajectoryFollower implements FollowerInterface {
 
   private double kp_;
   // private double ki_;  // Not currently used, but might be in the future.
@@ -21,7 +21,11 @@ public class TrajectoryFollower {
 
   }
 
-  public void configure(double kp, double ki, double kd, double kv, double ka) {
+  /* (non-Javadoc)
+ * @see com.team254.lib.trajectory.FollowerInterface#configure(double, double, double, double, double)
+ */
+@Override
+public void configure(double kp, double ki, double kd, double kv, double ka) {
     kp_ = kp;
     // ki_ = ki;
     kd_ = kd;
@@ -29,20 +33,36 @@ public class TrajectoryFollower {
     ka_ = ka;
   }
 
-  public void reset() {
+  /* (non-Javadoc)
+ * @see com.team254.lib.trajectory.FollowerInterface#reset()
+ */
+@Override
+public void reset() {
     last_error_ = 0.0;
     current_segment = 0;
   }
 
-  public void setTrajectory(Trajectory profile) {
+  /* (non-Javadoc)
+ * @see com.team254.lib.trajectory.FollowerInterface#setTrajectory(com.team254.lib.trajectory.Trajectory)
+ */
+@Override
+public void setTrajectory(Trajectory profile) {
     profile_ = profile;
   }
 
-  public Trajectory.Segment getSegment() {
+  /* (non-Javadoc)
+ * @see com.team254.lib.trajectory.FollowerInterface#getSegment()
+ */
+@Override
+public Trajectory.Segment getSegment() {
       return profile_.getSegment(current_segment);
   }
   
-  public double calculate(double distance_so_far) {
+  /* (non-Javadoc)
+ * @see com.team254.lib.trajectory.FollowerInterface#calculate(double)
+ */
+@Override
+public double calculate(double distance_so_far) {
     if (current_segment < profile_.getNumSegments()) {
       Trajectory.Segment segment = profile_.getSegment(current_segment);
       double error = segment.pos - distance_so_far;
@@ -60,11 +80,19 @@ public class TrajectoryFollower {
     }
   }
 
-  public double getHeading() {
+  /* (non-Javadoc)
+ * @see com.team254.lib.trajectory.FollowerInterface#getHeading()
+ */
+@Override
+public double getHeading() {
     return current_heading;
   }
 
-  public boolean isFinishedTrajectory() {
+  /* (non-Javadoc)
+ * @see com.team254.lib.trajectory.FollowerInterface#isFinishedTrajectory()
+ */
+@Override
+public boolean isFinishedTrajectory() {
     return current_segment >= profile_.getNumSegments();
   }
 }

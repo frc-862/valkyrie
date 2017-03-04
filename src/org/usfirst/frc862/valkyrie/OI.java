@@ -20,7 +20,7 @@ import org.usfirst.frc862.valkyrie.commands.Climb;
 import org.usfirst.frc862.valkyrie.commands.DoNothing;
 import org.usfirst.frc862.valkyrie.commands.DownShift;
 import org.usfirst.frc862.valkyrie.commands.DriveStraight;
-import org.usfirst.frc862.valkyrie.commands.DriveStraightAuton;
+import org.usfirst.frc862.valkyrie.commands.AutonStraight;
 import org.usfirst.frc862.valkyrie.commands.DriveTrainTest;
 import org.usfirst.frc862.valkyrie.commands.DynamicCheese;
 import org.usfirst.frc862.valkyrie.commands.DynamicExtraCheese;
@@ -149,7 +149,7 @@ public class OI {
 
 
         // SmartDashboard Buttons
-        SmartDashboard.putData("DriveStraightAuton", new DriveStraightAuton());
+        SmartDashboard.putData("DriveStraightAuton", new AutonStraight());
         SmartDashboard.putData("Do Nothing", new DoNothing());
         SmartDashboard.putData("Upshift", new Upshift());
         SmartDashboard.putData("DownShift", new DownShift());

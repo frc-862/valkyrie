@@ -55,6 +55,7 @@ public class CalibratedClimb extends Command {
         power = SmartDashboard.getNumber("Climb Power", 0.862);
         Robot.winch.climb(power);
         pdp = Robot.core.getPDP();
+        Robot.driveTrain.setStraightAdjust(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -88,6 +89,7 @@ public class CalibratedClimb extends Command {
         Robot.winch.stop();
         logger.drain();
         logger.flush();
+        Robot.driveTrain.setStraightAdjust(0);
     }
 
     // Called when another command which requires one or more of the same

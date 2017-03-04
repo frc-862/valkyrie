@@ -65,9 +65,9 @@ public class Core extends Subsystem implements Loop {
 
         DataLogger.addDataElement("Match Time", () -> DriverStation.getInstance().getMatchTime());
         DataLogger.addDataElement("Current Warning", () -> powerPanel.getTotalCurrent());
-        DataLogger.addDataElement("AccelX", () -> navx.getRawAccelX());
-        DataLogger.addDataElement("AccelY", () -> navx.getRawAccelY());
-        DataLogger.addDataElement("AccelZ", () -> navx.getRawAccelZ());
+        DataLogger.addDataElement("AccelX", () -> navx.getWorldLinearAccelX());
+        DataLogger.addDataElement("AccelY", () -> navx.getWorldLinearAccelY());
+        DataLogger.addDataElement("AccelZ", () -> navx.getWorldLinearAccelZ());
         DataLogger.addDataElement("Voltage", () -> powerPanel.getVoltage());
     }
 

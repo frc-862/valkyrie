@@ -56,7 +56,7 @@ public class Constants extends ConstantsBase {
 
     
     //DriveTrain
-    public static double driveTrainLoopRate = 0.1;
+    public static double driveTrainLoopRate = 0.05;
     public static double maxRampRate = 0.75;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default
     public static double maxVelocityLow = 350;

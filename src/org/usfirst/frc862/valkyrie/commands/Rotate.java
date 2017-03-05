@@ -15,6 +15,8 @@ import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 
+import com.team254.lib.util.ChezyMath;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -51,18 +53,20 @@ public class Rotate extends Command {
         previousHeading = RobotMap.navx.getFusedHeading();
         Robot.driveTrain.setMode(DriveTrain.Modes.VELOCITY);
         offset = previousHeading;
-        goal = m_degrees;
+        goal = ChezyMath.boundAngleNeg180to180Degrees(previousHeading + m_degrees);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         double heading = RobotMap.navx.getFusedHeading();
-        if(previousHeading > 170 && heading < 0) offset += 360;
-        if(previousHeading < -170 && heading > 0) offset -= 360;
-        error = goal - (heading - offset);
-        double rotatePGain = Robot.shifter.getMaxVelocity() / 180.0 * 1.5;
+        error = ChezyMath.boundAngleNeg180to180Degrees(goal - heading);
+        double rotatePGain = Robot.shifter.getMaxVelocity() / 180.0 * 3.9;
         double power = rotatePGain * error;
-
+        
+        if(Math.abs(power) < Constants.MinRotatePower){
+        	power = Constants.MinRotatePower * ((power > 0) ? 1 : -1);
+        }
+        SmartDashboard.putNumber("Rotate Power", power);
         Robot.driveTrain.set(power, -power);
         SmartDashboard.putNumber("Error", error);
         SmartDashboard.putNumber("Power", power);

@@ -56,6 +56,7 @@ public class Constants extends ConstantsBase {
 
     
     //DriveTrain
+	public static double MinRotatePower = 20;
     public static double driveTrainLoopRate = 0.05;
     public static double maxRampRate = 0.75;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default
@@ -70,7 +71,7 @@ public class Constants extends ConstantsBase {
     public static double velocityFeedForwardRHigh = 1.874/4;
     public static double velocityFeedForwardLHigh = 1.62/4;
 	public static double MotorOffTime = 1.0;
-    public static double rotateEpsilon = 2.5;
+    public static double rotateEpsilon = 1.5;
     public static double straightCommandDelta = 0.19;
     public static double straightenPGain = 1 / 90.0;
     public static double MinCommandedPower = 0.05;

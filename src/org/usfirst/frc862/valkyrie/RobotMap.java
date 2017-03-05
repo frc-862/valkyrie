@@ -54,6 +54,7 @@ public class RobotMap {
     public static Solenoid coreLEDRing;
     public static SpeedController winchWinchMotor1;
     public static SpeedController winchWinchMotor2;
+    public static DigitalInput winchClimbTouchpad;
     public static DoubleSolenoid shifterShifter;
     public static DoubleSolenoid gearCollectorcollector;
 
@@ -110,6 +111,9 @@ public class RobotMap {
         
         winchWinchMotor2 = new VictorSP(1);
         LiveWindow.addActuator("Winch", "WinchMotor2", (VictorSP) winchWinchMotor2);
+        
+        winchClimbTouchpad = new DigitalInput(1);
+        LiveWindow.addSensor("Winch", "Climb Touchpad", winchClimbTouchpad);
         
         shifterShifter = new DoubleSolenoid(11, 0, 1);
         LiveWindow.addActuator("Shifter", "Shifter", shifterShifter);

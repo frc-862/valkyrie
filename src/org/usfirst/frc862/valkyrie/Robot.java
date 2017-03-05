@@ -257,6 +257,7 @@ public class Robot extends IterativeRobot {
             SmartDashboard.putNumber("Right Vel", RobotMap.driveTrainRightMotor1.getSpeed());
             SmartDashboard.putNumber("Total Power", RobotMap.corePowerPanel.getTotalCurrent());
             SmartDashboard.putNumber("Voltage", RobotMap.corePowerPanel.getVoltage());
+            SmartDashboard.putBoolean("Climb Touchpad", Robot.winch.isCompressed());
             
             
             SmartDashboard.putNumber("Average Velocity", Robot.driveTrain.getAverageVelocity());

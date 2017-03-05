@@ -11,6 +11,7 @@
 
 package org.usfirst.frc862.valkyrie.commands;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,7 +24,8 @@ import org.usfirst.frc862.valkyrie.Robot;
  *
  */
 public class CalibratedClimb extends Command {
-    private PowerDistributionPanel pdp;
+    private double latched = 0.0;
+	private PowerDistributionPanel pdp;
     private CommandLogger logger;
     private double power;
 
@@ -53,19 +55,26 @@ public class CalibratedClimb extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         power = SmartDashboard.getNumber("Climb Power", 0.862);
-        Robot.winch.climb(power);
+//        Robot.winch.climb(power);
         pdp = Robot.core.getPDP();
         Robot.driveTrain.setStraightAdjust(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
-    protected void execute() {
-//        if (totalWinchCurrent() > Constants.slowWinchCurrent) {
+   protected void execute() {
+//    	if (Robot.winch.isCompressed()) {
+//    		latched = Timer.getFPGATimestamp();
+//    	}
+    	
+    	if (Timer.getFPGATimestamp() - latched < 2.0){
+    		power = 0;
+    	}
+    	//        if (totalWinchCurrent() > Constants.slowWinchCurrent) {
 //            power = SmartDashboard.getNumber("Climb Power", 0.862) / 2;
 //        }
         Robot.winch.climb(power);
-        
+   
         Logger.debug("Climbing " + this.totalWinchCurrent());
         logger.set("power", power);
         logger.set("winch_1_current", Robot.core.getPDP().getCurrent(Constants.winch1PowerChannel));
@@ -81,7 +90,8 @@ public class CalibratedClimb extends Command {
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false; // totalWinchCurrent() > Constants.stopWinchCurrent;
+    	//return Robot.winch.isCompressed();
+    	return false;
     }
 
     // Called once after isFinished returns true

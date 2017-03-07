@@ -1,17 +1,16 @@
 package org.usfirst.frc862.valkyrie;
 
-import org.spectrum3847.RIOdroid.RIOadb;
 import org.usfirst.frc862.util.CrashTracker;
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Looper;
 // import org.usfirst.frc862.valkyrie.commands.*;
 import org.usfirst.frc862.valkyrie.subsystems.Core;
+import org.usfirst.frc862.valkyrie.subsystems.Core.Ultrasonic;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 import org.usfirst.frc862.valkyrie.subsystems.GearCollector;
 import org.usfirst.frc862.valkyrie.subsystems.Shifter;
 import org.usfirst.frc862.valkyrie.subsystems.Winch;
-import org.usfirst.frc862.valkyrie.subsystems.Core.Ultrasonic;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;

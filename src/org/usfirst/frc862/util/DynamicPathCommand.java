@@ -36,6 +36,7 @@ public class DynamicPathCommand extends Command {
     private Path path;
     private double starting_heading;
     protected boolean testing = false;
+    protected boolean reverse = false;
 
     public DynamicPathCommand() {
         super();
@@ -163,6 +164,10 @@ public class DynamicPathCommand extends Command {
             savePath();
         }
 
+        if (reverse) {
+            path.reverse();
+        }
+        
         Robot.driveTrain.resetDistance();
         starting_heading = Robot.driveTrain.getGyroAngle();
         followerLeft.configure(Constants.pathP, Constants.pathI, Constants.pathD, Constants.pathV, Constants.pathA);        

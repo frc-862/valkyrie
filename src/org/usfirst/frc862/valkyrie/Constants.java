@@ -22,8 +22,9 @@ public class Constants extends ConstantsBase {
     public static double CompressorPauseTime = 1;
     public static double HCTriggerTime = 0.25;
     public static double HighCurrentThreshold = 200;
-    public static double LowVoltage = 10;
-    public static double CrashDeacceleration = -200;
+    public static double highCurrentTimeout = 0.150;
+    public static double LowVoltage = 8;
+    public static double CrashDeacceleration = -12;
     public static double CoastTriggerTime = 0.1;
     public static double CoastVelocity = 200;
     public static double VelocityUpshiftTime = 0.02 * 3;

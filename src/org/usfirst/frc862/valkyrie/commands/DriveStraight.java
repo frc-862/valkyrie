@@ -69,7 +69,7 @@ public class DriveStraight extends Command {
         Logger.debug("power %f", power);
         Logger.debug("heading %f", heading);
         Logger.debug("offset %f", offset);
-        Robot.driveTrain.teleop(Robot.oi.driverLeft, Robot.oi.driverLeft, Robot.oi.coPilot, power);
+        Robot.driveTrain.teleop(Robot.oi.driverLeft, Robot.oi.driverLeft, power);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -49,6 +49,14 @@ public class Shifter extends Subsystem {
         setDefaultCommand(new Autoshifter());
     }
 
+    public void useAutoShifter() {
+        
+    }
+    
+    public void useManualShifter() {
+        
+    }
+    
     public void downShift() {
         if (!isLowGear()) {
             shifter.set(Value.kReverse);

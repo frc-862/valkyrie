@@ -355,14 +355,10 @@ public class DriveTrain extends Subsystem implements Loop {
     }
     
     public void teleop(Joystick driverLeft, Joystick driverRight) {
-        teleop(driverLeft, driverRight, null);
+        teleop(driverLeft, driverRight, 0);
     }
 
-    public void teleop(Joystick driverLeft, Joystick driverRight, Joystick coPilot) {
-        teleop(driverLeft, driverRight, coPilot, 0);
-    }
-    
-    public void teleop(Joystick driverLeft, Joystick driverRight, Joystick coPilot, double straighten) {
+    public void teleop(Joystick driverLeft, Joystick driverRight, double straighten) {
         // NOTE this is where you need to make changes if we switch to a
         // single controller, etc. 
         double leftPower = filter.filter(driverLeft.getRawAxis(1));

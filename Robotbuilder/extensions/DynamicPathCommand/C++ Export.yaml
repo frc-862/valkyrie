@@ -1,0 +1,15 @@
+DynamicPathCommand:
+  Defaults: "CustomComponent,None"
+  ClassName: "DynamicPathCommand"
+  
+  #Construction: "#variable($Name) = new LightningDrive(#variable($Left_Motor_1), #variable($Left_Motor_2), #variable($Right_Motor_1), #variable($Right_Motor_2), #variable($Shifter));"
+##     - Export: The export instruction specifies the file to export
+##           this component to.
+##     - Import: The java import so that this component is properly
+##           imported in the generated java file
+##     - Declaration: The declaration to declare a variable
+##           representing this component.
+##     - Construction: The constructor to create this component.
+##     - LiveWindow: Put this component on the livewindow properly.
+##     - Extra: Extra configuration for after the constructor is done.
+##     - ClassName: The java class name of this object.

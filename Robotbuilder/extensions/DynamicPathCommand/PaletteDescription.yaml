@@ -1,0 +1,18 @@
+!Component
+   name: DynamicPathCommand
+   type: Command
+   help: A command that will always finished, by a specified time
+   properties:
+     - !TypeSelectionProperty
+       name: Requires
+       type: Subsystem
+       default: None
+     - !BooleanProperty
+       name: Button on SmartDashboard
+       default: true
+     - !Parameters
+       name: Parameters
+       default: []
+     - !ParameterSet
+       name: Parameter presets
+       default: []

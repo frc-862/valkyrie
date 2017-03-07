@@ -157,4 +157,12 @@ public class Core extends Subsystem implements Loop {
         return powerPanel;
     }
 
+    public void turnOnLED() {
+        this.lEDRing.set(true);
+    }
+
+    public void turnOffLED() {
+        lEDRing.set(false);
+    }
+
 }

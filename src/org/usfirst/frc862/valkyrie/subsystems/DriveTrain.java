@@ -92,11 +92,11 @@ public class DriveTrain extends Subsystem implements Loop {
     
     public void configure_test_mode() {
         eachPrimaryMotor((CANTalon t) -> {
-            t.changeControlMode(CANTalon.TalonControlMode.Voltage);
+            t.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
             t.set(0);
         });
         eachSlaveMotor((CANTalon t) -> {
-            t.changeControlMode(CANTalon.TalonControlMode.Voltage);
+            t.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
             t.set(0);
         });
     }

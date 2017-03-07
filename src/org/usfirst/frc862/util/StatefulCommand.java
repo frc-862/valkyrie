@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class StatefulCommand extends Command {
     protected Enum<?> state;
@@ -38,16 +39,18 @@ public class StatefulCommand extends Command {
         } catch (NoSuchMethodException | SecurityException | 
                  IllegalAccessException | IllegalArgumentException | 
                  InvocationTargetException e) {
+            SmartDashboard.putString("SysTest Missing Method", method_name);
             return false;
         }        
         return true;
     }
     
-    private String methodName(Enum<?> state) {
-        String state_name = state.name();
+    protected String methodName(Enum<?> state) {
+        String state_name = state.name().toLowerCase();
         String method_name = Stream.of(state_name.split("[^a-zA-Z0-9]"))
                 .map(v -> v.substring(0, 1).toUpperCase() + v.substring(1).toLowerCase())
                 .collect(Collectors.joining());
+        method_name = method_name.substring(0, 1).toLowerCase() + method_name.substring(1);
         return method_name;
     }
     
@@ -59,6 +62,7 @@ public class StatefulCommand extends Command {
                 call(exit_method);
             }
             
+            previous_state = state;
             call(methodName(state) + "Enter");
         }
         

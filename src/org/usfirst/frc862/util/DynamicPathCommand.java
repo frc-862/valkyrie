@@ -37,9 +37,17 @@ public class DynamicPathCommand extends Command {
     private double starting_heading;
     protected boolean testing = false;
 
+    public DynamicPathCommand() {
+        super();
+        setup();
+    }
+        
     public DynamicPathCommand(String name) {
         super(name);
+        setup();
+    }
         
+    private void setup() {
         config.dt = Constants.Path_dt;
         config.max_acc = Constants.Path_max_acc;
         config.max_jerk = Constants.Path_max_jerk;

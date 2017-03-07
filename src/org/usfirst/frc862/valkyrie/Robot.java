@@ -4,6 +4,11 @@ import org.usfirst.frc862.util.CrashTracker;
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Looper;
+import org.usfirst.frc862.valkyrie.commands.AutonBlueBoiler;
+import org.usfirst.frc862.valkyrie.commands.AutonBlueFeeder;
+import org.usfirst.frc862.valkyrie.commands.AutonRedBoiler;
+import org.usfirst.frc862.valkyrie.commands.AutonRedFeeder;
+import org.usfirst.frc862.valkyrie.commands.AutonStraight;
 // import org.usfirst.frc862.valkyrie.commands.*;
 import org.usfirst.frc862.valkyrie.subsystems.Core;
 import org.usfirst.frc862.valkyrie.subsystems.Core.Ultrasonic;
@@ -122,6 +127,11 @@ public class Robot extends IterativeRobot {
             // TODO add auton modes
             autonChooser = new SendableChooser<Command>();
             autonChooser.addDefault("Do Nothing", null);
+            autonChooser.addObject("Blue Boiler", new AutonBlueBoiler());
+            autonChooser.addObject("Blue Feeder", new AutonBlueFeeder());
+            autonChooser.addObject("Red Boiler", new AutonRedBoiler());
+            autonChooser.addObject("Red Feeder", new AutonRedFeeder());
+            autonChooser.addObject("Straight", new AutonStraight());
             // autonChooser.addDefault("Center Lift", new StraightDynamicProfile());
             
             SmartDashboard.putData("Auton Mode", autonChooser);

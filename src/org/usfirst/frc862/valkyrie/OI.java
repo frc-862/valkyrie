@@ -125,6 +125,11 @@ public class OI {
 
 
         // SmartDashboard Buttons
+        SmartDashboard.putData("AutonBlueBoiler", new AutonBlueBoiler());
+        SmartDashboard.putData("AutonBlueFeeder", new AutonBlueFeeder());
+        SmartDashboard.putData("AutonRedBoiler", new AutonRedBoiler());
+        SmartDashboard.putData("AutonRedFeeder", new AutonRedFeeder());
+        SmartDashboard.putData("AutonStraight", new AutonStraight());
         SmartDashboard.putData("Do Nothing", new DoNothing());
         SmartDashboard.putData("Upshift", new Upshift());
         SmartDashboard.putData("DownShift", new DownShift());

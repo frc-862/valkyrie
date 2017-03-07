@@ -453,5 +453,9 @@ public class DriveTrain extends Subsystem implements Loop {
 	public void setStraightAdjust(double adjustment) {
 		straightAdjust  = adjustment;
 	}
+	
+	public double getStraightAdjust() {
+	    return straightAdjust;
+	}
 }
 

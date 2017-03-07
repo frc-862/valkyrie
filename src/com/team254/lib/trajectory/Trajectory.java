@@ -155,7 +155,6 @@ public class Trajectory {
         copied[i] = new Segment(tocopy[count - i - 1]);
         copied[i].reverse();
         copied[i].pos -= start_pos;
-        // adjust pos
       }
       return copied;
     }

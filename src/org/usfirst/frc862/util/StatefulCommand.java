@@ -6,12 +6,24 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class StatefulCommand extends Command {
-    protected Enum<?> state;
+    private Enum<?> state;
     protected Runnable default_action = () -> {};
     private Enum<?> previous_state = null;
+    private Enum<?> calling_state = null;
+    
+    public void setState(Enum<?> new_state) {
+        state = new_state;
+    }
+    
+    public Enum<?> getState() {
+        return state;
+    }
+    
+    public Enum<?> getCallingState() {
+        return calling_state;
+    }
     
     protected void setDefaultAction(Runnable action) {
         default_action = action;
@@ -24,6 +36,7 @@ public class StatefulCommand extends Command {
     @Override
     protected void initialize() {
         previous_state = null;
+        calling_state = state;
     }
 
     @Override
@@ -39,7 +52,7 @@ public class StatefulCommand extends Command {
         } catch (NoSuchMethodException | SecurityException | 
                  IllegalAccessException | IllegalArgumentException | 
                  InvocationTargetException e) {
-            SmartDashboard.putString("SysTest Missing Method", method_name);
+            Logger.error("StatefulCommand missing method: " + method_name);
             return false;
         }        
         return true;
@@ -56,13 +69,14 @@ public class StatefulCommand extends Command {
     
     @Override
     protected void execute() {
-        if (previous_state  != state) {
+        if (previous_state != state) {
             if (previous_state != null) {
                 String exit_method = methodName(previous_state) + "Exit";
                 call(exit_method);
             }
             
             previous_state = state;
+            calling_state = state;
             call(methodName(state) + "Enter");
         }
         

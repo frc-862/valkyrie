@@ -13,9 +13,8 @@ public class Constants extends ConstantsBase {
     // it there, the value will be ignored
     // as the value here in the code is 
     // immutable
-    
-    
-	//Autoshifting
+        
+    //Autoshifting
     public static double HCScaryTriggerTime = 1.5;
     public static double CrashDuration = 0.1;
     public static double LostBattleTriggerTime = 0.75;
@@ -59,7 +58,7 @@ public class Constants extends ConstantsBase {
     
     //DriveTrain
 	public static double MinRotatePower = 20;
-    public static double driveTrainLoopRate = 0.05;
+    public static double driveTrainLoopRate = 0.1;
     public static double maxRampRate = 0.75;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default
     public static double maxVelocityLow = 350;

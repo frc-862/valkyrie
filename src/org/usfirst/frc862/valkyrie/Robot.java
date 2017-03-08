@@ -10,6 +10,7 @@ import org.usfirst.frc862.valkyrie.commands.AutonBlueFeeder;
 import org.usfirst.frc862.valkyrie.commands.AutonRedBoiler;
 import org.usfirst.frc862.valkyrie.commands.AutonRedFeeder;
 import org.usfirst.frc862.valkyrie.commands.AutonStraight;
+import org.usfirst.frc862.valkyrie.commands.SystemTest;
 // import org.usfirst.frc862.valkyrie.commands.*;
 import org.usfirst.frc862.valkyrie.subsystems.Core;
 import org.usfirst.frc862.valkyrie.subsystems.Core.Ultrasonic;
@@ -125,27 +126,23 @@ public class Robot extends IterativeRobot {
             backgroundLooper.start();
             driveTrainLooper.start();
 
-            // TODO add auton modes
             autonChooser = new SendableChooser<Command>();
             autonChooser.addDefault("Do Nothing", null);
             autonChooser.addObject("Blue Boiler", new AutonBlueBoiler());
             autonChooser.addObject("Blue Feeder", new AutonBlueFeeder());
             autonChooser.addObject("Red Boiler", new AutonRedBoiler());
             autonChooser.addObject("Red Feeder", new AutonRedFeeder());
-            autonChooser.addObject("Straight", new AutonStraight());
-            // autonChooser.addDefault("Center Lift", new StraightDynamicProfile());
-            
+            autonChooser.addObject("Straight", new AutonStraight());            
             SmartDashboard.putData("Auton Mode", autonChooser);
+            
             SmartDashboard.putNumber("Climb Power", 1.0);
-            SmartDashboard.putNumber("Dynamic Motion Profile X", 1.0);
-            SmartDashboard.putNumber("Dynamic Motion Profile Y", 1.0);
-            SmartDashboard.putNumber("Dynamic Motion Profile Angle", 90.0);
             
             SmartDashboard.putBoolean("Use Crash Downshift", true);
             SmartDashboard.putBoolean("Use Coast Downshift", true);
             SmartDashboard.putBoolean("Use Velocity Upshift", true);
             
             FaultCode.update();
+            SystemTest.update();
             
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);

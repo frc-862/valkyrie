@@ -16,9 +16,6 @@ import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
 import org.usfirst.frc862.valkyrie.subsystems.Core.Ultrasonic;
 
-import com.ctre.CANTalon;
-
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -27,7 +24,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SystemTest extends StatefulCommand {
     boolean complete = false;
     private boolean ispressed = false;
-    private String status = "";
     private double encoderStart;
     private double startingValue;
     
@@ -82,12 +78,11 @@ public class SystemTest extends StatefulCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        SmartDashboard.putString("SysTest Debug", "started");
         super.initialize();
         Robot.driveTrain.configure_test_mode();
         complete = false;
-        status = "initalized";
-        state = States.TEST_LEFT_MOTOR1;
+        status("initalized");
+        setState(States.TEST_LEFT_MOTOR1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -98,11 +93,7 @@ public class SystemTest extends StatefulCommand {
     @Override
     protected void execute() {
         // TODO Auto-generated method stub
-        SmartDashboard.putString("Test State", methodName(state));
         super.execute();
-
-        Sendable s; 
-        SmartDashboard.putString("Test Status", status);
     }
 
     // Called once after isFinished returns true
@@ -125,7 +116,6 @@ public class SystemTest extends StatefulCommand {
         boolean button = Robot.oi.buttonThing.getRawButton(0) || 
                 Robot.oi.driverLeft.getRawButton(1) ||
                 Robot.oi.driverRight.getRawButton(1);
-        SmartDashboard.putString("Test Button", (button ? "true" : "false"));
         if (ispressed && !button) {
             ispressed = false;
             return true;
@@ -138,11 +128,19 @@ public class SystemTest extends StatefulCommand {
 
     public boolean next() {
         if (buttonReleased()) {
-            state = ((States) state).next();
+            setState(((States) getState()).next());
             return true;
         }
         
         return false;
+    }
+    
+    public void success() {
+        SmartDashboard.putBoolean(getCallingState().toString(), true);
+    }
+    
+    public void fail() {
+        SmartDashboard.putBoolean(getCallingState().toString(), false);
     }
     
     public double nextWithValue(double fValue, double tValue) {
@@ -158,11 +156,10 @@ public class SystemTest extends StatefulCommand {
     }
     
     public void testLeftMotor1Exit() {
-        SmartDashboard.putString("Test Left1 Exit", "foobar");
         if (Math.abs(Robot.driveTrain.getLeftDistance() - encoderStart) > Constants.MotorTestDistance) {
-            status = "Left Motor 1 Test Success\n";
+            success();
         } else {
-            status = "Left Motor 1 Test Failure\n";
+            fail();
         }
     }
     
@@ -176,9 +173,9 @@ public class SystemTest extends StatefulCommand {
     
     public void testLeftMotor2Exit() {
         if (Math.abs(Robot.driveTrain.getLeftDistance() - encoderStart) > Constants.MotorTestDistance) {
-            status = "Left Motor 2 Test Success\n";
+            success();
         } else {
-            status = "Left Motor 2 Test Failure\n";
+            fail();
         }
     }
     
@@ -188,9 +185,9 @@ public class SystemTest extends StatefulCommand {
     
     public void testLeftMotor3Exit() {
         if (Math.abs(Robot.driveTrain.getLeftDistance() - encoderStart) > Constants.MotorTestDistance) {
-            status = "Left Motor 3 Test Success\n";
+            success();
         } else {
-            status = "Left Motor 3 Test Failure\n";
+            fail();
         }
     }
     
@@ -204,9 +201,9 @@ public class SystemTest extends StatefulCommand {
     
     public void testRightMotor1Exit() {
         if (Math.abs(Robot.driveTrain.getRightDistance() - encoderStart) > Constants.MotorTestDistance) {
-            status = "Right Motor 1 Test Success\n";
+            success();
         } else {
-            status = "Right Motor 1 Test Failure\n";
+            fail();
         }
     }
     
@@ -220,9 +217,9 @@ public class SystemTest extends StatefulCommand {
     
     public void testRightMotor2Exit() {
         if (Math.abs(Robot.driveTrain.getRightDistance() - encoderStart) > Constants.MotorTestDistance) {
-            status = "Right Motor 2 Test Success\n";
+            success();
         } else {
-            status = "Right Motor 2 Test Failure\n";
+            fail();
         }
     }
     
@@ -236,9 +233,9 @@ public class SystemTest extends StatefulCommand {
     
     public void testRightMotor3Exit() {
         if (Math.abs(Robot.driveTrain.getRightDistance() - encoderStart) > Constants.MotorTestDistance) {
-            status = "Right Motor 3 Test Success\n";
+            success();
         } else {
-            status = "Right Motor 3 Test Failure\n";
+            fail();
         }
     }
     
@@ -247,7 +244,7 @@ public class SystemTest extends StatefulCommand {
     }
 
     public void testWinchMotor1Exit() {
-        status = "Winch Motor 1 Test Complete\n";
+        success();
     }
     
     public void testWinchMotor1() {
@@ -255,7 +252,7 @@ public class SystemTest extends StatefulCommand {
     }
     
     public void testWinchMotor2Exit() {
-        status = "Winch Motor 2 Test Complete\n";
+        success();
     }
     
     public void testWinchMotor2() {
@@ -271,7 +268,7 @@ public class SystemTest extends StatefulCommand {
     }
     
     public void testCompressorExit() {
-        status = "Compressor Test Complete\n";
+        success();
     }
     
     public void testUpshift() {
@@ -280,7 +277,7 @@ public class SystemTest extends StatefulCommand {
     }
     
     public void testUpshiftExit() {
-        status = "Upshift test complete\n";
+        success();
     }
     
     public void testDownshift() {
@@ -289,7 +286,7 @@ public class SystemTest extends StatefulCommand {
     }
     
     public void testDownshiftExit() {
-        status = "Downshift test complete\n";
+        success();
     }
     
     public void testGearTray() {
@@ -300,7 +297,7 @@ public class SystemTest extends StatefulCommand {
     }
     
     public void testGearTrayExit() {
-        status = "Gear Tray tested\n";
+        success();
     }
     
     public void testLeftEncoderEnter() {
@@ -313,9 +310,9 @@ public class SystemTest extends StatefulCommand {
         double encoderStop = Robot.driveTrain.getLeftDistance();
         
         if (Math.abs(encoderStop - encoderStart) > Constants.MotorTestDistance) {
-            status = "Left Encoder test success\n";
+            success();
         } else {
-            status = "Left Encoder test failure\n";
+            fail();
         }
     }
     
@@ -329,74 +326,74 @@ public class SystemTest extends StatefulCommand {
         double encoderStop = Robot.driveTrain.getRightDistance();
         
         if (Math.abs(encoderStop - encoderStart) > Constants.MotorTestDistance) {
-            status = "Right Encoder test success\n";
+            success();
         } else {
-            status = "Right Encoder test failure\n";
+            fail();
         }
     }
     
     public void testNavxEnter() {
-        status = "Rotate the robot at least 5 degrees\n";
+        status("Rotate the robot at least 5 degrees");
         startingValue = Robot.driveTrain.getGyroAngle();
     }
     
     public void testNavxExit() {
         if (Math.abs(Robot.driveTrain.getGyroAngle() - startingValue) > 5) {
-            status = "NavX test passed\n";
+            success();
         } else {
-            status = "NavX test failed\n";
+            fail();
         }
     }
     
     public void testFrontUltrasonicEnter() {
         startingValue = Robot.core.getUltrasonic(Ultrasonic.Front);
-        status = "Block the front ultrasonic sensor\n";
+        status("Block the front ultrasonic sensor");
     }
     
     public void testFrontUltrasonicExit() {
         if (Math.abs(startingValue - Robot.core.getUltrasonic(Ultrasonic.Front)) > 2) {
-            status = "Front ultrasonic sensor passed\n";
+            success();
         } else {
-            status = "Front ultrasonic sensor failed\n";
+            fail();
         }
     }
     
     public void testLeftUltrasonicEnter() {
         startingValue = Robot.core.getUltrasonic(Ultrasonic.Left);
-        status = "Block the left ultrasonic sensor\n";
+        status("Block the left ultrasonic sensor");
     }
     
     public void testLeftUltrasonicExit() {
         if (Math.abs(startingValue - Robot.core.getUltrasonic(Ultrasonic.Left)) > 2) {
-            status = "Left ultrasonic sensor passed\n";
+            success();
         } else {
-            status = "Left ultrasonic sensor failed\n";
+            fail();
         }
     }
     
     public void testRightUltrasonicEnter() {
         startingValue = Robot.core.getUltrasonic(Ultrasonic.Right);
-        status = "Block the right ultrasonic sensor\n";
+        status("Block the right ultrasonic sensor");
     }
     
     public void testRightUltrasonicExit() {
         if (Math.abs(startingValue - Robot.core.getUltrasonic(Ultrasonic.Right)) > 2) {
-            status = "Right ultrasonic sensor passed\n";
+            success();
         } else {
-            status = "Right ultrasonic sensor failed\n";
+            fail();
         }
     }
     
     public void testRearUltrasonicEnter() {
         startingValue = Robot.core.getUltrasonic(Ultrasonic.Back);
-        status = "Block the rear ultrasonic sensor\n";
+        status("Block the rear ultrasonic sensor");
     }
     
     public void testRearUltrasonicExit() {
         if (Math.abs(startingValue - Robot.core.getUltrasonic(Ultrasonic.Back)) > 2) {
-            status = "Rear ultrasonic sensor passed\n";
+            success();
         } else {
-            status = "Rear ultrasonic sensor failed\n";
+            fail();
         }
     }
     
@@ -407,7 +404,18 @@ public class SystemTest extends StatefulCommand {
     }
     
     public void testsAreDone() {
-        status = "Tests complete\n";
+        status("Tests complete");
         complete = true;
+    }
+
+    public void status(String msg) {
+        SmartDashboard.putString("System Test Instruction", msg);    
+    }
+    
+    public static void update() {
+        SmartDashboard.putString("System Test Instruction", "Run the system test!");
+        for (States s : States.values()) {
+            SmartDashboard.putBoolean(s.toString(), false);
+        }
     }
 }

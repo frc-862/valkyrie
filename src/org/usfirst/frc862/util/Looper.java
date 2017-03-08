@@ -36,7 +36,7 @@ public class Looper {
                     double duration = Timer.getFPGATimestamp() - start;
                     timestamp = start;
                     
-                    if (duration >= period) {
+                    if (duration > period) {
                         FaultCode.write(FaultCode.Codes.SLOW_LOOPER, 
                                 "expected <" + period + " had " + dt);
                     }

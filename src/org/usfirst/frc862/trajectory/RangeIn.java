@@ -1,10 +1,5 @@
 package org.usfirst.frc862.trajectory;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
-
 /**
  * an input stream of doubles with a range and stream operations to do math on the stream as values
  * flow through

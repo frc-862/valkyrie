@@ -101,9 +101,6 @@
 	<widget field="Climb Power" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="470" y="95"/>
 	</widget>
-</dashboard>
-<live-window>
-</live-window>
 	<hidden field="AutonBlueBoiler"/>
 	<hidden field="AutonRedBoiler"/>
 	<hidden field="Open Loop Drive Command"/>
@@ -140,4 +137,7 @@
 	<hidden field="Climb"/>
 	<hidden field="Sticktion Speed"/>
 	<hidden field="Rotate: left"/>
+</dashboard>
+<live-window>
+</live-window>
 </xml>

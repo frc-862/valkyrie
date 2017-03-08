@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;
+import org.usfirst.frc862.util.FaultCode.Codes;
 import org.usfirst.frc862.util.JoystickFilter;
 import org.usfirst.frc862.util.LightningMath;
 import org.usfirst.frc862.util.Logger;
@@ -260,7 +261,8 @@ public class DriveTrain extends Subsystem implements Loop {
             break;
                         
         default:
-            // TODO set fault
+            Logger.error("Invalid Mode: " + m.toString());
+            FaultCode.write(Codes.INTERNAL_ERROR);
         }
         
         mode = m;
@@ -419,13 +421,7 @@ public class DriveTrain extends Subsystem implements Loop {
         return getGyroAngle() * Math.PI / 180;
     }
 
-    public void reduceMotorPower() {
-        // TODO for a limited amount of time reduce (cut?) motor power 
-        // better to loose the battle than the war...
-    }
-
     public void configureLowGear() {
-        // TODO Auto-generated method stub
         Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
             t.setPID(Constants.velocityPTermLow, 0, 0);
             t.setF(Constants.velocityFeedForwardLLow);
@@ -438,7 +434,6 @@ public class DriveTrain extends Subsystem implements Loop {
     }
 
     public void configureHighGear() {
-        // TODO Auto-generated method stub
         Robot.driveTrain.leftPrimaryMotor((CANTalon t) ->{
             t.setPID(Constants.velocityPTermHigh, 0, 0);
             t.setF(Constants.velocityFeedForwardLHigh);

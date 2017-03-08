@@ -232,8 +232,6 @@ public class Robot extends IterativeRobot {
 
             shifter.downShift();
             
-            // TODO fix other modes and make them work
-            // driveTrain.setMode(DriveTrain.Modes.OPEN_LOOP);
             driveTrain.setMode(DriveTrain.Modes.VELOCITY);
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
@@ -275,19 +273,6 @@ public class Robot extends IterativeRobot {
             throw t;
         }
     }
-
-//    @Override
-//    public void testInit() {
-//        try {
-//            CrashTracker.logTestInit();
-//
-//            // TODO Auto-generated method stub
-//            super.testInit();
-//        } catch (Throwable t) {
-//            CrashTracker.logThrowableCrash(t);
-//            throw t;
-//        }
-//    }
 
     /**
      * This function is called periodically during test mode

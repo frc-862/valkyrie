@@ -28,7 +28,6 @@ public class OpenLoopMode extends SubsystemMode {
 
     @Override
     public void onStop() {
-        // TODO Auto-generated method stub
         Robot.driveTrain.set(0, 0);
     }
 }

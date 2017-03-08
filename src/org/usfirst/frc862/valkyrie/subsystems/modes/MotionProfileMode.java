@@ -17,7 +17,6 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
 
     @Override
     public void onStart() {
-        // TODO Auto-generated method stub
         done = false;
         Logger.debug("start motion profile");
         super.onStart();        
@@ -79,7 +78,6 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
     }
 
     public void onLoop() {
-        // TODO Auto-generated method stub
         super.onLoop();
 
         Robot.driveTrain.eachPrimaryMotor((CANTalon t) -> {
@@ -96,7 +94,6 @@ public class MotionProfileMode extends SubsystemMode implements Runnable {
 
     @Override
     public void onStop() {
-        // TODO Auto-generated method stub
         Logger.debug("stopping motion profile");
         pump.stop();
         super.onStop();

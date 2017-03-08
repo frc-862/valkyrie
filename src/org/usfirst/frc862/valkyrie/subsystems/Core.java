@@ -106,7 +106,6 @@ public class Core extends Subsystem implements Loop {
 
     @Override
     public void onStop() {
-        // TODO Auto-generated method stub
     }
 
     public double getAvailableAirUnits() {

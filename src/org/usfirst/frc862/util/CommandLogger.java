@@ -132,8 +132,7 @@ public class CommandLogger {
         try {
             writer.flush();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            // Do nothing
         }
     }
     
@@ -141,8 +140,7 @@ public class CommandLogger {
         try {
             writer.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            // Do nothing
         }
     }
 }

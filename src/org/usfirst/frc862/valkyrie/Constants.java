@@ -164,7 +164,7 @@ public class Constants extends ConstantsBase {
         
         File file = new File("/home/lvuser/obot");
         if (file.exists()) {
-            // TODO any obot specific over-rides can go here
+            // obot specific over-rides can go here
         }
 
         // new Constants().readFromFile();

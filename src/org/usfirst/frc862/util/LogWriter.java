@@ -76,7 +76,6 @@ public class LogWriter implements Loop {
     }
 
     public void close() {
-        // TODO Auto-generated method stub
         close();
     }
 }

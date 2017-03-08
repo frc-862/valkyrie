@@ -42,7 +42,6 @@ public class AutonBlueFeeder extends DynamicPathCommand {
 
     @Override
     protected void end() {
-        // TODO Auto-generated method stub
         Robot.gearCollector.extend();
         super.end();
     }

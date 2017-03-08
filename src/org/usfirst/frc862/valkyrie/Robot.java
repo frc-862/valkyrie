@@ -2,6 +2,7 @@ package org.usfirst.frc862.valkyrie;
 
 import org.usfirst.frc862.util.CrashTracker;
 import org.usfirst.frc862.util.DataLogger;
+import org.usfirst.frc862.util.FaultCode;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Looper;
 import org.usfirst.frc862.valkyrie.commands.AutonBlueBoiler;
@@ -143,6 +144,8 @@ public class Robot extends IterativeRobot {
             SmartDashboard.putBoolean("Use Crash Downshift", true);
             SmartDashboard.putBoolean("Use Coast Downshift", true);
             SmartDashboard.putBoolean("Use Velocity Upshift", true);
+            
+            FaultCode.update();
             
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);

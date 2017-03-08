@@ -1,0 +1,151 @@
+<xml version="1.0">
+<dashboard>
+	<widget field="FAULT_INTERNAL_ERROR" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="43" y="178"/>
+		<width>210</width>
+		<height>24</height>
+	</widget>
+	<widget field="FAULT_LOW_MAIN_VOLTAGE" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="41" y="151"/>
+		<width>235</width>
+		<height>19</height>
+	</widget>
+	<widget field="FAULT_SLOW_LOOPER" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="39" y="97"/>
+		<width>195</width>
+		<height>21</height>
+	</widget>
+	<widget field="FAULT_MISMATCHED_MOTION_PROFILES" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="38" y="66"/>
+		<width>315</width>
+		<height>21</height>
+	</widget>
+	<widget field="FAULT_RIGHT_ENCODER_NOT_FOUND" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="39" y="35"/>
+		<width>299</width>
+		<height>23</height>
+	</widget>
+	<widget field="FAULT_NAVX_ERROR" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="40" y="124"/>
+		<width>187</width>
+		<height>19</height>
+	</widget>
+	<widget field="FAULT_LEFT_ENCODER_NOT_FOUND" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="37" y="7"/>
+		<width>292</width>
+		<height>23</height>
+	</widget>
+	<widget field="ManualShifter" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="92" y="408"/>
+	</widget>
+	<widget field="Auton Mode" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="370" y="348"/>
+	</widget>
+	<widget field="Climb Override" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="83" y="527"/>
+	</widget>
+	<widget field="Upshift" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="132" y="349"/>
+	</widget>
+	<widget field="DownShift" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="114" y="319"/>
+	</widget>
+	<widget field="WallFollow" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="113" y="260"/>
+	</widget>
+	<widget field="Retract Gear Collector" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="41" y="467"/>
+	</widget>
+	<widget field="Arcade Drive" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="100" y="290"/>
+	</widget>
+	<widget field="VisionGear" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="404" y="257"/>
+	</widget>
+	<widget field="TurnOnLEDRing" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="372" y="286"/>
+	</widget>
+	<widget field="Use Velocity Upshift" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="421" y="6"/>
+	</widget>
+	<widget field="Extend Gear Collector" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="42" y="438"/>
+	</widget>
+	<widget field="Use Coast Downshift" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="416" y="36"/>
+	</widget>
+	<widget field="VisionFeedStation" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="360" y="227"/>
+	</widget>
+	<widget field="DriveStraight" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="99" y="228"/>
+	</widget>
+	<widget field="CalibratedClimb" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="76" y="497"/>
+	</widget>
+	<widget field="Use Crash Downshift" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="416" y="65"/>
+	</widget>
+	<widget field="Autoshifter" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="107" y="379"/>
+	</widget>
+	<widget field="Climb Power" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="470" y="95"/>
+	</widget>
+</dashboard>
+<live-window>
+</live-window>
+	<hidden field="AutonBlueBoiler"/>
+	<hidden field="AutonRedBoiler"/>
+	<hidden field="Right Vel"/>
+	<hidden field="Open Loop Drive Command"/>
+	<hidden field="Gear"/>
+	<hidden field="Rotate: reverse"/>
+	<hidden field="Find Sticktion"/>
+	<hidden field="Ultra1"/>
+	<hidden field="Ultra2"/>
+	<hidden field="Ultra3"/>
+	<hidden field="Left Pos"/>
+	<hidden field="Requested Power"/>
+	<hidden field="Toggle Gear Collector"/>
+	<hidden field="Ultra4"/>
+	<hidden field="Joy2LR"/>
+	<hidden field="SystemTest"/>
+	<hidden field="Follow Motion Profile"/>
+	<hidden field="AutonStraight"/>
+	<hidden field="WriteConstants"/>
+	<hidden field="Left Vel"/>
+	<hidden field="DriveTrainTest"/>
+	<hidden field="AutonRedFeeder"/>
+	<hidden field="Average Velocity"/>
+	<hidden field="TurnOffMotors: OneSecond"/>
+	<hidden field="Auton Red Feeder"/>
+	<hidden field="Heading"/>
+	<hidden field="Right Pos"/>
+	<hidden field="Auton Straight"/>
+	<hidden field="Dynamic Motion Profile Angle"/>
+	<hidden field="HighCurrentResponse"/>
+	<hidden field="Do Nothing"/>
+	<hidden field="Right Dynamic"/>
+	<hidden field="Rotate: right"/>
+	<hidden field="Voltage"/>
+	<hidden field="AutonBlueFeeder"/>
+	<hidden field="Auton Blue Feeder"/>
+	<hidden field="Joy2"/>
+	<hidden field="Joy1"/>
+	<hidden field="ResetDataLogger"/>
+	<hidden field="DynamicExtraCheese"/>
+	<hidden field="Auton Blue Boiler"/>
+	<hidden field="Left Dynamic"/>
+	<hidden field="Total Power"/>
+	<hidden field="PauseCompressor"/>
+	<hidden field="Dynamic Motion Profile Y"/>
+	<hidden field="Dynamic Motion Profile X"/>
+	<hidden field="Get Data Packet"/>
+	<hidden field="Rotate: SmallLeft"/>
+	<hidden field="DynamicCheese"/>
+	<hidden field="Auton Red Boiler"/>
+	<hidden field="Climb"/>
+	<hidden field="Sticktion Speed"/>
+	<hidden field="Rotate: left"/>
+</xml>

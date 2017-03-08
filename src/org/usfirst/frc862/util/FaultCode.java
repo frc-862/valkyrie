@@ -27,6 +27,12 @@ public class FaultCode {
         write(code, "");
     }
     
+    public static void update() {
+        for (Codes c : Codes.values()) {
+            SmartDashboard.putBoolean("FAULT_" + c.toString(), !faults.contains(c));
+        }        
+    }
+    
     public static void write(Codes code, String msg) {
         dummy_light = true;
         try {

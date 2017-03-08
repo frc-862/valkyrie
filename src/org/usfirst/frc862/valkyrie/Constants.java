@@ -151,7 +151,7 @@ public class Constants extends ConstantsBase {
     public static double stopWinchCurrent = 42;
     
     // Vision
-    public static int kAndroidAppTcpPort = 8620;
+    public static int kAndroidAppTcpPort = 8254;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

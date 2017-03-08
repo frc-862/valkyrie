@@ -1,5 +1,14 @@
 <xml version="1.0">
 <dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="588" y="561"/>
+		<width>67</width>
+		<height>24</height>
+		<property name="Text" value="Connected"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="661" y="556"/>
+	</static-widget>
 	<widget field="FAULT_INTERNAL_ERROR" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
 		<location x="43" y="178"/>
 		<width>210</width>
@@ -97,47 +106,30 @@
 </live-window>
 	<hidden field="AutonBlueBoiler"/>
 	<hidden field="AutonRedBoiler"/>
-	<hidden field="Right Vel"/>
 	<hidden field="Open Loop Drive Command"/>
-	<hidden field="Gear"/>
 	<hidden field="Rotate: reverse"/>
 	<hidden field="Find Sticktion"/>
-	<hidden field="Ultra1"/>
-	<hidden field="Ultra2"/>
-	<hidden field="Ultra3"/>
-	<hidden field="Left Pos"/>
-	<hidden field="Requested Power"/>
 	<hidden field="Toggle Gear Collector"/>
-	<hidden field="Ultra4"/>
-	<hidden field="Joy2LR"/>
 	<hidden field="SystemTest"/>
 	<hidden field="Follow Motion Profile"/>
 	<hidden field="AutonStraight"/>
 	<hidden field="WriteConstants"/>
-	<hidden field="Left Vel"/>
 	<hidden field="DriveTrainTest"/>
 	<hidden field="AutonRedFeeder"/>
-	<hidden field="Average Velocity"/>
 	<hidden field="TurnOffMotors: OneSecond"/>
 	<hidden field="Auton Red Feeder"/>
-	<hidden field="Heading"/>
-	<hidden field="Right Pos"/>
 	<hidden field="Auton Straight"/>
 	<hidden field="Dynamic Motion Profile Angle"/>
 	<hidden field="HighCurrentResponse"/>
 	<hidden field="Do Nothing"/>
 	<hidden field="Right Dynamic"/>
 	<hidden field="Rotate: right"/>
-	<hidden field="Voltage"/>
 	<hidden field="AutonBlueFeeder"/>
 	<hidden field="Auton Blue Feeder"/>
-	<hidden field="Joy2"/>
-	<hidden field="Joy1"/>
 	<hidden field="ResetDataLogger"/>
 	<hidden field="DynamicExtraCheese"/>
 	<hidden field="Auton Blue Boiler"/>
 	<hidden field="Left Dynamic"/>
-	<hidden field="Total Power"/>
 	<hidden field="PauseCompressor"/>
 	<hidden field="Dynamic Motion Profile Y"/>
 	<hidden field="Dynamic Motion Profile X"/>

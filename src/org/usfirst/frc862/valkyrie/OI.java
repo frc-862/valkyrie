@@ -92,6 +92,7 @@ public class OI {
     public JoystickButton winchButton;
     public JoystickButton extendGearButton;
     public JoystickButton retractGearButton;
+    public JoystickButton lEDRing;
     public Joystick driverLeft;
     public JoystickButton winchButton2;
     public Joystick driverRight;
@@ -125,6 +126,8 @@ public class OI {
         winchButton2.whileHeld(new ClimbOverride());
         driverLeft = new Joystick(0);
         
+        lEDRing = new JoystickButton(driverLeft, 4);
+        lEDRing.whileHeld(new TurnOnLEDRing());
         retractGearButton = new JoystickButton(driverLeft, 10);
         retractGearButton.whileHeld(new RetractGearCollector());
         extendGearButton = new JoystickButton(driverLeft, 9);

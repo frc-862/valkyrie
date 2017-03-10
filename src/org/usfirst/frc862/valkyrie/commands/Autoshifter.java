@@ -101,6 +101,8 @@ public class Autoshifter extends Command {
             logger.write();
             if (lastShiftTimer.hasPeriodPassed(Constants.shiftHysteresis)) {
                 state = (Robot.shifter.isHighGear()) ? State.HIGH_GEAR : State.LOW_GEAR;
+                logger.drain();
+                logger.flush();
                 resetTimers();
             }
             break;

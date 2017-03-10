@@ -95,8 +95,8 @@ public class Autoshifter extends Command {
         case HYSTERESIS_DELAY:
             logger.set("left_velocity", Robot.driveTrain.getLeftVelocity());
             logger.set("right_velocity", Robot.driveTrain.getRightVelocity());
-            logger.set("left_encoder", Robot.driveTrain.getLeftDistance());
-            logger.set("right_encoder", Robot.driveTrain.getRightDistance());
+            logger.set("left_encoder", Robot.driveTrain.getLeftDistance() - originalLDistance);
+            logger.set("right_encoder", Robot.driveTrain.getRightDistance() - originalRDistance);
             logger.set("straighten", Robot.driveTrain.getStraightAdjust());
             logger.write();
             if (lastShiftTimer.hasPeriodPassed(Constants.shiftHysteresis)) {
@@ -135,8 +135,8 @@ public class Autoshifter extends Command {
         case STRAIGHT_OVERRIDE:
             logger.set("left_velocity", Robot.driveTrain.getLeftVelocity());
             logger.set("right_velocity", Robot.driveTrain.getRightVelocity());
-            logger.set("left_encoder", Robot.driveTrain.getLeftDistance());
-            logger.set("right_encoder", Robot.driveTrain.getRightDistance());
+            logger.set("left_encoder", Robot.driveTrain.getLeftDistance() - originalLDistance);
+            logger.set("right_encoder", Robot.driveTrain.getRightDistance() - originalRDistance);
             logger.set("straighten", Robot.driveTrain.getStraightAdjust());
             logger.write();
 

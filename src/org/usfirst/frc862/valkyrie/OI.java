@@ -176,9 +176,9 @@ public class OI {
         
         SmartDashboard.putData("SystemTest", new SystemTest());
 
-        new LowVoltageTrigger(RobotMap.corePowerPanel, Constants.LowVoltage, Constants.LVTriggerTime).whenActive(
-                new FaultCommand(FaultCode.Codes.LOW_MAIN_VOLTAGE)
-        );
+//        new LowVoltageTrigger(RobotMap.corePowerPanel, Constants.LowVoltage, Constants.LVTriggerTime).whenActive(
+//                new FaultCommand(FaultCode.Codes.LOW_MAIN_VOLTAGE)
+//        );
 
     }
 

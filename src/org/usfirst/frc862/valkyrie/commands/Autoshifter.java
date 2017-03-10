@@ -98,6 +98,7 @@ public class Autoshifter extends Command {
             logger.set("left_encoder", Robot.driveTrain.getLeftDistance());
             logger.set("right_encoder", Robot.driveTrain.getRightDistance());
             logger.set("straighten", Robot.driveTrain.getStraightAdjust());
+            logger.write();
             if (lastShiftTimer.hasPeriodPassed(Constants.shiftHysteresis)) {
                 state = (Robot.shifter.isHighGear()) ? State.HIGH_GEAR : State.LOW_GEAR;
                 resetTimers();
@@ -135,6 +136,7 @@ public class Autoshifter extends Command {
             logger.set("left_encoder", Robot.driveTrain.getLeftDistance());
             logger.set("right_encoder", Robot.driveTrain.getRightDistance());
             logger.set("straighten", Robot.driveTrain.getStraightAdjust());
+            logger.write();
 
             rDistDif = originalRDistance - Robot.driveTrain.getRightDistance();
             lDistDif = originalLDistance - Robot.driveTrain.getLeftDistance();

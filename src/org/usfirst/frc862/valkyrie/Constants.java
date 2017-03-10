@@ -146,8 +146,8 @@ public class Constants extends ConstantsBase {
     // Power channels
     public static int winch1PowerChannel = 4;
     public static int winch2PowerChannel = 11;
-    public static double slowWinchCurrent = 35;
-    public static double stopWinchCurrent = 42;
+    // public static double slowWinchCurrent = 35;
+    public static double stopWinchCurrent = 110;
     
     // Vision
     public static int kAndroidAppTcpPort = 8254;

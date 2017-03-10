@@ -37,7 +37,7 @@ public class AutonBlueBoiler extends DynamicPathCommand {
         testing = true;
         reverse = false;
         addWaypoint(0,0,0);
-        addWaypoint(9.95,-8.5,-70);
+        addWaypoint(8.95,-8.5,-70);
     }
 
     @Override

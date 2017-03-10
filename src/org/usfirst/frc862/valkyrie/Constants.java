@@ -41,7 +41,7 @@ public class Constants extends ConstantsBase {
     public static double seriousCurrentDrawTimer = 0.15;
 	public static double VeerDifference = 57.0; //idk how this works though
 	public static double autoshightStraightenP = -1.5;
-    public static double autoshightStraightenPeriod = 0.0;
+    public static double autoshightStraightenPeriod = 0.2;
     public static double ArcadeAngleP = 0.6;
     public static double autoshiftEpsilon = 1;
 

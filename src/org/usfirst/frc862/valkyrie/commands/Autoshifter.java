@@ -143,7 +143,8 @@ public class Autoshifter extends Command {
             rDistDif = originalRDistance - Robot.driveTrain.getRightDistance();
             lDistDif = originalLDistance - Robot.driveTrain.getLeftDistance();
             bigDif = rDistDif - lDistDif;
-            Robot.driveTrain.setStraightAdjust(bigDif * Constants.autoshightStraightenP);
+            Robot.driveTrain.setStraightAdjust(Robot.driveTrain.getLeftVelocity() * .05);
+            // Robot.driveTrain.setStraightAdjust(bigDif * Constants.autoshightStraightenP);
             if (overtakeTimer.hasPeriodPassed(Constants.autoshightStraightenPeriod)) {
                 state = State.HYSTERESIS_DELAY;
                 Robot.driveTrain.setStraightAdjust(0);

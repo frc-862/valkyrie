@@ -17,7 +17,6 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRLib.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/RIOdroid.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRLib-javadoc.jar"/>
-	<classpathentry kind="lib" path="/Users/phurley/wpilib/user/java/lib/json-simple-1.1.1.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

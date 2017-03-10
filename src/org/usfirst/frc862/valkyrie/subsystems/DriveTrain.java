@@ -83,6 +83,7 @@ public class DriveTrain extends Subsystem implements Loop {
     private EncoderMode encoderMode;
     private TestMode testMode;
 	private double straightAdjust = 0;
+    private double slowUntil = 0;
 
     // private double start;
     // private double stop;
@@ -347,9 +348,18 @@ public class DriveTrain extends Subsystem implements Loop {
         return Math.abs(leftRequestedPower + rightRequestedPower) / 2;
     }
     
+    public void slowForSeconds(double seconds) {
+        slowUntil = Timer.getFPGATimestamp() + seconds;
+    }
+    
     public void set(double left, double right) {
-        leftMotor1.set(left - straightAdjust);
-        rightMotor1.set(right + straightAdjust);
+        if (Timer.getFPGATimestamp() < slowUntil) {
+            leftMotor1.set(0);
+            rightMotor1.set(0);
+        } else {
+            leftMotor1.set(left - straightAdjust);
+            rightMotor1.set(right + straightAdjust);
+        }
     }
 
     public void stop() {

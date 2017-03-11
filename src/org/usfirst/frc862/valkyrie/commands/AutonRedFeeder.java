@@ -39,8 +39,6 @@ public class AutonRedFeeder extends DynamicPathCommand {
         addWaypoint(0,0,0);
         //addWaypoint(9.45,-6.5,-70);
         addWaypoint(7.9,-6.5,-70);
-
-
     }
 
     @Override

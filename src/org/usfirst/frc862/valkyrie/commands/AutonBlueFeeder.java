@@ -37,7 +37,7 @@ public class AutonBlueFeeder extends DynamicPathCommand {
         testing = false;
         reverse = false;
         addWaypoint(0,0,0);
-        addWaypoint(7.85,6.8,70);
+        addWaypoint(8.3,6.8,70);
 
     }
 

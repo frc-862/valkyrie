@@ -30,14 +30,14 @@ public class BinarySerializer {
 		for (int i = 0; i < trajectory.getNumSegments(); ++i) {
 			Segment segment = trajectory.getSegment(i);
 
-			outStream.writeFloat((float) segment.pos);
-			outStream.writeFloat((float) segment.vel);
-			outStream.writeFloat((float) segment.acc);
-			outStream.writeFloat((float) segment.jerk);
-			outStream.writeFloat((float) segment.heading);
-			outStream.writeFloat((float) segment.dt);
-			outStream.writeFloat((float) segment.x);
-			outStream.writeFloat((float) segment.y);
+			outStream.writeDouble(segment.pos);
+			outStream.writeDouble(segment.vel);
+			outStream.writeDouble(segment.acc);
+			outStream.writeDouble(segment.jerk);
+			outStream.writeDouble(segment.heading);
+			outStream.writeDouble(segment.dt);
+			outStream.writeDouble(segment.x);
+			outStream.writeDouble(segment.y);
 		}
 	}
 

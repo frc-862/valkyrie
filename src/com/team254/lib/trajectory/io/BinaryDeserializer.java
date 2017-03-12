@@ -42,14 +42,14 @@ public class BinaryDeserializer {
 	private Trajectory.Segment loadSegment(DataInputStream serialized) throws IOException {
 		Trajectory.Segment segment = new Trajectory.Segment();
 
-		segment.pos = serialized.readFloat();
-		segment.vel = serialized.readFloat();
-		segment.acc = serialized.readFloat();
-		segment.jerk = serialized.readFloat();
-		segment.heading = serialized.readFloat();
-		segment.dt = serialized.readFloat();
-		segment.x = serialized.readFloat();
-		segment.y = serialized.readFloat();
+		segment.pos = serialized.readDouble();
+		segment.vel = serialized.readDouble();
+		segment.acc = serialized.readDouble();
+		segment.jerk = serialized.readDouble();
+		segment.heading = serialized.readDouble();
+		segment.dt = serialized.readDouble();
+		segment.x = serialized.readDouble();
+		segment.y = serialized.readDouble();
 
 		return segment;
 	}

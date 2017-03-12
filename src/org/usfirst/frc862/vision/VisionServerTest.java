@@ -16,6 +16,7 @@ public class VisionServerTest {
     }
 
     public static void main(String[] args) {
+        System.out.println("Vision Server Test started");
         VisionServer visionServer = VisionServer.getInstance();
         visionServer.addVisionUpdateReceiver(new TestReceiver());
         while (true) {

@@ -12,7 +12,7 @@ import java.nio.file.Paths;
  */
 public class AdbBridge {
     Path bin_location_;
-    public final static Path DEFAULT_LOCATION = Paths.get("/usr/bin/adb");
+    public final static Path DEFAULT_LOCATION = Paths.get("/usr/local/bin/adb");
 
     public AdbBridge() {
         Path adb_location;
@@ -32,10 +32,15 @@ public class AdbBridge {
     private boolean runCommand(String args) {
         Runtime r = Runtime.getRuntime();
         String cmd = bin_location_.toString() + " " + args;
+        System.out.println("CMD: " + cmd);
 
         try {
             Process p = r.exec(cmd);
             p.waitFor();
+            System.out.println("Exit value: " + p.exitValue());
+            byte[] b = new byte[1024];
+            p.getInputStream().read(b);
+            System.out.println("Output " + new String(b));
         } catch (IOException e) {
             System.err.println("AdbBridge: Could not run command " + cmd);
             e.printStackTrace();
@@ -51,6 +56,7 @@ public class AdbBridge {
     public void start() {
         System.out.println("Starting adb");
         runCommand("start");
+        System.out.println("Started?");
     }
 
     public void stop() {

@@ -169,12 +169,12 @@ public class Autoshifter extends Command {
     }
 
     private void low_gear() {
-        if (Robot.driveTrain.getAbsVelocity() > Constants.MinUpshiftVelocity) {
-            if (lowGearUpshiftTimer.hasPeriodPassed(Constants.VelocityUpshiftTime)) {
+        if (Robot.driveTrain.getAbsVelocity() > Constants.MinUpshiftVelocity && Robot.driveTrain.getRequestedPower() > Constants.MinRequestedPowerForUpshift) {
+//            if (lowGearUpshiftTimer.hasPeriodPassed(Constants.VelocityUpshiftTime)) {
                 state = State.UP_SHIFTING;
-            }
-        } else {
-            lowGearUpshiftTimer.reset();
+//            }
+//        } else {
+//            lowGearUpshiftTimer.reset();
         }
     }
 

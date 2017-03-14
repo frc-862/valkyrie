@@ -37,12 +37,12 @@ public class VisionUpdate {
         }
     }
 
-    private static Optional<Integer> parseInteger(JSONObject j, String key) throws ClassCastException {
+    private static Optional<Long> parseLong(JSONObject j, String key) throws ClassCastException {
         Object d = j.get(key);
         if (d == null) {
             return Optional.empty();
         } else {
-            return Optional.of((int) d);
+            return Optional.of((long) d);
         }
     }
 
@@ -78,7 +78,7 @@ public class VisionUpdate {
                 Optional<Double> lon = parseDouble(target, "longitudinal_distance");
                 Optional<Double> lat = parseDouble(target, "latitudinal_distance");
                 Optional<Double> theta = parseDouble(target, "theta");
-                Optional<Integer> type = parseInteger(target, "type");
+                Optional<Long> type = parseLong(target, "type");
                 
                 if (!(y.isPresent() && z.isPresent())) {
                     update.valid = false;

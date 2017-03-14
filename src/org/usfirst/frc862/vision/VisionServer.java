@@ -153,7 +153,6 @@ public class VisionServer extends CrashTrackingRunnable {
             } catch (NullPointerException e) {
                 m_use_java_time = false;
             }
-            m_use_java_time = true;
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -11,9 +11,9 @@ public class TargetInfo {
     protected double lon;
     protected double lat;
     protected double theta;
-    protected int type;
+    protected long type;
 
-    public TargetInfo(double y, double z, double lon, double lat, double theta, int type) {
+    public TargetInfo(double y, double z, double lon, double lat, double theta, Long type) {
         this.y = y;
         this.z = z;
         this.lon = lon;
@@ -46,7 +46,7 @@ public class TargetInfo {
         return theta;
     }
 
-    public int getType() {
+    public long getType() {
         return type;
     }
 }

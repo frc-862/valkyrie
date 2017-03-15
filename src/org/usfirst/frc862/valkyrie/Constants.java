@@ -151,6 +151,9 @@ public class Constants extends ConstantsBase {
     
     // Vision
     public static int kAndroidAppTcpPort = 8254;
+    public static double kMaxGoalTrackAge = 2;
+    public static double kMaxTrackerDistance = 10;
+    public static double kCameraFrameRate = 8;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

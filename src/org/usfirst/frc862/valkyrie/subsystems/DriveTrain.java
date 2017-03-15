@@ -13,7 +13,6 @@ import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
 import org.usfirst.frc862.valkyrie.commands.TeleopVelocityDrive;
-import org.usfirst.frc862.valkyrie.subsystems.modes.AdaptivePursuitMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.BrakeMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.EncoderMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.HeadingMode;
@@ -44,7 +43,7 @@ import static org.usfirst.frc862.util.LightningMath.*;
 public class DriveTrain extends Subsystem implements Loop {
 
     public enum Modes {
-        OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE, ADAPTIVE_PURSUIT, ENCODER, TEST
+        OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE, ENCODER, TEST
     }    
     
     private final Object modeRunningLock = new Object();
@@ -53,7 +52,6 @@ public class DriveTrain extends Subsystem implements Loop {
     VelocityMode velocityMode;
     BrakeMode brakeMode;
     HeadingMode headingMode;
-    AdaptivePursuitMode adaptivePursuitMode;
     public MotionProfileMode motionProfileMode;
     SubsystemMode currentMode;
 
@@ -167,7 +165,6 @@ public class DriveTrain extends Subsystem implements Loop {
         brakeMode = new BrakeMode();
         headingMode = new HeadingMode();
         motionProfileMode = new MotionProfileMode();
-        adaptivePursuitMode = new AdaptivePursuitMode();
         encoderMode = new EncoderMode();
         testMode = new TestMode();
         
@@ -243,10 +240,6 @@ public class DriveTrain extends Subsystem implements Loop {
             
         case HEADING:
             currentMode = headingMode;
-            break;
-            
-        case ADAPTIVE_PURSUIT:
-            currentMode = adaptivePursuitMode;
             break;
             
         case MOTION_PROFILE:

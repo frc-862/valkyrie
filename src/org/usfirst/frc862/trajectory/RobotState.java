@@ -1,6 +1,9 @@
 package org.usfirst.frc862.trajectory;
 
+import java.util.List;
 import java.util.Map;
+
+import org.usfirst.frc862.vision.TargetInfo;
 
 /**
  * stores a map of recent poses of the robot for state estimation
@@ -113,5 +116,15 @@ public class RobotState {
 	public double getLatestTheta() {
 		return getLatestFieldToVehicle().getValue().getRotation().getDegrees();
 	}
+
+    public static RobotState getInstance() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public void addVisionUpdate(double capturedAtTimestamp, List<TargetInfo> targets) {
+        // TODO Auto-generated method stub
+        
+    }
 
 }

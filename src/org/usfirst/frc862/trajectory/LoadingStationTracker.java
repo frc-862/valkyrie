@@ -14,9 +14,9 @@ import org.usfirst.frc862.valkyrie.Constants;
  * to make consistent decisions about which goal to aim at and to smooth out
  * jitter from vibration of the camera.
  * 
- * @see GoalTrack.java
+ * @see LoadingStationTrack.java
  */
-public class GoalTracker {
+public class LoadingStationTracker {
     /**
      * Track reports contain all of the relevant information about a given goal
      * track.
@@ -35,7 +35,7 @@ public class GoalTracker {
         // The track id
         public int id;
 
-        public TrackReport(GoalTrack track) {
+        public TrackReport(LoadingStationTrack track) {
             this.field_to_goal = track.getSmoothedPosition();
             this.latest_timestamp = track.getLatestTimestamp();
             this.stability = track.getStability();
@@ -92,10 +92,10 @@ public class GoalTracker {
         }
     }
 
-    List<GoalTrack> mCurrentTracks = new ArrayList<>();
+    List<LoadingStationTrack> mCurrentTracks = new ArrayList<>();
     int mNextId = 0;
 
-    public GoalTracker() {
+    public LoadingStationTracker() {
     }
 
     public void reset() {
@@ -106,7 +106,7 @@ public class GoalTracker {
         boolean hasUpdatedTrack = false;
         // Try to update existing tracks
         for (Translation2d target : field_to_goals) {
-            for (GoalTrack track : mCurrentTracks) {
+            for (LoadingStationTrack track : mCurrentTracks) {
                 if (!hasUpdatedTrack) {
                     if (track.tryUpdate(timestamp, target)) {
                         hasUpdatedTrack = true;
@@ -117,8 +117,8 @@ public class GoalTracker {
             }
         }
         // Prune any tracks that have died
-        for (Iterator<GoalTrack> it = mCurrentTracks.iterator(); it.hasNext();) {
-            GoalTrack track = it.next();
+        for (Iterator<LoadingStationTrack> it = mCurrentTracks.iterator(); it.hasNext();) {
+            LoadingStationTrack track = it.next();
             if (!track.isAlive()) {
                 it.remove();
             }
@@ -126,7 +126,7 @@ public class GoalTracker {
         // If all tracks are dead, start new tracks for any detections
         if (mCurrentTracks.isEmpty()) {
             for (Translation2d target : field_to_goals) {
-                mCurrentTracks.add(GoalTrack.makeNewTrack(timestamp, target, mNextId));
+                mCurrentTracks.add(LoadingStationTrack.makeNewTrack(timestamp, target, mNextId));
                 ++mNextId;
             }
         }
@@ -138,7 +138,7 @@ public class GoalTracker {
 
     public List<TrackReport> getTracks() {
         List<TrackReport> rv = new ArrayList<>();
-        for (GoalTrack track : mCurrentTracks) {
+        for (LoadingStationTrack track : mCurrentTracks) {
             rv.add(new TrackReport(track));
         }
         return rv;

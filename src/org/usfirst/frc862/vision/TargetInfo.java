@@ -22,15 +22,15 @@ public class TargetInfo {
         this.type = type;
     }
 
-    public double getX() {
+    private double getX() {
         return x;
     }
 
-    public double getY() {
+    private double getY() {
         return y;
     }
 
-    public double getZ() {
+    private double getZ() {
         return z;
     }
 

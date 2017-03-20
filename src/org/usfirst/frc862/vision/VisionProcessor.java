@@ -9,7 +9,7 @@ import org.usfirst.frc862.util.Loop;
  * code to determine the best goal to shoot at and prune old Goal tracks is in
  * GoalTracker.java
  * 
- * @see GoalTracker.java
+ * @see PegTracker.java
  */
 public class VisionProcessor implements Loop, VisionUpdateReceiver {
     static VisionProcessor instance_ = new VisionProcessor();

@@ -16,22 +16,22 @@ import edu.wpi.first.wpilibj.Timer;
  * This helps in the goal ranking process that determines which goal to fire
  * into, and helps to smooth measurements of the goal's location over time.
  * 
- * @see GoalTracker.java
+ * @see PegTracker.java
  */
-public class GoalTrack {
+public class LoadingStationTrack {
     Map<Double, Translation2d> mObservedPositions = new TreeMap<>();
     Translation2d mSmoothedPosition = null;
     int mId;
 
-    private GoalTrack() {
+    private LoadingStationTrack() {
     }
 
     /**
      * Makes a new track based on the timestamp and the goal's coordinates (from
      * vision)
      */
-    public static GoalTrack makeNewTrack(double timestamp, Translation2d first_observation, int id) {
-        GoalTrack rv = new GoalTrack();
+    public static LoadingStationTrack makeNewTrack(double timestamp, Translation2d first_observation, int id) {
+        LoadingStationTrack rv = new LoadingStationTrack();
         rv.mObservedPositions.put(timestamp, first_observation);
         rv.mSmoothedPosition = first_observation;
         rv.mId = id;

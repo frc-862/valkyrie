@@ -58,7 +58,9 @@ public class Constants extends ConstantsBase {
     
     //DriveTrain
 	public static double MinRotatePower = 20;
-    public static double driveTrainLoopRate = 0.1;
+    public static double fastLoopRate = 0.01;
+    public static double mediumLoopRate = 0.1;
+    public static double slowLoopRate = 0.5;
     public static double maxRampRate = 0.75;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default
     public static double maxVelocityLow = 350;
@@ -90,7 +92,6 @@ public class Constants extends ConstantsBase {
 	
 	//Logging
     public static int logDepth = 1000;
-    public static double backgroundLoopRate = 0.5;
 
     
     //Mechanisms
@@ -154,6 +155,7 @@ public class Constants extends ConstantsBase {
     public static double kMaxGoalTrackAge = 2;
     public static double kMaxTrackerDistance = 10;
     public static double kCameraFrameRate = 8;
+    public static double kCameraDeadband = 0;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

@@ -1,6 +1,5 @@
 package org.usfirst.frc862.valkyrie;
 
-import org.usfirst.frc862.trajectory.RobotState;
 import org.usfirst.frc862.trajectory.RobotStateEstimator;
 import org.usfirst.frc862.util.CrashTracker;
 import org.usfirst.frc862.util.DataLogger;

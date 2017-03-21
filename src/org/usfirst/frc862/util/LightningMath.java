@@ -86,4 +86,8 @@ public class LightningMath {
         // feet / minute * circumference is rpm 
         return fps * 60 / Constants.WheelCircumference;
     }
+
+    public static double mm2ft(double dist) {
+        return dist / 304.8;
+    }
 }

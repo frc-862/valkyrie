@@ -1,146 +1,227 @@
 <xml version="1.0">
 <dashboard>
-	<widget field="System Test Instruction" type="String" class="edu.wpi.first.smartdashboard.gui.elements.FormattedField">
-		<location x="185" y="12"/>
-		<width>389</width>
+	<widget field="DynamicCheese" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="297" y="251"/>
+	</widget>
+	<widget field="AutonRedFeeder" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="632" y="389"/>
+	</widget>
+	<widget field="Find Sticktion" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="2" y="7"/>
+	</widget>
+	<widget field="AutonStraight" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="14" y="1"/>
+	</widget>
+	<widget field="Climb" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="273" y="105"/>
+	</widget>
+	<widget field="VisionFeedStation" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="29" y="6"/>
+	</widget>
+	<widget field="Rotate: right" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="1" y="4"/>
+	</widget>
+	<widget field="Upshift" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="273" y="65"/>
+	</widget>
+	<widget field="ResetDataLogger" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="7" y="31"/>
+	</widget>
+	<widget field="VisionGear" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="24" y="23"/>
+	</widget>
+	<widget field="ManualShifter" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="23" y="8"/>
+	</widget>
+	<widget field="HasGear" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="267" y="203"/>
+	</widget>
+	<widget field="Follow Motion Profile" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="7" y="16"/>
+	</widget>
+	<widget field="AutonBlueFeeder" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="2" y="28"/>
+	</widget>
+	<widget field="Extend Gear Collector" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="29" y="13"/>
+	</widget>
+	<widget field="PauseCompressor" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="20" y="9"/>
+	</widget>
+	<widget field="Do Nothing" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="29" y="13"/>
+	</widget>
+	<widget field="DownShift" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="1" y="15"/>
+	</widget>
+	<widget field="WallFollow" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="21" y="30"/>
+	</widget>
+	<widget field="AutonRedBoiler" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="3" y="11"/>
+	</widget>
+	<widget field="TurnOffMotors: OneSecond" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="19" y="25"/>
+	</widget>
+	<widget field="Retract Gear Collector" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="3" y="26"/>
+	</widget>
+	<widget field="DriveTrainTest" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="16" y="21"/>
+	</widget>
+	<widget field="CalibratedClimb" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="4" y="9"/>
+	</widget>
+	<widget field="TurnOnLEDRing" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="10" y="0"/>
+	</widget>
+	<widget field="Rotate: SmallLeft" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="20" y="18"/>
+	</widget>
+	<widget field="WriteConstants" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="19" y="1"/>
 	</widget>
 	<widget field="SystemTest" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="10" y="7"/>
+		<location x="12" y="2"/>
 	</widget>
-	<widget field="FAULT_INTERNAL_ERROR" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="590" y="142"/>
+	<widget field="DynamicExtraCheese" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="10" y="6"/>
 	</widget>
-	<widget field="TEST_RIGHT_ULTRASONIC" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="10" y="315"/>
+	<widget field="AutonBlueBoiler" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="30" y="17"/>
 	</widget>
-	<widget field="TEST_RIGHT_ENCODER" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="215" y="225"/>
+	<widget field="Rotate: left" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="26" y="30"/>
 	</widget>
-	<widget field="TEST_DOWNSHIFT" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="215" y="191"/>
+	<widget field="Arcade Drive" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="4" y="28"/>
 	</widget>
-	<widget field="FAULT_LOW_MAIN_VOLTAGE" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="592" y="9"/>
+	<widget field="Climb Override" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="20" y="31"/>
 	</widget>
-	<widget field="TEST_REAR_ULTRASONIC" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="215" y="315"/>
+	<widget field="Toggle Gear Collector" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="420" y="548"/>
 	</widget>
-	<widget field="TEST_WINCH_MOTOR2" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="215" y="128"/>
+	<widget field="Open Loop Drive Command" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="420" y="508"/>
 	</widget>
-	<widget field="TEST_WINCH_MOTOR1" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="10" y="129"/>
+	<widget field="DriveStraight" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="420" y="468"/>
 	</widget>
-	<widget field="FAULT_MISMATCHED_MOTION_PROFILES" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="590" y="60"/>
+	<widget field="Get Data Packet" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="420" y="428"/>
 	</widget>
-	<widget field="FAULT_NAVX_ERROR" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="590" y="167"/>
+	<widget field="Auton Mode" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="0" y="580"/>
 	</widget>
-	<widget field="TEST_GEAR_SENSOR" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="10" y="352"/>
+	<widget field="Autoshifter" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="420" y="388"/>
 	</widget>
-	<widget field="TEST_LEFT_ULTRASONIC" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="215" y="289"/>
+	<widget field="Rotate: reverse" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="420" y="348"/>
 	</widget>
-	<widget field="TEST_LEFT_MOTOR3" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="10" y="104"/>
+	<widget field="FAULT_INTERNAL_ERROR" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="420" y="319"/>
 	</widget>
-	<widget field="TEST_FRONT_ULTRASONIC" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="10" y="289"/>
+	<widget field="TEST_RIGHT_ULTRASONIC" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="420" y="290"/>
 	</widget>
-	<widget field="TEST_LEFT_MOTOR2" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="10" y="79"/>
+	<widget field="Sticktion Speed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="420" y="261"/>
 	</widget>
-	<widget field="TEST_LEFT_MOTOR1" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="14" y="52"/>
+	<widget field="TEST_RIGHT_ENCODER" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="420" y="232"/>
 	</widget>
-	<widget field="FAULT_RIGHT_ENCODER_NOT_FOUND" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="590" y="115"/>
+	<widget field="TEST_DOWNSHIFT" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="420" y="203"/>
 	</widget>
-	<widget field="TEST_UPSHIFT" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="10" y="191"/>
+	<widget field="FAULT_LOW_MAIN_VOLTAGE" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="420" y="174"/>
 	</widget>
-	<widget field="FAULT_SLOW_LOOPER" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="589" y="87"/>
+	<widget field="TEST_REAR_ULTRASONIC" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="420" y="145"/>
 	</widget>
-	<widget field="TEST_NAVX" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="10" y="248"/>
+	<widget field="Use Velocity Upshift" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="420" y="116"/>
 	</widget>
-	<widget field="FAULT_LEFT_ENCODER_NOT_FOUND" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="591" y="34"/>
+	<widget field="TEST_WINCH_MOTOR2" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="420" y="87"/>
 	</widget>
-	<widget field="TEST_LEFT_ENCODER" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="10" y="225"/>
-		<height>16</height>
+	<widget field="TEST_WINCH_MOTOR1" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="420" y="58"/>
 	</widget>
-	<widget field="TEST_RIGHT_MOTOR2" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="215" y="77"/>
+	<widget field="FAULT_MISMATCHED_MOTION_PROFILES" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="28" y="18"/>
 	</widget>
-	<widget field="TEST_RIGHT_MOTOR3" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="215" y="103"/>
+	<widget field="FAULT_NAVX_ERROR" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="534" y="29"/>
 	</widget>
-	<widget field="TEST_RIGHT_MOTOR1" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="215" y="51"/>
+	<widget field="TEST_GEAR_SENSOR" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="534" y="0"/>
 	</widget>
-	<widget field="TEST_COMPRESSOR" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="10" y="168"/>
+	<widget field="TEST_LEFT_ULTRASONIC" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="245" y="0"/>
 	</widget>
-	<widget field="TEST_GEAR_TRAY" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="381" y="191"/>
+	<widget field="TEST_LEFT_MOTOR3" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="551"/>
 	</widget>
-	<hidden field="AutonBlueBoiler"/>
-	<hidden field="AutonRedBoiler"/>
-	<hidden field="Open Loop Drive Command"/>
-	<hidden field="Rotate: reverse"/>
-	<hidden field="Find Sticktion"/>
-	<hidden field="Toggle Gear Collector"/>
-	<hidden field="Extend Gear Collector"/>
-	<hidden field="VisionFeedStation"/>
-	<hidden field="Auton Mode"/>
-	<hidden field="Follow Motion Profile"/>
-	<hidden field="AutonStraight"/>
-	<hidden field="Autoshifter"/>
-	<hidden field="WriteConstants"/>
-	<hidden field="DriveTrainTest"/>
-	<hidden field="DownShift"/>
-	<hidden field="TurnOnLEDRing"/>
-	<hidden field="AutonRedFeeder"/>
-	<hidden field="Upshift"/>
-	<hidden field="TurnOffMotors: OneSecond"/>
-	<hidden field="CalibratedClimb"/>
-	<hidden field="Climb Override"/>
-	<hidden field="Auton Red Feeder"/>
-	<hidden field="Climb Power"/>
-	<hidden field="Use Velocity Upshift"/>
-	<hidden field="Auton Straight"/>
-	<hidden field="Use Crash Downshift"/>
-	<hidden field="HighCurrentResponse"/>
-	<hidden field="Do Nothing"/>
-	<hidden field="Right Dynamic"/>
-	<hidden field="Rotate: right"/>
-	<hidden field="AutonBlueFeeder"/>
-	<hidden field="TESTS_ARE_DONE"/>
-	<hidden field="Use Coast Downshift"/>
-	<hidden field="Arcade Drive"/>
-	<hidden field="VisionGear"/>
-	<hidden field="Auton Blue Feeder"/>
-	<hidden field="ResetDataLogger"/>
-	<hidden field="DynamicExtraCheese"/>
-	<hidden field="Auton Blue Boiler"/>
-	<hidden field="Left Dynamic"/>
-	<hidden field="PauseCompressor"/>
-	<hidden field="DriveStraight"/>
-	<hidden field="Get Data Packet"/>
-	<hidden field="Rotate: SmallLeft"/>
-	<hidden field="DynamicCheese"/>
-	<hidden field="Auton Red Boiler"/>
-	<hidden field="Climb"/>
-	<hidden field="Sticktion Speed"/>
-	<hidden field="ManualShifter"/>
-	<hidden field="Rotate: left"/>
-	<hidden field="Retract Gear Collector"/>
-	<hidden field="WallFollow"/>
+	<widget field="TEST_FRONT_ULTRASONIC" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="522"/>
+	</widget>
+	<widget field="TEST_LEFT_MOTOR2" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="493"/>
+	</widget>
+	<widget field="TEST_LEFT_MOTOR1" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="464"/>
+	</widget>
+	<widget field="Climb Power" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="435"/>
+	</widget>
+	<widget field="FAULT_RIGHT_ENCODER_NOT_FOUND" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="406"/>
+	</widget>
+	<widget field="TEST_UPSHIFT" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="377"/>
+	</widget>
+	<widget field="FAULT_SLOW_LOOPER" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="348"/>
+	</widget>
+	<widget field="TESTS_ARE_DONE" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="319"/>
+	</widget>
+	<widget field="System Test Instruction" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="290"/>
+	</widget>
+	<widget field="Use Coast Downshift" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="261"/>
+	</widget>
+	<widget field="TEST_NAVX" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="232"/>
+	</widget>
+	<widget field="Use Crash Downshift" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="203"/>
+	</widget>
+	<widget field="FAULT_LEFT_ENCODER_NOT_FOUND" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="174"/>
+	</widget>
+	<widget field="TEST_LEFT_ENCODER" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="145"/>
+	</widget>
+	<widget field="TEST_RIGHT_MOTOR1" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="116"/>
+	</widget>
+	<widget field="TEST_RIGHT_MOTOR3" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="87"/>
+	</widget>
+	<widget field="TEST_RIGHT_MOTOR2" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="58"/>
+	</widget>
+	<widget field="TEST_COMPRESSOR" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="29"/>
+	</widget>
+	<widget field="TEST_GEAR_TRAY" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="0"/>
+	</widget>
 </dashboard>
 <live-window>
 </live-window>

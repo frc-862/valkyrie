@@ -37,6 +37,15 @@ public class VisionUpdate {
         }
     }
 
+    private static Optional<Long> parseLong(JSONObject j, String key) throws ClassCastException {
+        Object d = j.get(key);
+        if (d == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of((long) d);
+        }
+    }
+
     /**
      * Generates a VisionUpdate object given a JSON blob and a timestamp.
      * 
@@ -51,6 +60,7 @@ public class VisionUpdate {
     public static VisionUpdate generateFromJsonString(double current_time, String updateString) {
         VisionUpdate update = new VisionUpdate();
         try {
+            System.out.println("JSON: " + updateString);
             JSONObject j = (JSONObject) parser.parse(updateString);
             long capturedAgoMs = getOptLong(j.get("capturedAgoMs"), 0);
             if (capturedAgoMs == 0) {
@@ -65,11 +75,16 @@ public class VisionUpdate {
                 JSONObject target = (JSONObject) targetObj;
                 Optional<Double> y = parseDouble(target, "y");
                 Optional<Double> z = parseDouble(target, "z");
+                Optional<Double> lon = parseDouble(target, "longitudinal_distance");
+                Optional<Double> lat = parseDouble(target, "latitudinal_distance");
+                Optional<Double> theta = parseDouble(target, "theta");
+                Optional<Long> type = parseLong(target, "type");
+                
                 if (!(y.isPresent() && z.isPresent())) {
                     update.valid = false;
                     return update;
                 }
-                targetInfos.add(new TargetInfo(y.get(), z.get()));
+                targetInfos.add(new TargetInfo(y.get(), z.get(), lon.get(), lat.get(), theta.get(), type.get()));
             }
             update.targets = targetInfos;
             update.valid = true;

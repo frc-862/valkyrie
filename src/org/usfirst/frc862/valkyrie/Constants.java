@@ -25,12 +25,12 @@ public class Constants extends ConstantsBase {
     public static double LowVoltage = 9;
     public static double CrashDeacceleration = -12;
     public static double CoastTriggerTime = 0.1;
-    public static double CoastVelocity = 200;
-    public static double VelocityUpshiftTime = 0.02 * 3;
-    public static double MinRequestedPowerForUpshift = 0.75;
+    public static double CoastVelocity = 175;
+    public static double VelocityUpshiftTime = 0.002;
+    public static double MinRequestedPowerForUpshift = 0.70;
     public static double LVTriggerTime = 0.25;
     public static double MaxCoastPower = 0.35;
-    public static double MinUpshiftVelocity = 250;
+    public static double MinUpshiftVelocity = 225;
     public static double shiftHysteresis = 0.5;
     public static double shiftDelay = 0.25;
     public static double minimumShiftDelay = 0.75;
@@ -58,7 +58,9 @@ public class Constants extends ConstantsBase {
     
     //DriveTrain
 	public static double MinRotatePower = 20;
-    public static double driveTrainLoopRate = 0.1;
+    public static double fastLoopRate = 0.01;
+    public static double mediumLoopRate = 0.1;
+    public static double slowLoopRate = 0.5;
     public static double maxRampRate = 0.75;
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default
     public static double maxVelocityLow = 350;
@@ -90,7 +92,6 @@ public class Constants extends ConstantsBase {
 	
 	//Logging
     public static int logDepth = 1000;
-    public static double backgroundLoopRate = 0.5;
 
     
     //Mechanisms
@@ -151,6 +152,10 @@ public class Constants extends ConstantsBase {
     
     // Vision
     public static int kAndroidAppTcpPort = 8254;
+    public static double kMaxGoalTrackAge = 2;
+    public static double kMaxTrackerDistance = 10;
+    public static double kCameraFrameRate = 8;
+    public static double kCameraDeadband = 0;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

@@ -8,21 +8,45 @@ public class TargetInfo {
     protected double x = 1.0;
     protected double y;
     protected double z;
+    protected double lon;
+    protected double lat;
+    protected double theta;
+    protected long type;
 
-    public TargetInfo(double y, double z) {
+    public TargetInfo(double y, double z, double lon, double lat, double theta, Long type) {
         this.y = y;
         this.z = z;
+        this.lon = lon;
+        this.lat = lat;
+        this.theta = theta;
+        this.type = type;
     }
 
-    public double getX() {
+    private double getX() {
         return x;
     }
 
-    public double getY() {
+    private double getY() {
         return y;
     }
 
-    public double getZ() {
+    private double getZ() {
         return z;
+    }
+
+    public double getLongitudinalDistance() {
+        return lon;
+    }
+
+    public double getLatidunalDistance() {
+        return lat;
+    }
+
+    public double getTheta() {
+        return theta;
+    }
+
+    public long getType() {
+        return type;
     }
 }

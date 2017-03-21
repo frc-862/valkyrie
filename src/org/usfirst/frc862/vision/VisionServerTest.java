@@ -10,12 +10,13 @@ public class VisionServerTest {
             System.out.println("num targets: " + update.getTargets().size());
             for (int i = 0; i < update.getTargets().size(); i++) {
                 TargetInfo target = update.getTargets().get(i);
-                System.out.println("Target: " + target.getY() + ", " + target.getZ());
+                System.out.println("Target: " + target.getLongitudinalDistance() + ", " + target.getLatidunalDistance());
             }
         }
     }
 
     public static void main(String[] args) {
+        System.out.println("Vision Server Test started");
         VisionServer visionServer = VisionServer.getInstance();
         visionServer.addVisionUpdateReceiver(new TestReceiver());
         while (true) {

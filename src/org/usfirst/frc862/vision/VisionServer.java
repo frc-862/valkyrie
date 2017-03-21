@@ -141,9 +141,12 @@ public class VisionServer extends CrashTrackingRunnable {
         try {
             adb = new AdbBridge();
             m_port = port;
+            System.out.println("Try port " + port);
             m_server_socket = new ServerSocket(port);
             adb.start();
             adb.reversePortForward(port, port);
+            System.out.println("Try and start app");
+            adb.restartApp();
             try {
                 String useJavaTime = System.getenv("USE_JAVA_TIME");
                 m_use_java_time = "true".equals(useJavaTime);
@@ -153,7 +156,9 @@ public class VisionServer extends CrashTrackingRunnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Starting thread");
         new Thread(this).start();
+        System.out.println("Starting app thread");
         new Thread(new AppMaintainanceThread()).start();
     }
 
@@ -205,7 +210,8 @@ public class VisionServer extends CrashTrackingRunnable {
             while (true) {
                 if (getTimestamp() - lastMessageReceivedTime > .1) {
                     // camera disconnected
-                    adb.reversePortForward(m_port, m_port);
+                    // PTH restore, removed for testing
+                    // adb.reversePortForward(m_port, m_port);
                     mIsConnect = false;
                 } else {
                     mIsConnect = true;

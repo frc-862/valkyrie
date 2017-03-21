@@ -36,6 +36,10 @@ public class AdbBridge {
         try {
             Process p = r.exec(cmd);
             p.waitFor();
+//            System.out.println("Exit value: " + p.exitValue());
+//            byte[] b = new byte[1024];
+//            p.getInputStream().read(b);
+//            System.out.println("Output " + new String(b));
         } catch (IOException e) {
             System.err.println("AdbBridge: Could not run command " + cmd);
             e.printStackTrace();
@@ -49,17 +53,14 @@ public class AdbBridge {
     }
 
     public void start() {
-        System.out.println("Starting adb");
         runCommand("start");
     }
 
     public void stop() {
-        System.out.println("Stopping adb");
         runCommand("kill-server");
     }
 
     public void restartAdb() {
-        System.out.println("Restarting adb");
         stop();
         start();
     }
@@ -72,9 +73,16 @@ public class AdbBridge {
         runCommand("reverse tcp:" + remote_port + " tcp:" + local_port);
     }
 
+    public void startApp() {
+        runCommand("shell am start com.team254.cheezdroid/com.team254.cheezdroid.VisionTrackerActivity");        
+    }
+    
+    public void stopApp() {
+        runCommand("shell am force-stop com.team254.cheezdroid");
+    }
+    
     public void restartApp() {
-        System.out.println("Restarting app");
-        runCommand("shell am force-stop com.team254.cheezdroid \\; "
-                + "am start com.team254.cheezdroid/com.team254.cheezdroid.VisionTrackerActivity");
+        stopApp();
+        startApp();
     }
 }

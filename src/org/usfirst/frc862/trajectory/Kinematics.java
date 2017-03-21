@@ -40,21 +40,21 @@ public class Kinematics {
         return current_pose.transformBy(RigidTransform2d.fromVelocity(with_gyro));
     }
 
-//    public static class DriveVelocity {
-//        public final double left;
-//        public final double right;
-//
-//        public DriveVelocity(double left, double right) {
-//            this.left = left;
-//            this.right = right;
-//        }
-//    }
-//
-//    public static DriveVelocity inverseKinematics(RigidTransform2d.Delta velocity) {
-//        if (Math.abs(velocity.dtheta) < kEpsilon) {
-//            return new DriveVelocity(velocity.dx, velocity.dx);
-//        }
-//        double delta_v = Constants.kTrackEffectiveDiameter * velocity.dtheta / (2 * Constants.kTrackScrubFactor);
-//        return new DriveVelocity(velocity.dx - delta_v, velocity.dx + delta_v);
-//    }
+    public static class DriveVelocity {
+        public final double left;
+        public final double right;
+
+        public DriveVelocity(double left, double right) {
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public static DriveVelocity inverseKinematics(RigidTransform2d.Delta velocity) {
+        if (Math.abs(velocity.dtheta) < kEpsilon) {
+            return new DriveVelocity(velocity.dx, velocity.dx);
+        }
+        double delta_v = Constants.kTrackEffectiveDiameter * velocity.dtheta / (2 * Constants.kTrackScrubFactor);
+        return new DriveVelocity(velocity.dx - delta_v, velocity.dx + delta_v);
+    }
 }

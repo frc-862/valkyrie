@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.usfirst.frc862.trajectory.PegTracker.TrackReport;
 import org.usfirst.frc862.trajectory.RigidTransform2d.Delta;
+import org.usfirst.frc862.util.LightningMath;
 import org.usfirst.frc862.vision.TargetInfo;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -87,20 +88,19 @@ public class RobotState {
             Rotation2d initial_turret_rotation) {
         field_to_vehicle_ = new InterpolatingTreeMap<>(kObservationBufferSize);
         field_to_vehicle_.put(new InterpolatingDouble(start_time), initial_field_to_vehicle);
-//        vehicle_velocity_ = new RigidTransform2d.Delta(0, 0, 0);
-//        turret_rotation_ = new InterpolatingTreeMap<>(kObservationBufferSize);
-//        turret_rotation_.put(new InterpolatingDouble(start_time), initial_turret_rotation);
-//        goal_tracker_ = new GoalTracker();
+        vehicle_velocity_ = new RigidTransform2d.Delta(0, 0, 0);
         peg_tracker = new PegTracker();
         loading_station_tracker = new LoadingStationTracker();
+        
+        // camera is providing offset data, so we will not transform here
 //        camera_pitch_correction_ = Rotation2d.fromDegrees(-Constants.kCameraPitchAngleDegrees);
 //        camera_yaw_correction_ = Rotation2d.fromDegrees(-Constants.kCameraYawAngleDegrees);
 //        differential_height_ = Constants.kCenterOfTargetHeight - Constants.kCameraZOffset;
     }
 
-//    public synchronized RigidTransform2d getFieldToVehicle(double timestamp) {
-//        return field_to_vehicle_.getInterpolated(new InterpolatingDouble(timestamp));
-//    }
+    public synchronized RigidTransform2d getFieldToVehicle(double timestamp) {
+        return field_to_vehicle_.getInterpolated(new InterpolatingDouble(timestamp));
+    }
 
     public synchronized Map.Entry<InterpolatingDouble, RigidTransform2d> getLatestFieldToVehicle() {
         return field_to_vehicle_.lastEntry();
@@ -112,24 +112,9 @@ public class RobotState {
                         vehicle_velocity_.dy * lookahead_time, vehicle_velocity_.dtheta * lookahead_time)));
     }
 
-//    public synchronized Rotation2d getTurretRotation(double timestamp) {
-//        return turret_rotation_.getInterpolated(new InterpolatingDouble(timestamp));
-//    }
-//
-//    public synchronized Map.Entry<InterpolatingDouble, Rotation2d> getLatestTurretRotation() {
-//        return turret_rotation_.lastEntry();
-//    }
-//
-//    public synchronized RigidTransform2d getFieldToTurretRotated(double timestamp) {
-//        InterpolatingDouble key = new InterpolatingDouble(timestamp);
-//        return field_to_vehicle_.getInterpolated(key).transformBy(kVehicleToTurretFixed)
-//                .transformBy(RigidTransform2d.fromRotation(turret_rotation_.getInterpolated(key)));
-//    }
-
     public synchronized RigidTransform2d getFieldToCamera(double timestamp) {
-        // TODO PTH fix this -- camera does not move, so it should be a constant
-//        return getFieldToTurretRotated(timestamp).transformBy(kTurretRotatingToCamera);
-        return new RigidTransform2d();
+        // NOTE our camera is correcting for offset, so we will lie about this
+        return getFieldToVehicle(timestamp);
     }
 
     public synchronized List<RigidTransform2d> getCaptureTimeFieldToPeg() {
@@ -197,8 +182,8 @@ public class RobotState {
         if (!(vision_update == null || vision_update.isEmpty())) {
             for (TargetInfo target : vision_update) {
                 
-                Translation2d translation = new Translation2d(target.getLatidunalDistance(),
-                        target.getLongitudinalDistance());
+                Translation2d translation = new Translation2d(LightningMath.mm2ft(target.getLatidunalDistance()),
+                        LightningMath.mm2ft(target.getLongitudinalDistance()));
                 
                 if (target.getType() == 1) {
                     field_to_pegs.add(field_to_camera.transformBy(RigidTransform2d

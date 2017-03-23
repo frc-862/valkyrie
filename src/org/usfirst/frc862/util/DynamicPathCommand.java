@@ -116,7 +116,7 @@ public class DynamicPathCommand extends Command {
         //System.out.print(serialized);
         String fullpath = getFileName();
         if (!writeFile(fullpath, serialized)) {
-          Logger.debug(fullpath + " could not be written!!!!1");
+          Logger.debug(fullpath + " could not be written!!!!");
         } else {
           Logger.debug("Wrote " + fullpath);
         }    

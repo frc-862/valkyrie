@@ -157,6 +157,9 @@ public class Constants extends ConstantsBase {
     public static double kCameraFrameRate = 8;
     public static double kCameraDeadband = 0;
     
+    // Autoshut eject door
+    public static double notACrawl = 1.5;
+    
     public String getFileName() {
         return "~/valkyrie.yaml";
     }

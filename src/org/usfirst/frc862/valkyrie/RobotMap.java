@@ -58,7 +58,7 @@ public class RobotMap {
     public static DigitalInput winchClimbTouchpad;
     public static DoubleSolenoid shifterShifter;
     public static DoubleSolenoid gearCollectorcollector;
-    public static DoubleSolenoid gearCollectorgear_eject;
+    public static DoubleSolenoid gearCollectorGearEject;
     public static DynamicPathCommand autonBlueBoiler;
     public static DynamicPathCommand autonBlueFeeder;
     public static DynamicPathCommand autonRedBoiler;
@@ -128,8 +128,8 @@ public class RobotMap {
         gearCollectorcollector = new DoubleSolenoid(11, 4, 5);
         LiveWindow.addActuator("Gear Collector", "collector", gearCollectorcollector);
         
-        gearCollectorgear_eject = new DoubleSolenoid(11, 2, 3);
-        LiveWindow.addActuator("Gear Collector", "gear_eject", gearCollectorgear_eject);
+        gearCollectorGearEject = new DoubleSolenoid(11, 2, 3);
+        LiveWindow.addActuator("Gear Collector", "Gear Eject", gearCollectorGearEject);
         
         
         

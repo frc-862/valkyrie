@@ -48,9 +48,7 @@ public class PlaybackRecordedMotion extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.shifter.upShift();
-        path = new RecordedPath();
         drive = Robot.driveTrain;
-        drive.configure_test_mode();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -64,8 +62,6 @@ public class PlaybackRecordedMotion extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        // put things back to normal
-        drive.configure_follow_modes();
     }
 
     // Called when another command which requires one or more of the same

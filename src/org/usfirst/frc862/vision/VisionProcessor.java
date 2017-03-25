@@ -1,7 +1,10 @@
 package org.usfirst.frc862.vision;
 
 import org.usfirst.frc862.trajectory.RobotState;
+import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Loop;
+
+import edu.wpi.first.wpilibj.Utility;
 
 /**
  * This function adds vision updates (from the Nexus smartphone) to a list in
@@ -29,6 +32,13 @@ public class VisionProcessor implements Loop, VisionUpdateReceiver {
 
     @Override
     public void onLoop() {
+        if (Utility.getUserButton()) {
+            Logger.debug("Restart everything");
+//            VisionServer.getInstance().restartAdb();
+//            VisionServer.getInstance().restartApp();
+            VisionServer.getInstance().requestAppRestart();
+            Logger.flush();
+        }
         VisionUpdate update;
         synchronized (this) {
             if (update_ == null) {
@@ -36,6 +46,9 @@ public class VisionProcessor implements Loop, VisionUpdateReceiver {
             }
             update = update_;
             update_ = null;
+        }
+        for (TargetInfo target : update.targets) {
+            Logger.debug("vision update " + target.lat + "," + target.lon + " - " + target.theta);
         }
         robot_state_.addVisionUpdate(update.getCapturedAtTimestamp(), update.getTargets());
     }
@@ -47,6 +60,7 @@ public class VisionProcessor implements Loop, VisionUpdateReceiver {
 
     @Override
     public synchronized void gotUpdate(VisionUpdate update) {
+        Logger.debug("Vision gotUpdate!");
         update_ = update;
     }
 

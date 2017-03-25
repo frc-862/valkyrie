@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.usfirst.frc862.util.Logger;
+
 /**
  * AdbBridge interfaces to an Android Debug Bridge (adb) binary, which is needed
  * to communicate to Android devices over USB.
@@ -35,11 +37,16 @@ public class AdbBridge {
 
         try {
             Process p = r.exec(cmd);
+            Logger.debug("CMD: " + cmd);
+            
             p.waitFor();
-//            System.out.println("Exit value: " + p.exitValue());
-//            byte[] b = new byte[1024];
-//            p.getInputStream().read(b);
-//            System.out.println("Output " + new String(b));
+            Logger.debug("Return: " + p.exitValue());
+
+            byte[] b = new byte[2048];
+            p.getInputStream().read(b);
+            Logger.debug("Output " + new String(b));
+            
+            Logger.flush();
         } catch (IOException e) {
             System.err.println("AdbBridge: Could not run command " + cmd);
             e.printStackTrace();
@@ -53,15 +60,23 @@ public class AdbBridge {
     }
 
     public void start() {
-        runCommand("start");
+        Logger.debug("Start ADB");
+        runCommand("start-server");
     }
 
     public void stop() {
+        Logger.debug("Stop ADB");
         runCommand("kill-server");
     }
 
     public void restartAdb() {
         stop();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         start();
     }
 
@@ -74,10 +89,12 @@ public class AdbBridge {
     }
 
     public void startApp() {
+        Logger.debug("Starting android app");
         runCommand("shell am start com.team254.cheezdroid/com.team254.cheezdroid.VisionTrackerActivity");        
     }
     
     public void stopApp() {
+        Logger.debug("Stopping android app");
         runCommand("shell am force-stop com.team254.cheezdroid");
     }
     

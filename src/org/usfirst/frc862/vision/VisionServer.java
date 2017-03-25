@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import org.usfirst.frc862.util.CrashTrackingRunnable;
+import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.vision.messages.HeartbeatMessage;
 import org.usfirst.frc862.vision.messages.OffWireMessage;
@@ -99,6 +100,7 @@ public class VisionServer extends CrashTrackingRunnable {
         @Override
         public void runCrashTracked() {
             if (m_socket == null) {
+                Logger.debug("Socket is null");
                 return;
             }
             try {
@@ -108,6 +110,7 @@ public class VisionServer extends CrashTrackingRunnable {
                 while (m_socket.isConnected() && (read = is.read(buffer)) != -1) {
                     double timestamp = getTimestamp();
                     lastMessageReceivedTime = timestamp;
+                    Logger.debug("We have a message");
                     String messageRaw = new String(buffer, 0, read);
                     String[] messages = messageRaw.split("\n");
                     for (String message : messages) {
@@ -117,14 +120,16 @@ public class VisionServer extends CrashTrackingRunnable {
                         }
                     }
                 }
-                System.out.println("Socket disconnected");
+                Logger.debug("Socket is disconnected");
             } catch (IOException e) {
-                System.err.println("Could not talk to socket");
+                Logger.debug("Could not talk to socket");
             }
             if (m_socket != null) {
                 try {
+                    Logger.info("closing socket");
                     m_socket.close();
                 } catch (IOException e) {
+                    Logger.error("Socket Error: " + e);
                     e.printStackTrace();
                 }
             }
@@ -142,10 +147,11 @@ public class VisionServer extends CrashTrackingRunnable {
             adb = new AdbBridge();
             m_port = port;
             System.out.println("Try port " + port);
+            Logger.debug("Try port " + port);
             m_server_socket = new ServerSocket(port);
             adb.start();
             adb.reversePortForward(port, port);
-            System.out.println("Try and start app");
+            Logger.debug("Try and start app");
             adb.restartApp();
             try {
                 String useJavaTime = System.getenv("USE_JAVA_TIME");
@@ -154,19 +160,25 @@ public class VisionServer extends CrashTrackingRunnable {
                 m_use_java_time = false;
             }
         } catch (IOException e) {
+            Logger.error("Vision error: " + e);
             e.printStackTrace();
         }
-        System.out.println("Starting thread");
+        Logger.debug("Starting thread");
         new Thread(this).start();
-        System.out.println("Starting app thread");
+        Logger.debug("Starting app thread");
         new Thread(new AppMaintainanceThread()).start();
     }
 
     public void restartAdb() {
+        Logger.debug("restartAdb");
         adb.restartAdb();
         adb.reversePortForward(m_port, m_port);
     }
 
+    public void restartApp() {
+        adb.restartApp();
+    }
+    
     /**
      * If a VisionUpdate object (i.e. a target) is not in the list, add it.
      * 
@@ -208,11 +220,17 @@ public class VisionServer extends CrashTrackingRunnable {
         @Override
         public void runCrashTracked() {
             while (true) {
-                if (getTimestamp() - lastMessageReceivedTime > .1) {
+                if (getTimestamp() - lastMessageReceivedTime > 0.1) {
                     // camera disconnected
-                    // PTH restore, removed for testing
-                    // adb.reversePortForward(m_port, m_port);
+                    Logger.debug("reverse port from app thread " + Timer.getFPGATimestamp());
+//                    adb.reversePortForward(m_port, m_port);
+                    restartAdb();
                     mIsConnect = false;
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     mIsConnect = true;
                 }
@@ -235,5 +253,8 @@ public class VisionServer extends CrashTrackingRunnable {
         } else {
             return Timer.getFPGATimestamp();
         }
+    }
+
+    public void restartEverything() {
     }
 }

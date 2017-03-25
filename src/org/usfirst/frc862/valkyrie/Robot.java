@@ -1,6 +1,11 @@
 package org.usfirst.frc862.valkyrie;
 
+import java.util.List;
+
+import org.usfirst.frc862.trajectory.RigidTransform2d;
+import org.usfirst.frc862.trajectory.RobotState;
 import org.usfirst.frc862.trajectory.RobotStateEstimator;
+import org.usfirst.frc862.trajectory.Translation2d;
 import org.usfirst.frc862.util.CrashTracker;
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;
@@ -129,6 +134,7 @@ public class Robot extends IterativeRobot {
             slowLooper.register(Logger.getWriter());
             slowLooper.register(DataLogger.getLogger().getLogWriter());
             mediumLooper.register(DataLogger.getLogger());
+            mediumLooper.register(VisionProcessor.getInstance());
             fastLooper.register(RobotStateEstimator.getInstance());
 
             slowLooper.start();
@@ -191,7 +197,8 @@ public class Robot extends IterativeRobot {
             SmartDashboard.putNumber("Joy1", oi.driverLeft.getRawAxis(1));
             SmartDashboard.putNumber("Joy2", oi.driverRight.getRawAxis(1));
             SmartDashboard.putNumber("Joy2LR", oi.driverRight.getRawAxis(0));
-            // Scheduler.getInstance().run();
+            Scheduler.getInstance().run();
+            
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
             throw t;
@@ -252,11 +259,23 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+        Logger.debug("teleopPeriodic");
         try {
             if (Utility.getUserButton()) {
                 Logger.debug("Pressed!");
             }
             Scheduler.getInstance().run();
+            
+            RobotState rs = RobotStateEstimator.getInstance().getState();
+            List<RigidTransform2d> pegs = rs.getCaptureTimeFieldToPeg();
+            if (pegs.size() > 0) {
+               Translation2d trans = pegs.get(0).getTranslation();
+               SmartDashboard.putNumber("Vision X", trans.getX());
+               SmartDashboard.putNumber("Vision Y", trans.getY());
+            } else {
+                SmartDashboard.putNumber("Vision X", 862);
+                SmartDashboard.putNumber("Vision Y", 862);
+            }
             SmartDashboard.putNumber("Left Pos", RobotMap.driveTrainLeftMotor1.getPosition());
             SmartDashboard.putNumber("Right Pos", RobotMap.driveTrainRightMotor1.getPosition());
             SmartDashboard.putNumber("Left Vel", RobotMap.driveTrainLeftMotor1.getSpeed());
@@ -276,7 +295,8 @@ public class Robot extends IterativeRobot {
             SmartDashboard.putBoolean("Gear", Robot.core.gearPresent());
             
             //SmartDashboard.putNumber("Beam", Robot.core);
-//            
+            Logger.flush();
+
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
             throw t;

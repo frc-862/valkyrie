@@ -184,7 +184,9 @@ public class RobotState {
                 
                 Translation2d translation = new Translation2d(LightningMath.mm2ft(target.getLatidunalDistance()),
                         LightningMath.mm2ft(target.getLongitudinalDistance()));
-                
+
+                SmartDashboard.putString("Vision ", "type " + target.getType() + " - " +
+                target.getLatidunalDistance() + "," + target.getLongitudinalDistance());
                 if (target.getType() == 1) {
                     field_to_pegs.add(field_to_camera.transformBy(RigidTransform2d
                                     .fromTranslation(translation))

@@ -1,5 +1,6 @@
 package org.usfirst.frc862.trajectory;
 
+import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Loop;
 import org.usfirst.frc862.valkyrie.Robot;
 import edu.wpi.first.wpilibj.Timer;
@@ -7,12 +8,16 @@ import edu.wpi.first.wpilibj.Timer;
 public class RobotStateEstimator implements Loop {
     private static RobotStateEstimator instance = new RobotStateEstimator();
     
-    RobotState state;
+    RobotState state = new RobotState();
     double left_encoder_prev_distance = 0;
     double right_encoder_prev_distance = 0;    
 
 	public RobotStateEstimator() {
     }
+	
+	public RobotState getState() {
+	    return state;
+	}
 
     public static RobotStateEstimator getInstance() {
         return instance ;
@@ -42,8 +47,7 @@ public class RobotStateEstimator implements Loop {
 
     @Override
     public void onStop() {
-        // TODO Auto-generated method stub
-        
+        // TODO Auto-generated method stub        
     }
 
     

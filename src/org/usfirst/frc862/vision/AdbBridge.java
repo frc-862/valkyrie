@@ -37,46 +37,47 @@ public class AdbBridge {
 
         try {
             Process p = r.exec(cmd);
-            Logger.debug("CMD: " + cmd);
+            Logger.debug("Cmd: " + cmd);
             
             p.waitFor();
             Logger.debug("Return: " + p.exitValue());
-
+            
             byte[] b = new byte[2048];
             p.getInputStream().read(b);
             Logger.debug("Output " + new String(b));
             
-            Logger.flush();
+//            byte[] c = new byte[2048];
+//            p.getErrorStream().read(b);
+//            Logger.debug("Error " + new String(c));
+            
+            Logger.flush();            
         } catch (IOException e) {
-            System.err.println("AdbBridge: Could not run command " + cmd);
-            e.printStackTrace();
+            Logger.error("AdbBridge: Could not run command " + cmd);
+            Logger.error(e.toString());
             return false;
         } catch (InterruptedException e) {
-            System.err.println("AdbBridge: Could not run command " + cmd);
-            e.printStackTrace();
+            Logger.error("AdbBridge: Could not run command " + cmd);
+            Logger.error(e.toString());
             return false;
         }
         return true;
     }
 
     public void start() {
-        Logger.debug("Start ADB");
-        runCommand("start-server");
+        Logger.debug("Starting adb");
+//        runCommand("start-server");
+        runCommand("usb");
+        runCommand("devices");
     }
 
     public void stop() {
-        Logger.debug("Stop ADB");
+        Logger.debug("Stopping adb");
         runCommand("kill-server");
     }
 
     public void restartAdb() {
+        Logger.debug("Restarting adb");
         stop();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         start();
     }
 
@@ -88,18 +89,9 @@ public class AdbBridge {
         runCommand("reverse tcp:" + remote_port + " tcp:" + local_port);
     }
 
-    public void startApp() {
-        Logger.debug("Starting android app");
-        runCommand("shell am start com.team254.cheezdroid/com.team254.cheezdroid.VisionTrackerActivity");        
-    }
-    
-    public void stopApp() {
-        Logger.debug("Stopping android app");
-        runCommand("shell am force-stop com.team254.cheezdroid");
-    }
-    
     public void restartApp() {
-        stopApp();
-        startApp();
+        Logger.debug("Restarting app");
+        runCommand("shell am force-stop com.team254.cheezdroid");
+        runCommand("am start com.team254.cheezdroid/com.team254.cheezdroid.VisionTrackerActivity");
     }
 }

@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.usfirst.frc862.util.Logger;
 
 /**
  * VisionUpdate contains the various attributes outputted by the vision system,
@@ -60,7 +61,7 @@ public class VisionUpdate {
     public static VisionUpdate generateFromJsonString(double current_time, String updateString) {
         VisionUpdate update = new VisionUpdate();
         try {
-            System.out.println("JSON: " + updateString);
+            Logger.debug("JSON: " + updateString);
             JSONObject j = (JSONObject) parser.parse(updateString);
             long capturedAgoMs = getOptLong(j.get("capturedAgoMs"), 0);
             if (capturedAgoMs == 0) {
@@ -84,16 +85,24 @@ public class VisionUpdate {
                     update.valid = false;
                     return update;
                 }
-                targetInfos.add(new TargetInfo(y.get(), z.get(), lon.get(), lat.get(), theta.get(), type.get()));
+                Logger.debug("Adding TargetInfo");
+                targetInfos.add(new TargetInfo(
+                        y.orElse(0.0),
+                        z.orElse(0.0), 
+                        lon.orElse(0.0), 
+                        lat.orElse(0.0), 
+                        theta.orElse(0.0), 
+                        type.orElse((long) 0)));
+                Logger.debug("Added TargetInfo");
             }
             update.targets = targetInfos;
             update.valid = true;
         } catch (ParseException e) {
-            System.err.println("Parse error: " + e);
-            System.err.println(updateString);
+            Logger.error("Parse error: " + e);
+            Logger.error(updateString);
         } catch (ClassCastException e) {
-            System.err.println("Data type error: " + e);
-            System.err.println(updateString);
+            Logger.error("Data type error: " + e);
+            Logger.error(updateString);
         }
         return update;
     }

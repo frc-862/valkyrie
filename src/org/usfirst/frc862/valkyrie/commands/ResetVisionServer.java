@@ -37,8 +37,8 @@ public class ResetVisionServer extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        VisionServer.getInstance().restartApp();
-        VisionServer.getInstance().restartAdb();
+//        VisionServer.getInstance().restartAdb();
+        VisionServer.getInstance().requestAppRestart();
     }
 
     // Called repeatedly when this Command is scheduled to run

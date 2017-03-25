@@ -74,6 +74,7 @@ public class Shifter extends Subsystem {
             gear_state = 2;
             lastShift = Timer.getFPGATimestamp();
             Robot.driveTrain.configureHighGear();
+            Robot.core.orangeAndBlueLED();
         }
     }
 

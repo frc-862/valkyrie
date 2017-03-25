@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -165,5 +166,31 @@ public class Core extends Subsystem implements Loop {
     public void turnOffLED() {
         lEDRing.set(false);
     }
-
+    
+    public SerialPort blingPort = new SerialPort(9600, SerialPort.Port.kMXP);
+    
+    public void sendLEDMessage(String msg)
+    {
+    	blingPort.writeString(msg);
+    }
+    
+    public void rainbowLED()
+    {
+    	sendLEDMessage("r");
+    }
+    
+    public void purpleLED()
+    {
+    	sendLEDMessage("p");
+    }
+    
+    public void greenLED()
+    {
+    	sendLEDMessage("g");
+    }
+    
+    public void orangeAndBlueLED()
+    {
+    	sendLEDMessage("OandB");
+    }
 }

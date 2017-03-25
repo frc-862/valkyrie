@@ -11,6 +11,7 @@
 
 package org.usfirst.frc862.valkyrie.subsystems;
 
+import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -56,6 +57,7 @@ public class Winch extends Subsystem {
     public void climb(double power) {
         winchMotor1.set(power);
         winchMotor2.set(power);
+        Robot.core.rainbowLED();
     }
     
     public boolean isCompressed() {

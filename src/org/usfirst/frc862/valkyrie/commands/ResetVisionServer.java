@@ -11,6 +11,8 @@
 
 package org.usfirst.frc862.valkyrie.commands;
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.vision.VisionServer;
 
@@ -38,7 +40,9 @@ public class ResetVisionServer extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 //        VisionServer.getInstance().restartAdb();
+        Logger.debug("Restart vision app");
         VisionServer.getInstance().requestAppRestart();
+        Logger.flush();
     }
 
     // Called repeatedly when this Command is scheduled to run

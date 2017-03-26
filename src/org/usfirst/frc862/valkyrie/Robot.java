@@ -259,10 +259,10 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        Logger.debug("teleopPeriodic");
         try {
             if (Utility.getUserButton()) {
                 Logger.debug("Pressed!");
+                VisionServer.getInstance().requestAppRestart();
             }
             Scheduler.getInstance().run();
             

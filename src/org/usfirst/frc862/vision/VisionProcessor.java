@@ -32,13 +32,6 @@ public class VisionProcessor implements Loop, VisionUpdateReceiver {
 
     @Override
     public void onLoop() {
-        if (Utility.getUserButton()) {
-            Logger.debug("Restart everything");
-//            VisionServer.getInstance().restartAdb();
-//            VisionServer.getInstance().restartApp();
-            VisionServer.getInstance().requestAppRestart();
-            Logger.flush();
-        }
         VisionUpdate update;
         synchronized (this) {
             if (update_ == null) {

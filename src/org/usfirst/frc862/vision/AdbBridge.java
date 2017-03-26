@@ -92,6 +92,6 @@ public class AdbBridge {
     public void restartApp() {
         Logger.debug("Restarting app");
         runCommand("shell am force-stop com.team254.cheezdroid");
-        runCommand("am start com.team254.cheezdroid/com.team254.cheezdroid.VisionTrackerActivity");
+        runCommand("shell am start com.team254.cheezdroid/com.team254.cheezdroid.VisionTrackerActivity");
     }
 }

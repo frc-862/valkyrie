@@ -12,14 +12,16 @@ public class TargetInfo {
     protected double lat;
     protected double theta;
     protected long type;
+    protected double at;
 
-    public TargetInfo(double y, double z, double lon, double lat, double theta, Long type) {
+    public TargetInfo(double y, double z, double lon, double lat, double theta, Long type, double at) {
         this.y = y;
         this.z = z;
         this.lon = lon;
         this.lat = lat;
         this.theta = theta;
         this.type = type;
+        this.at = at;
     }
 
     public double getX() {
@@ -48,5 +50,9 @@ public class TargetInfo {
 
     public long getType() {
         return type;
+    }
+
+    public double getCaptureTime() {
+        return at;
     }
 }

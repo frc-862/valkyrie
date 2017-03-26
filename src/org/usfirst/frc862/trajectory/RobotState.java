@@ -60,9 +60,14 @@ public class RobotState {
         return instance_;
     }
 
+    public TargetInfo currentVisionTarget;
     public static final int kObservationBufferSize = 100;
     public static final double kMaxTargetAge = 0.4;
 
+    public TargetInfo getCurrentVisionTarget() {
+        return currentVisionTarget;
+    }
+    
 //    public static final RigidTransform2d kVehicleToTurretFixed = new RigidTransform2d(
 //            new Translation2d(Constants.kTurretXOffset, Constants.kTurretYOffset),
 //            Rotation2d.fromDegrees(Constants.kTurretAngleOffsetDegrees));
@@ -82,11 +87,10 @@ public class RobotState {
 //    protected double differential_height_;
 
     protected RobotState() {
-        reset(0, new RigidTransform2d(), new Rotation2d());
+        reset(0, new RigidTransform2d());
     }
 
-    public synchronized void reset(double start_time, RigidTransform2d initial_field_to_vehicle,
-            Rotation2d initial_turret_rotation) {
+    public synchronized void reset(double start_time, RigidTransform2d initial_field_to_vehicle) {
         field_to_vehicle_ = new InterpolatingTreeMap<>(kObservationBufferSize);
         field_to_vehicle_.put(new InterpolatingDouble(start_time), initial_field_to_vehicle);
         vehicle_velocity_ = new RigidTransform2d.Delta(0, 0, 0);
@@ -180,16 +184,25 @@ public class RobotState {
         List<Translation2d> field_to_pegs = new ArrayList<>();
         List<Translation2d> field_to_loading_station = new ArrayList<>();
         RigidTransform2d field_to_camera = getFieldToCamera(timestamp);
+        boolean reset_vision_target = true;
         if (!(vision_update == null || vision_update.isEmpty())) {
             for (TargetInfo target : vision_update) {
-                
                 Translation2d translation = new Translation2d(LightningMath.mm2ft(target.getLatidunalDistance()),
                         LightningMath.mm2ft(target.getLongitudinalDistance()));
+                
+//                RigidTransform2d transform = field_to_camera.transformBy(
+//                        new RigidTransform2d(translation, 
+//                                Rotation2d.fromDegrees(target.getTheta())));
 
                 SmartDashboard.putString("Vision ", "type " + target.getType() + " - " +
                 target.getLatidunalDistance() + "," + target.getLongitudinalDistance() + " :: " +
                         target.getTheta() + " :: " + target.getX() + "," + target.getY() + "," + target.getZ());
                 if (target.getType() == 2) {
+                    if (reset_vision_target) {
+                        currentVisionTarget = target;
+                        reset_vision_target = false;
+                    }
+                    
                     field_to_pegs.add(field_to_camera.transformBy(RigidTransform2d
                                     .fromTranslation(translation))
                             .getTranslation());

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.usfirst.frc862.trajectory.PegTracker.TrackReport;
 import org.usfirst.frc862.trajectory.RigidTransform2d.Delta;
 import org.usfirst.frc862.util.LightningMath;
+import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.vision.TargetInfo;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -186,8 +187,9 @@ public class RobotState {
                         LightningMath.mm2ft(target.getLongitudinalDistance()));
 
                 SmartDashboard.putString("Vision ", "type " + target.getType() + " - " +
-                target.getLatidunalDistance() + "," + target.getLongitudinalDistance());
-                if (target.getType() == 1) {
+                target.getLatidunalDistance() + "," + target.getLongitudinalDistance() + " :: " +
+                        target.getTheta() + " :: " + target.getX() + "," + target.getY() + "," + target.getZ());
+                if (target.getType() == 2) {
                     field_to_pegs.add(field_to_camera.transformBy(RigidTransform2d
                                     .fromTranslation(translation))
                             .getTranslation());

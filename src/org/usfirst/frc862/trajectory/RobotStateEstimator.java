@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class RobotStateEstimator implements Loop {
     private static RobotStateEstimator instance = new RobotStateEstimator();
     
-    RobotState state = new RobotState();
+    RobotState state = RobotState.getInstance();
     double left_encoder_prev_distance = 0;
     double right_encoder_prev_distance = 0;    
 

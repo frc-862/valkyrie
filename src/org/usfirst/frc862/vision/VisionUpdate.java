@@ -61,7 +61,7 @@ public class VisionUpdate {
     public static VisionUpdate generateFromJsonString(double current_time, String updateString) {
         VisionUpdate update = new VisionUpdate();
         try {
-            Logger.debug("JSON: " + updateString);
+            // Logger.debug("JSON: " + updateString);
             JSONObject j = (JSONObject) parser.parse(updateString);
             long capturedAgoMs = getOptLong(j.get("capturedAgoMs"), 0);
             if (capturedAgoMs == 0) {
@@ -85,7 +85,7 @@ public class VisionUpdate {
                     update.valid = false;
                     return update;
                 }
-                Logger.debug("Adding TargetInfo");
+//                Logger.debug("Adding TargetInfo");
                 targetInfos.add(new TargetInfo(
                         y.orElse(0.0),
                         z.orElse(0.0), 
@@ -93,7 +93,7 @@ public class VisionUpdate {
                         lat.orElse(0.0), 
                         theta.orElse(0.0), 
                         type.orElse((long) 0)));
-                Logger.debug("Added TargetInfo");
+//                Logger.debug("Added TargetInfo");
             }
             update.targets = targetInfos;
             update.valid = true;

@@ -203,16 +203,16 @@ public class VisionServer extends CrashTrackingRunnable {
         @Override
         public void runCrashTracked() {
             while (true) {
-                if (getTimestamp() - lastMessageReceivedTime > 0.1) {
+                if (getTimestamp() - lastMessageReceivedTime > 0.5) {
                     // camera disconnected
-//                    adb.reversePortForward(m_port, m_port);
+                    adb.reversePortForward(m_port, m_port);
 //                    adb.restartAdb();
-                    try {
-                        Thread.sleep(2500);
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        Thread.sleep(2500);
+//                    } catch (InterruptedException e) {
+//                        // TODO Auto-generated catch block
+//                        e.printStackTrace();
+//                    }
                     mIsConnect = false;
                 } else {
                     mIsConnect = true;

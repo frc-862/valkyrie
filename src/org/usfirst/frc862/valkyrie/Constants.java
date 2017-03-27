@@ -74,7 +74,7 @@ public class Constants extends ConstantsBase {
     public static double velocityFeedForwardRHigh = 0.523617647;
     public static double velocityFeedForwardLHigh = 0.452647059;
 	public static double MotorOffTime = 1.0;
-    public static double rotateEpsilon = 1.5;
+    public static double rotateEpsilon = 1.0;
     public static double straightCommandDelta = 0.19;
     public static double straightenPGain = 1 / 90.0;
     public static double MinCommandedPower = 0.05;
@@ -159,6 +159,8 @@ public class Constants extends ConstantsBase {
     
     // Autoshut eject door
     public static double notACrawl = 1.5;
+    public static double backupPower = LightningMath.fps2rpm(-2.5);
+    public static double backupDuration = 1.0;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

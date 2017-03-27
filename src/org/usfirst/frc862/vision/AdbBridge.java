@@ -37,20 +37,20 @@ public class AdbBridge {
 
         try {
             Process p = r.exec(cmd);
-            Logger.debug("Cmd: " + cmd);
+//            Logger.debug("Cmd: " + cmd);
             
             p.waitFor();
-            Logger.debug("Return: " + p.exitValue());
+//            Logger.debug("Return: " + p.exitValue());
             
-            byte[] b = new byte[2048];
-            p.getInputStream().read(b);
-            Logger.debug("Output " + new String(b));
+//            byte[] b = new byte[2048];
+//            p.getInputStream().read(b);
+//            Logger.debug("Output " + new String(b));
             
 //            byte[] c = new byte[2048];
 //            p.getErrorStream().read(b);
 //            Logger.debug("Error " + new String(c));
             
-            Logger.flush();            
+//            Logger.flush();            
         } catch (IOException e) {
             Logger.error("AdbBridge: Could not run command " + cmd);
             Logger.error(e.toString());

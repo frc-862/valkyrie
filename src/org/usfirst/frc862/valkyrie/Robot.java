@@ -272,7 +272,7 @@ public class Robot extends IterativeRobot {
             TargetInfo target = RobotState.getInstance().getCurrentVisionTarget();
             if (target != null) {
                SmartDashboard.putNumber("Vision X", target.getLatidunalDistance());
-               SmartDashboard.putNumber("Vision Y", target.getLatidunalDistance());
+               SmartDashboard.putNumber("Vision Y", target.getLongitudinalDistance());
                SmartDashboard.putNumber("Vision Theta: ", target.getTheta());
                SmartDashboard.putString("Vision coord", target.getX() + "," + target.getY() + "," + target.getZ());
             }

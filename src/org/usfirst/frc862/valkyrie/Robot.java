@@ -147,13 +147,7 @@ public class Robot extends IterativeRobot {
             autonChooser.addObject("Red Feeder", new AutonRedFeeder());
             autonChooser.addObject("Straight", new AutonStraight());            
             SmartDashboard.putData("Auton Mode", autonChooser);
-            
-            SmartDashboard.putNumber("Climb Power", 1.0);
-            
-            SmartDashboard.putBoolean("Use Crash Downshift", true);
-            SmartDashboard.putBoolean("Use Coast Downshift", true);
-            SmartDashboard.putBoolean("Use Velocity Upshift", true);
-            
+                        
             FaultCode.update();
             SystemTest.update();
             
@@ -192,9 +186,6 @@ public class Robot extends IterativeRobot {
     public void disabledPeriodic() {
         try {
             SmartDashboard.putNumber("Heading", Robot.driveTrain.getGyroAngle());
-            SmartDashboard.putNumber("Joy1", oi.driverLeft.getRawAxis(1));
-            SmartDashboard.putNumber("Joy2", oi.driverRight.getRawAxis(1));
-            SmartDashboard.putNumber("Joy2LR", oi.driverRight.getRawAxis(0));
             Scheduler.getInstance().run();
             
         } catch (Throwable t) {
@@ -268,8 +259,8 @@ public class Robot extends IterativeRobot {
             
             TargetInfo target = RobotState.getInstance().getCurrentVisionTarget();
             if (target != null) {
-               SmartDashboard.putNumber("Vision X", target.getLatidunalDistance());
-               SmartDashboard.putNumber("Vision Y", target.getLongitudinalDistance());
+               SmartDashboard.putNumber("Vision Lat", target.getLatidunalDistance());
+               SmartDashboard.putNumber("Vision Long", target.getLongitudinalDistance());
                SmartDashboard.putNumber("Vision Theta: ", target.getTheta());
                SmartDashboard.putString("Vision coord", target.getX() + "," + target.getY() + "," + target.getZ());
             }
@@ -279,20 +270,11 @@ public class Robot extends IterativeRobot {
             SmartDashboard.putNumber("Left Vel", RobotMap.driveTrainLeftMotor1.getSpeed());
             SmartDashboard.putNumber("Right Vel", RobotMap.driveTrainRightMotor1.getSpeed());
             SmartDashboard.putNumber("Total Power", RobotMap.corePowerPanel.getTotalCurrent());
-            SmartDashboard.putNumber("Voltage", RobotMap.corePowerPanel.getVoltage());
             
             
-            SmartDashboard.putNumber("Average Velocity", Robot.driveTrain.getAverageVelocity());
-            SmartDashboard.putNumber("Requested Power", Robot.driveTrain.getRequestedPower());
-
             SmartDashboard.putNumber("Heading", Robot.driveTrain.getGyroAngle());
-            SmartDashboard.putNumber("Ultra1", Robot.core.getUltrasonic(Ultrasonic.Front));
-            SmartDashboard.putNumber("Ultra2", Robot.core.getUltrasonic(Ultrasonic.Left));
-            SmartDashboard.putNumber("Ultra3", Robot.core.getUltrasonic(Ultrasonic.Right));
-            SmartDashboard.putNumber("Ultra4", Robot.core.getUltrasonic(Ultrasonic.Back));
             SmartDashboard.putBoolean("Gear", Robot.core.gearPresent());
             
-            //SmartDashboard.putNumber("Beam", Robot.core);
             Logger.flush();
 
         } catch (Throwable t) {

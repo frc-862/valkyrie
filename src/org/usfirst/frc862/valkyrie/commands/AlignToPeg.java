@@ -24,7 +24,6 @@ import com.team254.lib.util.ChezyMath;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -95,10 +94,7 @@ public class AlignToPeg extends Command {
             if(Math.abs(power) < Constants.MinRotatePower){
                 power = Constants.MinRotatePower * ((power > 0) ? 1 : -1);
             }
-            SmartDashboard.putNumber("Rotate Power", power);
             Robot.driveTrain.set(power, -power);
-            SmartDashboard.putNumber("Error", error);
-            SmartDashboard.putNumber("Power", power);
             
             if (Math.abs(error) < Constants.rotateEpsilon) {
                 state = State.WAIT_FOR_VISION;

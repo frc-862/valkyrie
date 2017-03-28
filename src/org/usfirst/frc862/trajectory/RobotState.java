@@ -194,11 +194,11 @@ public class RobotState {
 //                        new RigidTransform2d(translation, 
 //                                Rotation2d.fromDegrees(target.getTheta())));
 
-                SmartDashboard.putString("Vision ", "type " + target.getType() + " - " +
-                target.getLatidunalDistance() + "," + target.getLongitudinalDistance() + " :: " +
-                        target.getTheta() + " :: " + target.getX() + "," + target.getY() + "," + target.getZ());
                 if (target.getType() == 2) {
                     if (reset_vision_target) {
+                        SmartDashboard.putString("Vision ", "type " + target.getType() + " - " +
+                                target.getLatidunalDistance() + "," + target.getLongitudinalDistance() + " :: " +
+                                        target.getTheta() + " :: " + target.getX() + "," + target.getY() + "," + target.getZ());
                         currentVisionTarget = target;
                         reset_vision_target = false;
                     }

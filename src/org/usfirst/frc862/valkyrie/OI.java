@@ -20,7 +20,6 @@ import org.usfirst.frc862.valkyrie.commands.CalibratedClimb;
 import org.usfirst.frc862.valkyrie.commands.Climb;
 import org.usfirst.frc862.valkyrie.commands.ClimbOverride;
 import org.usfirst.frc862.valkyrie.commands.DriveStaightDistance;
-import org.usfirst.frc862.valkyrie.commands.DriveStraight;
 import org.usfirst.frc862.valkyrie.commands.ExtendGearCollector;
 import org.usfirst.frc862.valkyrie.commands.FullRedBoilerAuton;
 import org.usfirst.frc862.valkyrie.commands.ManualShifter;
@@ -134,11 +133,6 @@ public class OI {
         // SmartDashboard Buttons
         SmartDashboard.putData("AutonRedBoiler", new AutonRedBoiler());
         SmartDashboard.putData("Climb", new Climb());
-        SmartDashboard.putData("Rotate: left", new Rotate(-90));
-        SmartDashboard.putData("Rotate: right", new Rotate(90));
-        SmartDashboard.putData("Rotate: reverse", new Rotate(180));
-        SmartDashboard.putData("Rotate: SmallLeft", new Rotate(-30));
-        SmartDashboard.putData("DriveStraight", new DriveStraight());
         SmartDashboard.putData("Arcade Drive", new ArcadeDrive());
         SmartDashboard.putData("VisionFeedStation", new VisionFeedStation());
         SmartDashboard.putData("VisionGear", new VisionGear());

@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.usfirst.frc862.trajectory.PegTracker.TrackReport;
-import org.usfirst.frc862.trajectory.RigidTransform2d.Delta;
 import org.usfirst.frc862.util.LightningMath;
-import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.vision.TargetInfo;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

@@ -10,9 +10,6 @@
 
 
 package org.usfirst.frc862.valkyrie.commands;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -22,10 +19,13 @@ import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.RecordedPath;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
-import com.team254.lib.trajectory.Path;
 
+import com.team254.lib.trajectory.Path;
 import com.team254.lib.trajectory.Trajectory;
 import com.team254.lib.trajectory.io.TextFileSerializer;
+
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

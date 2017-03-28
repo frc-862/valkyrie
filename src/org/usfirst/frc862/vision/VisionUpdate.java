@@ -10,8 +10,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.usfirst.frc862.util.Logger;
 
-import edu.wpi.first.wpilibj.Timer;
-
 /**
  * VisionUpdate contains the various attributes outputted by the vision system,
  * namely a list of targets and the timestamp at which it was captured.

@@ -1,6 +1,5 @@
 package org.usfirst.frc862.trajectory;
 
-import org.usfirst.frc862.trajectory.RigidTransform2d.Delta;
 import org.usfirst.frc862.valkyrie.Constants;
 
 /**

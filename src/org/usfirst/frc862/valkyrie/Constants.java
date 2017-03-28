@@ -74,7 +74,7 @@ public class Constants extends ConstantsBase {
     public static double velocityFeedForwardRHigh = 0.523617647;
     public static double velocityFeedForwardLHigh = 0.452647059;
 	public static double MotorOffTime = 1.0;
-    public static double rotateEpsilon = 1.0;
+    public static double rotateEpsilon = 2.0;
     public static double straightCommandDelta = 0.19;
     public static double straightenPGain = 1 / 90.0;
     public static double MinCommandedPower = 0.05;
@@ -106,9 +106,9 @@ public class Constants extends ConstantsBase {
     public static double pathA = 0; //pathV / 2;
     public static double pathTurn = -3.0 / 80;  // borrowed from Poofs :)
     public static double Path_dt = 0.02;
-    public static double Path_max_acc = 8/3;
-    public static double Path_max_jerk = 25;
-    public static double Path_max_vel = 3.5;
+    public static double Path_max_acc = 8/2;
+    public static double Path_max_jerk = 45;
+    public static double Path_max_vel = 5.5;
     //public static InterpolatedMap lookupTable = new InterpolatedMap(new Double[]{1.0,2.1,3.2,4.3}); //interpolation example
 
     
@@ -161,6 +161,7 @@ public class Constants extends ConstantsBase {
     public static double notACrawl = 1.5;
     public static double backupPower = LightningMath.fps2rpm(-2.5);
     public static double backupDuration = 1.0;
+    public static double autonSpeed = 2.5;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

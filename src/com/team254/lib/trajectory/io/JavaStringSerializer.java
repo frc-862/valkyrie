@@ -1,7 +1,8 @@
 package com.team254.lib.trajectory.io;
 
-import com.team254.lib.trajectory.Path;
 import java.util.StringTokenizer;
+
+import com.team254.lib.trajectory.Path;
 
 /**
  * Save to a Java class with a static string, because J2ME has problems with

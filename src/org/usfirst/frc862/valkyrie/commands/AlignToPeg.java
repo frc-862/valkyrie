@@ -11,10 +11,6 @@
 
 
 package org.usfirst.frc862.valkyrie.commands;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc862.trajectory.RobotState;
 import org.usfirst.frc862.util.LightningMath;
 import org.usfirst.frc862.util.Logger;
@@ -25,6 +21,10 @@ import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 import org.usfirst.frc862.vision.TargetInfo;
 
 import com.team254.lib.util.ChezyMath;
+
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *

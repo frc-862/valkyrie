@@ -3,6 +3,7 @@ package org.usfirst.frc862.util;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.Timer;
 
 public class DataLogger implements Loop {

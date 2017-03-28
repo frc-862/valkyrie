@@ -10,10 +10,10 @@
 
 package org.usfirst.frc862.valkyrie.commands;
 
+import org.usfirst.frc862.valkyrie.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc862.valkyrie.Robot;
 
 /**
  *

@@ -10,9 +10,6 @@
 
 
 package org.usfirst.frc862.valkyrie.commands;
-import edu.wpi.first.wpilibj.Notifier;
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc862.util.CommandLogger;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
@@ -20,11 +17,14 @@ import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
 
 import com.team254.lib.trajectory.PathGenerator;
 import com.team254.lib.trajectory.Trajectory;
+import com.team254.lib.trajectory.Trajectory.Pair;
+import com.team254.lib.trajectory.TrajectoryFollower;
 import com.team254.lib.trajectory.TrajectoryGenerator;
 import com.team254.lib.trajectory.WaypointSequence;
 import com.team254.lib.util.ChezyMath;
-import com.team254.lib.trajectory.Trajectory.Pair;
-import com.team254.lib.trajectory.TrajectoryFollower;
+
+import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

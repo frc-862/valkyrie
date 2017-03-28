@@ -1,5 +1,6 @@
 package org.usfirst.frc862.vision;
 
+import org.usfirst.frc862.trajectory.PegTracker;
 import org.usfirst.frc862.trajectory.RobotState;
 import org.usfirst.frc862.util.Loop;
 

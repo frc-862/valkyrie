@@ -22,7 +22,6 @@ import org.usfirst.frc862.valkyrie.subsystems.DriveTrain.Modes;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc862.valkyrie.Robot;
 
 /**
  *

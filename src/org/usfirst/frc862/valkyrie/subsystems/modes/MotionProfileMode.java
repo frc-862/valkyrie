@@ -4,8 +4,10 @@ import org.usfirst.frc862.util.FaultCode;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
+
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.MotionProfileStatus;
+
 import edu.wpi.first.wpilibj.Notifier;
 
 public class MotionProfileMode extends SubsystemMode implements Runnable {

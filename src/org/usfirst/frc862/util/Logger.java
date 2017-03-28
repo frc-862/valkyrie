@@ -1,6 +1,7 @@
 package org.usfirst.frc862.util;
 
 import java.io.File;
+
 import org.usfirst.frc862.valkyrie.Constants;
 
 public class Logger {

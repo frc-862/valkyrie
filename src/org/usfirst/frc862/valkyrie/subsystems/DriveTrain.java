@@ -1,5 +1,7 @@
 package org.usfirst.frc862.valkyrie.subsystems;
 
+import static org.usfirst.frc862.util.LightningMath.limit;
+
 import java.util.function.Consumer;
 
 import org.usfirst.frc862.util.DataLogger;
@@ -26,15 +28,9 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.MotionProfileStatus;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.hal.HAL;
-import edu.wpi.first.wpilibj.hal.FRCNetComm.tInstances;
-import edu.wpi.first.wpilibj.hal.FRCNetComm.tResourceType;
-import static org.usfirst.frc862.util.LightningMath.*;
 
 /**
  *

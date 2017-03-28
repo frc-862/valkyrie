@@ -10,10 +10,12 @@
 
 
 package org.usfirst.frc862.valkyrie.commands;
-import edu.wpi.first.wpilibj.command.Command;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+
 import org.usfirst.frc862.util.Logger;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

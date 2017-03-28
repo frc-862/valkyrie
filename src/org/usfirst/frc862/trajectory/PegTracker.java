@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.valkyrie.Constants;
 
 /**

@@ -1,9 +1,9 @@
 package org.usfirst.frc862.util;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.buttons.Trigger;
-
-import java.util.function.BooleanSupplier;
 
 /**
  * Created by phurley on 12/7/16.

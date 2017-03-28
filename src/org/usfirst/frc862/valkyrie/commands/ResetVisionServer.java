@@ -10,11 +10,10 @@
 
 
 package org.usfirst.frc862.valkyrie.commands;
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc862.util.Logger;
-import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.vision.VisionServer;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

@@ -1,8 +1,8 @@
 package org.usfirst.frc862.trajectory;
 
-import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Loop;
 import org.usfirst.frc862.valkyrie.Robot;
+
 import edu.wpi.first.wpilibj.Timer;
 
 public class RobotStateEstimator implements Loop {

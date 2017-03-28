@@ -2,6 +2,7 @@ package org.usfirst.frc862.valkyrie.subsystems.modes;
 
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
+
 import com.ctre.CANTalon;
 
 public class BrakeMode extends SubsystemMode {

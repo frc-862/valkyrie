@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.HashSet;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class FaultCode {

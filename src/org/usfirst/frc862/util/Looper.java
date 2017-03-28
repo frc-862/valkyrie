@@ -2,6 +2,7 @@ package org.usfirst.frc862.util;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

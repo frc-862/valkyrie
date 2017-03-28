@@ -10,13 +10,11 @@
 
 
 package org.usfirst.frc862.valkyrie.commands;
-import edu.wpi.first.wpilibj.command.Command;
-
-import java.util.Vector;
-
 import org.usfirst.frc862.util.RecordedPath;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

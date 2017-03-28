@@ -13,7 +13,8 @@ package org.usfirst.frc862.valkyrie.subsystems;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
-import org.usfirst.frc862.valkyrie.commands.*;
+import org.usfirst.frc862.valkyrie.commands.Autoshifter;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Timer;

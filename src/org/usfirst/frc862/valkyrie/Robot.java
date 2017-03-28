@@ -1,11 +1,7 @@
 package org.usfirst.frc862.valkyrie;
 
-import java.util.List;
-
-import org.usfirst.frc862.trajectory.RigidTransform2d;
 import org.usfirst.frc862.trajectory.RobotState;
 import org.usfirst.frc862.trajectory.RobotStateEstimator;
-import org.usfirst.frc862.trajectory.Translation2d;
 import org.usfirst.frc862.util.CrashTracker;
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;

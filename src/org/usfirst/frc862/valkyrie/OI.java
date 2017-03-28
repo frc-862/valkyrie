@@ -29,7 +29,6 @@ import org.usfirst.frc862.valkyrie.commands.ResetADB;
 import org.usfirst.frc862.valkyrie.commands.ResetNavX;
 import org.usfirst.frc862.valkyrie.commands.ResetVisionServer;
 import org.usfirst.frc862.valkyrie.commands.RetractGearCollector;
-import org.usfirst.frc862.valkyrie.commands.Rotate;
 import org.usfirst.frc862.valkyrie.commands.SystemTest;
 import org.usfirst.frc862.valkyrie.commands.ToggleGearEject;
 import org.usfirst.frc862.valkyrie.commands.TurnOnLEDRing;

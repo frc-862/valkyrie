@@ -1,0 +1,3 @@
+!DistinctValidator
+  name: LightningDriveValidator
+  fields: ["Left Motor 1", "Left Motor 2", "Right Motor 1", "Right Motor 2"]

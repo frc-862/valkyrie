@@ -6,8 +6,6 @@ import org.usfirst.frc862.util.ConstantsBase;
 import org.usfirst.frc862.util.LightningMath;
 
 public class Constants extends ConstantsBase {
-	
-    
     // Note this is final, it will not be
     // in the config file, and if you put
     // it there, the value will be ignored
@@ -44,18 +42,15 @@ public class Constants extends ConstantsBase {
     public static double autoshightStraightenPeriod = 0.2;
     public static double ArcadeAngleP = 0.6;
     public static double autoshiftEpsilon = 1;
-
     
     //Robot Physical Specs
     public static double wheelBase = 22.0 / 12.0;  // in feet
     public static double WheelDiameter = 4.0 / 12.0;  // in feet
     public static double WheelCircumference = WheelDiameter * Math.PI;  // in feet
     
-    
     //Joystick
     public static double deadband = 0.09;
 
-    
     //DriveTrain
 	public static double MinRotatePower = 25;
     public static double fastLoopRate = 0.01;
@@ -162,6 +157,12 @@ public class Constants extends ConstantsBase {
     public static double backupPower = LightningMath.fps2rpm(-2.5);
     public static double backupDuration = 1.0;
     public static double autonSpeed = 2.5;
+    
+    // Magic Motion Configs
+    public static double magicVelocity = maxVelocityLow;
+    public static double magicAcceleration = maxVelocityLow / 1.5;
+    // 1/4 inch
+    public static double distanceEpsilon = (1.0 / 12.0) / 4.0;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

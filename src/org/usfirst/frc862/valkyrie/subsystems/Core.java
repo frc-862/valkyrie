@@ -10,6 +10,8 @@
 
 package org.usfirst.frc862.valkyrie.subsystems;
 
+import java.nio.ByteBuffer;
+
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.Loop;
 import org.usfirst.frc862.valkyrie.Constants;
@@ -167,28 +169,29 @@ public class Core extends Subsystem implements Loop {
     
     public SerialPort blingPort = new SerialPort(9600, SerialPort.Port.kMXP);
     
-    public void sendLEDMessage(String msg)
+    public void sendLEDMessage(int msg)
     {
-    	blingPort.writeString(msg);
+    	blingPort.write(ByteBuffer.allocate(4).putInt(msg).array(), 4);
+    	blingPort.flush();
     }
     
     public void rainbowLED()
     {
-    	sendLEDMessage("r");
+    	sendLEDMessage(1);
     }
     
     public void purpleLED()
     {
-    	sendLEDMessage("p");
+    	sendLEDMessage(2);
     }
     
     public void greenLED()
     {
-    	sendLEDMessage("g");
+    	sendLEDMessage(3);
     }
     
     public void orangeAndBlueLED()
     {
-    	sendLEDMessage("OandB");
+    	sendLEDMessage(4);
     }
 }

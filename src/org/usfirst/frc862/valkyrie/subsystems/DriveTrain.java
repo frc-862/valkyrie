@@ -18,6 +18,7 @@ import org.usfirst.frc862.valkyrie.commands.TeleopVelocityDrive;
 import org.usfirst.frc862.valkyrie.subsystems.modes.BrakeMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.EncoderMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.HeadingMode;
+import org.usfirst.frc862.valkyrie.subsystems.modes.MotionMagicMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.MotionProfileMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.OpenLoopMode;
 import org.usfirst.frc862.valkyrie.subsystems.modes.SubsystemMode;
@@ -39,7 +40,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveTrain extends Subsystem implements Loop {
 
     public enum Modes {
-        OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE, ENCODER, TEST
+        OPEN_LOOP, VELOCITY, BRAKE, HEADING, MOTION_PROFILE, 
+        ENCODER, MOTION_MAGIC, TEST
     }    
 
     private final Object modeRunningLock = new Object();
@@ -48,6 +50,7 @@ public class DriveTrain extends Subsystem implements Loop {
     VelocityMode velocityMode;
     BrakeMode brakeMode;
     HeadingMode headingMode;
+    MotionMagicMode motionMagicMode;
     public MotionProfileMode motionProfileMode;
     SubsystemMode currentMode;
 
@@ -165,6 +168,7 @@ public class DriveTrain extends Subsystem implements Loop {
         velocityMode = new VelocityMode();
         brakeMode = new BrakeMode();
         headingMode = new HeadingMode();
+        motionMagicMode = new MotionMagicMode();
         motionProfileMode = new MotionProfileMode();
         encoderMode = new EncoderMode();
         testMode = new TestMode();
@@ -240,6 +244,10 @@ public class DriveTrain extends Subsystem implements Loop {
 
             case MOTION_PROFILE:
                 currentMode = motionProfileMode;
+                break;
+                
+            case MOTION_MAGIC:
+                currentMode = motionMagicMode;
                 break;
 
             case TEST:

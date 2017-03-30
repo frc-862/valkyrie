@@ -113,6 +113,8 @@ public class AlignToPeg extends Command {
             break;
             
         case CALC_THETA:
+            int iteration = 0;
+            iteration = 1 + iteration ;
             distance = Math.sqrt(x*x+y*y);
             Logger.debug("x,y: " + x + "," + y);
             double theta = Math.toDegrees(Math.atan2(y, x));
@@ -120,7 +122,7 @@ public class AlignToPeg extends Command {
             setDesiredChange(theta);
             Logger.debug("  we have vision: " + m_degrees + " // " + error);
             
-            if (Math.abs(theta) < Constants.rotateEpsilon) 
+            if (Math.abs(theta) < (Constants.rotateEpsilon * 1) || (iteration >= 2) ) 
                 state = State.DONE;
             else
                 state = State.ROTATE;

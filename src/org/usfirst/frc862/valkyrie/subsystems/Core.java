@@ -169,29 +169,29 @@ public class Core extends Subsystem implements Loop {
     
     public SerialPort blingPort = new SerialPort(9600, SerialPort.Port.kMXP);
     
-    public void sendLEDMessage(int msg)
+    public void setLEDMode(byte mode)
     {
-    	blingPort.write(ByteBuffer.allocate(4).putInt(msg).array(), 4);
+    	blingPort.write(new byte[]{mode}, 1);
     	blingPort.flush();
     }
     
     public void rainbowLED()
     {
-    	sendLEDMessage(1);
+    	setLEDMode((byte)1);
     }
     
     public void purpleLED()
     {
-    	sendLEDMessage(2);
+    	setLEDMode((byte)2);
     }
     
     public void greenLED()
     {
-    	sendLEDMessage(3);
+    	setLEDMode((byte)3);
     }
     
     public void orangeAndBlueLED()
     {
-    	sendLEDMessage(4);
+    	setLEDMode((byte)4);
     }
 }

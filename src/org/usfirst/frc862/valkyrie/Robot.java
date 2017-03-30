@@ -5,6 +5,7 @@ import org.usfirst.frc862.trajectory.RobotStateEstimator;
 import org.usfirst.frc862.util.CrashTracker;
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;
+import org.usfirst.frc862.util.LightningMath;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Looper;
 import org.usfirst.frc862.valkyrie.commands.AutonBlueBoiler;
@@ -262,6 +263,16 @@ public class Robot extends IterativeRobot {
                SmartDashboard.putNumber("Vision Lat", target.getLatidunalDistance());
                SmartDashboard.putNumber("Vision Long", target.getLongitudinalDistance());
                SmartDashboard.putNumber("Vision Theta: ", target.getTheta());
+               double fudge = 40;
+               double lat = target.getLatidunalDistance();
+               double lon = target.getLongitudinalDistance();
+               if (Math.abs(lon) < 0.000001) {
+                   lon = 0.0001;
+               }
+               lat -= fudge;
+               double theta = Math.asin(lat / lon);
+               SmartDashboard.putNumber("Vision Theta2: ", Math.toDegrees(theta));
+               SmartDashboard.putNumber("Vision Theta3: ", Math.toDegrees(Math.atan2(lat, lon)));
                SmartDashboard.putString("Vision coord", target.getX() + "," + target.getY() + "," + target.getZ());
             }
             

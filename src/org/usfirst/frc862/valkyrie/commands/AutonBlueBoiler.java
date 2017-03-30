@@ -37,13 +37,6 @@ public class AutonBlueBoiler extends DynamicPathCommand {
         testing = false;
         reverse = false;
         addWaypoint(0,0,0);
-        addWaypoint(8.45,-8.5,-70);
+        addWaypoint(7,-4.1,-70);
     }
-
-    @Override
-    protected void end() {
-        Robot.gearCollector.extend();
-        super.end();
-    }
-
 }

@@ -153,6 +153,7 @@ public class DynamicPathCommand extends Command {
     
     @Override
     protected void initialize() {
+        Robot.core.rainbowLED();
         Logger.debug("DynamicPathCommand init " + Timer.getFPGATimestamp());
         
         Robot.driveTrain.setMode(Modes.VELOCITY);
@@ -225,6 +226,7 @@ public class DynamicPathCommand extends Command {
 
     @Override
     protected void end() {
+        Robot.core.orangeAndBlueLED();
         notifier.stop();
         logger.drain();
         logger.flush();

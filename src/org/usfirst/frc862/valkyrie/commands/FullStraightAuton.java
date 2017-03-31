@@ -47,6 +47,7 @@ public class FullStraightAuton extends CommandGroup {
         addSequential(new AutonStraight());
         addSequential(new AlignToAirShip());
         addSequential(new DriveDistance());
+        addParallel(new TurnOffLEDRing());
         addSequential(new ToggleGearEject());
         addSequential(new ToggleGearEject());
 

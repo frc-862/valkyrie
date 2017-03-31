@@ -23,7 +23,6 @@ import org.usfirst.frc862.valkyrie.commands.Autoshifter;
 import org.usfirst.frc862.valkyrie.commands.CalibratedClimb;
 import org.usfirst.frc862.valkyrie.commands.Climb;
 import org.usfirst.frc862.valkyrie.commands.ClimbOverride;
-import org.usfirst.frc862.valkyrie.commands.CommandGroup1;
 import org.usfirst.frc862.valkyrie.commands.DriveStaightDistance;
 import org.usfirst.frc862.valkyrie.commands.ExtendGearCollector;
 import org.usfirst.frc862.valkyrie.commands.FullBlueBoilerAuton;

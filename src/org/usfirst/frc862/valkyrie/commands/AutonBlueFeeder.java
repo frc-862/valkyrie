@@ -40,10 +40,4 @@ public class AutonBlueFeeder extends DynamicPathCommand {
         addWaypoint(8.3 - 1.6, 6.8 - 2.9, 70);
     }
 
-    @Override
-    protected void end() {
-        Robot.gearCollector.extend();
-        super.end();
-    }
-
 }

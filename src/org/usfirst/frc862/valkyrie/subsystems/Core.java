@@ -189,4 +189,12 @@ public class Core extends Subsystem implements Loop {
     {
         sendLEDMessage(4);
     }
+
+    public void blueLED() {
+        sendLEDMessage(7);
+    }
+
+    public void orangeLED() {
+        sendLEDMessage(6);
+    }
 }

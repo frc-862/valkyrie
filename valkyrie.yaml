@@ -380,6 +380,22 @@ Children:
         value: []
     Base: Subsystem
     Name: GearDetector
+  - Children: []
+    Properties:
+      Default command parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Default command parameters
+        validators: null
+        value: []
+      Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Default Command, type: Command, validators: null, value: VisionMonitor}
+      Constants: !!robotbuilder.data.properties.ConstantsProperty
+        default: []
+        name: Constants
+        validators: null
+        value: []
+    Base: Subsystem
+    Name: Vision
   Properties: {}
   Base: Subsystems
   Name: Subsystems
@@ -2765,6 +2781,24 @@ Children:
     Properties: *id089
     Base: Command
     Name: Turn Off LED Ring
+  - Children: []
+    Properties:
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value: []
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: Vision}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id103 []
+        name: Parameter presets
+        validators: null
+        value: *id103
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: false}
+    Base: Command
+    Name: VisionMonitor
   Properties: {}
   Base: Commands
   Name: Commands

@@ -587,6 +587,35 @@ Children:
           value: whenPressed
       Base: Joystick Button
       Name: GearEjectButton
+    - Children: []
+      Properties:
+        Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
+          name: Joystick, validators: null, value: DriverRight}
+        Parameters: !!robotbuilder.data.properties.ParametersProperty
+          default: []
+          name: Parameters
+          validators: null
+          value: []
+        Button: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id018
+          default: '1'
+          name: Button
+          validators: null
+          value: '2'
+        Command: !!robotbuilder.data.properties.TypeSelectionProperty
+          default: None
+          name: Command
+          type: Command
+          validators: *id019
+          value: AlignToAirShip
+        When to Run: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id020
+          default: whileHeld
+          name: When to Run
+          validators: null
+          value: whileHeld
+      Base: Joystick Button
+      Name: Vision Deliver
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
         choices: *id021
@@ -814,7 +843,7 @@ Children:
   Name: Operator Interface
 - Children:
   - Children: []
-    Properties: &id063
+    Properties: &id062
       Parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
         name: Parameters
@@ -832,7 +861,7 @@ Children:
     Base: DynamicPathCommand
     Name: AutonBlueBoiler
   - Children: []
-    Properties: &id074
+    Properties: &id076
       Parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
         name: Parameters
@@ -868,7 +897,7 @@ Children:
     Base: DynamicPathCommand
     Name: AutonRedBoiler
   - Children: []
-    Properties: &id084
+    Properties: &id091
       Parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
         name: Parameters
@@ -886,7 +915,7 @@ Children:
     Base: DynamicPathCommand
     Name: AutonRedFeeder
   - Children: []
-    Properties: &id097
+    Properties: &id103
       Parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
         name: Parameters
@@ -1752,7 +1781,7 @@ Children:
         validators: *id032
         value:
         - !!robotbuilder.data.CommandGroupEntry
-          command: &id059
+          command: &id089
             base: &id034
               help: A command specifies an action that the robot can perform.
               name: Command
@@ -1798,7 +1827,7 @@ Children:
             value: []
           previous: null
         - !!robotbuilder.data.CommandGroupEntry
-          command: &id060
+          command: &id087
             base: *id034
             name: Retract Gear Collector
             properties: *id035
@@ -1811,7 +1840,7 @@ Children:
             value: []
           previous: null
         - &id039 !!robotbuilder.data.CommandGroupEntry
-          command: &id061
+          command: &id088
             base: *id034
             name: TurnOnLEDRing
             properties: *id036
@@ -1825,7 +1854,7 @@ Children:
           previous: null
         - &id041 !!robotbuilder.data.CommandGroupEntry
           command:
-            base: &id062
+            base: &id090
               help: A command that will always finished, by a specified time
               name: DynamicPathCommand
               properties:
@@ -1856,7 +1885,7 @@ Children:
             value: []
           previous: *id039
         - &id043 !!robotbuilder.data.CommandGroupEntry
-          command: &id065
+          command: &id093
             base:
               help: A command that has an integrated statemachine
               name: StatefulCommand
@@ -1902,7 +1931,7 @@ Children:
             value: []
           previous: *id041
         - &id044 !!robotbuilder.data.CommandGroupEntry
-          command: &id067
+          command: &id095
             base: *id034
             name: DriveDistance
             properties: *id042
@@ -1915,10 +1944,10 @@ Children:
             value: []
           previous: *id043
         - !!robotbuilder.data.CommandGroupEntry
-          command: &id069
+          command:
             base: *id034
             name: Turn Off LED Ring
-            properties: &id089
+            properties: &id067
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -1955,7 +1984,7 @@ Children:
             value: []
           previous: *id044
         - &id048 !!robotbuilder.data.CommandGroupEntry
-          command: &id071
+          command: &id098
             base: *id034
             name: AlignToAbsoluteHeading
             properties: &id050
@@ -2008,7 +2037,7 @@ Children:
     Base: Command
     Name: AlignToAbsoluteHeading
   - Children: []
-    Properties: &id095
+    Properties: &id101
       Parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
         name: Parameters
@@ -2191,7 +2220,29 @@ Children:
         validators: *id032
         value:
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id059
+          command: &id074
+            base: &id060
+              help: A command specifies an action that the robot can perform.
+              name: Command
+              properties:
+              - !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+                name: Requires, type: Subsystem, validators: null, value: None}
+              - !!robotbuilder.data.properties.BooleanProperty {default: true, name: Button on SmartDashboard,
+                validators: null, value: true}
+              - !!robotbuilder.data.properties.ParametersProperty
+                default: []
+                name: Parameters
+                validators: null
+                value: []
+              - !!robotbuilder.data.properties.ParameterSetProperty
+                default: &id059 []
+                name: Parameter presets
+                validators: null
+                value: *id059
+              supports: {}
+              type: Command
+            name: ResetHeading
+            properties: *id049
           hasMatch: true
           order: Parallel
           parameters:
@@ -2201,7 +2252,10 @@ Children:
             value: []
           previous: null
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id060
+          command: &id072
+            base: *id060
+            name: Retract Gear Collector
+            properties: *id035
           hasMatch: true
           order: Parallel
           parameters:
@@ -2210,8 +2264,11 @@ Children:
             validators: null
             value: []
           previous: null
-        - &id064 !!robotbuilder.data.CommandGroupEntry
-          command: *id061
+        - &id063 !!robotbuilder.data.CommandGroupEntry
+          command: &id073
+            base: *id060
+            name: TurnOnLEDRing
+            properties: *id036
           hasMatch: true
           order: Sequential
           parameters:
@@ -2220,11 +2277,30 @@ Children:
             validators: null
             value: []
           previous: null
-        - &id066 !!robotbuilder.data.CommandGroupEntry
+        - &id065 !!robotbuilder.data.CommandGroupEntry
           command:
-            base: *id062
+            base: &id075
+              help: A command that will always finished, by a specified time
+              name: DynamicPathCommand
+              properties:
+              - !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+                name: Requires, type: Subsystem, validators: null, value: None}
+              - !!robotbuilder.data.properties.BooleanProperty {default: true, name: Button on SmartDashboard,
+                validators: null, value: true}
+              - !!robotbuilder.data.properties.ParametersProperty
+                default: []
+                name: Parameters
+                validators: null
+                value: []
+              - !!robotbuilder.data.properties.ParameterSetProperty
+                default: &id061 []
+                name: Parameter presets
+                validators: null
+                value: *id061
+              supports: {}
+              type: Command
             name: AutonBlueBoiler
-            properties: *id063
+            properties: *id062
           hasMatch: true
           order: Sequential
           parameters:
@@ -2232,9 +2308,44 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id064
+          previous: *id063
+        - &id066 !!robotbuilder.data.CommandGroupEntry
+          command: &id078
+            base:
+              help: A command that has an integrated statemachine
+              name: StatefulCommand
+              properties:
+              - !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+                name: Requires, type: Subsystem, validators: null, value: None}
+              - !!robotbuilder.data.properties.BooleanProperty {default: true, name: Button on SmartDashboard,
+                validators: null, value: true}
+              - !!robotbuilder.data.properties.ParametersProperty
+                default: []
+                name: Parameters
+                validators: null
+                value: []
+              - !!robotbuilder.data.properties.ParameterSetProperty
+                default: &id064 []
+                name: Parameter presets
+                validators: null
+                value: *id064
+              supports: {}
+              type: Command
+            name: AlignToAirShip
+            properties: *id051
+          hasMatch: true
+          order: Sequential
+          parameters:
+            default: []
+            name: ParametersProperty
+            validators: null
+            value: []
+          previous: *id065
         - &id068 !!robotbuilder.data.CommandGroupEntry
-          command: *id065
+          command: &id080
+            base: *id060
+            name: DriveDistance
+            properties: *id042
           hasMatch: true
           order: Sequential
           parameters:
@@ -2243,8 +2354,24 @@ Children:
             validators: null
             value: []
           previous: *id066
-        - &id070 !!robotbuilder.data.CommandGroupEntry
-          command: *id067
+        - !!robotbuilder.data.CommandGroupEntry
+          command: &id082
+            base: *id060
+            name: Turn Off LED Ring
+            properties: *id067
+          hasMatch: true
+          order: Parallel
+          parameters:
+            default: []
+            name: ParametersProperty
+            validators: null
+            value: []
+          previous: *id068
+        - &id069 !!robotbuilder.data.CommandGroupEntry
+          command: &id070
+            base: *id060
+            name: ToggleGearEject
+            properties: *id045
           hasMatch: true
           order: Sequential
           parameters:
@@ -2253,28 +2380,11 @@ Children:
             validators: null
             value: []
           previous: *id068
-        - !!robotbuilder.data.CommandGroupEntry
-          command: *id069
-          hasMatch: true
-          order: Parallel
-          parameters:
-            default: []
-            name: ParametersProperty
-            validators: null
-            value: []
-          previous: *id070
-        - &id072 !!robotbuilder.data.CommandGroupEntry
-          command: *id047
-          hasMatch: true
-          order: Sequential
-          parameters:
-            default: []
-            name: ParametersProperty
-            validators: null
-            value: []
-          previous: *id070
-        - &id073 !!robotbuilder.data.CommandGroupEntry
-          command: *id071
+        - &id071 !!robotbuilder.data.CommandGroupEntry
+          command: &id084
+            base: *id060
+            name: AlignToAbsoluteHeading
+            properties: *id050
           hasMatch: true
           order: Sequential
           parameters:
@@ -2284,9 +2394,9 @@ Children:
             value:
             - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: heading,
               type: double, value: '0'}
-          previous: *id072
+          previous: *id069
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id047
+          command: *id070
           hasMatch: true
           order: Sequential
           parameters:
@@ -2294,7 +2404,7 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id073
+          previous: *id071
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
@@ -2317,7 +2427,7 @@ Children:
         validators: *id032
         value:
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id060
+          command: *id072
           hasMatch: true
           order: Parallel
           parameters:
@@ -2327,7 +2437,7 @@ Children:
             value: []
           previous: null
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id061
+          command: *id073
           hasMatch: true
           order: Parallel
           parameters:
@@ -2336,8 +2446,8 @@ Children:
             validators: null
             value: []
           previous: null
-        - &id075 !!robotbuilder.data.CommandGroupEntry
-          command: *id059
+        - &id077 !!robotbuilder.data.CommandGroupEntry
+          command: *id074
           hasMatch: true
           order: Sequential
           parameters:
@@ -2346,31 +2456,11 @@ Children:
             validators: null
             value: []
           previous: null
-        - &id076 !!robotbuilder.data.CommandGroupEntry
+        - &id079 !!robotbuilder.data.CommandGroupEntry
           command:
-            base: *id062
+            base: *id075
             name: AutonBlueFeeder
-            properties: *id074
-          hasMatch: true
-          order: Sequential
-          parameters:
-            default: []
-            name: ParametersProperty
-            validators: null
-            value: []
-          previous: *id075
-        - &id077 !!robotbuilder.data.CommandGroupEntry
-          command: *id065
-          hasMatch: true
-          order: Sequential
-          parameters:
-            default: []
-            name: ParametersProperty
-            validators: null
-            value: []
-          previous: *id076
-        - &id078 !!robotbuilder.data.CommandGroupEntry
-          command: *id067
+            properties: *id076
           hasMatch: true
           order: Sequential
           parameters:
@@ -2379,18 +2469,8 @@ Children:
             validators: null
             value: []
           previous: *id077
-        - !!robotbuilder.data.CommandGroupEntry
-          command: *id069
-          hasMatch: true
-          order: Parallel
-          parameters:
-            default: []
-            name: ParametersProperty
-            validators: null
-            value: []
-          previous: *id078
-        - &id079 !!robotbuilder.data.CommandGroupEntry
-          command: *id047
+        - &id081 !!robotbuilder.data.CommandGroupEntry
+          command: *id078
           hasMatch: true
           order: Sequential
           parameters:
@@ -2398,9 +2478,39 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id078
-        - &id080 !!robotbuilder.data.CommandGroupEntry
-          command: *id071
+          previous: *id079
+        - &id083 !!robotbuilder.data.CommandGroupEntry
+          command: *id080
+          hasMatch: true
+          order: Sequential
+          parameters:
+            default: []
+            name: ParametersProperty
+            validators: null
+            value: []
+          previous: *id081
+        - !!robotbuilder.data.CommandGroupEntry
+          command: *id082
+          hasMatch: true
+          order: Parallel
+          parameters:
+            default: []
+            name: ParametersProperty
+            validators: null
+            value: []
+          previous: *id083
+        - &id085 !!robotbuilder.data.CommandGroupEntry
+          command: *id070
+          hasMatch: true
+          order: Sequential
+          parameters:
+            default: []
+            name: ParametersProperty
+            validators: null
+            value: []
+          previous: *id083
+        - &id086 !!robotbuilder.data.CommandGroupEntry
+          command: *id084
           hasMatch: true
           order: Sequential
           parameters:
@@ -2410,9 +2520,9 @@ Children:
             value:
             - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: heading,
               type: double, value: '0'}
-          previous: *id079
+          previous: *id085
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id047
+          command: *id070
           hasMatch: true
           order: Sequential
           parameters:
@@ -2420,7 +2530,7 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id080
+          previous: *id086
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
@@ -2443,29 +2553,7 @@ Children:
         validators: *id032
         value:
         - !!robotbuilder.data.CommandGroupEntry
-          command:
-            base: &id082
-              help: A command specifies an action that the robot can perform.
-              name: Command
-              properties:
-              - !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-                name: Requires, type: Subsystem, validators: null, value: None}
-              - !!robotbuilder.data.properties.BooleanProperty {default: true, name: Button on SmartDashboard,
-                validators: null, value: true}
-              - !!robotbuilder.data.properties.ParametersProperty
-                default: []
-                name: Parameters
-                validators: null
-                value: []
-              - !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id081 []
-                name: Parameter presets
-                validators: null
-                value: *id081
-              supports: {}
-              type: Command
-            name: Retract Gear Collector
-            properties: *id035
+          command: *id087
           hasMatch: true
           order: Parallel
           parameters:
@@ -2475,10 +2563,7 @@ Children:
             value: []
           previous: null
         - !!robotbuilder.data.CommandGroupEntry
-          command:
-            base: *id082
-            name: TurnOnLEDRing
-            properties: *id036
+          command: *id088
           hasMatch: true
           order: Parallel
           parameters:
@@ -2487,11 +2572,8 @@ Children:
             validators: null
             value: []
           previous: null
-        - &id085 !!robotbuilder.data.CommandGroupEntry
-          command:
-            base: *id082
-            name: ResetHeading
-            properties: *id049
+        - &id092 !!robotbuilder.data.CommandGroupEntry
+          command: *id089
           hasMatch: true
           order: Sequential
           parameters:
@@ -2500,30 +2582,11 @@ Children:
             validators: null
             value: []
           previous: null
-        - &id087 !!robotbuilder.data.CommandGroupEntry
+        - &id094 !!robotbuilder.data.CommandGroupEntry
           command:
-            base: &id094
-              help: A command that will always finished, by a specified time
-              name: DynamicPathCommand
-              properties:
-              - !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-                name: Requires, type: Subsystem, validators: null, value: None}
-              - !!robotbuilder.data.properties.BooleanProperty {default: true, name: Button on SmartDashboard,
-                validators: null, value: true}
-              - !!robotbuilder.data.properties.ParametersProperty
-                default: []
-                name: Parameters
-                validators: null
-                value: []
-              - !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id083 []
-                name: Parameter presets
-                validators: null
-                value: *id083
-              supports: {}
-              type: Command
+            base: *id090
             name: AutonRedFeeder
-            properties: *id084
+            properties: *id091
           hasMatch: true
           order: Sequential
           parameters:
@@ -2531,31 +2594,9 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id085
-        - &id088 !!robotbuilder.data.CommandGroupEntry
-          command:
-            base:
-              help: A command that has an integrated statemachine
-              name: StatefulCommand
-              properties:
-              - !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-                name: Requires, type: Subsystem, validators: null, value: None}
-              - !!robotbuilder.data.properties.BooleanProperty {default: true, name: Button on SmartDashboard,
-                validators: null, value: true}
-              - !!robotbuilder.data.properties.ParametersProperty
-                default: []
-                name: Parameters
-                validators: null
-                value: []
-              - !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id086 []
-                name: Parameter presets
-                validators: null
-                value: *id086
-              supports: {}
-              type: Command
-            name: AlignToAirShip
-            properties: *id051
+          previous: *id092
+        - &id096 !!robotbuilder.data.CommandGroupEntry
+          command: *id093
           hasMatch: true
           order: Sequential
           parameters:
@@ -2563,12 +2604,9 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id087
-        - &id090 !!robotbuilder.data.CommandGroupEntry
-          command:
-            base: *id082
-            name: DriveDistance
-            properties: *id042
+          previous: *id094
+        - &id097 !!robotbuilder.data.CommandGroupEntry
+          command: *id095
           hasMatch: true
           order: Sequential
           parameters:
@@ -2576,25 +2614,9 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id088
-        - !!robotbuilder.data.CommandGroupEntry
-          command:
-            base: *id082
-            name: Turn Off LED Ring
-            properties: *id089
-          hasMatch: true
-          order: Parallel
-          parameters:
-            default: []
-            name: ParametersProperty
-            validators: null
-            value: []
-          previous: *id090
-        - &id091 !!robotbuilder.data.CommandGroupEntry
-          command: &id092
-            base: *id082
-            name: ToggleGearEject
-            properties: *id045
+          previous: *id096
+        - &id099 !!robotbuilder.data.CommandGroupEntry
+          command: *id047
           hasMatch: true
           order: Sequential
           parameters:
@@ -2602,12 +2624,9 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id090
-        - &id093 !!robotbuilder.data.CommandGroupEntry
-          command:
-            base: *id082
-            name: AlignToAbsoluteHeading
-            properties: *id050
+          previous: *id097
+        - &id100 !!robotbuilder.data.CommandGroupEntry
+          command: *id098
           hasMatch: true
           order: Sequential
           parameters:
@@ -2617,9 +2636,9 @@ Children:
             value:
             - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: heading,
               type: double, value: '0'}
-          previous: *id091
-        - &id096 !!robotbuilder.data.CommandGroupEntry
-          command: *id092
+          previous: *id099
+        - &id102 !!robotbuilder.data.CommandGroupEntry
+          command: *id047
           hasMatch: true
           order: Sequential
           parameters:
@@ -2627,12 +2646,12 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id093
+          previous: *id100
         - !!robotbuilder.data.CommandGroupEntry
           command:
-            base: *id094
+            base: *id090
             name: Drive Straight Down Field
-            properties: *id095
+            properties: *id101
           hasMatch: true
           order: Sequential
           parameters:
@@ -2640,7 +2659,7 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id096
+          previous: *id102
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
@@ -2663,7 +2682,7 @@ Children:
         validators: *id032
         value:
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id060
+          command: *id072
           hasMatch: true
           order: Parallel
           parameters:
@@ -2673,7 +2692,7 @@ Children:
             value: []
           previous: null
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id061
+          command: *id073
           hasMatch: true
           order: Parallel
           parameters:
@@ -2682,8 +2701,8 @@ Children:
             validators: null
             value: []
           previous: null
-        - &id098 !!robotbuilder.data.CommandGroupEntry
-          command: *id059
+        - &id104 !!robotbuilder.data.CommandGroupEntry
+          command: *id074
           hasMatch: true
           order: Sequential
           parameters:
@@ -2692,11 +2711,11 @@ Children:
             validators: null
             value: []
           previous: null
-        - &id099 !!robotbuilder.data.CommandGroupEntry
+        - &id105 !!robotbuilder.data.CommandGroupEntry
           command:
-            base: *id062
+            base: *id075
             name: AutonStraight
-            properties: *id097
+            properties: *id103
           hasMatch: true
           order: Sequential
           parameters:
@@ -2704,9 +2723,9 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id098
-        - &id100 !!robotbuilder.data.CommandGroupEntry
-          command: *id065
+          previous: *id104
+        - &id106 !!robotbuilder.data.CommandGroupEntry
+          command: *id078
           hasMatch: true
           order: Sequential
           parameters:
@@ -2714,9 +2733,9 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id099
-        - &id101 !!robotbuilder.data.CommandGroupEntry
-          command: *id067
+          previous: *id105
+        - &id107 !!robotbuilder.data.CommandGroupEntry
+          command: *id080
           hasMatch: true
           order: Sequential
           parameters:
@@ -2724,9 +2743,9 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id100
+          previous: *id106
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id069
+          command: *id082
           hasMatch: true
           order: Parallel
           parameters:
@@ -2734,9 +2753,9 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id101
-        - &id102 !!robotbuilder.data.CommandGroupEntry
-          command: *id047
+          previous: *id107
+        - &id108 !!robotbuilder.data.CommandGroupEntry
+          command: *id070
           hasMatch: true
           order: Sequential
           parameters:
@@ -2744,9 +2763,9 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id101
+          previous: *id107
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id047
+          command: *id070
           hasMatch: true
           order: Sequential
           parameters:
@@ -2754,7 +2773,7 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id102
+          previous: *id108
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
@@ -2778,7 +2797,7 @@ Children:
     Base: Command
     Name: Gear Indicator
   - Children: []
-    Properties: *id089
+    Properties: *id067
     Base: Command
     Name: Turn Off LED Ring
   - Children: []
@@ -2791,10 +2810,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Vision}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id103 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id103
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command

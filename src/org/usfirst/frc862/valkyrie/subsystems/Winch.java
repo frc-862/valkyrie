@@ -57,7 +57,6 @@ public class Winch extends Subsystem {
     public void climb(double power) {
         winchMotor1.set(power);
         winchMotor2.set(power);
-        Robot.core.rainbowLED();
     }
     
     public boolean isCompressed() {

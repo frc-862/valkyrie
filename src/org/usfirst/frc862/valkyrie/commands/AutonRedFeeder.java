@@ -41,10 +41,4 @@ public class AutonRedFeeder extends DynamicPathCommand {
         addWaypoint(8.05 - 1.6, -6.6 + 2.9,-70);
     }
 
-    @Override
-    protected void end() {
-        Robot.gearCollector.extend();
-        super.end();
-    }
-
 }

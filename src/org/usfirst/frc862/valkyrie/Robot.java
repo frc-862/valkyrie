@@ -13,6 +13,10 @@ import org.usfirst.frc862.valkyrie.commands.AutonBlueFeeder;
 import org.usfirst.frc862.valkyrie.commands.AutonRedBoiler;
 import org.usfirst.frc862.valkyrie.commands.AutonRedFeeder;
 import org.usfirst.frc862.valkyrie.commands.AutonStraight;
+import org.usfirst.frc862.valkyrie.commands.FullBlueBoilerAuton;
+import org.usfirst.frc862.valkyrie.commands.FullBlueFeederAuton;
+import org.usfirst.frc862.valkyrie.commands.FullRedBoilerAuton;
+import org.usfirst.frc862.valkyrie.commands.FullRedFeederAuton;
 import org.usfirst.frc862.valkyrie.commands.SystemTest;
 // import org.usfirst.frc862.valkyrie.commands.*;
 import org.usfirst.frc862.valkyrie.subsystems.Core;
@@ -142,10 +146,10 @@ public class Robot extends IterativeRobot {
 
             autonChooser = new SendableChooser<Command>();
             autonChooser.addDefault("Do Nothing", null);
-            autonChooser.addObject("Blue Boiler", new AutonBlueBoiler());
-            autonChooser.addObject("Blue Feeder", new AutonBlueFeeder());
-            autonChooser.addObject("Red Boiler", new AutonRedBoiler());
-            autonChooser.addObject("Red Feeder", new AutonRedFeeder());
+            autonChooser.addObject("Blue Boiler", new FullBlueBoilerAuton());
+            autonChooser.addObject("Blue Feeder", new FullBlueFeederAuton());
+            autonChooser.addObject("Red Boiler", new FullRedBoilerAuton());
+            autonChooser.addObject("Red Feeder", new FullRedFeederAuton());
             autonChooser.addObject("Straight", new AutonStraight());            
             SmartDashboard.putData("Auton Mode", autonChooser);
                         
@@ -256,6 +260,13 @@ public class Robot extends IterativeRobot {
             }
             Scheduler.getInstance().run();
             
+            if (oi.driverLeft.getRawButton(11)) {
+            	core.greenLED();
+            } else if (oi.driverLeft.getRawButton(12)) {
+            	core.rainbowLED();
+            } else if (oi.driverLeft.getRawButton(13)) {
+            	core.orangeAndBlueLED();
+            }
             TargetInfo target = RobotState.getInstance().getCurrentVisionTarget();
             if (target != null) {
                SmartDashboard.putNumber("Vision Lat", target.getLatidunalDistance());

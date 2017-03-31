@@ -54,7 +54,6 @@ public class RobotMap {
     public static AnalogInput coreBackUltrasonic;
     public static PowerDistributionPanel corePowerPanel;
     public static Compressor coreCompressor;
-    public static DigitalInput coreGearSensor;
     public static Solenoid coreLEDRing;
     public static SpeedController winchWinchMotor1;
     public static SpeedController winchWinchMotor2;
@@ -62,6 +61,7 @@ public class RobotMap {
     public static DoubleSolenoid shifterShifter;
     public static DoubleSolenoid gearCollectorcollector;
     public static DoubleSolenoid gearCollectorGearEject;
+    public static DigitalInput gearDetectorGearSensor;
     public static DynamicPathCommand autonBlueBoiler;
     public static DynamicPathCommand autonBlueFeeder;
     public static DynamicPathCommand autonRedBoiler;
@@ -114,9 +114,6 @@ public class RobotMap {
         coreCompressor = new Compressor(11);
         
         
-        coreGearSensor = new DigitalInput(0);
-        LiveWindow.addSensor("Core", "Gear Sensor", coreGearSensor);
-        
         coreLEDRing = new Solenoid(11, 6);
         LiveWindow.addActuator("Core", "LED Ring", coreLEDRing);
         
@@ -137,6 +134,9 @@ public class RobotMap {
         
         gearCollectorGearEject = new DoubleSolenoid(11, 2, 3);
         LiveWindow.addActuator("Gear Collector", "Gear Eject", gearCollectorGearEject);
+        
+        gearDetectorGearSensor = new DigitalInput(0);
+        LiveWindow.addSensor("GearDetector", "Gear Sensor", gearDetectorGearSensor);
         
         
         

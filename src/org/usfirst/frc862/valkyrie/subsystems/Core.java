@@ -23,6 +23,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -163,14 +164,21 @@ public class Core extends Subsystem implements Loop {
         lEDRing.set(false);
     }
 
-    public SerialPort blingPort = new SerialPort(9600, SerialPort.Port.kMXP);
+    public static SerialPort blingPort = new SerialPort(9600, SerialPort.Port.kMXP);
 
-    public void sendLEDMessage(int msg)
+    public void sendLEDMessage(int msg) {
+        sendLEDMessage((byte) msg);
+    }
+
+    public void sendLEDMessage(byte msg)
     {
-        blingPort.write(ByteBuffer.allocate(4).putInt(msg).array(), 4);
+//        blingPort.write(ByteBuffer.allocate(4).putInt(msg).array(), 4);
+        blingPort.write(ByteBuffer.allocate(1).put(msg).array(), 4);
         blingPort.flush();
 //        Logger.debug("sendLEDMessage: " + msg);
 //        Logger.flush();
+//        DigitalOutput line1 = new DigitalOutput(1);
+//        line1.set(value);
     }
 
     public void rainbowLED()

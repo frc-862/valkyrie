@@ -52,7 +52,7 @@ public class Constants extends ConstantsBase {
     public static double deadband = 0.09;
 
     //DriveTrain
-	public static double MinRotatePower = 25;
+	public static double MinRotatePower = 35;
     public static double fastLoopRate = 0.01;
     public static double mediumLoopRate = 0.1;
     public static double slowLoopRate = 0.5;
@@ -69,7 +69,7 @@ public class Constants extends ConstantsBase {
     public static double velocityFeedForwardRHigh = 0.523617647;
     public static double velocityFeedForwardLHigh = 0.452647059;
 	public static double MotorOffTime = 1.0;
-    public static double rotateEpsilon = 1;
+    public static double rotateEpsilon = 1.5;
     public static double straightCommandDelta = 0.19;
     public static double straightenPGain = 1 / 90.0;
     public static double MinCommandedPower = 0.05;

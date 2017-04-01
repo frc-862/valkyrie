@@ -63,7 +63,8 @@ public class DriveDistance extends Command {
         left_start = Robot.driveTrain.getLeftDistance();
         right_start = Robot.driveTrain.getRightDistance();
         left_vel = LightningMath.fps2rpm(Constants.autonSpeed);
-        right_vel = left_vel;        
+        right_vel = left_vel;    
+        Robot.core.rainbowLED();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -80,6 +81,7 @@ public class DriveDistance extends Command {
     // Called once after isFinished returns true
     protected void end() {
         Robot.driveTrain.stop();
+        Robot.core.orangeAndBlueLED();
     }
 
     // Called when another command which requires one or more of the same

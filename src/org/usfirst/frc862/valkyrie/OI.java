@@ -93,6 +93,7 @@ public class OI {
     public Joystick driverLeft;
     public JoystickButton winchButton2;
     public JoystickButton gearEjectButton;
+    public JoystickButton visionDeliver;
     public Joystick driverRight;
     public JoystickButton shiftSelectAuto;
     public JoystickButton shiftSelectManual;
@@ -126,6 +127,8 @@ public class OI {
         shiftSelectAuto.whenReleased(new Autoshifter());
         driverRight = new Joystick(1);
         
+        visionDeliver = new JoystickButton(driverRight, 2);
+        visionDeliver.whileHeld(new AlignToAirShip());
         gearEjectButton = new JoystickButton(driverRight, 4);
         gearEjectButton.whenPressed(new ToggleGearEject());
         winchButton2 = new JoystickButton(driverRight, 7);

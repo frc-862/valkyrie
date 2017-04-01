@@ -59,8 +59,10 @@ public class ToggleGearEject extends Command {
 //        Robot.gearCollector.toggleGearEject();
         if (Robot.gearCollector.getEjectDoorState() == GearCollector.State.EXTENDED) {
             state = State.CLOSING_GEAR;
+            Robot.core.orangeAndBlueLED();
         } else {
             state = State.CLOSING_COLLECTOR;
+            Robot.core.purpleLED();
         }
         timeout = 0;
     }

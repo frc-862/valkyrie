@@ -65,6 +65,7 @@ public class AlignToAirShip extends StatefulCommand {
     public void initialize() {
         setState(States.WAIT_FOR_VISION);
         Logger.debug("Initalize align to air ship");
+        Robot.core.purpleLED();
     }
     
     public void waitForVisionEnter() {
@@ -132,6 +133,7 @@ public class AlignToAirShip extends StatefulCommand {
         Robot.driveTrain.stop();
         Logger.debug("rotated!");
         Logger.flush();        
+        Robot.core.orangeAndBlueLED();
     }
 
     // Called when another command which requires one or more of the same

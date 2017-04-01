@@ -47,6 +47,7 @@ public class FullBlueBoilerAuton extends CommandGroup {
         addSequential(new AutonBlueBoiler());
         addSequential(new AlignToAirShip());
         addSequential(new DriveDistance());
+        addParallel(new TurnOffLEDRing());
         addSequential(new ToggleGearEject());
         addSequential(new AlignToAbsoluteHeading(0));
         addSequential(new ToggleGearEject());

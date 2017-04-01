@@ -13,6 +13,7 @@ package org.usfirst.frc862.valkyrie.subsystems;
 import java.nio.ByteBuffer;
 
 import org.usfirst.frc862.util.DataLogger;
+import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Loop;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.RobotMap;
@@ -168,6 +169,8 @@ public class Core extends Subsystem implements Loop {
     {
         blingPort.write(ByteBuffer.allocate(4).putInt(msg).array(), 4);
         blingPort.flush();
+//        Logger.debug("sendLEDMessage: " + msg);
+//        Logger.flush();
     }
 
     public void rainbowLED()
@@ -188,5 +191,13 @@ public class Core extends Subsystem implements Loop {
     public void orangeAndBlueLED()
     {
         sendLEDMessage(4);
+    }
+
+    public void blueLED() {
+        sendLEDMessage(7);
+    }
+
+    public void orangeLED() {
+        sendLEDMessage(6);
     }
 }

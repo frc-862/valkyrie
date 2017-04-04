@@ -11,7 +11,6 @@
 
 package org.usfirst.frc862.valkyrie.subsystems;
 
-import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;

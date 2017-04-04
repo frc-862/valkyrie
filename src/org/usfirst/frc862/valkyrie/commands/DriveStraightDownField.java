@@ -36,7 +36,7 @@ public class DriveStraightDownField extends DynamicPathCommand {
         testing = false;
         addWaypoint(0,0,0);
         // Neutral zone is ~27ft long
-        addWaypoint(19, 0, 0);
+        addWaypoint(21, 0, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

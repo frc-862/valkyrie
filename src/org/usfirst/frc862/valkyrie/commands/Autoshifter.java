@@ -120,12 +120,16 @@ public class Autoshifter extends Command {
             resetTimers();
             overtakeTimer.reset();
             state = State.STRAIGHT_OVERRIDE;
+            if (Robot.inTeleop) {
+                Robot.core.turnOffLED();
+            }
             break;
 
         case DOWN_SHIFTING:
             Robot.shifter.downShift();
             state = State.HYSTERESIS_DELAY;
             resetTimers();
+            Robot.core.turnOnLED();
             break;
 
         case STRAIGHT_CHECK:

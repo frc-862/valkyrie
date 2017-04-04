@@ -192,7 +192,7 @@ public class RobotState {
 //                        new RigidTransform2d(translation, 
 //                                Rotation2d.fromDegrees(target.getTheta())));
 
-                if (target.getType() == 2) {
+                if (target.getType() == 2 || target.getType() == 4) {
                     if (reset_vision_target) {
                         SmartDashboard.putString("Vision ", "type " + target.getType() + " - " +
                                 target.getLatidunalDistance() + "," + target.getLongitudinalDistance() + " :: " +

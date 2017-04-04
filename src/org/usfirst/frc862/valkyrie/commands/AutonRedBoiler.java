@@ -11,7 +11,6 @@
 
 package org.usfirst.frc862.valkyrie.commands;
 import org.usfirst.frc862.util.DynamicPathCommand;
-import org.usfirst.frc862.valkyrie.Robot;
 
 /**
  *

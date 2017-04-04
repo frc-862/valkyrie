@@ -128,7 +128,7 @@ public class OI {
         driverRight = new Joystick(1);
         
         visionDeliver = new JoystickButton(driverRight, 2);
-        visionDeliver.whileHeld(new AlignToAirShip());
+        visionDeliver.whileHeld(new TestAlignPeg());
         gearEjectButton = new JoystickButton(driverRight, 4);
         gearEjectButton.whenPressed(new ToggleGearEject());
         winchButton2 = new JoystickButton(driverRight, 7);

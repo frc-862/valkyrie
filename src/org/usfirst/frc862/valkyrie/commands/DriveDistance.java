@@ -62,7 +62,12 @@ public class DriveDistance extends Command {
         
         left_start = Robot.driveTrain.getLeftDistance();
         right_start = Robot.driveTrain.getRightDistance();
-        left_vel = LightningMath.fps2rpm(Constants.autonSpeed);
+        
+        if (Robot.inTeleop) {
+            left_vel = LightningMath.fps2rpm(Constants.autonSpeed) * 1.5;
+        } else {
+            left_vel = LightningMath.fps2rpm(Constants.autonSpeed);            
+        }
         right_vel = left_vel;    
         Robot.core.rainbowLED();
     }

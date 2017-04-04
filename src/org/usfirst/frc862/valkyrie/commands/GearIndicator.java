@@ -55,10 +55,10 @@ public class GearIndicator extends Command {
         }
         
         hasGear = Robot.gearDetector.gearPresent();
-        if (active && Timer.getFPGATimestamp() > gotGear + 5) {
+        if ((active && !hasGear) || (active && Timer.getFPGATimestamp() > gotGear + 5)) {
             active = false;
             Robot.core.orangeAndBlueLED();
-        }
+        } 
     }
 
     // Make this return true when this Command no longer needs to run execute()

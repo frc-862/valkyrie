@@ -23,7 +23,6 @@ import org.usfirst.frc862.vision.TargetInfo;
 import com.team254.lib.util.ChezyMath;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

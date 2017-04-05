@@ -53,6 +53,8 @@ public class Constants extends ConstantsBase {
 
     //DriveTrain
 	public static double MinRotatePower = 35;
+    public static double rotateIGain = MinRotatePower / 3.0;
+
     public static double fastLoopRate = 0.01;
     public static double mediumLoopRate = 0.1;
     public static double slowLoopRate = 0.5;

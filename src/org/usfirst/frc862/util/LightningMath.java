@@ -1,3 +1,4 @@
+
 package org.usfirst.frc862.util;
 
 import org.usfirst.frc862.valkyrie.Constants;
@@ -89,5 +90,13 @@ public class LightningMath {
 
     public static double mm2ft(double dist) {
         return dist / 304.8;
+    }
+    
+    public static boolean isZero(double val) {
+        return Math.abs(val) < 0.0000001;
+    }
+    
+    public static boolean isEqual(double v1, double v2) {
+        return isZero(v1 - v2);
     }
 }

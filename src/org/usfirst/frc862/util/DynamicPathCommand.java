@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.usfirst.frc862.util.FaultCode.Codes;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.DriveTrain;
@@ -230,6 +231,14 @@ public class DynamicPathCommand extends Command {
         notifier.stop();
         logger.drain();
         logger.flush();
+        
+        if (LightningMath.isZero(Robot.driveTrain.getLeftDistance())) {
+            FaultCode.write(Codes.LEFT_ENCODER_NOT_FOUND);
+        }
+        
+        if (LightningMath.isZero(Robot.driveTrain.getRightDistance())) {
+            FaultCode.write(Codes.RIGHT_ENCODER_NOT_FOUND);
+        }
     }
 
     @Override

@@ -397,6 +397,16 @@ Children:
           value: '0'
       Base: Digital Input
       Name: Gear Sensor
+    - Children: []
+      Properties:
+        Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id018
+          default: '0'
+          name: Input Channel (Digital)
+          validators: *id019
+          value: '5'
+      Base: Digital Input
+      Name: Peg Sensor
     Properties:
       Default command parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []

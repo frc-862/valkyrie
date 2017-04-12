@@ -1,9 +1,13 @@
-package org.usfirst.frc862.util;
+package edu.wpi.first.wpilibj.command;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.usfirst.frc862.util.Logger;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,6 +16,11 @@ public class StatefulCommand extends Command {
     protected Runnable default_action = () -> {};
     private Enum<?> previous_state = null;
     private Enum<?> calling_state = null;
+    
+    private HashMap<Enum<?>,Command> commands = new HashMap<Enum<?>,Command>();
+    private HashMap<Enum<?>,Supplier<Enum<?>>> next_state = new HashMap<Enum<?>,Supplier<Enum<?>>>();
+    
+    Command currentCommand = null;
     
     public void setState(Enum<?> new_state) {
         state = new_state;
@@ -23,6 +32,11 @@ public class StatefulCommand extends Command {
     
     public Enum<?> getCallingState() {
         return calling_state;
+    }
+    
+    protected void registerState(Enum<?> state, Command cmd, Supplier<Enum<?>> next) {
+        commands.put(state, cmd);
+        next_state.put(state, next);
     }
     
     protected void setDefaultAction(Runnable action) {
@@ -37,6 +51,7 @@ public class StatefulCommand extends Command {
     protected void initialize() {
         previous_state = null;
         calling_state = state;
+        currentCommand = null;
     }
 
     @Override
@@ -46,7 +61,7 @@ public class StatefulCommand extends Command {
 
     private boolean call(String method_name) {
         try {
-            Logger.debug("Call " + method_name);
+//            Logger.debug("Call " + method_name);
             Method method = getClass().getMethod(method_name);
             method.invoke(this);
         } catch (NoSuchMethodException | SecurityException | 
@@ -77,10 +92,16 @@ public class StatefulCommand extends Command {
             
             previous_state = state;
             calling_state = state;
+            currentCommand = commands.get(state);
             call(methodName(state) + "Enter");
         }
         
-        if (!call(methodName(state))) {
+        if (currentCommand != null) {
+            if (!currentCommand.run()) {
+                currentCommand.removed();
+                state = next_state.get(state).get();
+            }
+        } else if (!call(methodName(state))) {
             this.default_action.run();
         }
     }

@@ -5,6 +5,7 @@ import org.usfirst.frc862.trajectory.RobotStateEstimator;
 import org.usfirst.frc862.util.CrashTracker;
 import org.usfirst.frc862.util.DataLogger;
 import org.usfirst.frc862.util.FaultCode;
+import org.usfirst.frc862.util.LightningMath;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Looper;
 import org.usfirst.frc862.valkyrie.commands.AutonStraight;
@@ -12,6 +13,7 @@ import org.usfirst.frc862.valkyrie.commands.FullBlueBoilerAuton;
 import org.usfirst.frc862.valkyrie.commands.FullBlueFeederAuton;
 import org.usfirst.frc862.valkyrie.commands.FullRedBoilerAuton;
 import org.usfirst.frc862.valkyrie.commands.FullRedFeederAuton;
+import org.usfirst.frc862.valkyrie.commands.FullStraightAuton;
 import org.usfirst.frc862.valkyrie.commands.SystemTest;
 // import org.usfirst.frc862.valkyrie.commands.*;
 import org.usfirst.frc862.valkyrie.subsystems.Core;
@@ -154,12 +156,13 @@ public class Robot extends IterativeRobot {
             autonChooser.addObject("Blue Feeder", new FullBlueFeederAuton());
             autonChooser.addObject("Red Boiler", new FullRedBoilerAuton());
             autonChooser.addObject("Red Feeder", new FullRedFeederAuton());
-            autonChooser.addObject("Straight", new AutonStraight());            
+            autonChooser.addObject("Straight", new FullStraightAuton());            
             SmartDashboard.putData("Auton Mode", autonChooser);
                         
             FaultCode.update();
             SystemTest.update();
-            
+            Logger.debug("Init complete");
+            Logger.flush();
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
             throw t;
@@ -186,6 +189,9 @@ public class Robot extends IterativeRobot {
             driveTrain.setMode(DriveTrain.Modes.BRAKE);
             driveTrain.start();
             
+            core.purpleLED();
+            init_navx_value = driveTrain.getGyroAngle();
+            
             Logger.flush();
             DataLogger.flush();
         } catch (Throwable t) {
@@ -199,14 +205,28 @@ public class Robot extends IterativeRobot {
             SmartDashboard.putNumber("Heading", Robot.driveTrain.getGyroAngle());
             Scheduler.getInstance().run();
             
-            if (Math.abs(driveTrain.getGyroAngle() - this.init_navx_value) > 0.000000001) {
+            if (!LightningMath.isEqual(driveTrain.getGyroAngle(), init_navx_value)) {
                 core.orangeAndBlueLED();
             }
             
+            Logger.debug("disablePeriodic");
+            Logger.flush();
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
             throw t;
         }
+    }
+
+    /* (non-Javadoc)
+     * @see edu.wpi.first.wpilibj.IterativeRobot#robotPeriodic()
+     */
+    @Override
+    public void robotPeriodic() {
+        // TODO Auto-generated method stub
+        super.robotPeriodic();
+        
+        Logger.debug("robotPeriodic");
+        Logger.flush();
     }
 
     public void autonomousInit() {

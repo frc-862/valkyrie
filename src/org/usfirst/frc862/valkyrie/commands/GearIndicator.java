@@ -59,6 +59,14 @@ public class GearIndicator extends Command {
             active = false;
             Robot.core.orangeAndBlueLED();
         } 
+        
+        if (!active && Robot.gearDetector.pegPresent()) {
+            Robot.core.purpleLED();
+        } else if (!active) {
+            Robot.core.orangeAndBlueLED();
+        } else {
+            Robot.core.greenLED();
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -59,7 +59,7 @@ public class CalibratedClimb extends Command {
         // Robot.winch.climb(power);
         pdp = Robot.core.getPDP();
         Robot.driveTrain.setStraightAdjust(0);
-        Robot.core.rainbowLED();
+        Robot.core.greenLED();
         Logger.debug("Started Climb");
     }
 
@@ -103,7 +103,9 @@ public class CalibratedClimb extends Command {
         logger.flush();
         Robot.driveTrain.setStraightAdjust(0);
         
-        if (!Robot.winch.isCompressed()) {
+        if (Robot.winch.isCompressed()) {
+            Robot.core.rainbowLED();
+        } else {
             Robot.core.orangeAndBlueLED();
         }
     }

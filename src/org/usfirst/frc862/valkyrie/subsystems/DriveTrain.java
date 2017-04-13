@@ -164,6 +164,8 @@ public class DriveTrain extends Subsystem implements Loop {
         DataLogger.addDataElement("Left Drive Power", () -> leftMotor1.get());
         DataLogger.addDataElement("Right Drive Power", () -> rightMotor1.get());
 
+        DataLogger.addDataElement("pegdetected", () -> Robot.gearDetector.pegPresent() ? 100.0 : 0.0);
+
         openLoopMode = new OpenLoopMode();
         velocityMode = new VelocityMode();
         brakeMode = new BrakeMode();

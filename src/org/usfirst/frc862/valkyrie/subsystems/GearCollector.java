@@ -90,5 +90,9 @@ public class GearCollector extends Subsystem {
             closeGearEjectDoor();
         }
     }
+
+    public boolean gearClosed() {
+        return door_state == State.RETRACTED;
+    }
 }
 

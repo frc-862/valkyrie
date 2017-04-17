@@ -37,7 +37,7 @@ public class AutonStraight extends DynamicPathCommand {
         testing = false;
         reverse = false;
         addWaypoint(0,0,0);
-        addWaypoint(7.5, 0, 0);
+        addWaypoint(2.5, 0, 0);
     }
 
     @Override

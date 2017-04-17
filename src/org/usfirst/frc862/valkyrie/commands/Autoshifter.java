@@ -124,6 +124,9 @@ public class Autoshifter extends Command {
             if (Robot.inTeleop) {
                 Robot.core.turnOffLED();
             }
+//            if (Robot.gearDetector.gearPresent() && Robot.gearCollector.gearClosed()) {
+//                Robot.gearCollector.retract();
+//            }
             break;
 
         case DOWN_SHIFTING:

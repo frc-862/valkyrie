@@ -62,7 +62,7 @@ public class Constants extends ConstantsBase {
     public static double dataLoggerPeriod = 0.05;  // 20 times a second by default
     public static double maxVelocityLow = 350;
     public static double maxVelocityHigh = 850;
-    public static double driveRampRate = 300;
+    public static double driveRampRate = 40.0;
     public static int encoderTicksPerRev = 360;
     public static double velocityFeedForwardRLow = 4.6 / 4;
     public static double velocityFeedForwardLLow = 4.5 / 4;

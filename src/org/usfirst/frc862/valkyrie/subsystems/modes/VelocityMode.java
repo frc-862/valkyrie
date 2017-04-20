@@ -1,5 +1,6 @@
 package org.usfirst.frc862.valkyrie.subsystems.modes;
 
+import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 
 import com.ctre.CANTalon;
@@ -30,8 +31,7 @@ public class VelocityMode extends SubsystemMode {
     
     @Override
     public void teleop(double left, double right) {
-        // Joysticks are backwards -- forward is negative, positive is backwards
-        // But our master is now reversed in a 6cim setup, so no negation
-        Robot.driveTrain.set(left * - Robot.shifter.getMaxVelocity(), right * -Robot.shifter.getMaxVelocity());
+//        Robot.driveTrain.set(left * - Robot.shifter.getMaxVelocity(), right * -Robot.shifter.getMaxVelocity());
+        Robot.driveTrain.set(left * -Constants.maxVelocityHigh, right * -Constants.maxVelocityHigh);
     }
 }

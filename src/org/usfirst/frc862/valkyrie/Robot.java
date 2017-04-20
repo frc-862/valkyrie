@@ -9,6 +9,7 @@ import org.usfirst.frc862.util.LightningMath;
 import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Looper;
 import org.usfirst.frc862.valkyrie.commands.AutonStraight;
+import org.usfirst.frc862.valkyrie.commands.DriveDistance;
 import org.usfirst.frc862.valkyrie.commands.FullBlueBoilerAuton;
 import org.usfirst.frc862.valkyrie.commands.FullBlueFeederAuton;
 import org.usfirst.frc862.valkyrie.commands.FullRedBoilerAuton;
@@ -258,6 +259,7 @@ public class Robot extends IterativeRobot {
         }
     }
 
+    DriveDistance dd = new DriveDistance();
     public void teleopInit() {
         try {
             CrashTracker.logTeleopInit();

@@ -50,12 +50,11 @@ public class CalibratedClimb extends Command {
         logger.addDataElement("winch_2_current");
         logger.addDataElement("total_winch");
         logger.addDataElement("sensor");
-
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        power = SmartDashboard.getNumber("Climb Power", 0.862);
+        power = SmartDashboard.getNumber("Climb Power", 1.0);
         // Robot.winch.climb(power);
         pdp = Robot.core.getPDP();
         Robot.driveTrain.setStraightAdjust(0);

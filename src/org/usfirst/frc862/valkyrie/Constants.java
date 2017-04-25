@@ -49,7 +49,7 @@ public class Constants extends ConstantsBase {
     public static double WheelCircumference = WheelDiameter * Math.PI;  // in feet
     
     //Joystick
-    public static double deadband = 0.09;
+    public static double deadband = 0.10;
 
     //DriveTrain
 	public static double MinRotatePower = 35;

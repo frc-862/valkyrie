@@ -302,6 +302,9 @@ public class Robot extends IterativeRobot {
             	core.orangeAndBlueLED();
             }
             
+            SmartDashboard.putBoolean("Peg Detected", gearDetector.pegPresent());
+            SmartDashboard.putBoolean("Gear Detected", gearDetector.gearPresent());
+            
             TargetInfo target = RobotState.getInstance().getCurrentVisionTarget();
             if (target != null) {
                SmartDashboard.putNumber("Vision Lat", target.getLatidunalDistance());
@@ -318,6 +321,10 @@ public class Robot extends IterativeRobot {
                SmartDashboard.putNumber("Vision Theta2: ", Math.toDegrees(theta));
                SmartDashboard.putNumber("Vision Theta3: ", Math.toDegrees(Math.atan2(lat, lon)));
                SmartDashboard.putString("Vision coord", target.getX() + "," + target.getY() + "," + target.getZ());
+               
+               SmartDashboard.putBoolean("Ready for Vision", true);
+            } else {
+                SmartDashboard.putBoolean("Ready for Vision", false);            
             }
             
             SmartDashboard.putNumber("Left Pos", RobotMap.driveTrainLeftMotor1.getPosition());

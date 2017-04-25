@@ -54,7 +54,8 @@ public class CalibratedClimb extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        power = SmartDashboard.getNumber("Climb Power", 1.0);
+        power = 1.0;
+        
         // Robot.winch.climb(power);
         pdp = Robot.core.getPDP();
         Robot.driveTrain.setStraightAdjust(0);

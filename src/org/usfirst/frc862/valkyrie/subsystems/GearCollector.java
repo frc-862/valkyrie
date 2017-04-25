@@ -17,6 +17,7 @@ import org.usfirst.frc862.valkyrie.commands.AutoRetractGearDoor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -54,11 +55,13 @@ public class GearCollector extends Subsystem {
 
     public void retract() {
         collector.set(Value.kReverse);
+        SmartDashboard.putBoolean("Collector Open", false);
         collector_state = State.RETRACTED;
     }
 
     public void extend() {
         collector.set(Value.kForward);
+        SmartDashboard.putBoolean("Collector Open", true);
         collector_state = State.EXTENDED;
     }
 

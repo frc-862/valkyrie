@@ -39,8 +39,8 @@ public class ClimbOverride extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        double power = SmartDashboard.getNumber("Climb Power", 0.862);
-        Robot.winch.climb(power / 2);
+        double power = 0.75;
+        Robot.winch.climb(power);
         Robot.driveTrain.setStraightAdjust(0);
     }
 

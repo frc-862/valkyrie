@@ -53,20 +53,12 @@ public class VisionMonitor extends Command {
             double age = Timer.getFPGATimestamp() - peg.getCaptureTime();
 
             if (age > 0.5) {
-                if (found) {
-                    Robot.core.orangeAndBlueLED();
-                } 
-                found = false;
-            } else if (!found && peg.getType() == 2) {
-                Robot.core.blueLED();
-                found = true;
-            } else if (!found) {
-                found = true;
-                Robot.core.orangeLED();
+                Robot.ready_for_vision = false;
+            } else {
+                Robot.ready_for_vision = true;
             }
-        } else if (found) {
-            found = false;
-            Robot.core.orangeAndBlueLED();            
+        } else {
+            Robot.ready_for_vision = false;
         }
 
     }

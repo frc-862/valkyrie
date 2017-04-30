@@ -102,12 +102,7 @@ public class CalibratedClimb extends Command {
         logger.drain();
         logger.flush();
         Robot.driveTrain.setStraightAdjust(0);
-        
-        if (Robot.winch.isCompressed()) {
-            Robot.core.rainbowLED();
-        } else {
-            Robot.core.orangeAndBlueLED();
-        }
+        Robot.rainbow = Robot.winch.isCompressed();
     }
 
     // Called when another command which requires one or more of the same

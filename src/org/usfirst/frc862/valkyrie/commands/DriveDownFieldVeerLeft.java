@@ -36,7 +36,7 @@ public class DriveDownFieldVeerLeft extends DynamicPathCommand {
         addWaypoint(0,0,0);
         // Neutral zone is ~27ft long
         // about 27ft wide as well
-        addWaypoint(23, 19, 0);
+        addWaypoint(15, 19, 0);
     }
 
 }

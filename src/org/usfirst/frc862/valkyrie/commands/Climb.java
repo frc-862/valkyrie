@@ -54,6 +54,7 @@ public class Climb extends Command {
             now = stop;
         Robot.winch.climb((now - start) / Constants.winchRampTime);
         Robot.core.greenLED();
+        Robot.rainbow = false;
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -57,13 +57,26 @@ public class GearIndicator extends Command {
         hasGear = Robot.gearDetector.gearPresent();
         if ((active && !hasGear) || (active && Timer.getFPGATimestamp() > gotGear + 5)) {
             active = false;
-            Robot.core.orangeAndBlueLED();
+            
+            if (Robot.ready_for_vision) {
+                Robot.core.blueLED();
+            } else if (Robot.rainbow) {
+                Robot.core.rainbowLED();
+            } else {
+                Robot.core.orangeAndBlueLED();
+            }
         } 
         
         if (!active && Robot.gearDetector.pegPresent()) {
             Robot.core.purpleLED();
         } else if (!active) {
-            Robot.core.orangeAndBlueLED();
+            if (Robot.ready_for_vision) {
+                Robot.core.blueLED();
+            } else if (Robot.rainbow) {
+                Robot.core.rainbowLED();
+            } else {
+                Robot.core.orangeAndBlueLED();
+            }
         } else {
             Robot.core.greenLED();
         }

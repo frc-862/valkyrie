@@ -209,7 +209,6 @@ public class Robot extends IterativeRobot {
                 core.orangeAndBlueLED();
             }
 
-            Logger.debug("disablePeriodic");
             Logger.flush();
         } catch (Throwable t) {
             CrashTracker.logThrowableCrash(t);
@@ -227,8 +226,7 @@ public class Robot extends IterativeRobot {
         // TODO Auto-generated method stub
         super.robotPeriodic();
 
-        Logger.debug("robotPeriodic");
-        Logger.flush();
+//        Logger.flush();
     }
 
     public void autonomousInit() {

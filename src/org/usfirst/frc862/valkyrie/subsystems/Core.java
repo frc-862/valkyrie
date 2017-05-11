@@ -165,7 +165,7 @@ public class Core extends Subsystem implements Loop {
         lEDRing.set(false);
     }
 
-    public static SerialPort blingPort = new SerialPort(9600, SerialPort.Port.kMXP);
+//    public static SerialPort blingPort = new SerialPort(9600, SerialPort.Port.kMXP);
 
     public void sendLEDMessage(int msg) {
         sendLEDMessage((byte) msg);
@@ -174,8 +174,8 @@ public class Core extends Subsystem implements Loop {
     public void sendLEDMessage(byte msg)
     {
 //        blingPort.write(ByteBuffer.allocate(4).putInt(msg).array(), 4);
-        blingPort.write(ByteBuffer.allocate(1).put(msg).array(), 1);
-        blingPort.flush();
+//        blingPort.write(ByteBuffer.allocate(1).put(msg).array(), 1);
+//        blingPort.flush();
 //        Logger.debug("sendLEDMessage: " + msg);
 //        Logger.flush();
 //        DigitalOutput line1 = new DigitalOutput(1);

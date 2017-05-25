@@ -65,10 +65,11 @@ public class AlignToAirShip extends StatefulCommand {
         setState(States.WAIT_FOR_VISION);
         Logger.debug("Initalize align to air ship");
         Robot.core.purpleLED();
+        start_time = Timer.getFPGATimestamp() + 0.5;
     }
     
     public void waitForVisionEnter() {
-        start_time = Timer.getFPGATimestamp();
+        start_time = Timer.getFPGATimestamp() + 0.5;
     }
     
     public void waitForVision() {

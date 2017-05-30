@@ -371,9 +371,17 @@ public class DriveTrain extends Subsystem implements Loop {
 
     public void teleop(Joystick driverLeft, Joystick driverRight, double straighten) {
         // NOTE this is where you need to make changes if we switch to a
-        // single controller, etc. 
-        double leftPower = filter.filter(driverLeft.getRawAxis(1));
-        double rightPower = filter.filter(driverRight.getRawAxis(1));
+        // single controller, etc.
+        teleop(driverLeft.getRawAxis(1), driverRight.getRawAxis(1));
+    }
+
+    public void teleop(double left, double right) {
+        teleop(left, right, 0);
+    }
+
+    public void teleop(double left, double right, double straighten) {
+        double leftPower = filter.filter(left);
+        double rightPower = filter.filter(right);
 
         leftRequestedPower = leftPower - straighten;
         rightRequestedPower = rightPower + straighten;
@@ -381,10 +389,8 @@ public class DriveTrain extends Subsystem implements Loop {
         //                rightRequestedPower = -rightRequestedPower;
         // sub-modes should map -1 to 1 into their desired ranges
         currentMode.teleop(leftRequestedPower, rightRequestedPower);
-
-        // coPilot currently unused.
     }
-
+    
     public void teleopArcade(double moveValue, double rotateValue) {
         // NOTE this is where you need to make changes if we switch to a
         // single controller, etc.

@@ -29,7 +29,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DynamicPathCommand extends Command {
     private WaypointSequence points = new WaypointSequence(10);
-    private TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
+    protected TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
     private CommandLogger logger;
     private TrajectoryFollower followerLeft = new TrajectoryFollower();
     private TrajectoryFollower followerRight = new TrajectoryFollower();

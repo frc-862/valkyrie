@@ -166,6 +166,7 @@ public class Constants extends ConstantsBase {
     // 1/4 inch
     public static double distanceEpsilon = (1.0 / 12.0) / 4.0;
     public static double MinSpinSpeed = 330;
+    public static double slowDownRate = 0.95;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

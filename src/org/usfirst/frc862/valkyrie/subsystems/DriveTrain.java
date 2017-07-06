@@ -353,8 +353,8 @@ public class DriveTrain extends Subsystem implements Loop {
 
     public void set(double left, double right) {
         if (Timer.getFPGATimestamp() < slowUntil) {
-            leftMotor1.set(this.getAverageVelocity());
-            rightMotor1.set(getAverageVelocity());
+            leftMotor1.set(getAverageVelocity() * Constants.slowDownRate);
+            rightMotor1.set(getAverageVelocity() * Constants.slowDownRate);
         } else {
             leftMotor1.set(left - straightAdjust);
             rightMotor1.set(right + straightAdjust);

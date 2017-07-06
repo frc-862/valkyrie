@@ -49,7 +49,7 @@ public class Constants extends ConstantsBase {
     public static double WheelCircumference = WheelDiameter * Math.PI;  // in feet
     
     //Joystick
-    public static double deadband = 0.09;
+    public static double deadband = 0.11;
 
     //DriveTrain
 	public static double MinRotatePower = 35;
@@ -165,6 +165,7 @@ public class Constants extends ConstantsBase {
     public static double magicAcceleration = maxVelocityLow / 1.5;
     // 1/4 inch
     public static double distanceEpsilon = (1.0 / 12.0) / 4.0;
+    public static double MinSpinSpeed = 330;
     
     public String getFileName() {
         return "~/valkyrie.yaml";

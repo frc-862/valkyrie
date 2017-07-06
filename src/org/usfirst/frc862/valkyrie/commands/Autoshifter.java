@@ -114,13 +114,14 @@ public class Autoshifter extends Command {
             break;
 
         case UP_SHIFTING:
-            Robot.driveTrain.slowForSeconds(0.20);
+            Robot.driveTrain.slowForSeconds(0.25);
             originalRDistance = Robot.driveTrain.getRightDistance();
             originalLDistance = Robot.driveTrain.getLeftDistance();
             Robot.shifter.upShift();
             resetTimers();
             overtakeTimer.reset();
             state = State.STRAIGHT_OVERRIDE;
+            state = State.HYSTERESIS_DELAY;
             if (Robot.inTeleop) {
                 Robot.core.turnOffLED();
             }

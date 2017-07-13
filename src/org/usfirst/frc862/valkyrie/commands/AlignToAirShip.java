@@ -74,7 +74,7 @@ public class AlignToAirShip extends StatefulCommand {
     
     public void waitForVision() {
         TargetInfo peg = RobotState.getInstance().getCurrentVisionTarget();
-        if (peg != null & peg.getCaptureTime() > start_time) {
+        if (peg != null && peg.getCaptureTime() > start_time) {
             double fudge = -25;
             fudge = 0;
             double lat = peg.getLatidunalDistance();

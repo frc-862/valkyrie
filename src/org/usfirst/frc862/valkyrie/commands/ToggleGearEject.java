@@ -84,7 +84,7 @@ public class ToggleGearEject extends Command {
         
         // Log state on change
         if(state != oldState) {
-        	System.out.printf("ToggleGearEject state: %s\n", state.name());
+        	Logger.debug("ToggleGearEject state: %s\n", state.name());
         	oldState = state;
         }
 

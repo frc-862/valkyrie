@@ -11,6 +11,7 @@
 
 package org.usfirst.frc862.valkyrie.commands;
 import org.usfirst.frc862.util.LightningTimer;
+import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.valkyrie.Constants;
 import org.usfirst.frc862.valkyrie.Robot;
 import org.usfirst.frc862.valkyrie.subsystems.GearCollector;
@@ -57,22 +58,28 @@ public class ToggleGearEject extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 //        Robot.gearCollector.toggleGearEject();
+        Logger.debug("init ToggleGearEject");
         if (Robot.gearCollector.getEjectDoorState() == GearCollector.State.EXTENDED) {
+            Logger.debug("close gear");
             state = State.CLOSING_GEAR;
             Robot.core.orangeAndBlueLED();
         } else {
+            Logger.debug("eject gear");
             state = State.CLOSING_COLLECTOR;
             Robot.core.purpleLED();
         }
         timeout = 0;
+        // Robot.driveTrain.stop();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if (!timer.hasPeriodPassed(timeout)) {
+            Logger.debug("timeout");
             return;
         }
         
+        Logger.debug("Toggle state: " + state);
         switch (state) {
         case CLOSING_COLLECTOR:
             Robot.gearCollector.retract();
@@ -96,8 +103,14 @@ public class ToggleGearEject extends Command {
         case OPENING_GEAR:
             Robot.gearCollector.ejectGear();
             state = State.BACKING_AWAY;
+            if (!Robot.inTeleop) {
+                Logger.debug("We are not in tele, wait a bit");
+                timer.reset();
+                timeout = 1.25;
+            }
             break;
         case BACKING_AWAY:
+            Logger.debug("Backing away!!!");
             timeout = Constants.backupDuration;
             timer.reset();
             Robot.driveTrain.set(Constants.backupPower, Constants.backupPower);

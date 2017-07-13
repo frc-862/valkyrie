@@ -233,7 +233,8 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         try {
             CrashTracker.logAutoInit();
-
+            inTeleop = false;
+            
             // schedule the autonomous command (example)
             Logger.debug("Starting autonomous");
             shifter.downShift();
@@ -259,7 +260,7 @@ public class Robot extends IterativeRobot {
         }
     }
 
-    DriveDistance dd = new DriveDistance();
+    //DriveDistance dd = new DriveDistance();
     public static boolean ready_for_vision = false;
     public static boolean rainbow = false;
 

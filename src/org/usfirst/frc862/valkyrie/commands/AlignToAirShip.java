@@ -74,7 +74,7 @@ public class AlignToAirShip extends StatefulCommand {
     
     public void waitForVision() {
         TargetInfo peg = RobotState.getInstance().getCurrentVisionTarget();
-        if (peg != null & peg.getCaptureTime() > start_time) {
+        if (peg != null && peg.getCaptureTime() > start_time) {
             double fudge = -25;
             fudge = 0;
             double lat = peg.getLatidunalDistance();
@@ -84,7 +84,8 @@ public class AlignToAirShip extends StatefulCommand {
             }
             lat -= fudge;
             double theta = Math.toDegrees(Math.asin(lat / lon));
-            theta += 2;
+            // seem to need this for blue
+//            theta += 2;
 
             setDesiredChange(theta);
             distance = Math.sqrt((peg.getLatidunalDistance() * peg.getLatidunalDistance()) + 

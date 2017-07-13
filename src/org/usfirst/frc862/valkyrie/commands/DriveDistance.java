@@ -74,6 +74,7 @@ public class DriveDistance extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        Logger.debug("Driving forward");
         Robot.driveTrain.set(left_vel, right_vel);
     }
 
@@ -85,6 +86,7 @@ public class DriveDistance extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+        Logger.debug("Stop driving forward");
         Robot.driveTrain.stop();
         Robot.core.orangeAndBlueLED();
     }

@@ -84,7 +84,8 @@ public class AlignToAirShip extends StatefulCommand {
             }
             lat -= fudge;
             double theta = Math.toDegrees(Math.asin(lat / lon));
-            theta += 2;
+            // seem to need this for blue
+//            theta += 2;
 
             setDesiredChange(theta);
             distance = Math.sqrt((peg.getLatidunalDistance() * peg.getLatidunalDistance()) + 

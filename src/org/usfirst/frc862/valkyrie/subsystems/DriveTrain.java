@@ -352,6 +352,7 @@ public class DriveTrain extends Subsystem implements Loop {
     }
 
     public void set(double left, double right) {
+        Logger.debug("Drivetrain set: " + left + ", " + right);
         if (Timer.getFPGATimestamp() < slowUntil) {
         	Logger.debug("slowUntil");
         	

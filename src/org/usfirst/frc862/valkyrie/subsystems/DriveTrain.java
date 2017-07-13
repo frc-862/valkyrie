@@ -353,11 +353,28 @@ public class DriveTrain extends Subsystem implements Loop {
 
     public void set(double left, double right) {
         if (Timer.getFPGATimestamp() < slowUntil) {
+        	Logger.debug("slowUntil");
+        	
             leftMotor1.set(getAverageVelocity() * Constants.slowDownRate);
             rightMotor1.set(getAverageVelocity() * Constants.slowDownRate);
         } else {
             leftMotor1.set(left - straightAdjust);
             rightMotor1.set(right + straightAdjust);
+            
+            if(straightAdjust != 0) {
+            	Logger.debug("Straight adjust is not 0, it is %.4d\n", straightAdjust);
+            	new Exception().printStackTrace();
+            	
+            	// Try to print a stack trace
+            	StackTraceElement[] stes = Thread.getAllStackTraces().get(Thread.currentThread());
+            	if(stes != null) {
+            		for(StackTraceElement ste : stes) {
+            			Logger.debug(ste.toString());
+            		}
+            	}
+            	
+            	Logger.debug("END ST FOR STRAIGHTADJUST");
+            }
         }
     }
 

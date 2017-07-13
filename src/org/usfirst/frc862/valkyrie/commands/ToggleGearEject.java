@@ -67,10 +67,19 @@ public class ToggleGearEject extends Command {
         timeout = 0;
     }
 
+    // for debugging
+    private State oldState = State.DONE;
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if (!timer.hasPeriodPassed(timeout)) {
             return;
+        }
+        
+        // Log state on change
+        if(state != oldState) {
+        	System.out.printf("ToggleGearEject state: %s\n", state.name());
+        	oldState = state;
         }
         
         switch (state) {

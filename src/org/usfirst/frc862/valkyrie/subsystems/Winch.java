@@ -46,6 +46,9 @@ public class Winch extends Subsystem {
 
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
+    	
+    	winchMotor1.setInverted(true);
+    	winchMotor2.setInverted(true);
     }
 
     public void stop() {

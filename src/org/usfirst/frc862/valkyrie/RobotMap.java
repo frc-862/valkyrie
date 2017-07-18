@@ -75,6 +75,9 @@ public class RobotMap {
     public static DynamicPathCommand driveDownFieldVeerLeft;
     public static DynamicPathCommand driveDownFieldVeerRight;
     public static StatefulCommand alignToAirShip;
+    public static DynamicPathCommand fOCMotion1;
+    public static DynamicPathCommand fOCMotion2;
+    public static DynamicPathCommand fOCMotion3;
     public static DynamicPathCommand fOCHopperDump;
     public static DynamicPathCommand fOCAutonBlueFeeder;
 
@@ -155,6 +158,15 @@ public class RobotMap {
         
         gearDetectorPegSensor = new DigitalInput(5);
         LiveWindow.addSensor("GearDetector", "Peg Sensor", gearDetectorPegSensor);
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         

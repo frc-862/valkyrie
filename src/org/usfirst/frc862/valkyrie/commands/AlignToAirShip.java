@@ -76,7 +76,7 @@ public class AlignToAirShip extends StatefulCommand {
         TargetInfo peg = RobotState.getInstance().getCurrentVisionTarget();
         if (peg != null && peg.getCaptureTime() > start_time) {
             double fudge = -25;
-            fudge = 0;
+//            fudge = 0;
             double lat = peg.getLatidunalDistance();
             double lon = peg.getLongitudinalDistance();
             if (Math.abs(lon) < 0.000001) {
@@ -125,6 +125,10 @@ public class AlignToAirShip extends StatefulCommand {
         }
         
         Robot.driveTrain.set(power, -power);
+    }
+    
+    public void done() {
+        Robot.driveTrain.stop();
     }
     
     protected boolean isFinished() {

@@ -141,7 +141,6 @@ public class DriveTrain extends Subsystem implements Loop {
 
         rightMotor2.set(rightMotor1.getDeviceID());
         rightMotor3.set(rightMotor1.getDeviceID());
-
     }
 
     private void initialize() {
@@ -380,6 +379,7 @@ public class DriveTrain extends Subsystem implements Loop {
     }
 
     public void stop() {
+        Logger.debug("Stop!!!");
         set(0,0);
     }
 

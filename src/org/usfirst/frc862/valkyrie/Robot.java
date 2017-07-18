@@ -10,6 +10,7 @@ import org.usfirst.frc862.util.Logger;
 import org.usfirst.frc862.util.Looper;
 import org.usfirst.frc862.valkyrie.commands.AutonStraight;
 import org.usfirst.frc862.valkyrie.commands.DriveDistance;
+import org.usfirst.frc862.valkyrie.commands.FOCAuton;
 import org.usfirst.frc862.valkyrie.commands.FOCAutonBlueFeeder;
 import org.usfirst.frc862.valkyrie.commands.FOCHopperDump;
 import org.usfirst.frc862.valkyrie.commands.FullBlueBoilerAuton;
@@ -160,8 +161,8 @@ public class Robot extends IterativeRobot {
             autonChooser.addObject("Red Boiler", new FullRedBoilerAuton());
             autonChooser.addObject("Red Feeder", new FullRedFeederAuton());
             autonChooser.addObject("Straight", new FullStraightAuton());
-            autonChooser.addObject("FOC Blue Feeder", new FOCAutonBlueFeeder());
-            autonChooser.addObject("FOC Hopper Dump", new FOCHopperDump());
+            autonChooser.addObject("FOC Blue Feeder", new FOCAuton());
+            // autonChooser.addObject("FOC Hopper Dump", new FOCHopperDump());
             SmartDashboard.putData("Auton Mode", autonChooser);
 
             FaultCode.update();

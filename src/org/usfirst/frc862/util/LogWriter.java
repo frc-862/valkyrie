@@ -9,6 +9,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 import org.usfirst.frc862.valkyrie.Constants;
 
+import edu.wpi.first.wpilibj.Timer;
+
 public class LogWriter implements Loop {
     private BufferedWriter writer;
     private ArrayBlockingQueue<String> buffer;
@@ -64,7 +66,7 @@ public class LogWriter implements Loop {
     }
 
     public void logString(String s) {
-        overflow |= !buffer.offer(s);
+        overflow |= !buffer.offer(String.format("%6.3f: %s", Timer.getFPGATimestamp(), s));
     }
     
     @Override
@@ -77,5 +79,9 @@ public class LogWriter implements Loop {
 
     public void close() {
         close();
+    }
+
+    public void logRawString(String s) {
+        overflow |= !buffer.offer(s);
     }
 }

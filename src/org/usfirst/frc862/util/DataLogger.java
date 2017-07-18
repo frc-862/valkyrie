@@ -44,7 +44,7 @@ public class DataLogger implements Loop {
         for (String fld : fieldNames) {
             header += "," + fld;
         }
-        writer.logString(header);
+        writer.logRawString(header);
     }
     
     private void writeValues() {
@@ -52,7 +52,7 @@ public class DataLogger implements Loop {
         for (DoubleSupplier fld : fieldValues) {
             values += "," + Double.toString(fld.getAsDouble());
         }
-        writer.logString(values);
+        writer.logRawString(values);
     }
     
     private DataLogger() {

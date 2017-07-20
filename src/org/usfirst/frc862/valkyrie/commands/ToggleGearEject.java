@@ -27,6 +27,7 @@ public class ToggleGearEject extends Command {
     }
 
     State state;
+    static public boolean foc_auton = false;
 
     private LightningTimer timer = new LightningTimer();
 
@@ -105,12 +106,12 @@ public class ToggleGearEject extends Command {
             break;
         case OPENING_GEAR:
             Robot.gearCollector.ejectGear();
-            state = State.BACKING_AWAY;
-            if (!Robot.inTeleop) {
-                Logger.debug("We are not in tele, wait a bit");
-                timer.reset();
-                timeout = 1.25;
+            if (foc_auton) {
+                state = State.FINISHED;
+            } else {
+                state = State.BACKING_AWAY;
             }
+            foc_auton = false;
             break;
         case BACKING_AWAY:
             Logger.debug("Backing away!!!");

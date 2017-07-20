@@ -46,7 +46,7 @@ public class FullBlueFeederAuton extends CommandGroup {
         addSequential(new AutonBlueFeeder());
         addSequential(new AlignToAirShip());
         addSequential(new DriveDistance());
-        addSequential(new Delay(1));
+        addSequential(new Delay(0.5));
         addSequential(new pegTester());
         addSequential(new ToggleGearEject());
         addParallel(new TurnOffLEDRing());

@@ -41,9 +41,14 @@ public class FOCAutonBlueFeeder extends DynamicPathCommand {
         //config.max_acc = Constants.Path_max_acc * 1.5;
         //config.max_vel = Constants.Path_max_vel * 2;
         
-        testing = true;
+        testing = false;
         reverse = false;
         addWaypoint(0,0,0);
-        addWaypoint(8.3, 6.8, 70);
+        addWaypoint(6.3, 6.8, 70);
+    }
+    
+    public void initialize() {
+        ToggleGearEject.foc_auton = true;
+        super.initialize();
     }
 }

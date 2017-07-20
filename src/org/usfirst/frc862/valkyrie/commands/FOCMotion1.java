@@ -38,7 +38,7 @@ public class FOCMotion1 extends DynamicPathCommand {
         testing = true;
         reverse = true;
         addWaypoint(0,0,0);
-        addWaypoint(3,0,0);
+        addWaypoint(2,0,0);
     }
 
 }

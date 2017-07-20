@@ -55,13 +55,13 @@ public class AlignToAbsoluteHeading extends Command {
     }
     
     // Called just before this Command runs the first time
-    protected void initialize() {
+    public void initialize() {
         Robot.driveTrain.setMode(DriveTrain.Modes.VELOCITY);
         updateSetPoint();
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    public void execute() {
         double heading = RobotMap.navx.getFusedHeading();
         error = ChezyMath.boundAngleNeg180to180Degrees(goal - heading);
         double rotatePGain = Robot.shifter.getMaxVelocity() / 180.0 * 3.9;
@@ -74,18 +74,18 @@ public class AlignToAbsoluteHeading extends Command {
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
+    public boolean isFinished() {
         return Math.abs(error) < Constants.rotateEpsilon;
     }
 
     // Called once after isFinished returns true
-    protected void end() {
+    public void end() {
         Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
-    protected void interrupted() {
+    public void interrupted() {
         end();
     }
 }

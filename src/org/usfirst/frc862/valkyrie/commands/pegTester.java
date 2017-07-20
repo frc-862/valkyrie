@@ -28,7 +28,7 @@ public class pegTester extends ConditionalCommand {
     }
 
     protected boolean condition() {
-        DriveBackwardDistance.setDistance(-2.4);
+        DriveBackwardDistance.setDistance(-1.8);
         boolean status = Robot.gearDetector.pegPresent();
         Logger.debug("pegTester: " + status);
         return status;
